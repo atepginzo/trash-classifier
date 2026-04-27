@@ -1,8 +1,3 @@
-/**
- * Standardized API response helpers.
- * Every response from this API follows the same shape.
- */
-
 function success(res, data, statusCode = 200) {
   return res.status(statusCode).json({
     status: 'success',

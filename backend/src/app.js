@@ -7,7 +7,6 @@ const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
-// ─── Middleware ─────────────────────────────────────────────────
 app.use(cors({
   origin: config.corsOrigin,
   methods: ['GET', 'POST'],
@@ -16,10 +15,8 @@ app.use(cors({
 app.use(morgan(config.nodeEnv === 'production' ? 'combined' : 'dev'));
 app.use(express.json());
 
-// ─── Routes ────────────────────────────────────────────────────
 app.use('/api', routes);
 
-// ─── 404 handler ───────────────────────────────────────────────
 app.use((_req, res) => {
   res.status(404).json({
     status: 'error',
@@ -28,7 +25,6 @@ app.use((_req, res) => {
   });
 });
 
-// ─── Error handler ─────────────────────────────────────────────
 app.use(errorHandler);
 
 module.exports = app;

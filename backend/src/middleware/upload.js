@@ -4,13 +4,9 @@ const { error } = require('../utils/apiResponse');
 
 const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
-const storage = multer.memoryStorage();
-
 const upload = multer({
-  storage,
-  limits: {
-    fileSize: config.maxFileSize,
-  },
+  storage: multer.memoryStorage(),
+  limits: { fileSize: config.maxFileSize },
   fileFilter: (_req, file, cb) => {
     if (ALLOWED_MIME_TYPES.includes(file.mimetype)) {
       cb(null, true);
@@ -20,10 +16,6 @@ const upload = multer({
   },
 });
 
-/**
- * Middleware: handle single image upload via field name "image".
- * Handles multer errors and returns standardized error responses.
- */
 function uploadImage(req, res, next) {
   const singleUpload = upload.single('image');
 

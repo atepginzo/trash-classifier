@@ -9,25 +9,15 @@ datasource db {
 
 model Prediction {
   id               String   @id @default(cuid())
-
-  // File metadata
   originalFilename String   @map("original_filename")
   mimeType         String   @map("mime_type")
   fileSize         Int      @map("file_size")
   imageUrl         String?  @map("image_url")
-
-  // Normalized prediction result
   label            String
   confidence       Float
   category         String?
-
-  // Flexible detection details (array of objects with optional bbox)
   detections       Json     @default("[]")
-
-  // Raw AI response for debugging
   rawAiResponse    Json?    @map("raw_ai_response")
-
-  // Metadata
   aiProvider       String   @default("mock") @map("ai_provider")
   createdAt        DateTime @default(now()) @map("created_at")
 
