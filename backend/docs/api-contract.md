@@ -187,3 +187,13 @@ Error:
 | `AI_SERVICE_ERROR`  | 502  | AI service gagal atau timeout        |
 | `UPLOAD_ERROR`      | 400  | Proses upload gagal                  |
 | `INTERNAL_ERROR`    | 500  | Kesalahan internal server            |
+
+## Kamus Data (Data Dictionary)
+
+* **Category:** `Organik`, `Anorganik`, `Residu`
+* **Label (FINAL dari tim Data Science):** 1. `Glass` (Anorganik)
+    2. `Paper` (Organik)
+    3. `Cardboard` (Organik)
+    4. `Plastic` (Anorganik)
+    5. `Metal` (Anorganik)
+    6. `Residu (Campuran)` (Residu)
