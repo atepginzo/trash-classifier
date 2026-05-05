@@ -131,7 +131,7 @@ Langkah 5 — Stop Kamera
 
 ## 3. Peringatan Integrasi (Integration Notes)
 
-### ⚡ Poin 1 — Jangan Kirim Frame Baru Jika Request Sebelumnya Belum Selesai
+###  Poin 1 — Jangan Kirim Frame Baru Jika Request Sebelumnya Belum Selesai
 
 Ini yang paling kritis. Jika interval 1.5 detik terlalu cepat dibanding waktu respons AI (misalnya AI butuh 2 detik), maka request akan menumpuk dan membanjiri server.
 
@@ -161,7 +161,7 @@ function onIntervalTick() {
 
 Dengan pola ini, jika AI butuh 3 detik, frame hanya dikirim setiap ~3 detik (bukan 1.5 detik), secara otomatis menyesuaikan dengan kecepatan respons server. **Tidak ada request yang saling tumpang tindih.**
 
-### ⚡ Poin 2 — Sinkronkan Dimensi Canvas dengan Video
+###  Poin 2 — Sinkronkan Dimensi Canvas dengan Video
 
 `<canvas id="overlay">` dan `<canvas id="capture">` **HARUS** memiliki dimensi (`width`, `height`) yang sama persis dengan resolusi aktual `<video>`. Jika tidak sinkron, koordinat bounding box dari AI akan salah posisi.
 
@@ -179,7 +179,7 @@ video.addEventListener('loadedmetadata', () => {
 
 > **Catatan:** `video.videoWidth` adalah resolusi asli stream kamera, bukan ukuran CSS elemen. Gunakan resolusi asli untuk canvas, lalu gunakan CSS untuk mengatur ukuran tampilan visual agar keduanya tumpang tindih sempurna.
 
-### ⚡ Poin 3 — Bersihkan State Saat Mode Berganti
+###  Poin 3 — Bersihkan State Saat Mode Berganti
 
 Jika UI kalian punya toggle antara mode "Upload Gambar" dan "Live Camera", pastikan:
 
