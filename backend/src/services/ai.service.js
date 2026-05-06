@@ -43,9 +43,32 @@ async function mockPredict(_fileBuffer, _mimeType) {
   };
 }
 
-// TODO: implementasi ketika AI service sudah ready
 async function realPredict(fileBuffer, mimeType) {
-  throw new Error('Real AI service not yet configured. Set USE_MOCK_AI=true or configure AI_SERVICE_URL.');
+  const axios = require('axios');
+  const FormData = require('form-data');
+
+  const form = new FormData();
+  const ext = mimeType.split('/')[1] || 'jpg';
+  form.append('file', fileBuffer, {
+    filename: `frame.${ext}`,
+    contentType: mimeType,
+  });
+
+  try {
+    const response = await axios.post(config.aiServiceUrl, form, {
+      headers: { ...form.getHeaders() },
+      timeout: 10000,
+      maxContentLength: 10 * 1024 * 1024,
+    });
+
+    return normalizeAiResponse(response.data);
+  } catch (err) {
+    console.error('AI Service Error:', err.message);
+    const aiError = new Error('AI service sedang tidak tersedia');
+    aiError.code = 'AI_SERVICE_ERROR';
+    aiError.statusCode = 502;
+    throw aiError;
+  }
 }
 
 // Normalisasi response AI ke format standar backend.

@@ -7,8 +7,8 @@ async function createPrediction(req, res, next) {
     const prediction = await predictionService.createPrediction(req.file);
     return success(res, formatPredictionDetail(prediction), 201);
   } catch (err) {
-    if (err.message?.includes('AI') || err.message?.includes('service')) {
-      return error(res, 'AI service sedang tidak tersedia', 'AI_SERVICE_ERROR', 502);
+    if (err.code === 'AI_SERVICE_ERROR') {
+      return error(res, err.message, 'AI_SERVICE_ERROR', 502);
     }
     next(err);
   }
