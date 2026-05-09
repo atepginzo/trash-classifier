@@ -18,7 +18,7 @@ Goal: Semua anggota bisa develop paralel.
 | GET /api/predictions (list + pagination)       | Full-Stack | Done   |
 | GET /api/predictions/:id                       | Full-Stack | Done   |
 | Dokumentasi API & arsitektur                   | Full-Stack | Done   |
-| Setup frontend (React + Vite)                  | Full-Stack | Todo   |
+| Setup frontend (React + Vite)                  | Full-Stack | Done   |
 | Kumpulkan & labeling dataset                   | AI/Data    | Todo   |
 | Riset model object detection                   | AI/ML      | Todo   |
 
