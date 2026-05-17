@@ -1,1 +1,146 @@
+/* ============================================================
+   TrashSmart — Global Styles & Design Tokens
+   Earthy-fresh palette: sustainability editorial × modern tech
+   ============================================================ */
+
+/* --- Google Fonts: Playfair Display (serif heading) + DM Sans (body) --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap');
+
+/* --- Tailwind v4 entry --- */
 @import "tailwindcss";
+
+/* --- Custom Tailwind v4 theme tokens --- */
+@theme {
+  /* Color palette — earthy-fresh */
+  --color-cream: #F5F0E8;
+  --color-cream-light: #FAFAF7;
+  --color-forest: #2D5016;
+  --color-forest-dark: #1E3A0E;
+  --color-forest-light: #3D6B20;
+  --color-terracotta: #C4622D;
+  --color-terracotta-light: #D4783F;
+  --color-sage: #A8B89C;
+  --color-sage-light: #C5D3BB;
+  --color-sage-muted: #D6E0CF;
+  --color-heading: #0F1A0A;
+  --color-body: #3A3D35;
+  --color-muted: #6B7160;
+
+  /* Typography */
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+  --font-sans: 'DM Sans', 'Inter', system-ui, sans-serif;
+}
+
+/* CSS Custom Properties (for non-Tailwind usage) */
+:root {
+  --bg-primary: #F5F0E8;
+  --bg-secondary: #FAFAF7;
+  --accent-green: #2D5016;
+  --accent-green-dark: #1E3A0E;
+  --accent-terracotta: #C4622D;
+  --color-sage: #A8B89C;
+  --color-sage-light: #C5D3BB;
+  --text-heading: #0F1A0A;
+  --text-body: #3A3D35;
+  --text-muted: #6B7160;
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+  --font-sans: 'DM Sans', 'Inter', system-ui, sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+}
+
+/* Base resets & defaults */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+/* Marquee infinite scroll animation */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 25s linear infinite;
+}
+
+/* Scroll indicator bounce */
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+/* Utility: backdrop blur for navbar */
+.navbar-blur {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+/* Selection color */
+::selection {
+  background-color: #2D501630;
+  color: #0F1A0A;
+}
+
+/* Scrollbar styling (webkit) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sage);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-green);
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Line clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

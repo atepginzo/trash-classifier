@@ -68,7 +68,6 @@ export default function HistoryPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex flex-col items-center p-4 py-8">
       <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8 space-y-6">
-        {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <History className="w-6 h-6 text-green-600" />
@@ -81,8 +80,6 @@ export default function HistoryPage() {
             + Upload Baru
           </Link>
         </div>
-
-        {/* Empty State */}
         {predictions.length === 0 && (
           <div className="text-center py-16 space-y-3">
             <Inbox className="w-16 h-16 text-gray-300 mx-auto" />
@@ -96,8 +93,6 @@ export default function HistoryPage() {
             </Link>
           </div>
         )}
-
-        {/* Prediction List */}
         {predictions.length > 0 && (
           <div className="divide-y divide-gray-100 border rounded-xl overflow-hidden">
             {predictions.map((pred) => {
@@ -111,7 +106,6 @@ export default function HistoryPage() {
                   onClick={() => navigate(`/predictions/${pred.id}`)}
                   className="flex items-center gap-4 p-4 hover:bg-gray-50 cursor-pointer transition-colors"
                 >
-                  {/* Thumbnail */}
                   <div className="w-16 h-16 bg-gray-100 rounded-lg shrink-0 overflow-hidden">
                     {pred.imageUrl || pred.image_url ? (
                       <img
@@ -125,8 +119,6 @@ export default function HistoryPage() {
                       </div>
                     )}
                   </div>
-
-                  {/* Info */}
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-gray-800 truncate">
                       {pred.label || pred.topLabel || 'Tidak ada label'}
@@ -135,14 +127,10 @@ export default function HistoryPage() {
                       {pred.createdAt ? new Date(pred.createdAt).toLocaleString('id-ID') : '-'}
                     </p>
                   </div>
-
-                  {/* Category Badge */}
                   <span className={`inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full ${catConfig.color}`}>
                     <CatIcon className="w-3 h-3" />
                     {catConfig.label}
                   </span>
-
-                  {/* Confidence */}
                   <span className="text-xs font-mono text-gray-500 shrink-0">
                     {((pred.confidence || 0) * 100).toFixed(0)}%
                   </span>
@@ -151,8 +139,6 @@ export default function HistoryPage() {
             })}
           </div>
         )}
-
-        {/* Pagination */}
         {predictions.length > 0 && (
           <div className="flex items-center justify-between pt-2">
             <button
