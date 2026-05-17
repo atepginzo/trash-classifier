@@ -93,13 +93,10 @@ export default function UploadPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex flex-col items-center justify-center p-4">
       <div className="max-w-lg w-full bg-white rounded-2xl shadow-xl p-8 space-y-6">
-        {/* Header */}
         <div className="text-center space-y-1">
           <h1 className="text-2xl font-bold text-gray-800">Upload Foto Sampah</h1>
           <p className="text-sm text-gray-500">Drag & drop atau klik untuk memilih gambar</p>
         </div>
-
-        {/* Drop Zone */}
         <div
           onDrop={handleDrop}
           onDragOver={handleDragOver}
@@ -141,8 +138,6 @@ export default function UploadPage() {
             </div>
           )}
         </div>
-
-        {/* File Info */}
         {file && (
           <div className="flex items-center justify-between bg-gray-50 rounded-lg px-4 py-3 text-sm">
             <div className="flex items-center gap-2 min-w-0">
@@ -152,16 +147,12 @@ export default function UploadPage() {
             <span className="text-gray-400 shrink-0 ml-2">{formatSize(file.size)}</span>
           </div>
         )}
-
-        {/* Error */}
         {error && (
           <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg flex items-start gap-3">
             <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
             <p className="text-sm text-red-700">{error}</p>
           </div>
         )}
-
-        {/* Actions */}
         <div className="grid grid-cols-2 gap-4">
           <button
             onClick={handleClassify}

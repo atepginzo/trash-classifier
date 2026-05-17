@@ -126,18 +126,13 @@ export default function ResultPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex flex-col items-center justify-center p-4">
       <div className="max-w-lg w-full bg-white rounded-2xl shadow-xl p-8 space-y-6">
-        {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold text-gray-800">Hasil Prediksi</h1>
           <span className="text-xs text-gray-400 font-mono">#{id}</span>
         </div>
-
-        {/* Image with Bounding Boxes */}
         {imageUrl && (
           <BoundingBoxOverlay imageUrl={imageUrl} detections={detections} />
         )}
-
-        {/* Summary Card */}
         <div className={`rounded-xl border p-5 space-y-3 ${catConfig.color}`}>
           <div className="flex items-center gap-2 font-bold text-lg">
             <CatIcon className="w-6 h-6" />
@@ -154,8 +149,6 @@ export default function ResultPage() {
             </div>
           )}
         </div>
-
-        {/* Detected Objects */}
         {detections.length > 0 && (
           <div className="space-y-2">
             <h3 className="text-sm font-semibold text-gray-700">Objek Terdeteksi</h3>
@@ -171,8 +164,6 @@ export default function ResultPage() {
             </div>
           </div>
         )}
-
-        {/* Navigation */}
         <div className="grid grid-cols-2 gap-4 pt-2">
           <button
             onClick={() => navigate('/upload')}
