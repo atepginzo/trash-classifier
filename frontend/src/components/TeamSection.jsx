@@ -186,11 +186,7 @@ function MemberCard({ member, role, index }) {
   );
 }
 
-/* Animation config */
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } },
-};
+
 
 export default function TeamSection() {
   const paths = Object.entries(TEAM_MEMBERS);

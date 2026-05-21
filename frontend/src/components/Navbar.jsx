@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 /* Navigation links config */
 const NAV_LINKS = [
   { label: 'Beranda', href: '/', icon: 'home' },
   { label: 'Tentang', href: '/#tentang', icon: 'info' },
-  { label: 'Blog', href: '/blog', icon: 'book' },
+  { label: 'Edukasi', href: '/#edukasi', icon: 'book' },
   { label: 'Tim', href: '/team', icon: 'users' },
   { label: 'Kontak', href: '/contact', icon: 'mail' },
 ];
@@ -137,7 +137,7 @@ export default function Navbar() {
       return;
     }
 
-    const SECTION_IDS = ['tentang', 'blog'];
+    const SECTION_IDS = ['tentang', 'edukasi'];
     const observers = [];
 
     // Small delay to let DOM render
@@ -198,17 +198,15 @@ export default function Navbar() {
   };
 
   const linkClass = (href) =>
-    `flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
-      isActive(href)
-        ? 'bg-forest/10 text-forest'
-        : 'text-body hover:bg-forest/5 hover:text-forest'
+    `flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${isActive(href)
+      ? 'bg-forest/10 text-forest'
+      : 'text-body hover:bg-forest/5 hover:text-forest'
     }`;
 
   const mobileLinkClass = (href) =>
-    `flex items-center gap-2.5 px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
-      isActive(href)
-        ? 'bg-forest/10 text-forest'
-        : 'text-body hover:bg-forest/5 hover:text-forest'
+    `flex items-center gap-2.5 px-4 py-3 text-sm font-medium rounded-lg transition-colors ${isActive(href)
+      ? 'bg-forest/10 text-forest'
+      : 'text-body hover:bg-forest/5 hover:text-forest'
     }`;
 
   return (
@@ -246,7 +244,7 @@ export default function Navbar() {
               TrashSmart
             </span>
           </a>
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
@@ -259,11 +257,11 @@ export default function Navbar() {
               </a>
             ))}
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <a
               href="/login"
               onClick={(e) => handleNavClick(e, '/login')}
-              className="hidden lg:flex items-center gap-2 px-5 py-2 text-sm font-semibold
+              className="flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 text-xs sm:text-sm font-semibold
                          border border-forest/30 text-forest rounded-full
                          hover:bg-forest hover:text-white
                          transition-all duration-300"
@@ -273,7 +271,7 @@ export default function Navbar() {
             </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-forest/5 transition-colors"
+              className="md:hidden p-2 rounded-lg hover:bg-forest/5 transition-colors"
               aria-label="Toggle menu"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -301,7 +299,7 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden navbar-blur bg-cream/95 border-t border-sage/20"
+            className="md:hidden overflow-hidden navbar-blur bg-cream/95 border-t border-sage/20"
           >
             <div className="px-4 py-4 space-y-1">
               {NAV_LINKS.map((link) => (
@@ -315,18 +313,6 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
-              <div className="pt-2 border-t border-sage/20">
-                <a
-                  href="/login"
-                  onClick={(e) => handleNavClick(e, '/login')}
-                  className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold
-                             border border-forest/30 text-forest rounded-full
-                             hover:bg-forest hover:text-white transition-all duration-300"
-                >
-                  <LoginIcon />
-                  Masuk
-                </a>
-              </div>
             </div>
           </motion.div>
         )}

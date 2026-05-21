@@ -5,7 +5,7 @@ import AboutSection from '../components/AboutSection'
 import StatsSection from '../components/StatsSection'
 import HowItWorks from '../components/HowItWorks'
 import CategoriesSection from '../components/CategoriesSection'
-import BlogSection from '../components/BlogSection'
+import EdukasiSection from '../components/EdukasiSection'
 import BenefitsSection from '../components/BenefitsSection'
 import Footer from '../components/Footer'
 
@@ -19,7 +19,7 @@ export default function LandingPage() {
       <StatsSection />
       <HowItWorks />
       <CategoriesSection />
-      <BlogSection />
+      <EdukasiSection />
       <BenefitsSection />
       <Footer />
     </div>

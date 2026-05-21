@@ -27,7 +27,7 @@ const RecycleIllustration = () => (
 /* Feature list data */
 const FEATURES = [
   'Deteksi otomatis via kamera atau unggah gambar',
-  'Klasifikasi 4 kategori: Plastik, Kertas, Logam, Residu',
+  'Klasifikasi 3 kategori: Anorganik, B3, Organik',
   'Dashboard analitik untuk pengelola fasilitas',
 ];
 

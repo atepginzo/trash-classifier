@@ -91,6 +91,7 @@ export default function Footer() {
               {[
                 { label: 'Beranda', href: '/' },
                 { label: 'Tentang', href: '/#tentang' },
+                { label: 'Edukasi', href: '/#edukasi' },
                 { label: 'Cara Pakai', href: '/#cara-pakai' },
                 { label: 'Tim', href: '/team' },
               ].map((item) => (
