@@ -26,7 +26,7 @@ const BoltIcon = () => (
 
 const STATS = [
   { value: 91, suffix: '%', label: 'Akurasi Model', Icon: TargetIcon },
-  { value: 4, suffix: '+', label: 'Kategori Sampah', Icon: GridIcon },
+  { value: 3, suffix: '', label: 'Kategori Sampah', Icon: GridIcon },
   { value: 500, suffix: '+', label: 'Gambar Dataset', Icon: ImageIcon },
   { value: 3, suffix: 's', label: 'Waktu Deteksi', Icon: BoltIcon },
 ];

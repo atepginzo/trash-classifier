@@ -1,35 +1,36 @@
 import { motion } from 'framer-motion';
 
-/* Category icons */
-const PlasticIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2D5016" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M8 2h8l1 5H7l1-5z" /><path d="M7 7v13a2 2 0 002 2h6a2 2 0 002-2V7" />
-    <path d="M10 11v6M14 11v6" />
-  </svg>
-);
-const PaperIcon = () => (
+const RecycleIcon = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" />
-    <line x1="8" y1="13" x2="16" y2="13" /><line x1="8" y1="17" x2="12" y2="17" />
+    <path d="M7 19H4.815a1.83 1.83 0 01-1.57-.881 1.785 1.785 0 01-.004-1.784L7.196 9.5" />
+    <path d="M11 19h8.203a1.83 1.83 0 001.556-.89 1.784 1.784 0 00-.005-1.775L16.8 9.5" />
+    <path d="M14.469 3.592a1.835 1.835 0 00-1.563-.887h-.002a1.834 1.834 0 00-1.563.892L7.196 9.5" />
+    <polyline points="9.5 14.5 7.196 9.5 12 9.5" />
+    <polyline points="14.5 14.5 16.804 9.5 12 9.5" />
+    <polyline points="12 19 9.5 14.5 14.5 14.5" />
   </svg>
 );
-const MetalIcon = () => (
+
+const AlertTriangleIcon = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+    <line x1="12" y1="9" x2="12" y2="13" />
+    <line x1="12" y1="17" x2="12.01" y2="17" />
   </svg>
 );
-const ResidueIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
-    <line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" />
+
+const LeafIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2D5016" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89-.82" />
+    <path d="M17 8a14 14 0 004-6 14 14 0 00-6 4" />
+    <path d="M17 8C13 12 8 17 3.82 21.34" />
   </svg>
 );
 
 const CATEGORIES = [
-  { name: 'Plastik', desc: 'Botol, kantong, wadah plastik berbagai jenis', Icon: PlasticIcon, bg: 'bg-[#E8EDDF]' },
-  { name: 'Kertas', desc: 'Kardus, koran, kertas kantor & kemasan', Icon: PaperIcon, bg: 'bg-[#E0ECFF]' },
-  { name: 'Logam', desc: 'Kaleng, besi, aluminium bekas pakai', Icon: MetalIcon, bg: 'bg-[#FFE0E0]' },
-  { name: 'Residu', desc: 'Sampah campuran yang tidak dapat didaur ulang', Icon: ResidueIcon, bg: 'bg-[#EDEDED]' },
+  { name: 'Anorganik', desc: 'Plastik, kaleng, kaca, kertas yang masih bisa didaur ulang', Icon: RecycleIcon, bg: 'bg-[#E0ECFF]' },
+  { name: 'B3', desc: 'Baterai, elektronik, bahan kimia berbahaya', Icon: AlertTriangleIcon, bg: 'bg-[#FFE0E0]' },
+  { name: 'Organik', desc: 'Sisa makanan, daun, material yang bisa dikompos', Icon: LeafIcon, bg: 'bg-[#E8EDDF]' },
 ];
 
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } } };
@@ -57,13 +58,12 @@ export default function CategoriesSection() {
           </h2>
         </motion.div>
 
-        {/* 4 Category Cards */}
         <motion.div
           variants={stagger}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
         >
           {CATEGORIES.map((cat, i) => (
             <motion.div

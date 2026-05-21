@@ -5,7 +5,7 @@ import ResultPage from './pages/ResultPage'
 import HistoryPage from './pages/HistoryPage'
 import TeamPage from './pages/TeamPage'
 import ContactPage from './pages/ContactPage'
-import BlogPage from './pages/BlogPage'
+
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 
@@ -15,7 +15,7 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/upload" element={<UploadPage />} />
       <Route path="/team" element={<TeamPage />} />
-      <Route path="/blog" element={<BlogPage />} />
+
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
