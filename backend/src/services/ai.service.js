@@ -36,7 +36,7 @@ async function mockPredict(_fileBuffer, _mimeType) {
       {
         label,
         confidence,
-        bbox: { x: 50, y: 30, width: 200, height: 250 },
+        bbox: { x: 0.15, y: 0.12, width: 0.7, height: 0.75 },
       },
     ],
     raw: { mock: true, label, confidence },

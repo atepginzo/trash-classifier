@@ -8,6 +8,8 @@ import {
   RotateCcw,
   RefreshCw,
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { predictionService } from '../services/predictionService';
 import Navbar from '../components/Navbar';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
@@ -57,6 +59,7 @@ const CLASS_CONFIG = {
 };
 
 export default function UploadPage() {
+  const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -221,37 +224,14 @@ export default function UploadPage() {
     setError(null);
     setResult(null);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      const response = await fetch(`${API_URL}/predict`, {
-        method: 'POST',
-        body: formData,
-      });
-      if (!response.ok) {
-        const statusText = response.statusText || 'Unknown';
-        throw new Error(
-          `Server merespons dengan status ${response.status} (${statusText}).`
-        );
-      }
-      const data = await response.json();
-      if (
-        !data.class ||
-        typeof data.confidence !== 'number' ||
-        !Array.isArray(data.all_scores) ||
-        data.all_scores.length !== 3
-      ) {
+      const res = await predictionService.uploadImage(file);
+      if (res.status === 'success' && res.data && res.data.id) {
+        navigate(`/predictions/${res.data.id}`);
+      } else {
         throw new Error('Format respons dari server tidak sesuai.');
       }
-      setResult(data);
     } catch (err) {
-      if (err instanceof TypeError) {
-        setError(
-          'Tidak dapat terhubung ke server. Pastikan server API berjalan di ' +
-            API_URL
-        );
-      } else {
-        setError(err.message || 'Terjadi kesalahan saat mengklasifikasi gambar.');
-      }
+      setError(err.message || 'Terjadi kesalahan saat mengklasifikasi gambar.');
     } finally {
       setLoading(false);
     }
