@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Logo from './Logo';
 
 /* Checkmark bullet icon */
 const CheckBullet = () => (
@@ -8,19 +9,10 @@ const CheckBullet = () => (
   </svg>
 );
 
-/* Recycle illustration for the card */
-const RecycleIllustration = () => (
+/* Illustration for the card */
+const BrandIllustration = () => (
   <div className="relative flex items-center justify-center">
-    <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-forest flex items-center justify-center shadow-xl shadow-forest/20">
-      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M7 19H4.815a1.83 1.83 0 01-1.57-.881 1.785 1.785 0 01-.004-1.784L7.196 9.5" />
-        <path d="M11 19h8.203a1.83 1.83 0 001.556-.89 1.784 1.784 0 00-.005-1.775L16.8 9.5" />
-        <path d="M14.469 3.592a1.835 1.835 0 00-1.563-.887h-.002a1.834 1.834 0 00-1.563.892L7.196 9.5" />
-        <polyline points="9.5 14.5 7.196 9.5 12 9.5" />
-        <polyline points="14.5 14.5 16.804 9.5 12 9.5" />
-        <polyline points="12 19 9.5 14.5 14.5 14.5" />
-      </svg>
-    </div>
+    <Logo size={120} />
   </div>
 );
 
@@ -121,7 +113,7 @@ export default function AboutSection() {
                   }}
                 />
 
-                <RecycleIllustration />
+                <BrandIllustration />
 
                 <p className="mt-6 text-xl sm:text-2xl font-serif font-bold text-heading tracking-tight">
                   TrashSmart

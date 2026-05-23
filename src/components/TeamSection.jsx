@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { School, BookOpen } from 'lucide-react';
+import { School, BookOpen, Users } from 'lucide-react';
 
 /* Social Icons */
 const LinkedInIcon = () => (
@@ -265,10 +265,11 @@ export default function TeamSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full mb-4
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full mb-4
                           bg-forest/8 border border-forest/15
                           text-forest text-xs sm:text-sm font-semibold tracking-wide">
-            👨‍💻 Tim Pengembang
+            <Users size={14} />
+            Tim Pengembang
           </span>
           <h2
             style={{ fontFamily: 'var(--font-serif)', color: '#0F1A0A' }}
