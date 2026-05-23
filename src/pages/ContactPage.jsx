@@ -51,8 +51,8 @@ const InstagramIcon = () => (
 );
 
 const CONTACT_INFO = [
-  { Icon: MailIcon, label: 'Email', value: 'trashsmart.team@gmail.com', color: 'bg-forest/10 text-forest' },
-  { Icon: PhoneIcon, label: 'Telepon', value: '+62 812-3456-7890', color: 'bg-terracotta/10 text-terracotta' },
+  { Icon: MailIcon, label: 'Email', value: 'ecosortdbs@gmail.com', color: 'bg-forest/10 text-forest' },
+  { Icon: PhoneIcon, label: 'Telepon', value: '+62 895-1382-9923', color: 'bg-terracotta/10 text-terracotta' },
   { Icon: MapPinIcon, label: 'Lokasi', value: 'Jakarta, Indonesia', color: 'bg-[#5B21B6]/10 text-[#5B21B6]' },
 ];
 

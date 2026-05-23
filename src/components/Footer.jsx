@@ -1,3 +1,5 @@
+import Logo from './Logo';
+
 /* Social media icons */
 const FacebookIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -62,13 +64,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-10 border-b border-white/10">
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-full bg-forest flex items-center justify-center">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M7 19H4.815a1.83 1.83 0 01-1.57-.881 1.785 1.785 0 01-.004-1.784L7.196 9.5" />
-                  <path d="M11 19h8.203a1.83 1.83 0 001.556-.89 1.784 1.784 0 00-.005-1.775L16.8 9.5" />
-                  <path d="M14.469 3.592a1.835 1.835 0 00-1.563-.887h-.002a1.834 1.834 0 00-1.563.892L7.196 9.5" />
-                </svg>
-              </div>
+              <Logo size={32} />
               <span className="font-serif text-lg font-semibold text-white">TrashSmart</span>
             </div>
             <p className="text-sm text-white/50 leading-relaxed max-w-xs mb-6">
