@@ -2,18 +2,16 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Logo from './Logo';
+import ThemeToggle from './ThemeToggle';
 
-/* Navigation links config */
 const NAV_LINKS = [
   { label: 'Beranda', href: '/', icon: 'home' },
-  { label: 'Tentang', href: '/#tentang', icon: 'info' },
-  { label: 'Edukasi', href: '/#edukasi', icon: 'book' },
+  { label: 'Tentang', href: '/about', icon: 'info' },
+  { label: 'Edukasi', href: '/education', icon: 'book' },
   { label: 'Tim', href: '/team', icon: 'users' },
-  { label: 'Riwayat', href: '/predictions', icon: 'history' },
   { label: 'Kontak', href: '/contact', icon: 'mail' },
 ];
 
-/* Mini SVG icons for nav items */
 const NavIcon = ({ type, className = '' }) => {
   const iconMap = {
     home: (
@@ -58,7 +56,6 @@ const NavIcon = ({ type, className = '' }) => {
   return iconMap[type] || null;
 };
 
-/* Login icon */
 const LoginIcon = () => (
   <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="3" width="14" height="14" rx="3" />
@@ -88,121 +85,22 @@ export default function Navbar() {
   /**
    * Smart navigation handler:
    * - "/" → scroll to top
-   * - "/#tentang" → if on /, scroll to #tentang. If on /team, navigate to / then scroll.
+   * - "/about" → navigate to about page
    * - "/team" → navigate to /team
    */
   const handleNavClick = useCallback((e, href) => {
     e.preventDefault();
     setMobileOpen(false);
 
-    const NAVBAR_OFFSET = 80;
-    const scrollToEl = (el) => {
-      const top = el.getBoundingClientRect().top + window.scrollY - NAVBAR_OFFSET;
-      window.scrollTo({ top, behavior: 'smooth' });
-    };
-
     // Pure route (no hash), e.g. "/team" or "/"
-    if (!href.includes('#')) {
-      navigate(href);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    // Has hash, e.g. "/#tentang"
-    const [path, hash] = href.split('#');
-    const targetPath = path || '/';
-
-    if (location.pathname === targetPath) {
-      // Same page — just scroll to the element
-      const el = document.getElementById(hash);
-      if (el) {
-        scrollToEl(el);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    } else {
-      // Different page — navigate first, then scroll after render
-      navigate(targetPath);
-      const scrollToHash = (attempts = 0) => {
-        const el = document.getElementById(hash);
-        if (el) {
-          scrollToEl(el);
-        } else if (attempts < 10) {
-          setTimeout(() => scrollToHash(attempts + 1), 100);
-        }
-      };
-      setTimeout(() => scrollToHash(), 150);
-    }
-  }, [navigate, location.pathname]);
-
-  /* Scroll-spy: track which section is visible */
-  const [activeSection, setActiveSection] = useState('');
-
-  useEffect(() => {
-    // Only run scroll-spy on the landing page
-    if (location.pathname !== '/') {
-      setActiveSection('');
-      return;
-    }
-
-    const SECTION_IDS = ['tentang', 'edukasi'];
-    const observers = [];
-
-    // Small delay to let DOM render
-    const timer = setTimeout(() => {
-      SECTION_IDS.forEach((id) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              setActiveSection(id);
-            }
-          },
-          { rootMargin: '-100px 0px -60% 0px', threshold: 0 }
-        );
-        observer.observe(el);
-        observers.push(observer);
-      });
-    }, 300);
-
-    // Reset to '' when at the very top (hero visible)
-    const handleScroll = () => {
-      if (window.scrollY < 200) {
-        setActiveSection('');
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      clearTimeout(timer);
-      observers.forEach((o) => o.disconnect());
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [location.pathname]);
+    navigate(href);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [navigate]);
 
   /* Check if link is active */
   const isActive = (href) => {
-    // Pages with their own routes (not on landing page)
-    if (location.pathname !== '/') {
-      if (href.startsWith('/') && !href.includes('#')) {
-        return location.pathname === href;
-      }
-      return false;
-    }
-
-    // On landing page — use scroll-spy
-    if (href.includes('#')) {
-      const hash = href.split('#')[1];
-      return activeSection === hash;
-    }
-
-    // "Beranda" is active only when no section is in view
-    if (href === '/') {
-      return activeSection === '';
-    }
-
-    return false;
+    // Direct path matching for all routes
+    return location.pathname === href;
   };
 
   const linkClass = (href) =>

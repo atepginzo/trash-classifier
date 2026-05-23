@@ -29,10 +29,35 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!email) {
+      newErrors.email = 'Email wajib diisi';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Format email tidak valid';
+    }
+    
+    if (!password) {
+      newErrors.password = 'Password wajib diisi';
+    } else if (password.length < 6) {
+      newErrors.password = 'Password minimal 6 karakter';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
     setLoading(true);
     // Simulate login
     setTimeout(() => {
@@ -41,9 +66,19 @@ export default function LoginPage() {
     }, 1200);
   };
 
-  const inputClass = `w-full px-4 py-3 text-sm bg-white border border-sage/30 rounded-xl
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    navigate('/forgot-password');
+  };
+
+  const handleGoogleLogin = () => {
+    // Show toast notification
+    alert('Fitur segera hadir');
+  };
+
+  const inputClass = (hasError) => `w-full px-4 py-3 text-sm bg-white border ${hasError ? 'border-red' : 'border-sage/30'} rounded-xl
     text-heading placeholder-muted/50
-    focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest/40
+    focus:outline-none focus:ring-2 ${hasError ? 'focus:ring-red/20 focus:border-red' : 'focus:ring-forest/20 focus:border-forest/40'}
     transition-all duration-200`;
 
   return (
@@ -78,23 +113,29 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="block text-xs font-semibold text-heading mb-1.5">Email</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                       placeholder="nama@email.com" required className={inputClass} />
+                <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setErrors({...errors, email: ''}); }}
+                       placeholder="nama@email.com" className={inputClass(errors.email)} />
+                {errors.email && (
+                  <p className="text-xs text-red mt-1.5">{errors.email}</p>
+                )}
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="text-xs font-semibold text-heading">Password</label>
-                  <a href="#" className="text-xs text-forest font-medium hover:underline">Lupa password?</a>
+                  <button type="button" onClick={handleForgotPassword} className="text-xs text-forest font-medium hover:underline">Lupa password?</button>
                 </div>
                 <div className="relative">
                   <input type={showPass ? 'text' : 'password'} value={password}
-                         onChange={(e) => setPassword(e.target.value)}
-                         placeholder="Masukkan password" required className={`${inputClass} pr-11`} />
+                         onChange={(e) => { setPassword(e.target.value); setErrors({...errors, password: ''}); }}
+                         placeholder="Masukkan password" className={`${inputClass(errors.password)} pr-11`} />
                   <button type="button" onClick={() => setShowPass(!showPass)}
                           className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-heading transition-colors">
                     {showPass ? <EyeOffIcon /> : <EyeIcon />}
                   </button>
                 </div>
+                {errors.password && (
+                  <p className="text-xs text-red mt-1.5">{errors.password}</p>
+                )}
               </div>
               <label className="flex items-center gap-2.5 cursor-pointer">
                 <input type="checkbox"
@@ -122,7 +163,7 @@ export default function LoginPage() {
               <span className="text-xs text-muted font-medium">atau</span>
               <div className="flex-1 h-px bg-sage/20" />
             </div>
-            <button className="w-full flex items-center justify-center gap-2.5 px-6 py-3
+            <button onClick={handleGoogleLogin} className="w-full flex items-center justify-center gap-2.5 px-6 py-3
                                bg-cream-light border border-sage/25 text-sm font-medium text-heading rounded-xl
                                hover:bg-sage-light/30 transition-all duration-200">
               <svg width="18" height="18" viewBox="0 0 24 24">
@@ -136,7 +177,7 @@ export default function LoginPage() {
           </div>
           <p className="text-center text-sm text-muted mt-6">
             Belum punya akun?{' '}
-            <Link to="/signup" className="text-forest font-semibold hover:underline">
+            <Link to="/register" className="text-forest font-semibold hover:underline">
               Daftar sekarang
             </Link>
           </p>

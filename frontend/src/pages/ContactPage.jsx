@@ -53,7 +53,7 @@ const InstagramIcon = () => (
 const CONTACT_INFO = [
   { Icon: MailIcon, label: 'Email', value: 'ecosortdbs@gmail.com', color: 'bg-forest/10 text-forest' },
   { Icon: PhoneIcon, label: 'Telepon', value: '+62 895-1382-9923', color: 'bg-terracotta/10 text-terracotta' },
-  { Icon: MapPinIcon, label: 'Lokasi', value: 'Jakarta, Indonesia', color: 'bg-[#5B21B6]/10 text-[#5B21B6]' },
+  { Icon: MapPinIcon, label: 'Lokasi', value: 'Bandung, Indonesia', color: 'bg-[#5B21B6]/10 text-[#5B21B6]' },
 ];
 
 export default function ContactPage() {
@@ -61,22 +61,58 @@ export default function ContactPage() {
     firstName: '', lastName: '', email: '', phone: '', message: '', agree: false,
   });
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!form.firstName.trim()) {
+      newErrors.firstName = 'Nama depan wajib diisi';
+    }
+    
+    if (!form.email.trim()) {
+      newErrors.email = 'Email wajib diisi';
+    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+      newErrors.email = 'Format email tidak valid';
+    }
+    
+    if (!form.message.trim()) {
+      newErrors.message = 'Pesan wajib diisi';
+    }
+    
+    if (!form.agree) {
+      newErrors.agree = 'Anda harus menyetujui kebijakan privasi';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
     setForm({ firstName: '', lastName: '', email: '', phone: '', message: '', agree: false });
+    setErrors({});
   };
 
-  const inputClass = `w-full px-4 py-3 text-sm bg-white border border-sage/30 rounded-xl
+  const inputClass = (hasError) => `w-full px-4 py-3 text-sm bg-white border ${hasError ? 'border-red' : 'border-sage/30'} rounded-xl
     text-heading placeholder-muted/50
-    focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest/40
+    focus:outline-none focus:ring-2 ${hasError ? 'focus:ring-red/20 focus:border-red' : 'focus:ring-forest/20 focus:border-forest/40'}
     transition-all duration-200`;
 
   return (
@@ -128,8 +164,13 @@ export default function ContactPage() {
               <div>
                 <p className="text-sm font-semibold text-heading mb-3">Ikuti Kami</p>
                 <div className="flex items-center gap-2.5">
-                  {[FacebookIcon, TwitterIcon, YoutubeIcon, InstagramIcon].map((Icon, i) => (
-                    <a key={i} href="#" className="w-9 h-9 rounded-full bg-cream border border-sage/20
+                  {[
+                    { Icon: FacebookIcon, href: 'https://facebook.com' },
+                    { Icon: TwitterIcon, href: 'https://twitter.com' },
+                    { Icon: YoutubeIcon, href: 'https://youtube.com' },
+                    { Icon: InstagramIcon, href: 'https://instagram.com' },
+                  ].map(({ Icon, href }, i) => (
+                    <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-cream border border-sage/20
                                                    flex items-center justify-center text-muted
                                                    hover:bg-forest hover:text-white hover:border-forest
                                                    transition-all duration-300">
@@ -156,7 +197,7 @@ export default function ContactPage() {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-forest/10 border border-forest/20 rounded-xl text-sm text-forest font-medium"
+                  className="mb-6 p-4 bg-green-light border border-green/20 rounded-xl text-sm text-green font-medium"
                 >
                   Pesan berhasil dikirim! Kami akan segera menghubungi Anda.
                 </motion.div>
@@ -165,45 +206,60 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-heading mb-1.5">Nama Depan</label>
+                    <label className="block text-xs font-semibold text-heading mb-1.5">Nama Depan *</label>
                     <input type="text" name="firstName" value={form.firstName} onChange={handleChange}
-                           placeholder="John" required className={inputClass} />
+                           placeholder="John" className={inputClass(errors.firstName)} />
+                    {errors.firstName && (
+                      <p className="text-xs text-red mt-1.5">{errors.firstName}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-heading mb-1.5">Nama Belakang</label>
                     <input type="text" name="lastName" value={form.lastName} onChange={handleChange}
-                           placeholder="Doe" className={inputClass} />
+                           placeholder="Doe" className={inputClass()} />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-heading mb-1.5">Email</label>
+                  <label className="block text-xs font-semibold text-heading mb-1.5">Email *</label>
                   <input type="email" name="email" value={form.email} onChange={handleChange}
-                         placeholder="user@gmail.com" required className={inputClass} />
+                         placeholder="user@gmail.com" className={inputClass(errors.email)} />
+                  {errors.email && (
+                    <p className="text-xs text-red mt-1.5">{errors.email}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-heading mb-1.5">Nomor Telepon</label>
                   <input type="tel" name="phone" value={form.phone} onChange={handleChange}
-                         placeholder="+62 812 345 789" className={inputClass} />
+                         placeholder="+62 812 345 789" className={inputClass()} />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-heading mb-1.5">Pesan</label>
+                  <label className="block text-xs font-semibold text-heading mb-1.5">Pesan *</label>
                   <textarea name="message" value={form.message} onChange={handleChange}
-                            placeholder="Tulis pesan Anda di sini..." required rows={4}
-                            className={`${inputClass} resize-y min-h-[100px]`} />
+                            placeholder="Tulis pesan Anda di sini..." rows={4}
+                            className={`${inputClass(errors.message)} resize-y min-h-[100px]`} />
+                  {errors.message && (
+                    <p className="text-xs text-red mt-1.5">{errors.message}</p>
+                  )}
                 </div>
-                <label className="flex items-start gap-2.5 cursor-pointer group">
-                  <input type="checkbox" name="agree" checked={form.agree} onChange={handleChange} required
-                         className="mt-0.5 w-4 h-4 rounded border-sage/40 text-forest focus:ring-forest/30 accent-forest" />
-                  <span className="text-xs text-muted leading-relaxed">
-                    Saya setuju dengan{' '}
-                    <a href="#" className="text-forest font-semibold hover:underline">kebijakan privasi</a>
-                    {' '}TrashSmart
-                  </span>
-                </label>
-                <button type="submit"
+                <div>
+                  <label className="flex items-start gap-2.5 cursor-pointer group">
+                    <input type="checkbox" name="agree" checked={form.agree} onChange={handleChange}
+                           className="mt-0.5 w-4 h-4 rounded border-sage/40 text-forest focus:ring-forest/30 accent-forest" />
+                    <span className="text-xs text-muted leading-relaxed">
+                      Saya setuju dengan{' '}
+                      <a href="/privacy" className="text-forest font-semibold hover:underline">kebijakan privasi</a>
+                      {' '}TrashSmart
+                    </span>
+                  </label>
+                  {errors.agree && (
+                    <p className="text-xs text-red mt-1.5">{errors.agree}</p>
+                  )}
+                </div>
+                <button type="submit" disabled={!form.agree}
                         className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5
                                    bg-forest text-white text-sm font-semibold rounded-xl
                                    hover:bg-forest-dark active:scale-[0.98]
+                                   disabled:opacity-60 disabled:cursor-not-allowed
                                    transition-all duration-300 shadow-lg shadow-forest/20">
                   <SendIcon />
                   Kirim Pesan

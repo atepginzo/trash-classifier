@@ -71,8 +71,13 @@ export default function Footer() {
               Sistem klasifikasi sampah berbasis AI untuk mendukung pengelolaan limbah yang lebih efisien dan berkelanjutan.
             </p>
             <div className="flex items-center gap-3">
-              {[FacebookIcon, InstagramIcon, YoutubeIcon, TwitterIcon].map((Icon, i) => (
-                <a key={i} href="#" className="w-9 h-9 rounded-full bg-white/8 border border-white/10
+              {[
+                { Icon: FacebookIcon, href: 'https://facebook.com' },
+                { Icon: InstagramIcon, href: 'https://instagram.com' },
+                { Icon: YoutubeIcon, href: 'https://youtube.com' },
+                { Icon: TwitterIcon, href: 'https://twitter.com' },
+              ].map(({ Icon, href }, i) => (
+                <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/8 border border-white/10
                                               flex items-center justify-center text-white/50
                                               hover:bg-white/15 hover:text-white hover:border-white/25
                                               transition-all duration-300">
@@ -86,9 +91,9 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {[
                 { label: 'Beranda', href: '/' },
-                { label: 'Tentang', href: '/#tentang' },
-                { label: 'Edukasi', href: '/#edukasi' },
-                { label: 'Cara Pakai', href: '/#cara-pakai' },
+                { label: 'Tentang', href: '/about' },
+                { label: 'Edukasi', href: '/education' },
+                { label: 'Cara Pakai', href: '/about#cara-pakai' },
                 { label: 'Tim', href: '/team' },
               ].map((item) => (
                 <li key={item.label}>
@@ -100,21 +105,29 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold text-sm mb-4 tracking-wider">Kontak</h4>
             <ul className="space-y-2.5">
-              {['Email kami', 'WhatsApp', 'Telepon'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-sm text-white/50 hover:text-white transition-colors duration-200">{item}</a>
-                </li>
-              ))}
+              <li>
+                <a href="mailto:ecosortdbs@gmail.com" className="text-sm text-white/50 hover:text-white transition-colors duration-200">Email kami</a>
+              </li>
+              <li>
+                <a href="https://wa.me/6289513829923" target="_blank" rel="noopener noreferrer" className="text-sm text-white/50 hover:text-white transition-colors duration-200">WhatsApp</a>
+              </li>
+              <li>
+                <a href="tel:+6289513829923" className="text-sm text-white/50 hover:text-white transition-colors duration-200">Telepon</a>
+              </li>
             </ul>
           </div>
           <div>
             <h4 className="text-white font-semibold text-sm mb-4 tracking-wider">Perusahaan</h4>
             <ul className="space-y-2.5">
-              {['Kebijakan Privasi', 'Syarat & Ketentuan', 'Karir'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-sm text-white/50 hover:text-white transition-colors duration-200">{item}</a>
-                </li>
-              ))}
+              <li>
+                <a href="/privacy" className="text-sm text-white/50 hover:text-white transition-colors duration-200">Kebijakan Privasi</a>
+              </li>
+              <li>
+                <a href="/terms" className="text-sm text-white/50 hover:text-white transition-colors duration-200">Syarat & Ketentuan</a>
+              </li>
+              <li>
+                <a href="/career" className="text-sm text-white/50 hover:text-white transition-colors duration-200">Karir</a>
+              </li>
             </ul>
           </div>
         </div>
