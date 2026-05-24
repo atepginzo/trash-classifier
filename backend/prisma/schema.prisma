@@ -8,18 +8,11 @@ datasource db {
 }
 
 model Prediction {
-  id               String   @id @default(cuid())
-  originalFilename String   @map("original_filename")
-  mimeType         String   @map("mime_type")
-  fileSize         Int      @map("file_size")
-  imageUrl         String?  @map("image_url")
-  label            String
-  confidence       Float
-  category         String?
-  detections       Json     @default("[]")
-  rawAiResponse    Json?    @map("raw_ai_response")
-  aiProvider       String   @default("mock") @map("ai_provider")
-  createdAt        DateTime @default(now()) @map("created_at")
+  id          String   @id @default(cuid())
+  label       String
+  confidence  Float
+  category    String?
+  createdAt   DateTime @default(now()) @map("created_at")
 
   @@map("predictions")
 }

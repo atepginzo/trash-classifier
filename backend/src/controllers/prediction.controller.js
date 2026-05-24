@@ -51,7 +51,6 @@ async function getPredictionById(req, res, next) {
 function formatPredictionSummary(prediction) {
   return {
     id: prediction.id,
-    originalFilename: prediction.originalFilename,
     result: {
       label: prediction.label,
       confidence: prediction.confidence,
@@ -64,18 +63,12 @@ function formatPredictionSummary(prediction) {
 function formatPredictionDetail(prediction) {
   return {
     id: prediction.id,
-    originalFilename: prediction.originalFilename,
-    mimeType: prediction.mimeType,
-    fileSize: prediction.fileSize,
-    imageUrl: prediction.imageUrl,
     result: {
       label: prediction.label,
       confidence: prediction.confidence,
       category: prediction.category,
-      detections: prediction.detections || [],
+      detections: [], // Fallback karena field detections dihapus dari database
     },
-    rawAiResponse: prediction.rawAiResponse,
-    aiProvider: prediction.aiProvider,
     createdAt: prediction.createdAt,
   };
 }

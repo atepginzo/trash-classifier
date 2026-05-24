@@ -1,43 +1,37 @@
-const fs = require('fs');
-const path = require('path');
-const crypto = require('crypto');
 const prisma = require('../lib/prisma');
 const aiService = require('./ai.service');
 const config = require('../config');
 
 async function createPrediction(file) {
-  // Ensure uploads folder exists
-  const uploadsDir = path.join(__dirname, '../../uploads');
-  if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir, { recursive: true });
-  }
-
-  // Generate a unique file name
-  const ext = file.originalname.split('.').pop() || 'jpg';
-  const filename = `${crypto.randomUUID()}.${ext}`;
-  const filePath = path.join(uploadsDir, filename);
-
-  // Write buffer to file
-  fs.writeFileSync(filePath, file.buffer);
-
-  // Predict using AI service
   const aiResult = await aiService.predictImage(file.buffer, file.mimetype);
 
-  // Construct image URL
-  const imageUrl = `http://localhost:${config.port}/uploads/${filename}`;
+  let label      = aiResult.label;
+  let confidence = aiResult.confidence;
+  let category   = aiResult.category;
+
+  if (!label || label === 'Unknown') {
+    const hasilArray =
+      (aiResult.data && Array.isArray(aiResult.data.hasil) ? aiResult.data.hasil : null) ||
+      (Array.isArray(aiResult.hasil) ? aiResult.hasil : null);
+
+    if (!hasilArray || hasilArray.length === 0) {
+      const err = new Error('Format respons AI tidak valid: array "hasil" tidak ditemukan.');
+      err.code = 'AI_INVALID_RESPONSE';
+      err.statusCode = 502;
+      throw err;
+    }
+
+    const top = hasilArray[0];
+    label      = top.kategori  || 'Unknown';
+    confidence = top.confidence || 0;
+    category   = top.kategori  || 'Unknown';
+  }
 
   const prediction = await prisma.prediction.create({
     data: {
-      originalFilename: file.originalname,
-      mimeType: file.mimetype,
-      fileSize: file.size,
-      imageUrl: imageUrl,
-      label: aiResult.label,
-      confidence: aiResult.confidence,
-      category: aiResult.category,
-      detections: aiResult.detections || [],
-      rawAiResponse: aiResult.raw || null,
-      aiProvider: config.useMockAi ? 'mock' : 'ai-service',
+      label,
+      confidence: parseFloat(confidence),
+      category,
     },
   });
 
@@ -54,7 +48,6 @@ async function getPredictions(page, limit) {
       orderBy: { createdAt: 'desc' },
       select: {
         id: true,
-        originalFilename: true,
         label: true,
         confidence: true,
         category: true,
