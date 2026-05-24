@@ -1,0 +1,13 @@
+.vscode/
+.idea/
+.DS_Store
+EcoSort-AI/
+**/dev.db
+**/dev.db-journal
+**/uploads/
+**/node_modules/
+**/.env
+**/.env.local
+**/.env.*.local
+frontend/Foto Team/
+

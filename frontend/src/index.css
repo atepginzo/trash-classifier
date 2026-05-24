@@ -1,0 +1,219 @@
+/**
+ * TrashSmart - Global Styles & Design System
+ * Professional sustainability-focused design with dark/light mode support
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F5F0E8;
+  --color-cream-light: #FAFAF7;
+  --color-forest: #2D5016;
+  --color-forest-dark: #1E3A0E;
+  --color-forest-light: #3D6B20;
+  --color-terracotta: #C4622D;
+  --color-terracotta-light: #D4783F;
+  --color-sage: #A8B89C;
+  --color-sage-light: #C5D3BB;
+  --color-sage-muted: #D6E0CF;
+  --color-heading: #0F1A0A;
+  --color-body: #3A3D35;
+  --color-muted: #6B7160;
+  
+  --color-blue: #1860a0;
+  --color-blue-light: #eef4fa;
+  --color-red: #a32d2d;
+  --color-red-light: #fdf2f2;
+  --color-green: #2d6a2d;
+  --color-green-light: #f0f7f0;
+
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+  --font-sans: 'DM Sans', 'Inter', system-ui, sans-serif;
+}
+
+:root {
+  --bg-primary: #F5F0E8;
+  --bg-secondary: #FAFAF7;
+  --bg-tertiary: #FFFFFF;
+  --accent-primary: #2D5016;
+  --accent-secondary: #1E3A0E;
+  --accent-tertiary: #C4622D;
+  --border-primary: #A8B89C;
+  --border-secondary: #C5D3BB;
+  --text-primary: #0F1A0A;
+  --text-secondary: #3A3D35;
+  --text-tertiary: #6B7160;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+  --font-sans: 'DM Sans', 'Inter', system-ui, sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0F1A0A;
+  --bg-secondary: #1A3A1F;
+  --bg-tertiary: #2D5A35;
+  --accent-primary: #7EC892;
+  --accent-secondary: #A8E6B8;
+  --accent-tertiary: #D4783F;
+  --border-primary: #3D6B20;
+  --border-secondary: #2D5016;
+  --text-primary: #E8F5EC;
+  --text-secondary: #C5D3BB;
+  --text-tertiary: #A8B89C;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 25s linear infinite;
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+.navbar-blur {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+::selection {
+  background-color: rgba(45, 80, 22, 0.2);
+  color: var(--text-primary);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-primary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+@media (max-width: 767px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.875rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  button, a, [role="button"] {
+    min-height: 44px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 2.25rem !important;
+  }
+
+  h2 {
+    font-size: 1.875rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}

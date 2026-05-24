@@ -18,7 +18,7 @@ Goal: Semua anggota bisa develop paralel.
 | GET /api/predictions (list + pagination)       | Full-Stack | Done   |
 | GET /api/predictions/:id                       | Full-Stack | Done   |
 | Dokumentasi API & arsitektur                   | Full-Stack | Done   |
-| Setup frontend (React + Vite)                  | Full-Stack | Todo   |
+| Setup frontend (React + Vite)                  | Full-Stack | Done   |
 | Kumpulkan & labeling dataset                   | AI/Data    | Todo   |
 | Riset model object detection                   | AI/ML      | Todo   |
 
@@ -32,10 +32,10 @@ Goal: Frontend terhubung ke backend, model AI mulai training.
 
 | Task                                           | PIC        | Status |
 | ---------------------------------------------- | ---------- | ------ |
-| Halaman upload gambar (drag & drop)            | Full-Stack | Todo   |
-| Halaman hasil prediksi                         | Full-Stack | Todo   |
-| Halaman riwayat prediksi (list + pagination)   | Full-Stack | Todo   |
-| Koneksi frontend ke backend API                | Full-Stack | Todo   |
+| Halaman upload gambar (drag & drop)            | Full-Stack | Done   |
+| Halaman hasil prediksi                         | Full-Stack | Done   |
+| Halaman riwayat prediksi (list + pagination)   | Full-Stack | Done   |
+| Koneksi frontend ke backend API                | Full-Stack | Done   |
 | Training model dengan dataset awal             | AI/ML      | Todo   |
 | Evaluasi metrik model (accuracy, mAP)          | AI/Data    | Todo   |
 | Deploy model sebagai REST API                  | AI/ML      | Todo   |
