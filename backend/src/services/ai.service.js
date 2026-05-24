@@ -55,9 +55,10 @@ async function realPredict(fileBuffer, mimeType) {
   });
 
   try {
+    const timeoutMs = config.aiTimeout || 30000; // default 30 detik untuk cold start
     const response = await axios.post(config.aiServiceUrl, form, {
       headers: { ...form.getHeaders() },
-      timeout: 10000,
+      timeout: timeoutMs,
       maxContentLength: 10 * 1024 * 1024,
     });
 
@@ -72,9 +73,32 @@ async function realPredict(fileBuffer, mimeType) {
 }
 
 // Normalisasi response AI ke format standar backend.
-// Sesuaikan fungsi ini ketika format response dari tim AI sudah final.
+// Mendukung format Python FastAPI: { status, hasil: [{ kategori, confidence }] }
+// Serta format generik lama: { predictions, results }
 function normalizeAiResponse(rawResponse) {
-  const predictions = rawResponse.predictions || rawResponse.results || [];
+  // --- Format Python FastAPI (primer) ---
+  // { "status": "success", "hasil": [{ "kategori": "Anorganik", "confidence": 0.986 }] }
+  if (Array.isArray(rawResponse.hasil) && rawResponse.hasil.length > 0) {
+    const top = rawResponse.hasil[0];
+    const label = top.kategori || 'Unknown';
+    const confidence = parseFloat(top.confidence || 0);
+
+    return {
+      label,
+      confidence,
+      category: label, // Python sudah mengembalikan kategori final
+      detections: rawResponse.hasil.map((item) => ({
+        label: item.kategori || 'Unknown',
+        confidence: parseFloat(item.confidence || 0),
+        bbox: null,
+      })),
+      raw: rawResponse,
+    };
+  }
+
+  // --- Format generik lama (fallback) ---
+  const predictions =
+    rawResponse.predictions || rawResponse.results || [];
 
   const topPrediction = predictions[0] || {};
   const label = topPrediction.class || topPrediction.label || 'Unknown';
