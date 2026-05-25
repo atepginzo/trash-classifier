@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -15,4 +15,15 @@ model Prediction {
   createdAt   DateTime @default(now()) @map("created_at")
 
   @@map("predictions")
+}
+
+model tps_master {
+  id            String  @id
+  nama_desa     String?
+  kecamatan     String?
+  kabupaten     String?
+  area_type     String?
+  lat           Decimal?
+  lon           Decimal?
+  kapasitas_ton Decimal?
 }

@@ -191,7 +191,8 @@ Error:
 ## Kamus Data (Data Dictionary)
 
 * **Category:** `Organik`, `Anorganik`, `Residu`
-* **Label (FINAL dari tim Data Science):** 1. `Glass` (Anorganik)
+* **Label (FINAL dari tim Data Science):** 
+    1. `Glass` (Anorganik)
     2. `Paper` (Organik)
     3. `Cardboard` (Organik)
     4. `Plastic` (Anorganik)

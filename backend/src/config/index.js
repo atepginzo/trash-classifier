@@ -7,7 +7,7 @@ const config = {
   useMockAi: process.env.USE_MOCK_AI === 'true',
   aiServiceUrl: process.env.AI_SERVICE_URL || '',
   aiApiKey: process.env.AI_API_KEY || '',
-  aiTimeout: parseInt(process.env.AI_TIMEOUT, 10) || 30000, // ms – naikkan untuk cold start TF
+  aiTimeout: parseInt(process.env.AI_TIMEOUT, 10) || 2500, // ms – auto-capture: harus < 2.5 detik polling
   maxFileSize: parseInt(process.env.MAX_FILE_SIZE, 10) || 5 * 1024 * 1024, // 5MB
 };
 

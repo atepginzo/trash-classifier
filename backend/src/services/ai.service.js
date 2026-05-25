@@ -55,7 +55,10 @@ async function realPredict(fileBuffer, mimeType) {
   });
 
   try {
-    const timeoutMs = config.aiTimeout || 30000; // default 30 detik untuk cold start
+    // ── [FIX: Timeout] Timeout harus < interval polling (2 detik) ──────
+    // Agar request lambat tidak menumpuk dengan frame berikutnya.
+    // Gunakan AI_TIMEOUT env var, default 2500ms (sesuai skenario auto-capture 2.5s).
+    const timeoutMs = config.aiTimeout || 2500;
     const response = await axios.post(config.aiServiceUrl, form, {
       headers: { ...form.getHeaders() },
       timeout: timeoutMs,

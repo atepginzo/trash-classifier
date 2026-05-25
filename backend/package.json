@@ -9,7 +9,8 @@
     "db:migrate": "npx prisma migrate dev",
     "db:push": "npx prisma db push",
     "db:studio": "npx prisma studio",
-    "db:generate": "npx prisma generate"
+    "db:generate": "npx prisma generate",
+    "db:migrate-tps": "node scripts/migrate-tps.js"
   },
   "keywords": [
     "trash",
@@ -23,11 +24,13 @@
     "@prisma/client": "^6.6.0",
     "axios": "^1.16.0",
     "cors": "^2.8.6",
+    "csv-parser": "^3.2.1",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "form-data": "^4.0.5",
     "morgan": "^1.10.1",
-    "multer": "^2.1.1"
+    "multer": "^2.1.1",
+    "pg": "^8.21.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14",
