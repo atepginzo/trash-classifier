@@ -190,10 +190,6 @@ html, body {
   button, a, [role="button"] {
     min-height: 44px;
   }
-
-  .grid {
-    grid-template-columns: 1fr !important;
-  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -215,5 +211,98 @@ html, body {
   section {
     padding-top: 4rem;
     padding-bottom: 4rem;
+  }
+}
+
+/* ===== LIVE SCAN ANIMATIONS ===== */
+
+/* Laser Scan Animation */
+.scan-laser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #00ff88, #00ffcc, #00ff88, transparent);
+  box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+  animation: laserScan 2s ease-in-out infinite;
+  z-index: 10;
+  pointer-events: none;
+}
+
+@keyframes laserScan {
+  0% {
+    top: 0%;
+    opacity: 1;
+  }
+  50% {
+    top: calc(100% - 3px);
+    opacity: 1;
+  }
+  100% {
+    top: 0%;
+    opacity: 1;
+  }
+}
+
+/* Scan Corner Frames */
+.scan-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: #00ff88;
+  border-style: solid;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.corner-tl {
+  top: 8px;
+  left: 8px;
+  border-width: 3px 0 0 3px;
+}
+
+.corner-tr {
+  top: 8px;
+  right: 8px;
+  border-width: 3px 3px 0 0;
+}
+
+.corner-bl {
+  bottom: 8px;
+  left: 8px;
+  border-width: 0 0 3px 3px;
+}
+
+.corner-br {
+  bottom: 8px;
+  right: 8px;
+  border-width: 0 3px 3px 0;
+}
+
+/* Scan Result Fade In */
+.scan-result-fade-in {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Confidence Bar Animation */
+.confidence-bar-animation {
+  animation: expandWidth 0.6s ease-out;
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0%;
   }
 }

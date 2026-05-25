@@ -38,21 +38,21 @@ const STEPS = [
     number: '1.',
     title: 'Unggah atau Foto',
     description: 'Gunakan kamera perangkat atau unggah gambar sampah dari galeri. Pastikan objek terlihat jelas untuk hasil terbaik.',
-    Icon: UploadIcon,
+    image: '/cara-pakai/unggah.png',
     bgColor: 'from-sage-light/50 to-sage-muted/30',
   },
   {
     number: '2.',
     title: 'Analisis dengan AI',
     description: 'Sistem mendeteksi objek sampah menggunakan model YOLOv8. Tunggu beberapa detik hingga hasil muncul.',
-    Icon: AIIcon,
+    image: '/cara-pakai/analisis.png',
     bgColor: 'from-[#C5E8D8]/40 to-[#E0F0E8]/30',
   },
   {
     number: '3.',
     title: 'Lihat Hasil Lengkap',
     description: 'Tampil kategori sampah, bounding box, dan confidence score. Data tersimpan otomatis ke dashboard analitik.',
-    Icon: ResultIcon,
+    image: '/cara-pakai/hasil.png',
     bgColor: 'from-cream-light to-sage-light/20',
   },
 ];
@@ -114,14 +114,18 @@ export default function HowItWorks() {
                   {step.number}
                 </span>
               </div>
-              <div className={`relative bg-gradient-to-br ${step.bgColor} px-6 pt-14 pb-8 flex items-center justify-center`}>
-                <div className="absolute inset-0 opacity-[0.04]"
+              <div className={`relative bg-gradient-to-br ${step.bgColor} aspect-[3/2] w-full overflow-hidden flex items-center justify-center`}>
+                <div className="absolute inset-0 opacity-[0.04] z-10 pointer-events-none"
                   style={{
                     backgroundImage: 'radial-gradient(circle, #2D5016 0.8px, transparent 0.8px)',
                     backgroundSize: '14px 14px',
                   }}
                 />
-                <step.Icon />
+                <img
+                  src={step.image}
+                  alt={step.title}
+                  className="w-full h-full object-contain p-4 mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
               <div className="px-6 py-6">
                 <h3 className="text-base sm:text-lg font-bold text-heading mb-2 tracking-tight">

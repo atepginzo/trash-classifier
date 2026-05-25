@@ -1,24 +1,48 @@
 import { useNavigate, Link } from 'react-router-dom';
-import { History, ChevronLeft, ChevronRight, Inbox, AlertTriangle, Leaf, Recycle, Trash2 } from 'lucide-react';
+import { History, ChevronLeft, ChevronRight, Inbox, AlertTriangle, Leaf, Recycle, Trash2, ArrowLeft, RefreshCw, Clock } from 'lucide-react';
 import { usePredictions } from '../hooks/usePredictions';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { motion } from 'framer-motion';
 
 const CATEGORY_CONFIG = {
-  organik: { label: 'Organik', icon: Leaf, color: 'bg-green-100 text-green-700' },
-  anorganik: { label: 'Anorganik', icon: Recycle, color: 'bg-blue-100 text-blue-700' },
-  residu: { label: 'Residu', icon: Trash2, color: 'bg-amber-100 text-amber-700' },
+  organik: { 
+    label: 'Organik', 
+    icon: Leaf, 
+    color: 'bg-forest/5 text-forest border-forest/15',
+    primaryColor: '#2D5016',
+    bgBadge: 'bg-forest/10 text-forest',
+    bgPill: 'border-forest bg-forest/5 text-forest'
+  },
+  anorganik: { 
+    label: 'Anorganik', 
+    icon: Recycle, 
+    color: 'bg-blue/5 text-blue border-blue/15',
+    primaryColor: '#1860a0',
+    bgBadge: 'bg-blue/10 text-blue',
+    bgPill: 'border-blue bg-blue/5 text-blue'
+  },
+  b3: { 
+    label: 'Limbah B3', 
+    icon: AlertTriangle, 
+    color: 'bg-red-light text-red border-red/15',
+    primaryColor: '#a32d2d',
+    bgBadge: 'bg-red-light text-red',
+    bgPill: 'border-red bg-red-light text-red'
+  },
 };
 
 function SkeletonCards() {
   return (
-    <div className="space-y-3">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <div key={i} className="animate-pulse flex items-center gap-4 bg-gray-100 rounded-xl p-4">
-          <div className="w-16 h-16 bg-gray-200 rounded-lg shrink-0" />
-          <div className="flex-1 space-y-2">
-            <div className="h-4 bg-gray-200 rounded w-1/3" />
-            <div className="h-3 bg-gray-200 rounded w-1/2" />
+    <div className="space-y-4">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div key={i} className="animate-pulse flex items-center gap-4 bg-white border border-sage/10 rounded-2xl p-4 shadow-[0_2px_12px_rgba(0,0,0,0.01)]">
+          <div className="w-16 h-16 bg-cream rounded-xl shrink-0" />
+          <div className="flex-1 space-y-2.5">
+            <div className="h-4 bg-cream rounded w-1/3" />
+            <div className="h-3 bg-cream rounded w-1/2" />
           </div>
-          <div className="h-6 w-16 bg-gray-200 rounded-full" />
+          <div className="h-6 w-20 bg-cream rounded-full" />
         </div>
       ))}
     </div>
@@ -33,136 +57,166 @@ export default function HistoryPage() {
   const meta = data?.meta || {};
   const totalPages = meta.totalPages || 1;
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center p-4">
-        <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8">
-          <div className="flex items-center gap-2 mb-6">
-            <History className="w-6 h-6 text-green-600" />
-            <h1 className="text-xl font-bold text-gray-800">Riwayat Prediksi</h1>
-          </div>
-          <SkeletonCards />
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center p-4">
-        <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8 text-center space-y-4">
-          <AlertTriangle className="w-12 h-12 text-red-400 mx-auto" />
-          <h2 className="text-xl font-bold text-gray-800">Gagal Memuat Data</h2>
-          <p className="text-sm text-gray-500">{error.message || 'Terjadi kesalahan saat mengambil data.'}</p>
-          <button
-            onClick={() => setPage(page)}
-            className="px-6 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
-          >
-            Coba Lagi
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex flex-col items-center p-4 py-8">
-      <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8 space-y-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <History className="w-6 h-6 text-green-600" />
-            <h1 className="text-xl font-bold text-gray-800">Riwayat Prediksi</h1>
+    <div className="min-h-screen bg-cream flex flex-col justify-between">
+      <Navbar />
+
+      <main className="flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full">
+        {/* Page Title & Breadcrumb */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
+          <div>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mb-3
+                            bg-forest/8 border border-forest/15
+                            text-forest text-xs font-semibold tracking-wide">
+              <History size={13} />
+              Riwayat Aktivitas
+            </span>
+            <h1 className="font-serif text-3xl sm:text-4xl font-bold text-heading tracking-tight">
+              Daftar Prediksi AI
+            </h1>
+            <p className="text-sm text-muted mt-1 leading-relaxed">
+              Temukan kembali hasil klasifikasi sampah dan rekomendasi pemilahan yang telah Anda lakukan.
+            </p>
           </div>
           <Link
             to="/upload"
-            className="text-sm text-green-600 font-medium hover:underline"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-forest text-white rounded-full text-sm font-bold hover:bg-forest-dark transition-all duration-300 shadow-sm self-start sm:self-auto cursor-pointer"
           >
-            + Upload Baru
+            + Pindai Baru
           </Link>
         </div>
-        {predictions.length === 0 && (
-          <div className="text-center py-16 space-y-3">
-            <Inbox className="w-16 h-16 text-gray-300 mx-auto" />
-            <p className="text-gray-500 font-medium">Belum ada prediksi</p>
-            <p className="text-sm text-gray-400">Upload foto sampah untuk memulai klasifikasi</p>
-            <Link
-              to="/upload"
-              className="inline-block mt-4 px-6 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
-            >
-              Upload Sekarang
-            </Link>
-          </div>
-        )}
-        {predictions.length > 0 && (
-          <div className="divide-y divide-gray-100 border rounded-xl overflow-hidden">
-            {predictions.map((pred) => {
-              const category = pred.category?.toLowerCase() || 'organik';
-              const catConfig = CATEGORY_CONFIG[category] || CATEGORY_CONFIG.organik;
-              const CatIcon = catConfig.icon;
 
-              return (
-                <div
-                  key={pred.id}
-                  onClick={() => navigate(`/predictions/${pred.id}`)}
-                  className="flex items-center gap-4 p-4 hover:bg-gray-50 cursor-pointer transition-colors"
-                >
-                  <div className="w-16 h-16 bg-gray-100 rounded-lg shrink-0 overflow-hidden">
-                    {pred.imageUrl || pred.image_url ? (
-                      <img
-                        src={pred.imageUrl || pred.image_url}
-                        alt=""
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-gray-300">
-                        <Leaf className="w-6 h-6" />
+        {/* Outer Card Container */}
+        <div className="bg-white border border-sage/20 rounded-3xl p-4 sm:p-6 lg:p-8 shadow-[0_4px_24px_rgba(45,80,22,0.02)] min-h-[420px] flex flex-col justify-between">
+          
+          {loading ? (
+            <SkeletonCards />
+          ) : error ? (
+            <div className="text-center py-16 space-y-5 flex-grow flex flex-col items-center justify-center">
+              <AlertTriangle className="w-16 h-16 text-terracotta animate-bounce-slow" />
+              <div className="space-y-2">
+                <h3 className="text-xl font-bold text-heading">Gagal Memuat Data</h3>
+                <p className="text-sm text-muted max-w-sm mx-auto">
+                  {error.message || 'Terjadi gangguan jaringan saat menghubungi server.'}
+                </p>
+              </div>
+              <button
+                onClick={() => setPage(page)}
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-forest text-white rounded-full font-bold hover:bg-forest-dark transition-all duration-300 shadow-sm cursor-pointer"
+              >
+                <RefreshCw size={15} />
+                Coba Lagi
+              </button>
+            </div>
+          ) : predictions.length === 0 ? (
+            <div className="text-center py-16 space-y-5 flex-grow flex flex-col items-center justify-center">
+              <Inbox className="w-16 h-16 text-sage/40" />
+              <div className="space-y-2">
+                <h3 className="text-xl font-serif font-bold text-heading">Riwayat Masih Kosong</h3>
+                <p className="text-sm text-muted max-w-sm mx-auto">
+                  Anda belum pernah memindai sampah menggunakan asisten AI TrashSmart.
+                </p>
+              </div>
+              <Link
+                to="/upload"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-forest text-white rounded-full font-bold hover:bg-forest-dark transition-all duration-300 shadow-md cursor-pointer"
+              >
+                Mulai Pindai Sekarang
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-4 flex-grow">
+              <div className="divide-y divide-sage/10 border border-sage/20 rounded-2xl bg-cream-light/30 overflow-hidden shadow-inner">
+                {predictions.map((pred, i) => {
+                  const result = pred.result || pred || {};
+                  let category = (result.category || pred.category || 'organik').toLowerCase();
+                  if (category === 'residu') category = 'b3';
+                  const catConfig = CATEGORY_CONFIG[category] || CATEGORY_CONFIG.organik;
+                  const CatIcon = catConfig.icon;
+                  const confidence = result.confidence ?? pred.confidence ?? 0;
+                  const label = result.label ?? pred.label ?? pred.topLabel ?? 'Tidak terdeteksi';
+
+                  return (
+                    <motion.div
+                      key={pred.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: i * 0.05 }}
+                      onClick={() => navigate(`/predictions/${pred.id}`)}
+                      className="flex items-center gap-4 p-4 sm:p-5 hover:bg-white cursor-pointer transition-all duration-200 group border-l-4 border-l-transparent hover:border-l-forest"
+                    >
+                      {/* Image Thumbnail Container */}
+                      <div className="w-16 h-16 bg-cream border border-sage/10 rounded-xl shrink-0 overflow-hidden shadow-sm relative">
+                        {pred.imageUrl || pred.image_url ? (
+                          <img
+                            src={pred.imageUrl || pred.image_url}
+                            alt=""
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-sage">
+                            <Leaf className="w-6 h-6" />
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-gray-800 truncate">
-                      {pred.label || pred.topLabel || 'Tidak ada label'}
-                    </p>
-                    <p className="text-xs text-gray-400">
-                      {pred.createdAt ? new Date(pred.createdAt).toLocaleString('id-ID') : '-'}
-                    </p>
-                  </div>
-                  <span className={`inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full ${catConfig.color}`}>
-                    <CatIcon className="w-3 h-3" />
-                    {catConfig.label}
-                  </span>
-                  <span className="text-xs font-mono text-gray-500 shrink-0">
-                    {((pred.confidence || 0) * 100).toFixed(0)}%
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        )}
-        {predictions.length > 0 && (
-          <div className="flex items-center justify-between pt-2">
-            <button
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page <= 1}
-              className="flex items-center gap-1 px-4 py-2 text-sm font-medium bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-            >
-              <ChevronLeft className="w-4 h-4" />
-              Prev
-            </button>
-            <span className="text-sm text-gray-500">
-              Halaman <span className="font-semibold text-gray-800">{page}</span> dari {totalPages}
-            </span>
-            <button
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              disabled={page >= totalPages}
-              className="flex items-center gap-1 px-4 py-2 text-sm font-medium bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-            >
-              Next
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-        )}
-      </div>
+
+                      {/* Info Metadata */}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-base font-bold text-heading truncate group-hover:text-forest transition-colors duration-150">
+                          {label}
+                        </p>
+                        <div className="flex items-center gap-1.5 text-xs text-muted mt-1">
+                          <Clock size={12} />
+                          <span>{pred.createdAt ? new Date(pred.createdAt).toLocaleString('id-ID') : '-'}</span>
+                        </div>
+                      </div>
+
+                      {/* Status / Category Badges */}
+                      <div className="flex items-center gap-3 shrink-0">
+                        <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold border ${catConfig.color}`}>
+                          <CatIcon size={12} />
+                          {catConfig.label}
+                        </span>
+                        <span className="text-xs font-mono font-bold bg-cream-light border border-sage/15 px-2.5 py-1 rounded-lg text-muted shadow-sm hidden sm:inline-block">
+                          {((confidence || 0) * 100).toFixed(0)}% Akurasi
+                        </span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Pagination Controls */}
+          {!loading && !error && predictions.length > 0 && (
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-sage/10 pt-6 mt-6">
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page <= 1}
+                className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-2 border border-sage/35 text-body rounded-full text-sm font-bold hover:bg-forest/5 disabled:opacity-40 disabled:hover:bg-transparent disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
+              >
+                <ChevronLeft size={16} />
+                Sebelumnya
+              </button>
+              <span className="text-sm font-medium text-body order-first sm:order-none">
+                Halaman <span className="font-bold text-forest">{page}</span> dari {totalPages}
+              </span>
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page >= totalPages}
+                className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-2 border border-sage/35 text-body rounded-full text-sm font-bold hover:bg-forest/5 disabled:opacity-40 disabled:hover:bg-transparent disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
+              >
+                Berikutnya
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          )}
+
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }
