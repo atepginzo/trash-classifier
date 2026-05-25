@@ -134,4 +134,46 @@ async function predictImage(fileBuffer, mimeType) {
   return realPredict(fileBuffer, mimeType);
 }
 
-module.exports = { predictImage };
+// ═══════════════════════════════════════════════════════════════════════════════
+// FITUR 2: Prediksi Volume Sampah (LSTM)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Kirim payload 12 bulan history ke FastAPI /predict-volume/
+ * dan kembalikan prediksi 3 bulan ke depan.
+ *
+ * @param {Array<Object>} history - Array 12 objek VolumeTimestep
+ * @returns {Promise<Object>} { status, model_used, predictions: [{bulan_ke, volume_ton}] }
+ */
+async function predictVolume(history) {
+  const axios = require('axios');
+
+  // URL FastAPI — ganti /predict/ → /predict-volume/
+  const baseUrl = config.aiServiceUrl.replace(/\/predict\/?$/, '');
+  const volumeUrl = `${baseUrl}/predict-volume/`;
+
+  try {
+    const response = await axios.post(volumeUrl, { history }, {
+      headers: { 'Content-Type': 'application/json' },
+      timeout: 15000, // LSTM butuh waktu lebih dari CNN
+    });
+
+    if (response.data.status === 'error') {
+      const err = new Error(response.data.message || 'AI volume prediction error');
+      err.code = 'AI_SERVICE_ERROR';
+      err.statusCode = 502;
+      throw err;
+    }
+
+    return response.data;
+  } catch (err) {
+    if (err.code === 'AI_SERVICE_ERROR') throw err;
+    console.error('AI Volume Service Error:', err.message);
+    const aiError = new Error('AI volume prediction service sedang tidak tersedia');
+    aiError.code = 'AI_SERVICE_ERROR';
+    aiError.statusCode = 502;
+    throw aiError;
+  }
+}
+
+module.exports = { predictImage, predictVolume };

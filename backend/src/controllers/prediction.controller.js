@@ -56,6 +56,7 @@ function formatPredictionSummary(prediction) {
       confidence: prediction.confidence,
       category: prediction.category,
     },
+    imageUrl: prediction.imageUrl || null,
     createdAt: prediction.createdAt,
   };
 }
@@ -67,8 +68,9 @@ function formatPredictionDetail(prediction) {
       label: prediction.label,
       confidence: prediction.confidence,
       category: prediction.category,
-      detections: [], // Fallback karena field detections dihapus dari database
+      detections: [],
     },
+    imageUrl: prediction.imageUrl || null,
     createdAt: prediction.createdAt,
   };
 }

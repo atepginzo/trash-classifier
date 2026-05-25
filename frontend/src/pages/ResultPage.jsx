@@ -265,7 +265,14 @@ export default function ResultPage() {
   const catConfig = CATEGORY_CONFIG[categoryKey] || CATEGORY_CONFIG.organik;
   const CatIcon = catConfig.icon;
   const detections = result.detections || prediction?.detections || [];
-  const imageUrl = prediction?.imageUrl || prediction?.image_url;
+
+  // Resolve imageUrl: path relatif → URL absolut
+  const rawImageUrl = prediction?.imageUrl || prediction?.image_url;
+  const backendBase = (import.meta.env.VITE_API_URL || 'http://localhost:3000/api').replace(/\/api\/?$/, '');
+  const imageUrl = rawImageUrl
+    ? rawImageUrl.startsWith('http') ? rawImageUrl : `${backendBase}${rawImageUrl}`
+    : null;
+
   const confidence = result.confidence ?? prediction?.confidence ?? 0;
   const label = result.label ?? prediction?.label ?? 'Tidak terdeteksi';
   const tipsConfig = CATEGORY_TIPS[categoryKey] || CATEGORY_TIPS.organik;

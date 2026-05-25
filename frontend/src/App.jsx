@@ -13,6 +13,9 @@ import PrivacyPage from './pages/PrivacyPage'
 import TermsPage from './pages/TermsPage'
 import CareerPage from './pages/CareerPage'
 import ForgotPasswordPage from './pages/ForgotPasswordPage'
+import VolumePredictionPage from './pages/VolumePredictionPage'
+import TpsPage from './pages/TpsPage'
+import DashboardTpsPage from './pages/DashboardTpsPage'
 
 function App() {
   return (
@@ -32,8 +35,14 @@ function App() {
       <Route path="/career" element={<CareerPage />} />
       <Route path="/predictions" element={<HistoryPage />} />
       <Route path="/predictions/:id" element={<ResultPage />} />
+      <Route path="/volume-prediction" element={<VolumePredictionPage />} />
+      <Route path="/tps" element={<TpsPage />} />
+      <Route path="/dashboard-tps" element={<DashboardTpsPage />} />
     </Routes>
   )
 }
 
 export default App
+
+
+

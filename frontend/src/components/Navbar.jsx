@@ -6,8 +6,8 @@ import ThemeToggle from './ThemeToggle';
 
 const NAV_LINKS = [
   { label: 'Beranda', href: '/', icon: 'home' },
-  { label: 'Tentang', href: '/about', icon: 'info' },
-  { label: 'Edukasi', href: '/education', icon: 'book' },
+  { label: 'Peta TPS', href: '/dashboard-tps', icon: 'map' },
+  { label: 'Riwayat', href: '/predictions', icon: 'history' },
   { label: 'Tim', href: '/team', icon: 'users' },
   { label: 'Kontak', href: '/contact', icon: 'mail' },
 ];
@@ -50,6 +50,18 @@ const NavIcon = ({ type, className = '' }) => {
       <svg className={className} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="10" cy="10" r="7" />
         <polyline points="10 6 10 10 13 10" />
+      </svg>
+    ),
+    scan: (
+      <svg className={className} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 7V5a2 2 0 012-2h2M13 3h2a2 2 0 012 2v2M17 13v2a2 2 0 01-2 2h-2M7 17H5a2 2 0 01-2-2v-2" />
+        <circle cx="10" cy="10" r="3" />
+      </svg>
+    ),
+    map: (
+      <svg className={className} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 5l5-2 4 2 5-2v12l-5 2-4-2-5 2V5z" />
+        <path d="M8 3v12M12 5v12" />
       </svg>
     ),
   };

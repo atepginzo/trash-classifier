@@ -1,6 +1,15 @@
 const prisma = require('../lib/prisma');
 const aiService = require('./ai.service');
 const config = require('../config');
+const fs = require('fs');
+const path = require('path');
+const { createId } = require('@paralleldrive/cuid2');
+
+// Pastikan folder uploads/ ada
+const UPLOADS_DIR = path.join(__dirname, '../../uploads');
+if (!fs.existsSync(UPLOADS_DIR)) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
 
 async function createPrediction(file) {
   const aiResult = await aiService.predictImage(file.buffer, file.mimetype);
@@ -27,11 +36,22 @@ async function createPrediction(file) {
     category   = top.kategori  || 'Unknown';
   }
 
+  // ── Simpan gambar ke disk ──────────────────────────────────────────────────
+  let imageUrl = null;
+  if (file.buffer && file.buffer.length > 0) {
+    const ext = (file.mimetype || 'image/jpeg').split('/')[1] || 'jpg';
+    const filename = `${createId()}.${ext}`;
+    const filepath = path.join(UPLOADS_DIR, filename);
+    fs.writeFileSync(filepath, file.buffer);
+    imageUrl = `/uploads/${filename}`;
+  }
+
   const prediction = await prisma.prediction.create({
     data: {
       label,
       confidence: parseFloat(confidence),
       category,
+      imageUrl,
     },
   });
 
@@ -51,6 +71,7 @@ async function getPredictions(page, limit) {
         label: true,
         confidence: true,
         category: true,
+        imageUrl: true,
         createdAt: true,
       },
     }),
@@ -71,3 +92,4 @@ async function getPredictionById(id) {
 }
 
 module.exports = { createPrediction, getPredictions, getPredictionById };
+

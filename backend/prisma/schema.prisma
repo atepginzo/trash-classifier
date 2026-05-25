@@ -12,6 +12,7 @@ model Prediction {
   label       String
   confidence  Float
   category    String?
+  imageUrl    String?  @map("image_url")
   createdAt   DateTime @default(now()) @map("created_at")
 
   @@map("predictions")
@@ -26,4 +27,34 @@ model tps_master {
   lat           Decimal?
   lon           Decimal?
   kapasitas_ton Decimal?
+
+  volumes       VolumeHistory[]
+}
+
+/// Data volume pembuangan sampah per bulan per TPS.
+/// 12 bulan terakhir dipakai sebagai input LSTM.
+model VolumeHistory {
+  id         String   @id @default(cuid())
+  tpsId      String   @map("tps_id")
+  tahun      Int
+  bulan      Int      /// 1-12
+  volumeTon  Float    @map("volume_ton")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  tps        tps_master @relation(fields: [tpsId], references: [id])
+
+  @@unique([tpsId, tahun, bulan])
+  @@map("volume_history")
+}
+
+/// Hasil prediksi volume dari model LSTM, disimpan untuk riwayat.
+model VolumePrediction {
+  id          String   @id @default(cuid())
+  tpsId       String   @map("tps_id")
+  areaType    String   @map("area_type")
+  modelUsed   String   @map("model_used")
+  predictions Json     /// Array [{bulan_ke, volume_ton}]
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("volume_predictions")
 }
