@@ -74,9 +74,9 @@ const TEAM_MEMBERS = {
     {
       name: 'Devin Suryadi',
       id: 'CACC011D6Y0941',
-      university: 'Universitas (Belum diisi)',
+      university: 'Universitas Padjadjaran',
       major: 'Teknik Informatika',
-      photo: null,
+      photo: '/team/devin.jpeg',
       quote: 'Belajar dan berinovasi tanpa henti untuk menciptakan teknologi masa depan yang selaras dengan alam.',
       linkedin: 'https://www.linkedin.com/in/devin-suryadi',
       github: 'https://github.com/DevinSuryadi',

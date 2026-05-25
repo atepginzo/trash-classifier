@@ -190,10 +190,6 @@ html, body {
   button, a, [role="button"] {
     min-height: 44px;
   }
-
-  .grid {
-    grid-template-columns: 1fr !important;
-  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
