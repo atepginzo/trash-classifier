@@ -131,10 +131,10 @@ export default function DashboardTpsPage() {
             <div style={{
               display: 'flex', flexDirection: 'column',
               alignItems: 'center', justifyContent: 'center',
-              height: '100%', backgroundColor: '#F5F0E8',
+              height: '100%', backgroundColor: '#F8FAFC',
             }}>
-              <Loader2 size={36} style={{ color: '#1a3d1a' }} className="animate-spin" />
-              <p style={{ color: '#6B7160', marginTop: 16, fontSize: 14 }}>Memuat peta TPS...</p>
+              <Loader2 size={36} style={{ color: '#059669' }} className="animate-spin" />
+              <p style={{ color: '#64748B', marginTop: 16, fontSize: 14 }}>Memuat peta TPS...</p>
             </div>
           ) : (
             <MapContainer
@@ -172,7 +172,7 @@ export default function DashboardTpsPage() {
             padding: '12px 16px', boxShadow: '0 2px 12px rgba(0,0,0,0.12)',
             fontSize: 12,
           }}>
-            <div style={{ fontWeight: 700, marginBottom: 8, color: '#0F1A0A' }}>
+            <div style={{ fontWeight: 700, marginBottom: 8, color: '#0F172A' }}>
               {allTps.length} TPS di Bandung Raya
             </div>
             {Object.entries(AREA_META).map(([key, m]) => (
@@ -182,7 +182,7 @@ export default function DashboardTpsPage() {
                   backgroundColor: m.color, border: '2px solid #fff',
                   boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
                 }} />
-                <span style={{ color: '#3A3D35' }}>{m.label}</span>
+                <span style={{ color: '#334155' }}>{m.label}</span>
               </div>
             ))}
           </div>
@@ -191,7 +191,7 @@ export default function DashboardTpsPage() {
           {!sidebarOpen && !loading && (
             <div style={{
               position: 'absolute', top: 20, left: '50%', transform: 'translateX(-50%)',
-              zIndex: 1000, backgroundColor: 'rgba(26,61,26,0.9)', color: '#fff',
+              zIndex: 1000, backgroundColor: 'rgba(5,150,105,0.9)', color: '#fff',
               borderRadius: 999, padding: '10px 20px', fontSize: 13, fontWeight: 600,
               display: 'flex', alignItems: 'center', gap: 8,
               boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
@@ -209,8 +209,8 @@ export default function DashboardTpsPage() {
             minWidth: sidebarOpen ? 360 : 0,
             overflow: 'hidden',
             transition: 'width 0.3s ease, min-width 0.3s ease',
-            backgroundColor: '#F5F0E8',
-            borderLeft: sidebarOpen ? '1px solid #e0ddd5' : 'none',
+            backgroundColor: '#F8FAFC',
+            borderLeft: sidebarOpen ? '1px solid #E2E8F0' : 'none',
             display: 'flex', flexDirection: 'column',
           }}
         >
@@ -221,7 +221,7 @@ export default function DashboardTpsPage() {
                 onClick={closeSidebar}
                 style={{
                   float: 'right', background: 'none', border: 'none',
-                  cursor: 'pointer', color: '#6B7160', padding: 4,
+                  cursor: 'pointer', color: '#64748B', padding: 4,
                 }}
               >
                 <X size={20} />
@@ -243,17 +243,17 @@ export default function DashboardTpsPage() {
                   );
                 })()}
                 <h2 style={{
-                  fontFamily: 'var(--font-serif)', color: '#0F1A0A',
+                  fontFamily: 'var(--font-sans)', color: '#0F172A',
                   fontSize: 22, fontWeight: 700, marginTop: 8, marginBottom: 4,
                 }}>
                   {selectedTps.nama_desa}
                 </h2>
-                <p style={{ color: '#6B7160', fontSize: 13 }}>
+                <p style={{ color: '#64748B', fontSize: 13 }}>
                   Kec. {selectedTps.kecamatan} • {selectedTps.kabupaten}
                 </p>
                 <div style={{
                   display: 'flex', alignItems: 'center', gap: 12,
-                  marginTop: 8, fontSize: 12, color: '#6B7160',
+                  marginTop: 8, fontSize: 12, color: '#64748B',
                 }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                     <Navigation size={12} />
@@ -261,20 +261,20 @@ export default function DashboardTpsPage() {
                     {typeof selectedTps.lon === 'number' ? selectedTps.lon.toFixed(4) : selectedTps.lon}
                   </span>
                   <span>•</span>
-                  <span style={{ fontWeight: 600, color: '#3A3D35' }}>
+                  <span style={{ fontWeight: 600, color: '#334155' }}>
                     {selectedTps.kapasitas_ton} ton
                   </span>
                 </div>
               </div>
 
-              <hr style={{ border: 'none', borderTop: '1px solid #e0ddd5', margin: '0 0 20px' }} />
+              <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '0 0 20px' }} />
 
               {/* Volume Prediction Section */}
               <h3 style={{
-                fontSize: 14, fontWeight: 700, color: '#0F1A0A',
+                fontSize: 14, fontWeight: 700, color: '#0F172A',
                 display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16,
               }}>
-                <TrendingUp size={16} style={{ color: '#2d6a2d' }} />
+                <TrendingUp size={16} style={{ color: '#059669' }} />
                 Prediksi Volume Sampah (LSTM)
               </h3>
 
@@ -284,10 +284,10 @@ export default function DashboardTpsPage() {
                   display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 0',
                 }}>
                   <div style={{
-                    width: 36, height: 36, border: '3px solid #e0ddd5',
-                    borderTopColor: '#1a3d1a', borderRadius: '50%',
+                    width: 36, height: 36, border: '3px solid #E2E8F0',
+                    borderTopColor: '#059669', borderRadius: '50%',
                   }} className="animate-spin" />
-                  <p style={{ color: '#6B7160', fontSize: 13, marginTop: 12 }}>
+                  <p style={{ color: '#64748B', fontSize: 13, marginTop: 12 }}>
                     Menjalankan model LSTM...
                   </p>
                 </div>
@@ -317,19 +317,19 @@ export default function DashboardTpsPage() {
                       return (
                         <div key={i} style={{
                           backgroundColor: '#ffffff', borderRadius: 10, padding: 14,
-                          textAlign: 'center', border: '1px solid #e0ddd5',
+                          textAlign: 'center', border: '1px solid #E2E8F0',
                           boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
                         }}>
-                          <div style={{ fontSize: 11, color: '#6B7160', marginBottom: 6 }}>
+                          <div style={{ fontSize: 11, color: '#64748B', marginBottom: 6 }}>
                             {BULAN[predMonth - 1]} {predYear}
                           </div>
                           <div style={{
-                            fontSize: 20, fontWeight: 800, color: '#1a3d1a',
+                            fontSize: 20, fontWeight: 800, color: '#059669',
                             fontFamily: 'var(--font-mono, monospace)',
                           }}>
                             {pred.volume_ton.toFixed(1)}
                           </div>
-                          <div style={{ fontSize: 10, color: '#6B7160', marginTop: 2 }}>ton</div>
+                          <div style={{ fontSize: 10, color: '#64748B', marginTop: 2 }}>ton</div>
                         </div>
                       );
                     })}
@@ -337,16 +337,16 @@ export default function DashboardTpsPage() {
 
                   {/* Model badge */}
                   <div style={{
-                    backgroundColor: '#e8f5e9', borderRadius: 6,
+                    backgroundColor: '#ECFDF5', borderRadius: 6,
                     padding: '6px 12px', display: 'inline-flex', alignItems: 'center', gap: 6,
-                    fontSize: 11, color: '#2e7d32', fontWeight: 600, marginBottom: 16,
+                    fontSize: 11, color: '#059669', fontWeight: 600, marginBottom: 16,
                   }}>
                     <BarChart3 size={12} /> {volResult.model_used}
                   </div>
 
                   {/* History Bar Chart */}
                   <h4 style={{
-                    fontSize: 12, fontWeight: 600, color: '#3A3D35',
+                    fontSize: 12, fontWeight: 600, color: '#334155',
                     marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6,
                   }}>
                     <BarChart3 size={13} /> Riwayat 12 Bulan (ton)
@@ -355,20 +355,20 @@ export default function DashboardTpsPage() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 5, marginBottom: 16 }}>
                     {(volResult.history || []).map((h, i) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <span style={{ minWidth: 52, fontSize: 11, color: '#6B7160', textAlign: 'right' }}>
+                        <span style={{ minWidth: 52, fontSize: 11, color: '#64748B', textAlign: 'right' }}>
                           {BULAN[h.bulan - 1]} {h.tahun}
                         </span>
                         <div style={{
-                          flex: 1, height: 16, backgroundColor: '#f0ebe3',
+                          flex: 1, height: 16, backgroundColor: '#F1F5F9',
                           borderRadius: 3, overflow: 'hidden',
                         }}>
                           <div style={{
                             width: `${(h.volume_ton / maxVol) * 100}%`,
-                            height: '100%', backgroundColor: '#7fa67f',
+                            height: '100%', backgroundColor: '#86EFAC',
                             borderRadius: 3, transition: 'width 0.4s ease',
                           }} />
                         </div>
-                        <span style={{ minWidth: 40, fontSize: 11, fontWeight: 600, color: '#3A3D35', textAlign: 'right' }}>
+                        <span style={{ minWidth: 40, fontSize: 11, fontWeight: 600, color: '#334155', textAlign: 'right' }}>
                           {h.volume_ton.toFixed(1)}
                         </span>
                       </div>
@@ -378,8 +378,8 @@ export default function DashboardTpsPage() {
                     <div style={{
                       display: 'flex', alignItems: 'center', gap: 8, padding: '4px 0',
                     }}>
-                      <div style={{ flex: 1, height: 1, backgroundColor: '#c5c5b8' }} />
-                      <span style={{ fontSize: 10, fontWeight: 700, color: '#1a3d1a' }}>▼ PREDIKSI</span>
+                      <div style={{ flex: 1, height: 1, backgroundColor: '#CBD5E1' }} />
+                      <span style={{ fontSize: 10, fontWeight: 700, color: '#059669' }}>▼ PREDIKSI</span>
                       <div style={{ flex: 1, height: 1, backgroundColor: '#c5c5b8' }} />
                     </div>
 
@@ -390,7 +390,7 @@ export default function DashboardTpsPage() {
                       const py = lastH ? lastH.tahun + Math.floor((lastH.bulan + i) / 12) : 2026;
                       return (
                         <div key={`p-${i}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <span style={{ minWidth: 52, fontSize: 11, fontWeight: 700, color: '#1a3d1a', textAlign: 'right' }}>
+                          <span style={{ minWidth: 52, fontSize: 11, fontWeight: 700, color: '#059669', textAlign: 'right' }}>
                             {BULAN[pm - 1]} {py}
                           </span>
                           <div style={{
@@ -400,11 +400,11 @@ export default function DashboardTpsPage() {
                             <div style={{
                               width: `${(p.volume_ton / maxVol) * 100}%`,
                               height: '100%',
-                              background: 'linear-gradient(90deg, #1a3d1a 0%, #2d6a2d 100%)',
+                              background: 'linear-gradient(90deg, #059669 0%, #34D399 100%)',
                               borderRadius: 3, transition: 'width 0.4s ease',
                             }} />
                           </div>
-                          <span style={{ minWidth: 40, fontSize: 11, fontWeight: 800, color: '#1a3d1a', textAlign: 'right' }}>
+                          <span style={{ minWidth: 40, fontSize: 11, fontWeight: 800, color: '#059669', textAlign: 'right' }}>
                             {p.volume_ton.toFixed(1)}
                           </span>
                         </div>

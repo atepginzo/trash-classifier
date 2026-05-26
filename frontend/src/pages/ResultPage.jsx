@@ -10,28 +10,28 @@ const CATEGORY_CONFIG = {
   organik: {
     label: 'Organik',
     icon: Leaf,
-    color: 'bg-forest/5 text-forest border-forest/15',
-    primaryColor: '#2D5016',
-    bgBadge: 'bg-forest/10 text-forest',
-    bgPill: 'border-forest bg-forest/5 text-forest',
+    color: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    primaryColor: '#059669',
+    bgBadge: 'bg-emerald-50 text-emerald-700',
+    bgPill: 'border-emerald-300 bg-emerald-50 text-emerald-700',
     description: 'Sampah alami yang mudah membusuk dan terurai secara alami oleh mikroorganisme.'
   },
   anorganik: {
     label: 'Anorganik',
     icon: Recycle,
-    color: 'bg-blue/5 text-blue border-blue/15',
-    primaryColor: '#1860a0',
-    bgBadge: 'bg-blue/10 text-blue',
-    bgPill: 'border-blue bg-blue/5 text-blue',
+    color: 'bg-sky-50 text-sky-700 border-sky-200',
+    primaryColor: '#0284C7',
+    bgBadge: 'bg-sky-50 text-sky-700',
+    bgPill: 'border-sky-300 bg-sky-50 text-sky-700',
     description: 'Sampah buatan manusia yang tidak mudah terurai secara alami dan dapat didaur ulang.'
   },
   b3: {
     label: 'Limbah B3',
     icon: AlertTriangle,
-    color: 'bg-red-light text-red border-red/15',
-    primaryColor: '#a32d2d',
-    bgBadge: 'bg-red-light text-red',
-    bgPill: 'border-red bg-red-light text-red',
+    color: 'bg-red-50 text-red-600 border-red-200',
+    primaryColor: '#DC2626',
+    bgBadge: 'bg-red-50 text-red-600',
+    bgPill: 'border-red-300 bg-red-50 text-red-600',
     description: 'Bahan Berbahaya dan Beracun yang memerlukan penanganan khusus demi keamanan lingkungan.'
   }
 };
@@ -44,25 +44,25 @@ const CATEGORY_TIPS = {
         title: 'Dampak Lingkungan',
         desc: 'Membusuk dalam 1–4 minggu. Menghasilkan emisi gas metana berbahaya jika menumpuk di TPA tanpa oksigen.',
         icon: AlertTriangle,
-        color: 'bg-red-light/60 text-red border border-red/10'
+        color: 'bg-red-50 text-red-600 border border-red-100'
       },
       {
         title: 'Penanganan Tepat',
         desc: 'Pisahkan dari sampah anorganik agar kering, masukkan ke wadah tertutup atau komposter organik rumah tangga.',
         icon: CheckCircle2,
-        color: 'bg-green-light/60 text-green border border-green/10'
+        color: 'bg-emerald-50 text-emerald-700 border border-emerald-100'
       },
       {
         title: 'Nilai Ekonomis',
         desc: 'Berkisar Rp 500 – Rp 1.500 per kilogram jika diolah menjadi pupuk kompos matang atau pakan budidaya maggot.',
         icon: Coins,
-        color: 'bg-terracotta/5 text-terracotta border border-terracotta/10'
+        color: 'bg-amber-50 text-amber-700 border border-amber-100'
       },
       {
         title: 'Konversi Kreatif',
         desc: 'Sangat ideal diolah kembali menjadi pupuk kompos organik cair, eco-enzyme pembersih, atau sumber biogas.',
         icon: RefreshCw,
-        color: 'bg-blue-light/60 text-blue border border-blue/10'
+        color: 'bg-sky-50 text-sky-700 border border-sky-100'
       }
     ]
   },
@@ -192,7 +192,7 @@ function BoundingBoxOverlay({ imageUrl, detections, categoryColor }) {
   }, [detections]);
 
   return (
-    <div className="relative inline-block w-full overflow-hidden rounded-2xl border border-sage/20 bg-cream-light/40 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
+    <div className="relative inline-block w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-slate-50/40 shadow-sm">
       <img
         ref={imgRef}
         src={imageUrl}
@@ -216,14 +216,14 @@ export default function ResultPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-cream flex flex-col justify-between">
+      <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-between">
         <Navbar />
         <div className="flex-grow pt-28 pb-16 flex items-center justify-center px-4">
-          <div className="max-w-xl w-full bg-white rounded-3xl border border-sage/20 shadow-sm p-8 text-center space-y-6">
-            <div className="w-16 h-16 border-4 border-forest border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="max-w-xl w-full bg-white rounded-3xl border border-slate-200/60 shadow-sm p-8 text-center space-y-6">
+            <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto" />
             <div className="space-y-2">
-              <h2 className="text-xl font-bold text-heading">Menganalisis Data Sampah...</h2>
-              <p className="text-sm text-muted">Mengambil detail hasil klasifikasi AI dari basis data.</p>
+              <h2 className="text-xl font-bold text-slate-800">Menganalisis Data Sampah...</h2>
+              <p className="text-sm text-slate-500">Mengambil detail hasil klasifikasi AI dari basis data.</p>
             </div>
           </div>
         </div>
@@ -234,18 +234,18 @@ export default function ResultPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-cream flex flex-col justify-between">
+      <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-between">
         <Navbar />
         <div className="flex-grow pt-28 pb-16 flex items-center justify-center px-4">
-          <div className="max-w-md w-full bg-white rounded-3xl border border-sage/20 shadow-md p-8 text-center space-y-6">
-            <ShieldAlert className="w-16 h-16 text-terracotta mx-auto animate-bounce-slow" />
+          <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200/60 shadow-md p-8 text-center space-y-6">
+            <ShieldAlert className="w-16 h-16 text-amber-500 mx-auto animate-bounce-slow" />
             <div className="space-y-2">
-              <h2 className="text-2xl font-serif font-bold text-heading">Analisis Tidak Ditemukan</h2>
-              <p className="text-sm text-muted">ID deteksi "{id}" tidak terdaftar atau telah kadaluarsa.</p>
+              <h2 className="text-2xl font-extrabold text-slate-800">Analisis Tidak Ditemukan</h2>
+              <p className="text-sm text-slate-500">ID deteksi "{id}" tidak terdaftar atau telah kadaluarsa.</p>
             </div>
             <button
               onClick={() => navigate('/upload')}
-              className="w-full py-3 bg-forest text-white rounded-full font-bold hover:bg-forest-dark transition-all duration-300 shadow-sm"
+              className="w-full py-3 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition-all duration-300 shadow-sm"
             >
               Coba Pindai Ulang
             </button>
@@ -278,22 +278,22 @@ export default function ResultPage() {
   const tipsConfig = CATEGORY_TIPS[categoryKey] || CATEGORY_TIPS.organik;
 
   return (
-    <div className="min-h-screen bg-cream flex flex-col justify-between">
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-between">
       <Navbar />
 
       <main className="flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         {/* Page Title Row */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="font-serif text-3xl sm:text-4xl font-bold text-heading tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
               Hasil Pemindaian
             </h1>
-            <p className="text-xs sm:text-sm text-muted font-mono mt-1">
+            <p className="text-xs sm:text-sm text-slate-400 font-mono mt-1">
               ID Pindaian: #{id}
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white border border-sage/20 text-muted shadow-sm">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-500 shadow-sm">
               <Clock size={13} />
               {prediction?.createdAt ? new Date(prediction.createdAt).toLocaleString('id-ID') : 'Baru saja'}
             </span>
@@ -304,13 +304,13 @@ export default function ResultPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* LEFT COLUMN: Scanned Image */}
-          <div className="lg:col-span-6 bg-white border border-sage/20 rounded-3xl p-5 sm:p-6 shadow-[0_4px_20px_rgba(45,80,22,0.02)] space-y-4">
-            <div className="flex items-center justify-between border-b border-sage/10 pb-4">
-              <span className="font-bold text-sm text-heading uppercase tracking-wider flex items-center gap-2">
-                <Sparkles size={16} className="text-forest animate-pulse" />
+          <div className="lg:col-span-6 bg-white border border-slate-200/60 rounded-3xl p-5 sm:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <span className="font-bold text-sm text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                <Sparkles size={16} className="text-emerald-500 animate-pulse" />
                 Citra Terdeteksi
               </span>
-              <span className="text-xs text-muted font-medium">
+              <span className="text-xs text-slate-400 font-medium">
                 {prediction?.originalFilename || 'Hasil-Pindai.jpg'}
               </span>
             </div>
@@ -322,8 +322,8 @@ export default function ResultPage() {
                 categoryColor={catConfig.primaryColor}
               />
             ) : (
-              <div className="w-full h-64 bg-cream-light rounded-2xl flex items-center justify-center border border-dashed border-sage/30">
-                <span className="text-sm text-muted">Gambar tidak tersedia</span>
+              <div className="w-full h-64 bg-slate-50 rounded-2xl flex items-center justify-center border border-dashed border-slate-200">
+                <span className="text-sm text-slate-400">Gambar tidak tersedia</span>
               </div>
             )}
           </div>
@@ -332,24 +332,24 @@ export default function ResultPage() {
           <div className="lg:col-span-6 space-y-6">
 
             {/* Category Analysis Card */}
-            <div className="bg-white border border-sage/20 rounded-3xl p-5 sm:p-6 lg:p-8 shadow-[0_4px_20px_rgba(45,80,22,0.02)] space-y-6">
+            <div className="bg-white border border-slate-200/60 rounded-3xl p-5 sm:p-6 lg:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-6">
 
               {/* Category Badge & Headline */}
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 sm:gap-4">
                 <div className="space-y-3">
-                  <span className="text-xs font-bold text-muted uppercase tracking-wider block">Kategori Dominan</span>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Kategori Dominan</span>
                   <div className="flex items-start gap-3">
                     <div className={`p-2.5 rounded-2xl ${catConfig.color} border shrink-0`}>
                       <CatIcon size={28} />
                     </div>
                     <div className="min-w-0">
-                      <h2 className="text-2xl sm:text-3xl font-serif font-bold text-heading leading-none mb-1">
+                      <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none mb-1">
                         {catConfig.label}
                       </h2>
-                      <span className="text-sm font-semibold text-forest mb-2 block">
+                      <span className="text-sm font-semibold text-emerald-600 mb-2 block">
                         Terdeteksi: {label}
                       </span>
-                      <span className="text-xs text-muted leading-relaxed block max-w-sm">
+                      <span className="text-xs text-slate-400 leading-relaxed block max-w-sm">
                         {catConfig.description}
                       </span>
                     </div>
@@ -357,8 +357,8 @@ export default function ResultPage() {
                 </div>
 
                 {/* Confidence Score Badge */}
-                <div className="flex items-center sm:items-end justify-between sm:justify-start sm:flex-col gap-2 border-t border-dashed border-sage/10 pt-4 sm:border-t-0 sm:pt-0 shrink-0">
-                  <span className="text-xs font-semibold text-muted">Akurasi AI</span>
+                <div className="flex items-center sm:items-end justify-between sm:justify-start sm:flex-col gap-2 border-t border-dashed border-slate-100 pt-4 sm:border-t-0 sm:pt-0 shrink-0">
+                  <span className="text-xs font-semibold text-slate-400">Akurasi AI</span>
                   <span className={`inline-flex px-3.5 py-1.5 rounded-xl text-sm font-bold border ${catConfig.bgPill}`}>
                     {((confidence || 0) * 100).toFixed(1)}%
                   </span>
@@ -366,12 +366,12 @@ export default function ResultPage() {
               </div>
 
               {/* Confidence Progress Bar */}
-              <div className="space-y-2 border-t border-sage/10 pt-5">
-                <div className="flex justify-between text-xs font-semibold text-body">
+              <div className="space-y-2 border-t border-slate-100 pt-5">
+                <div className="flex justify-between text-xs font-semibold text-slate-600">
                   <span>Tingkat Kepastian</span>
                   <span>{((confidence || 0) * 100).toFixed(0)}%</span>
                 </div>
-                <div className="w-full h-3 bg-cream rounded-full overflow-hidden border border-sage/10">
+                <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200/60">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${(confidence || 0) * 100}%` }}
@@ -385,17 +385,17 @@ export default function ResultPage() {
               {/* Detailed Detections List */}
               {detections.length > 0 && (
                 <div className="space-y-3 pt-2">
-                  <h3 className="text-sm font-bold text-heading uppercase tracking-wider">
+                  <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider">
                     Daftar Objek Terdeteksi
                   </h3>
-                  <div className="divide-y divide-sage/10 border border-sage/20 rounded-2xl bg-cream-light/30 overflow-hidden">
+                  <div className="divide-y divide-slate-100 border border-slate-200/60 rounded-2xl bg-slate-50/30 overflow-hidden">
                     {detections.map((det, i) => (
                       <div key={i} className="flex items-center justify-between px-4 py-3 hover:bg-white/40 transition-colors duration-150">
                         <div className="flex items-center gap-2.5">
                           <CheckCircle2 size={16} style={{ color: catConfig.primaryColor }} />
-                          <span className="text-sm text-body font-semibold">{det.label}</span>
+                          <span className="text-sm text-slate-600 font-semibold">{det.label}</span>
                         </div>
-                        <span className="text-xs font-mono font-bold bg-white border border-sage/15 px-2.5 py-1 rounded-lg text-muted shadow-sm">
+                        <span className="text-xs font-mono font-bold bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-slate-500 shadow-sm">
                           {(det.confidence * 100).toFixed(1)}%
                         </span>
                       </div>
@@ -406,10 +406,10 @@ export default function ResultPage() {
             </div>
 
             {/* AI Insight — Analisis Sampah (4-Card Dashboard Grid) */}
-            <div className="bg-white border border-sage/20 rounded-3xl p-5 sm:p-6 lg:p-8 shadow-[0_4px_20px_rgba(45,80,22,0.02)] space-y-6">
-              <div className="flex items-center gap-2 border-b border-sage/10 pb-4">
-                <Sparkles size={18} className="text-forest shrink-0" />
-                <h3 className="font-serif text-lg font-bold text-heading">
+            <div className="bg-white border border-slate-200/60 rounded-3xl p-5 sm:p-6 lg:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-6">
+              <div className="flex items-center gap-2 border-b border-slate-100 pb-4">
+                <Sparkles size={18} className="text-emerald-500 shrink-0" />
+                <h3 className="text-lg font-bold text-slate-800">
                   {tipsConfig.title}
                 </h3>
               </div>
@@ -428,7 +428,7 @@ export default function ResultPage() {
                           {card.title}
                         </h4>
                       </div>
-                      <p className="text-xs text-body leading-relaxed">
+                      <p className="text-xs text-slate-500 leading-relaxed">
                         {card.desc}
                       </p>
                     </div>
@@ -441,14 +441,14 @@ export default function ResultPage() {
             <div className="flex flex-col sm:flex-row gap-4 w-full">
               <button
                 onClick={() => navigate('/upload')}
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 border-2 border-forest text-forest rounded-full font-bold hover:bg-forest hover:text-white transition-all duration-300 shadow-sm cursor-pointer text-center text-sm"
+                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 border-2 border-emerald-500 text-emerald-600 rounded-full font-bold hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm cursor-pointer text-center text-sm"
               >
                 <ArrowLeft className="w-5 h-5 shrink-0" />
                 Pindai Baru
               </button>
               <Link
                 to="/predictions"
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 bg-forest text-white rounded-full font-bold hover:bg-forest-dark transition-all duration-300 shadow-md cursor-pointer text-center text-sm"
+                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition-all duration-300 shadow-md cursor-pointer text-center text-sm"
               >
                 <History className="w-5 h-5 shrink-0" />
                 Lihat Riwayat

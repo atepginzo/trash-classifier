@@ -4,16 +4,9 @@ import Logo from './Logo';
 /* Checkmark bullet icon */
 const CheckBullet = () => (
   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" className="flex-shrink-0 mt-0.5">
-    <circle cx="11" cy="11" r="10" stroke="#2D5016" strokeWidth="1.5" fill="#2D5016" fillOpacity="0.08" />
-    <path d="M7 11.5L10 14.5L15.5 8.5" stroke="#2D5016" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="11" cy="11" r="10" stroke="#059669" strokeWidth="1.5" fill="#059669" fillOpacity="0.08" />
+    <path d="M7 11.5L10 14.5L15.5 8.5" stroke="#059669" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
-);
-
-/* Illustration for the card */
-const BrandIllustration = () => (
-  <div className="relative flex items-center justify-center">
-    <Logo size={120} />
-  </div>
 );
 
 /* Feature list data */
@@ -24,14 +17,6 @@ const FEATURES = [
 ];
 
 /* Animation config */
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -30 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
-};
-const fadeInRight = {
-  hidden: { opacity: 0, x: 30 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
-};
 const staggerContainer = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
@@ -40,11 +25,15 @@ const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
+const fadeInRight = {
+  hidden: { opacity: 0, x: 30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+};
 
 export default function AboutSection() {
   return (
     <section id="tentang" className="relative py-20 sm:py-28 lg:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-cream to-cream-light pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC] to-white pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -58,21 +47,21 @@ export default function AboutSection() {
           >
             <motion.div variants={fadeUp} className="mb-5">
               <span className="inline-flex items-center px-4 py-1.5 rounded-full
-                              bg-forest/8 border border-forest/15
-                              text-forest text-xs sm:text-sm font-semibold tracking-wide">
-                Tentang
+                              bg-emerald-50 border border-emerald-200/60
+                              text-emerald-700 text-xs sm:text-sm font-semibold tracking-wide">
+                Tentang Kami
               </span>
             </motion.div>
             <motion.h2
               variants={fadeUp}
-              className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold
-                         text-heading leading-[1.15] tracking-tight mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold
+                         text-slate-900 leading-[1.15] tracking-tight mb-6"
             >
-              Apa itu TrashSmart?
+              Apa itu <span className="text-gradient">TrashSmart</span>?
             </motion.h2>
             <motion.p
               variants={fadeUp}
-              className="text-base sm:text-lg text-muted leading-relaxed mb-8 max-w-lg"
+              className="text-base sm:text-lg text-slate-500 leading-relaxed mb-8 max-w-lg"
             >
               TrashSmart adalah sistem klasifikasi sampah cerdas yang membantu
               organisasi pengelola limbah mengidentifikasi dan memilah jenis sampah
@@ -83,7 +72,7 @@ export default function AboutSection() {
                 <motion.li
                   key={i}
                   variants={fadeUp}
-                  className="flex items-start gap-3 text-sm sm:text-base text-body"
+                  className="flex items-start gap-3 text-sm sm:text-base text-slate-600"
                 >
                   <CheckBullet />
                   <span>{feature}</span>
@@ -92,7 +81,7 @@ export default function AboutSection() {
             </motion.ul>
           </motion.div>
 
-          {/* ============ RIGHT COLUMN — Illustration Card ============ */}
+          {/* ============ RIGHT COLUMN — Photo ============ */}
           <motion.div
             variants={fadeInRight}
             initial="hidden"
@@ -101,26 +90,13 @@ export default function AboutSection() {
             className="flex justify-center lg:justify-end"
           >
             <div className="relative w-full max-w-sm lg:max-w-md">
-              <div className="bg-gradient-to-br from-sage-light/40 to-cream-light
-                              border border-sage/25 rounded-2xl lg:rounded-3xl
-                              p-10 sm:p-14 flex flex-col items-center justify-center
-                              shadow-[0_8px_30px_rgba(45,80,22,0.06)]
-                              min-h-[280px] sm:min-h-[340px]">
-                <div className="absolute inset-0 rounded-2xl lg:rounded-3xl overflow-hidden opacity-[0.03]"
-                  style={{
-                    backgroundImage: 'radial-gradient(circle, #2D5016 1px, transparent 1px)',
-                    backgroundSize: '18px 18px',
-                  }}
-                />
-
-                <BrandIllustration />
-
-                <p className="mt-6 text-xl sm:text-2xl font-serif font-bold text-heading tracking-tight">
-                  TrashSmart
-                </p>
-                <p className="mt-1 text-xs sm:text-sm text-muted font-medium tracking-wider uppercase">
-                  Smart Waste Classification
-                </p>
+              <div className="relative overflow-hidden rounded-2xl lg:rounded-3xl
+                              bg-gradient-to-br from-emerald-50 to-teal-50
+                              border border-emerald-100/60
+                              shadow-[0_20px_60px_rgba(0,0,0,0.06)]
+                              flex items-center justify-center
+                              h-[300px] sm:h-[380px]">
+                <Logo size={160} />
               </div>
             </div>
           </motion.div>
