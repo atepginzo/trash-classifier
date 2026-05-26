@@ -150,38 +150,35 @@ function BoundingBoxOverlay({ imageUrl, detections, categoryColor }) {
       const pw = width * canvas.width;
       const ph = height * canvas.height;
 
-      // Color scheme matches the category color
-      ctx.strokeStyle = categoryColor || '#2D5016';
-      ctx.lineWidth = 3;
-      ctx.lineJoin = 'round';
-
-      // Draw double border effect
-      ctx.setLineDash([6, 4]);
-      ctx.strokeRect(px, py, pw, ph);
-      ctx.setLineDash([]);
+      // Bounding box border
+      ctx.strokeStyle = categoryColor || '#2d9e6b';
+      ctx.lineWidth = 2;
       ctx.strokeRect(px, py, pw, ph);
 
-      // Draw prediction label
+      // Label ABOVE the box
       const text = `${det.label} ${(det.confidence * 100).toFixed(0)}%`;
-      ctx.font = 'bold 11px system-ui, -apple-system, sans-serif';
-      const textW = ctx.measureText(text).width + 12;
+      ctx.font = 'bold 12px system-ui, -apple-system, sans-serif';
+      const textW = ctx.measureText(text).width + 20;
 
-      const rx = px;
-      const ry = py - 22;
-      const rw = textW;
-      const rh = 20;
+      const labelX = px;
+      const labelY = py - 24;
+      const labelW = textW;
+      const labelH = 22;
 
-      ctx.fillStyle = categoryColor || '#2D5016';
+      // Background for label
+      ctx.fillStyle = '#1e3a2f';
       if (ctx.roundRect) {
         ctx.beginPath();
-        ctx.roundRect(rx, ry, rw, rh, 4);
+        ctx.roundRect(labelX, labelY, labelW, labelH, [6, 6, 0, 0]);
         ctx.fill();
       } else {
-        ctx.fillRect(rx, ry, rw, rh);
+        ctx.fillRect(labelX, labelY, labelW, labelH);
       }
 
+      // Text
       ctx.fillStyle = '#ffffff';
-      ctx.fillText(text, px + 6, py - 8);
+      ctx.font = '600 11px system-ui';
+      ctx.fillText(text, labelX + 10, labelY + 15);
     });
   };
 
@@ -192,12 +189,12 @@ function BoundingBoxOverlay({ imageUrl, detections, categoryColor }) {
   }, [detections]);
 
   return (
-    <div className="relative inline-block w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-slate-50/40 shadow-sm">
+    <div className="relative inline-block w-full overflow-hidden rounded-lg border border-slate-200/60 bg-slate-50/40">
       <img
         ref={imgRef}
         src={imageUrl}
         alt="Hasil Deteksi"
-        className="w-full h-auto max-h-[420px] object-contain mx-auto block"
+        className="w-full h-auto max-h-[360px] object-contain mx-auto block"
         onLoad={drawBoxes}
         crossOrigin="anonymous"
       />
@@ -227,7 +224,6 @@ export default function ResultPage() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -251,7 +247,6 @@ export default function ResultPage() {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -278,124 +273,125 @@ export default function ResultPage() {
   const tipsConfig = CATEGORY_TIPS[categoryKey] || CATEGORY_TIPS.organik;
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-between">
+    <div className="h-screen bg-[#F8FAFC] flex flex-col overflow-hidden">
       <Navbar />
 
-      <main className="flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        {/* Page Title Row */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+      <main className="flex-1 pt-20 pb-4 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto w-full overflow-hidden flex flex-col">
+        {/* Page Header - Compact */}
+        <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200/60">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h1 style={{ fontSize: '1.375rem' }} className="font-semibold text-slate-900 leading-tight">
               Hasil Pemindaian
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400 font-mono mt-1">
-              ID Pindaian: #{id}
-            </p>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-500 shadow-sm">
-              <Clock size={13} />
-              {prediction?.createdAt ? new Date(prediction.createdAt).toLocaleString('id-ID') : 'Baru saja'}
+          <div className="flex items-center gap-3 text-right">
+            <span style={{ fontSize: '0.8rem' }} className="text-slate-400 font-mono">
+              ID: #{id?.slice(0, 8)}
+            </span>
+            <span style={{ fontSize: '0.8rem' }} className="text-slate-500">
+              {prediction?.createdAt ? new Date(prediction.createdAt).toLocaleString('id-ID', { 
+                day: '2-digit', 
+                month: 'short', 
+                hour: '2-digit', 
+                minute: '2-digit' 
+              }) : 'Baru'}
             </span>
           </div>
         </div>
 
-        {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-          {/* LEFT COLUMN: Scanned Image */}
-          <div className="lg:col-span-6 bg-white border border-slate-200/60 rounded-3xl p-5 sm:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-              <span className="font-bold text-sm text-slate-800 uppercase tracking-wider flex items-center gap-2">
-                <Sparkles size={16} className="text-emerald-500 animate-pulse" />
-                Citra Terdeteksi
-              </span>
-              <span className="text-xs text-slate-400 font-medium">
-                {prediction?.originalFilename || 'Hasil-Pindai.jpg'}
-              </span>
+        {/* Main Content Grid - Fits in viewport */}
+        <div 
+          style={{ 
+            display: 'grid', 
+            gridTemplateColumns: '1fr 1.2fr',
+            gap: '1.5rem',
+            maxHeight: 'calc(100vh - 140px)',
+            overflow: 'hidden'
+          }}
+          className="result-grid"
+        >
+          {/* LEFT COLUMN - Image + Classification */}
+          <div className="flex flex-col gap-4 overflow-auto scrollbar-thin">
+            {/* Image with Bounding Box */}
+            <div className="bg-white border border-slate-200/60 rounded-xl p-4 shadow-sm">
+              <div className="mb-3">
+                <span style={{ fontSize: '0.7rem', letterSpacing: '0.08em' }} className="font-bold text-slate-400 uppercase">
+                  Citra Terdeteksi
+                </span>
+              </div>
+              
+              {imageUrl ? (
+                <BoundingBoxOverlay
+                  imageUrl={imageUrl}
+                  detections={detections}
+                  categoryColor={catConfig.primaryColor}
+                />
+              ) : (
+                <div className="w-full h-48 bg-slate-50 rounded-lg flex items-center justify-center border border-dashed border-slate-200">
+                  <span className="text-sm text-slate-400">Gambar tidak tersedia</span>
+                </div>
+              )}
             </div>
 
-            {imageUrl ? (
-              <BoundingBoxOverlay
-                imageUrl={imageUrl}
-                detections={detections}
-                categoryColor={catConfig.primaryColor}
-              />
-            ) : (
-              <div className="w-full h-64 bg-slate-50 rounded-2xl flex items-center justify-center border border-dashed border-slate-200">
-                <span className="text-sm text-slate-400">Gambar tidak tersedia</span>
-              </div>
-            )}
-          </div>
-
-          {/* RIGHT COLUMN: AI Analysis & Educational tips */}
-          <div className="lg:col-span-6 space-y-6">
-
-            {/* Category Analysis Card */}
-            <div className="bg-white border border-slate-200/60 rounded-3xl p-5 sm:p-6 lg:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-6">
-
-              {/* Category Badge & Headline */}
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 sm:gap-4">
-                <div className="space-y-3">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Kategori Dominan</span>
-                  <div className="flex items-start gap-3">
-                    <div className={`p-2.5 rounded-2xl ${catConfig.color} border shrink-0`}>
-                      <CatIcon size={28} />
-                    </div>
-                    <div className="min-w-0">
-                      <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none mb-1">
-                        {catConfig.label}
-                      </h2>
-                      <span className="text-sm font-semibold text-emerald-600 mb-2 block">
-                        Terdeteksi: {label}
-                      </span>
-                      <span className="text-xs text-slate-400 leading-relaxed block max-w-sm">
-                        {catConfig.description}
-                      </span>
-                    </div>
-                  </div>
+            {/* Classification Result */}
+            <div className="bg-white border border-slate-200/60 rounded-xl p-5 shadow-sm">
+              <div className="flex items-start gap-3 mb-4">
+                <div className={`p-2 rounded-lg ${catConfig.color} border shrink-0`}>
+                  <CatIcon size={24} />
                 </div>
-
-                {/* Confidence Score Badge */}
-                <div className="flex items-center sm:items-end justify-between sm:justify-start sm:flex-col gap-2 border-t border-dashed border-slate-100 pt-4 sm:border-t-0 sm:pt-0 shrink-0">
-                  <span className="text-xs font-semibold text-slate-400">Akurasi AI</span>
-                  <span className={`inline-flex px-3.5 py-1.5 rounded-xl text-sm font-bold border ${catConfig.bgPill}`}>
-                    {((confidence || 0) * 100).toFixed(1)}%
+                <div className="flex-1 min-w-0">
+                  <h2 style={{ fontSize: '1.5rem' }} className="font-bold text-slate-800 leading-tight mb-1">
+                    {catConfig.label}
+                  </h2>
+                  <span style={{ fontSize: '0.85rem' }} className="text-slate-500">
+                    Terdeteksi: {label}
                   </span>
                 </div>
+                <span 
+                  style={{ 
+                    fontSize: '1.25rem',
+                    backgroundColor: catConfig.primaryColor + '15',
+                    color: catConfig.primaryColor,
+                    borderColor: catConfig.primaryColor + '30'
+                  }} 
+                  className="font-semibold px-3 py-1 rounded-full border-2"
+                >
+                  {((confidence || 0) * 100).toFixed(1)}%
+                </span>
               </div>
 
-              {/* Confidence Progress Bar */}
-              <div className="space-y-2 border-t border-slate-100 pt-5">
-                <div className="flex justify-between text-xs font-semibold text-slate-600">
-                  <span>Tingkat Kepastian</span>
-                  <span>{((confidence || 0) * 100).toFixed(0)}%</span>
+              {/* Confidence Bar */}
+              <div className="space-y-1.5">
+                <div className="flex justify-between items-center">
+                  <span style={{ fontSize: '0.8rem', letterSpacing: '0.05em' }} className="font-semibold text-slate-400 uppercase">
+                    Tingkat Kepastian
+                  </span>
+                  <span style={{ fontSize: '0.85rem' }} className="font-semibold text-slate-600">
+                    {((confidence || 0) * 100).toFixed(0)}%
+                  </span>
                 </div>
-                <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200/60">
+                <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${(confidence || 0) * 100}%` }}
-                    transition={{ duration: 1, ease: 'easeOut' }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
                     style={{ backgroundColor: catConfig.primaryColor }}
                     className="h-full rounded-full"
                   />
                 </div>
               </div>
 
-              {/* Detailed Detections List */}
+              {/* Detections List */}
               {detections.length > 0 && (
-                <div className="space-y-3 pt-2">
-                  <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider">
-                    Daftar Objek Terdeteksi
-                  </h3>
-                  <div className="divide-y divide-slate-100 border border-slate-200/60 rounded-2xl bg-slate-50/30 overflow-hidden">
+                <div className="mt-4 pt-4 border-t border-slate-100">
+                  <div className="space-y-2">
                     {detections.map((det, i) => (
-                      <div key={i} className="flex items-center justify-between px-4 py-3 hover:bg-white/40 transition-colors duration-150">
-                        <div className="flex items-center gap-2.5">
-                          <CheckCircle2 size={16} style={{ color: catConfig.primaryColor }} />
-                          <span className="text-sm text-slate-600 font-semibold">{det.label}</span>
+                      <div key={i} className="flex items-center justify-between text-sm">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 size={14} style={{ color: catConfig.primaryColor }} />
+                          <span className="text-slate-600 font-medium">{det.label}</span>
                         </div>
-                        <span className="text-xs font-mono font-bold bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-slate-500 shadow-sm">
+                        <span className="text-xs font-mono font-semibold text-slate-500">
                           {(det.confidence * 100).toFixed(1)}%
                         </span>
                       </div>
@@ -404,62 +400,77 @@ export default function ResultPage() {
                 </div>
               )}
             </div>
+          </div>
 
-            {/* AI Insight — Analisis Sampah (4-Card Dashboard Grid) */}
-            <div className="bg-white border border-slate-200/60 rounded-3xl p-5 sm:p-6 lg:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-6">
-              <div className="flex items-center gap-2 border-b border-slate-100 pb-4">
-                <Sparkles size={18} className="text-emerald-500 shrink-0" />
-                <h3 className="text-lg font-bold text-slate-800">
-                  {tipsConfig.title}
-                </h3>
-              </div>
+          {/* RIGHT COLUMN - AI Insights + Actions */}
+          <div className="flex flex-col gap-4 overflow-hidden">
+            <div className="flex-1 overflow-auto scrollbar-thin">
+              <div className="bg-white border border-slate-200/60 rounded-xl p-5 shadow-sm h-full flex flex-col">
+                <div className="mb-4 pb-3 border-b border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={16} className="text-emerald-500" />
+                    <h3 style={{ fontSize: '0.95rem' }} className="font-bold text-slate-800">
+                      AI Insight — Analisis Sampah
+                    </h3>
+                  </div>
+                </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {tipsConfig.cards.map((card, idx) => {
-                  const CardIcon = card.icon;
-                  return (
-                    <div
-                      key={idx}
-                      className={`p-4 rounded-2xl border ${card.color} flex flex-col justify-start transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.02)]`}
-                    >
-                      <div className="flex items-center gap-2 mb-2.5">
-                        <CardIcon size={16} className="shrink-0" />
-                        <h4 className="font-bold text-xs uppercase tracking-wider">
-                          {card.title}
-                        </h4>
+                {/* 2x2 Grid for AI Insight Cards */}
+                <div 
+                  style={{ 
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gridTemplateRows: '1fr 1fr',
+                    gap: '0.875rem',
+                    flex: 1
+                  }}
+                >
+                  {tipsConfig.cards.map((card, idx) => {
+                    const CardIcon = card.icon;
+                    return (
+                      <div
+                        key={idx}
+                        className={`p-3.5 rounded-xl border ${card.color} flex flex-col`}
+                        style={{ display: 'flex', flexDirection: 'column' }}
+                      >
+                        <div className="flex items-center gap-1.5 mb-2">
+                          <CardIcon size={14} className="shrink-0" />
+                          <h4 style={{ fontSize: '0.7rem', letterSpacing: '0.08em' }} className="font-bold uppercase">
+                            {card.title}
+                          </h4>
+                        </div>
+                        <p style={{ fontSize: '0.82rem', lineHeight: '1.55' }} className="text-slate-600">
+                          {card.desc}
+                        </p>
                       </div>
-                      <p className="text-xs text-slate-500 leading-relaxed">
-                        {card.desc}
-                      </p>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
-            {/* Actions Panel */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full">
+            {/* Action Buttons - Pinned to bottom */}
+            <div className="flex gap-3 mt-auto">
               <button
                 onClick={() => navigate('/upload')}
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 border-2 border-emerald-500 text-emerald-600 rounded-full font-bold hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm cursor-pointer text-center text-sm"
+                style={{ fontSize: '0.9rem' }}
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 border-2 border-emerald-500 text-emerald-600 rounded-full font-semibold hover:bg-emerald-600 hover:text-white transition-all duration-200 shadow-sm"
               >
-                <ArrowLeft className="w-5 h-5 shrink-0" />
+                <ArrowLeft size={18} />
                 Pindai Baru
               </button>
-              <Link
-                to="/predictions"
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition-all duration-300 shadow-md cursor-pointer text-center text-sm"
+              <button
+                onClick={() => navigate('/predictions')}
+                style={{ fontSize: '0.9rem' }}
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 text-white rounded-full font-semibold hover:bg-emerald-700 transition-all duration-200 shadow-md"
               >
-                <History className="w-5 h-5 shrink-0" />
-                Lihat Riwayat
-              </Link>
+                <History size={18} />
+                Riwayat
+              </button>
             </div>
-
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

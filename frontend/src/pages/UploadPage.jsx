@@ -230,10 +230,10 @@ export default function UploadPage() {
           borderRadius: 12,
           transition: 'max-width 0.3s ease'
         }}
-          className="w-full p-5 md:p-8">
+          className="w-full p-5 md:p-8 upload-card">
 
           {/* tab switcher */}
-          <div style={{ backgroundColor: '#F1F5F9', borderRadius: 999, padding: 4 }} className="flex mb-6">
+          <div style={{ backgroundColor: '#F1F5F9', borderRadius: 999, padding: 4 }} className="flex mb-6 upload-tabs">
             {[{ key: 'upload', label: 'Upload File', Icon: Upload }, { key: 'camera', label: 'Kamera', Icon: Camera }].map(({ key, label, Icon }) => (
               <button key={key} onClick={() => switchTab(key)} disabled={loading}
                 style={{
@@ -317,7 +317,7 @@ export default function UploadPage() {
                 </div>
               )}
               {(cameraStatus === 'idle' || cameraStatus === 'starting' || cameraStatus === 'active') && (
-                <div className="flex flex-col lg:flex-row gap-6">
+                <div className="upload-camera-layout flex flex-col lg:flex-row gap-6">
                   {/* Kamera Feed (Kiri) */}
                   <div className="flex-1">
                     <div style={{ borderRadius: 8, overflow: 'hidden', backgroundColor: '#1a1a1a', width: '100%', aspectRatio: '4/3', position: 'relative' }}>
@@ -361,9 +361,9 @@ export default function UploadPage() {
                       
                       {!scanResult && !scanLoading && (
                         <div className="flex flex-col items-center justify-center py-12 text-center">
-                          <Zap size={40} style={{ color: '#94A3B8' }} />
+                          <Zap size={40} style={{ color: '#94A3B8' }} className="animate-pulse-icon" />
                           <p style={{ color: '#64748B' }} className="text-sm mt-3">
-                            Menunggu hasil scan...
+                            Menunggu hasil scan<span className="loading-dots"></span>
                           </p>
                           <p style={{ color: '#94A3B8' }} className="text-xs mt-1">
                             Arahkan kamera ke sampah
