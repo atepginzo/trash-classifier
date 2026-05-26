@@ -34,24 +34,24 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="kontak" className="bg-forest-dark overflow-hidden">
+    <footer id="kontak" className="bg-slate-900 overflow-hidden">
 
       {/* ======== CTA Banner Strip ======== */}
-      <div className="bg-heading">
+      <div className="bg-emerald-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10
                         flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
-            <h3 className="font-serif text-xl sm:text-2xl font-bold text-white mb-1 tracking-tight">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 tracking-tight">
               Mulai kelola sampah lebih cerdas
             </h3>
-            <p className="text-sm sm:text-base text-white/50 max-w-md">
+            <p className="text-sm sm:text-base text-emerald-100/70 max-w-md">
               Bergabung bersama organisasi pengelola limbah yang sudah menggunakan TrashSmart
             </p>
           </div>
           <a href="/login"
-             className="inline-flex items-center gap-2.5 px-6 py-3 bg-transparent border border-white/30
-                        text-white font-semibold text-sm rounded-lg
-                        hover:bg-white/10 hover:border-white/50
+             className="inline-flex items-center gap-2.5 px-6 py-3 bg-white text-emerald-700
+                        font-semibold text-sm rounded-full
+                        hover:bg-emerald-50 hover:shadow-lg
                         transition-all duration-300 shrink-0">
             <LoginIcon />
             Masuk Sekarang
@@ -65,9 +65,9 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2.5 mb-4">
               <Logo size={32} />
-              <span className="font-serif text-lg font-semibold text-white">TrashSmart</span>
+              <span className="text-lg font-bold text-white">TrashSmart</span>
             </div>
-            <p className="text-sm text-white/50 leading-relaxed max-w-xs mb-6">
+            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mb-6">
               Sistem klasifikasi sampah berbasis AI untuk mendukung pengelolaan limbah yang lebih efisien dan berkelanjutan.
             </p>
             <div className="flex items-center gap-3">
@@ -77,9 +77,9 @@ export default function Footer() {
                 { Icon: YoutubeIcon, href: 'https://youtube.com' },
                 { Icon: TwitterIcon, href: 'https://twitter.com' },
               ].map(({ Icon, href }, i) => (
-                <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/8 border border-white/10
-                                              flex items-center justify-center text-white/50
-                                              hover:bg-white/15 hover:text-white hover:border-white/25
+                <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10
+                                              flex items-center justify-center text-slate-400
+                                              hover:bg-emerald-500/20 hover:text-emerald-400 hover:border-emerald-500/30
                                               transition-all duration-300">
                   <Icon />
                 </a>
@@ -97,7 +97,7 @@ export default function Footer() {
                 { label: 'Tim', href: '/team' },
               ].map((item) => (
                 <li key={item.label}>
-                  <a href={item.href} className="text-sm text-white/50 hover:text-white transition-colors duration-200">{item.label}</a>
+                  <a href={item.href} className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">{item.label}</a>
                 </li>
               ))}
             </ul>
@@ -106,13 +106,13 @@ export default function Footer() {
             <h4 className="text-white font-semibold text-sm mb-4 tracking-wider">Kontak</h4>
             <ul className="space-y-2.5">
               <li>
-                <a href="mailto:ecosortdbs@gmail.com" className="text-sm text-white/50 hover:text-white transition-colors duration-200">Email kami</a>
+                <a href="mailto:ecosortdbs@gmail.com" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">Email kami</a>
               </li>
               <li>
-                <a href="https://wa.me/6289513829923" target="_blank" rel="noopener noreferrer" className="text-sm text-white/50 hover:text-white transition-colors duration-200">WhatsApp</a>
+                <a href="https://wa.me/6289513829923" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">WhatsApp</a>
               </li>
               <li>
-                <a href="tel:+6289513829923" className="text-sm text-white/50 hover:text-white transition-colors duration-200">Telepon</a>
+                <a href="tel:+6289513829923" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">Telepon</a>
               </li>
             </ul>
           </div>
@@ -120,18 +120,18 @@ export default function Footer() {
             <h4 className="text-white font-semibold text-sm mb-4 tracking-wider">Perusahaan</h4>
             <ul className="space-y-2.5">
               <li>
-                <a href="/privacy" className="text-sm text-white/50 hover:text-white transition-colors duration-200">Kebijakan Privasi</a>
+                <a href="/privacy" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">Kebijakan Privasi</a>
               </li>
               <li>
-                <a href="/terms" className="text-sm text-white/50 hover:text-white transition-colors duration-200">Syarat & Ketentuan</a>
+                <a href="/terms" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">Syarat & Ketentuan</a>
               </li>
               <li>
-                <a href="/career" className="text-sm text-white/50 hover:text-white transition-colors duration-200">Karir</a>
+                <a href="/career" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">Karir</a>
               </li>
             </ul>
           </div>
         </div>
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/30">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
           <p>&copy; {currentYear} TrashSmart &middot; Coding Camp DBS Foundation</p>
           <p className="font-mono tracking-wider">CC26-PSU179</p>
         </div>

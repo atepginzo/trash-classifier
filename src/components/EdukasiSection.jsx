@@ -100,7 +100,7 @@ const stagger = {
 
 export default function EdukasiSection() {
   return (
-    <section id="edukasi" className="pt-20 lg:pt-28 bg-cream">
+    <section id="edukasi" className="pt-20 lg:pt-28 bg-[#F8FAFC]">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -109,15 +109,15 @@ export default function EdukasiSection() {
         className="text-center px-4 mb-10 sm:mb-14"
       >
         <span className="inline-flex items-center px-4 py-1.5 rounded-full mb-5
-                        bg-forest/8 border border-forest/15
-                        text-forest text-xs sm:text-sm font-semibold tracking-wide">
+                        bg-emerald-50 border border-emerald-200/60
+                        text-emerald-700 text-xs sm:text-sm font-semibold tracking-wide">
           Panduan Pemilahan
         </span>
-        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold
-                       text-heading leading-[1.15] tracking-tight mb-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold
+                       text-slate-900 leading-[1.15] tracking-tight mb-4">
           Kenali Jenis Sampahmu
         </h2>
-        <p className="text-muted text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+        <p className="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
           Pahami perbedaan sampah Anorganik, B3, dan Organik agar proses daur ulang lebih efektif
         </p>
       </motion.div>
@@ -223,7 +223,7 @@ export default function EdukasiSection() {
         </motion.div>
       </div>
 
-      <div className="py-12 sm:py-16 lg:py-20 bg-cream-light">
+      <div className="py-12 sm:py-16 lg:py-20 bg-emerald-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -233,12 +233,12 @@ export default function EdukasiSection() {
             className="mb-8 sm:mb-10"
           >
             <span className="inline-flex items-center px-4 py-1.5 rounded-full mb-5
-                            bg-forest/8 border border-forest/15
-                            text-forest text-xs sm:text-sm font-semibold tracking-wide">
+                            bg-emerald-50 border border-emerald-200/60
+                            text-emerald-700 text-xs sm:text-sm font-semibold tracking-wide">
               Tips Praktis
             </span>
-            <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold
-                           text-heading leading-[1.15] tracking-tight">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold
+                           text-slate-900 leading-[1.15] tracking-tight">
               Tips Pemilahan Sampah
             </h3>
           </motion.div>
@@ -253,16 +253,16 @@ export default function EdukasiSection() {
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="bg-white border border-sage/20 rounded-xl p-5 sm:p-6
+                className="bg-white border border-slate-200/60 rounded-xl p-5 sm:p-6
                            flex items-start gap-4
                            shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
               >
                 <span className="text-2xl shrink-0 mt-0.5">{tip.emoji}</span>
                 <div className="flex items-start gap-2.5">
-                  <div className="w-5 h-5 rounded-full bg-forest/10 flex items-center justify-center shrink-0 mt-0.5 text-forest">
+                  <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5 text-emerald-600">
                     <CheckIcon />
                   </div>
-                  <p className="text-sm sm:text-base text-body leading-relaxed">
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                     {tip.teks}
                   </p>
                 </div>

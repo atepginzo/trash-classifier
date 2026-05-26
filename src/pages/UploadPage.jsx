@@ -209,16 +209,16 @@ export default function UploadPage() {
     <>
       <Navbar />
       <div
-        style={{ minHeight: '100vh', backgroundColor: '#F5F0E8' }}
+        style={{ minHeight: '100vh', backgroundColor: '#F8FAFC' }}
         className="flex flex-col items-center px-4 pt-28 pb-16 md:pt-32 md:pb-24"
       >
         {/* heading */}
         <div className="text-center mb-8 max-w-lg">
-          <h1 style={{ fontFamily: 'var(--font-serif)', color: '#0F1A0A' }}
-            className="text-3xl md:text-4xl font-bold mb-2">
+          <h1 style={{ fontFamily: 'var(--font-sans)', color: '#0F172A' }}
+            className="text-3xl md:text-4xl font-extrabold mb-2">
             Deteksi Sampah
           </h1>
-          <p style={{ color: '#6B7160' }} className="text-base leading-relaxed">
+          <p style={{ color: '#64748B' }} className="text-base leading-relaxed">
             Unggah atau foto sampah untuk mendapatkan klasifikasi AI
           </p>
         </div>
@@ -233,12 +233,12 @@ export default function UploadPage() {
           className="w-full p-5 md:p-8">
 
           {/* tab switcher */}
-          <div style={{ backgroundColor: '#f0ebe3', borderRadius: 999, padding: 4 }} className="flex mb-6">
+          <div style={{ backgroundColor: '#F1F5F9', borderRadius: 999, padding: 4 }} className="flex mb-6">
             {[{ key: 'upload', label: 'Upload File', Icon: Upload }, { key: 'camera', label: 'Kamera', Icon: Camera }].map(({ key, label, Icon }) => (
               <button key={key} onClick={() => switchTab(key)} disabled={loading}
                 style={{
-                  backgroundColor: activeTab === key ? '#1a3d1a' : 'transparent',
-                  color: activeTab === key ? '#ffffff' : '#3A3D35',
+                  backgroundColor: activeTab === key ? '#059669' : 'transparent',
+                  color: activeTab === key ? '#ffffff' : '#334155',
                   borderRadius: 999, border: 'none', outline: 'none',
                   cursor: loading ? 'not-allowed' : 'pointer',
                   transition: 'background-color 0.2s ease, color 0.2s ease',
@@ -259,19 +259,19 @@ export default function UploadPage() {
                   role="button" tabIndex={0}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!loading) fileInputRef.current?.click(); } }}
                   style={{
-                    border: `2px dashed ${dragging ? '#1a3d1a' : '#c5c5b8'}`,
-                    backgroundColor: dragging ? '#e8f0e8' : '#fafaf7',
-                    borderRadius: 8, cursor: loading ? 'not-allowed' : 'pointer',
+                    border: `2px dashed ${dragging ? '#059669' : '#CBD5E1'}`,
+                    backgroundColor: dragging ? '#ECFDF5' : '#F8FAFC',
+                    borderRadius: 12, cursor: loading ? 'not-allowed' : 'pointer',
                     transition: 'border-color 0.2s ease, background-color 0.2s ease',
                   }}
                   className="flex flex-col items-center justify-center py-16 px-4"
                 >
-                  <Upload size={40} style={{ color: dragging ? '#1a3d1a' : '#A8B89C' }} />
-                  <p style={{ color: '#3A3D35' }} className="mt-4 text-sm font-medium">
-                    <span style={{ color: '#1a3d1a' }} className="font-semibold">Klik untuk upload</span>{' '}
+                  <Upload size={40} style={{ color: dragging ? '#059669' : '#94A3B8' }} />
+                  <p style={{ color: '#334155' }} className="mt-4 text-sm font-medium">
+                    <span style={{ color: '#059669' }} className="font-semibold">Klik untuk upload</span>{' '}
                     atau drag & drop di sini
                   </p>
-                  <p style={{ color: '#6B7160' }} className="text-xs mt-1.5">
+                  <p style={{ color: '#64748B' }} className="text-xs mt-1.5">
                     Format: JPG, PNG, WebP — Maksimal 10MB
                   </p>
                 </div>
@@ -280,7 +280,7 @@ export default function UploadPage() {
                   <div style={{ maxWidth: 300, maxHeight: 300, borderRadius: 8, overflow: 'hidden', aspectRatio: '1/1', width: '100%' }}>
                     <img src={preview} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                   </div>
-                  {file && <p style={{ color: '#6B7160' }} className="text-xs mt-3 truncate max-w-[300px]">{file.name}</p>}
+                  {file && <p style={{ color: '#64748B' }} className="text-xs mt-3 truncate max-w-[300px]">{file.name}</p>}
                 </div>
               )}
               <input type="file" ref={fileInputRef} onChange={handleFileInputChange}
@@ -292,25 +292,25 @@ export default function UploadPage() {
           {activeTab === 'camera' && (
             <>
               {cameraStatus === 'unsupported' && (
-                <div style={{ backgroundColor: '#fafaf7', borderRadius: 8, border: '1px solid #e0ddd5' }}
+                <div style={{ backgroundColor: '#F8FAFC', borderRadius: 12, border: '1px solid #E2E8F0' }}
                   className="flex flex-col items-center justify-center py-16 px-6 text-center">
                   <AlertCircle size={40} style={{ color: '#a32d2d' }} />
-                  <p style={{ color: '#3A3D35' }} className="mt-4 text-sm font-semibold">Kamera Tidak Didukung</p>
-                  <p style={{ color: '#6B7160' }} className="text-xs mt-2 leading-relaxed max-w-xs">
+                  <p style={{ color: '#334155' }} className="mt-4 text-sm font-semibold">Kamera Tidak Didukung</p>
+                  <p style={{ color: '#64748B' }} className="text-xs mt-2 leading-relaxed max-w-xs">
                     Browser Anda tidak mendukung akses kamera. Gunakan mode upload file.
                   </p>
                 </div>
               )}
               {cameraStatus === 'denied' && (
-                <div style={{ backgroundColor: '#fafaf7', borderRadius: 8, border: '1px solid #e0ddd5' }}
+                <div style={{ backgroundColor: '#F8FAFC', borderRadius: 12, border: '1px solid #E2E8F0' }}
                   className="flex flex-col items-center justify-center py-16 px-6 text-center">
                   <AlertCircle size={40} style={{ color: '#a32d2d' }} />
-                  <p style={{ color: '#3A3D35' }} className="mt-4 text-sm font-semibold">Izin Kamera Ditolak</p>
-                  <p style={{ color: '#6B7160' }} className="text-xs mt-2 leading-relaxed max-w-xs">
+                  <p style={{ color: '#334155' }} className="mt-4 text-sm font-semibold">Izin Kamera Ditolak</p>
+                  <p style={{ color: '#64748B' }} className="text-xs mt-2 leading-relaxed max-w-xs">
                     Izinkan akses kamera di pengaturan browser, lalu coba lagi.
                   </p>
                   <button onClick={activateCamera}
-                    style={{ backgroundColor: '#1a3d1a', color: '#ffffff', borderRadius: 999, border: 'none' }}
+                    style={{ backgroundColor: '#059669', color: '#ffffff', borderRadius: 999, border: 'none' }}
                     className="mt-5 px-6 py-2.5 text-sm font-semibold flex items-center gap-2 cursor-pointer">
                     <RefreshCw size={14} /> Coba Lagi
                   </button>
@@ -354,18 +354,18 @@ export default function UploadPage() {
                   
                   {/* Hasil Klasifikasi (Kanan) */}
                   <div className="flex-1">
-                    <div style={{ backgroundColor: '#fafaf7', borderRadius: 8, border: '1px solid #e0ddd5', minHeight: 300, position: 'relative' }} className="p-5">
-                      <h3 style={{ color: '#0F1A0A', fontSize: 16, fontWeight: 600, marginBottom: 16 }}>
+                    <div style={{ backgroundColor: '#F8FAFC', borderRadius: 12, border: '1px solid #E2E8F0', minHeight: 300, position: 'relative' }} className="p-5">
+                      <h3 style={{ color: '#0F172A', fontSize: 16, fontWeight: 600, marginBottom: 16 }}>
                         Hasil Analisis Real-Time
                       </h3>
                       
                       {!scanResult && !scanLoading && (
                         <div className="flex flex-col items-center justify-center py-12 text-center">
-                          <Zap size={40} style={{ color: '#A8B89C' }} />
-                          <p style={{ color: '#6B7160' }} className="text-sm mt-3">
+                          <Zap size={40} style={{ color: '#94A3B8' }} />
+                          <p style={{ color: '#64748B' }} className="text-sm mt-3">
                             Menunggu hasil scan...
                           </p>
-                          <p style={{ color: '#A8B89C' }} className="text-xs mt-1">
+                          <p style={{ color: '#94A3B8' }} className="text-xs mt-1">
                             Arahkan kamera ke sampah
                           </p>
                         </div>
@@ -373,8 +373,8 @@ export default function UploadPage() {
                       
                       {scanLoading && !scanResult && (
                         <div className="flex flex-col items-center justify-center py-12">
-                          <div style={{ width: 40, height: 40, border: '3px solid #e0ddd5', borderTopColor: '#00ff88', borderRadius: '50%' }} className="animate-spin" />
-                          <p style={{ color: '#6B7160' }} className="text-sm mt-4 animate-pulse">
+                          <div style={{ width: 40, height: 40, border: '3px solid #E2E8F0', borderTopColor: '#34D399', borderRadius: '50%' }} className="animate-spin" />
+                          <p style={{ color: '#64748B' }} className="text-sm mt-4 animate-pulse">
                             Menganalisis...
                           </p>
                         </div>
@@ -390,7 +390,7 @@ export default function UploadPage() {
                             padding: 16,
                             marginBottom: 16
                           }}>
-                            <div style={{ fontSize: 12, color: '#6B7160', marginBottom: 4 }}>Kategori Terdeteksi</div>
+                            <div style={{ fontSize: 12, color: '#64748B', marginBottom: 4 }}>Kategori Terdeteksi</div>
                             <div style={{ 
                               fontSize: 20, 
                               fontWeight: 700,
@@ -400,7 +400,7 @@ export default function UploadPage() {
                               {scanResult.result?.category || 'Unknown'}
                             </div>
                             {scanResult.result?.label && (
-                              <div style={{ fontSize: 13, color: '#6B7160', marginTop: 4 }}>
+                              <div style={{ fontSize: 13, color: '#64748B', marginTop: 4 }}>
                                 {scanResult.result.label}
                               </div>
                             )}
@@ -410,17 +410,17 @@ export default function UploadPage() {
                           {scanResult.result?.confidence && (
                             <div style={{ marginBottom: 16 }}>
                               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-                                <span style={{ fontSize: 12, color: '#6B7160' }}>Tingkat Keyakinan</span>
-                                <span style={{ fontSize: 12, fontWeight: 600, color: '#0F1A0A' }}>
+                                <span style={{ fontSize: 12, color: '#64748B' }}>Tingkat Keyakinan</span>
+                                <span style={{ fontSize: 12, fontWeight: 600, color: '#0F172A' }}>
                                   {scanResult.result.confidence}%
                                 </span>
                               </div>
-                              <div style={{ width: '100%', height: 8, backgroundColor: '#e0ddd5', borderRadius: 999, overflow: 'hidden' }}>
+                              <div style={{ width: '100%', height: 8, backgroundColor: '#E2E8F0', borderRadius: 999, overflow: 'hidden' }}>
                                 <div 
                                   style={{ 
                                     width: `${scanResult.result.confidence}%`, 
                                     height: '100%', 
-                                    backgroundColor: '#00ff88',
+                                    backgroundColor: '#34D399',
                                     transition: 'width 0.5s ease',
                                     borderRadius: 999
                                   }} 
@@ -432,11 +432,11 @@ export default function UploadPage() {
                           
                           {/* Tips Penanganan */}
                           {scanResult.result?.category && (
-                            <div style={{ backgroundColor: '#ffffff', borderRadius: 8, padding: 12, border: '1px solid #e0ddd5' }}>
-                              <div style={{ fontSize: 12, fontWeight: 600, color: '#0F1A0A', marginBottom: 6 }}>
+                            <div style={{ backgroundColor: '#ffffff', borderRadius: 8, padding: 12, border: '1px solid #E2E8F0' }}>
+                              <div style={{ fontSize: 12, fontWeight: 600, color: '#0F172A', marginBottom: 6 }}>
                                 💡 Tips Penanganan
                               </div>
-                              <p style={{ fontSize: 12, color: '#6B7160', lineHeight: 1.5 }}>
+                              <p style={{ fontSize: 12, color: '#64748B', lineHeight: 1.5 }}>
                                 {scanResult.result.category === 'Organik' 
                                   ? 'Sampah organik dapat dikomposkan atau dijadikan pupuk alami. Pisahkan dari sampah lainnya.'
                                   : scanResult.result.category === 'Anorganik'
@@ -452,7 +452,7 @@ export default function UploadPage() {
                               onClick={() => navigate(`/predictions/${scanResult.id}`)}
                               style={{ 
                                 width: '100%',
-                                backgroundColor: '#1a3d1a', 
+                                backgroundColor: '#059669', 
                                 color: '#ffffff', 
                                 borderRadius: 8, 
                                 border: 'none',
@@ -474,12 +474,12 @@ export default function UploadPage() {
                           position: 'absolute', 
                           top: 8, 
                           right: 8, 
-                          backgroundColor: 'rgba(0,255,136,0.9)', 
+                          backgroundColor: 'rgba(52,211,153,0.9)', 
                           borderRadius: '0 0 0 8px',
                           padding: '4px 10px',
                           fontSize: 10,
                           fontWeight: 600,
-                          color: '#0F1A0A',
+                          color: '#064E3B',
                           display: 'flex',
                           alignItems: 'center',
                           gap: 4
@@ -515,12 +515,12 @@ export default function UploadPage() {
           {activeTab === 'upload' && (
             <div className="flex gap-3 mt-6">
               <button onClick={submitClassification} disabled={!canClassify}
-                style={{ backgroundColor: canClassify ? '#1a3d1a' : '#b0b0a8', color: '#ffffff', borderRadius: 999, border: 'none', cursor: canClassify ? 'pointer' : 'not-allowed', transition: 'background-color 0.2s ease' }}
+                style={{ backgroundColor: canClassify ? '#059669' : '#94A3B8', color: '#ffffff', borderRadius: 999, border: 'none', cursor: canClassify ? 'pointer' : 'not-allowed', transition: 'background-color 0.2s ease' }}
                 className="flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold">
                 {loading ? <><Loader2 size={18} className="animate-spin" /> Menganalisis...</> : 'Klasifikasi'}
               </button>
               <button onClick={resetAll} disabled={loading}
-                style={{ backgroundColor: '#f0ebe3', color: '#3A3D35', borderRadius: 999, border: 'none', opacity: loading ? 0.5 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+                style={{ backgroundColor: '#F1F5F9', color: '#334155', borderRadius: 999, border: 'none', opacity: loading ? 0.5 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
                 className="px-5 py-3 text-sm font-medium flex items-center gap-2">
                 <X size={14} /> Reset
               </button>
@@ -529,8 +529,8 @@ export default function UploadPage() {
 
           {loading && activeTab === 'upload' && (
             <div className="flex flex-col items-center mt-6 py-6">
-              <div style={{ width: 44, height: 44, border: '3px solid #e0ddd5', borderTopColor: '#1a3d1a', borderRadius: '50%' }} className="animate-spin" />
-              <p style={{ color: '#6B7160' }} className="mt-4 text-sm">Menganalisis gambar...</p>
+              <div style={{ width: 44, height: 44, border: '3px solid #E2E8F0', borderTopColor: '#059669', borderRadius: '50%' }} className="animate-spin" />
+              <p style={{ color: '#64748B' }} className="mt-4 text-sm">Menganalisis gambar...</p>
             </div>
           )}
         </div>

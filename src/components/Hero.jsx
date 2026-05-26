@@ -4,9 +4,9 @@ import PreviewCard from './PreviewCard';
 
 /* Rotating headline phrases */
 const HEADLINES = [
-  { words: ['Identifikasi', 'Jenis', 'Sampah', 'Secara', 'Otomatis'], accents: new Set(['Jenis', 'Sampah']) },
-  { words: ['Pilah', 'Limbah', 'dengan', 'Teknologi', 'Cerdas'], accents: new Set(['Limbah', 'Cerdas']) },
-  { words: ['Deteksi', 'Kategori', 'Sampah', 'dalam', 'Hitungan', 'Detik'], accents: new Set(['Kategori', 'Sampah']) },
+  { words: ['Kelola', 'Sampah', 'Lebih', 'Cerdas', 'dengan', 'AI'], accents: new Set(['Sampah', 'Cerdas']) },
+  { words: ['Kenali', 'Jenis', 'Limbah', 'dalam', 'Hitungan', 'Detik'], accents: new Set(['Limbah', 'Detik']) },
+  { words: ['Deteksi', 'Kategori', 'Sampah', 'Secara', 'Otomatis'], accents: new Set(['Kategori', 'Otomatis']) },
 ];
 
 /* Scan/detect icon for CTA */
@@ -54,9 +54,11 @@ export default function Hero() {
       id="beranda"
       className="relative min-h-screen flex items-center overflow-hidden pt-24 lg:pt-28"
     >
+      {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-sage/10 blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 w-[300px] h-[300px] rounded-full bg-terracotta/5 blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-emerald-100/40 blur-3xl" />
+        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full bg-teal-100/30 blur-3xl" />
+        <div className="absolute top-1/3 left-1/4 w-[200px] h-[200px] rounded-full bg-sky-100/20 blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -71,9 +73,9 @@ export default function Hero() {
               className="mb-6 sm:mb-8"
             >
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full
-                              bg-forest/8 border border-forest/15
-                              text-forest text-xs sm:text-sm font-semibold tracking-wide">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" className="text-terracotta">
+                              bg-emerald-50 border border-emerald-200/60
+                              text-emerald-700 text-xs sm:text-sm font-semibold tracking-wide">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" className="text-amber-500">
                   <path d="M8 0l2 5h5l-4 3.5 1.5 5L8 10.5 3.5 13.5 5 8.5 1 5h5z"/>
                 </svg>
                 Didukung Teknologi AI
@@ -87,16 +89,17 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl
-                             leading-[1.1] tracking-tight text-heading absolute inset-0"
+                  className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl
+                             leading-[1.1] tracking-tight text-slate-900 absolute inset-0
+                             font-extrabold"
                 >
                   {currentHeadline.words.map((word, i) => (
                     <span
                       key={i}
                       className={`inline-block mr-[0.3em] ${
                         currentHeadline.accents.has(word)
-                          ? 'font-bold text-forest'
-                          : 'font-medium'
+                          ? 'text-gradient'
+                          : ''
                       }`}
                     >
                       {word}
@@ -109,10 +112,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-base sm:text-lg text-body/80 leading-relaxed mb-8 sm:mb-10 max-w-md"
+              className="text-base sm:text-lg text-slate-500 leading-relaxed mb-8 sm:mb-10 max-w-md"
             >
-              Unggah foto sampah dan temukan kategorinya secara instan menggunakan
-              teknologi Object Detection berbasis kecerdasan buatan.
+              Unggah foto sampah dan dapatkan klasifikasi instan menggunakan
+              teknologi AI. Temukan cara pengelolaan yang tepat untuk setiap jenis limbah.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -122,24 +125,24 @@ export default function Hero() {
             >
               <a
                 href="/upload"
-                className="group inline-flex items-center gap-2.5 px-6 py-3.5
-                           bg-forest text-white font-semibold text-sm sm:text-base
-                           rounded-full shadow-lg shadow-forest/20
-                           hover:bg-forest-dark hover:shadow-xl hover:shadow-forest/25
+                className="group inline-flex items-center gap-2.5 px-7 py-3.5
+                           bg-emerald-600 text-white font-semibold text-sm sm:text-base
+                           rounded-full shadow-lg shadow-emerald-600/25
+                           hover:bg-emerald-700 hover:shadow-xl hover:shadow-emerald-600/30
                            hover:-translate-y-0.5 transition-all duration-300"
               >
                 <ScanIcon />
-                Mulai Deteksi
+                Mulai Scan Sampah
               </a>
               <a
                 href="#tentang"
                 className="group inline-flex items-center gap-2 px-6 py-3.5
-                           border border-forest/25 text-forest font-semibold text-sm sm:text-base
-                           rounded-full hover:bg-forest/5 hover:border-forest/40
+                           border border-slate-200 text-slate-700 font-semibold text-sm sm:text-base
+                           rounded-full hover:bg-slate-50 hover:border-slate-300
                            hover:-translate-y-0.5 transition-all duration-300"
               >
                 <InfoIcon />
-                Pelajari Lebih
+                Cara Kerja
               </a>
             </motion.div>
           </div>
@@ -153,10 +156,10 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.4, duration: 0.6 }}
-          className="hidden sm:flex flex-col items-center gap-2 text-muted pb-8"
+          className="hidden sm:flex flex-col items-center gap-2 text-slate-400 pb-8"
         >
           <span className="text-xs tracking-widest uppercase font-medium">Scroll</span>
-          <div className="animate-bounce-slow text-forest/50">
+          <div className="animate-bounce-slow text-emerald-400">
             <ScrollArrow />
           </div>
         </motion.div>

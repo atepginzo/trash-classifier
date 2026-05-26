@@ -7,18 +7,18 @@ export default function Logo({ size = 40, variant = 'default' }) {
   // Variant colors
   const colors = {
     default: {
-      bg: '#1A3A1F',
-      body: '#2D5A35',
-      stroke: '#7EC892',
-      light: '#A8E6B8',
-      accent: '#4A9660',
+      bg: '#064E3B',
+      body: '#065F46',
+      stroke: '#34D399',
+      light: '#6EE7B7',
+      accent: '#10B981',
     },
     light: {
-      bg: '#2D5A35',
-      body: '#2D5A35',
-      stroke: '#7EC892',
-      light: '#A8E6B8',
-      accent: '#4A9660',
+      bg: '#065F46',
+      body: '#065F46',
+      stroke: '#34D399',
+      light: '#6EE7B7',
+      accent: '#10B981',
     },
   };
 

@@ -117,14 +117,14 @@ export default function Navbar() {
 
   const linkClass = (href) =>
     `flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${isActive(href)
-      ? 'bg-forest/10 text-forest'
-      : 'text-body hover:bg-forest/5 hover:text-forest'
+      ? 'bg-emerald-50 text-emerald-700'
+      : 'text-slate-600 hover:bg-emerald-50/60 hover:text-emerald-700'
     }`;
 
   const mobileLinkClass = (href) =>
     `flex items-center gap-2.5 px-4 py-3 text-sm font-medium rounded-lg transition-colors ${isActive(href)
-      ? 'bg-forest/10 text-forest'
-      : 'text-body hover:bg-forest/5 hover:text-forest'
+      ? 'bg-emerald-50 text-emerald-700'
+      : 'text-slate-600 hover:bg-emerald-50/60 hover:text-emerald-700'
     }`;
 
   return (
@@ -136,7 +136,7 @@ export default function Navbar() {
         fixed top-0 left-0 right-0 z-50
         transition-all duration-300
         ${scrolled
-          ? 'navbar-blur bg-cream/85 shadow-[0_1px_0_0_rgba(168,184,156,0.3)]'
+          ? 'navbar-blur bg-white/80 shadow-[0_1px_3px_rgba(0,0,0,0.05)]'
           : 'bg-transparent'
         }
       `}
@@ -151,7 +151,7 @@ export default function Navbar() {
             <div className="transition-transform duration-300 group-hover:scale-110">
               <Logo size={40} />
             </div>
-            <span className="font-serif text-xl font-semibold text-heading tracking-tight">
+            <span className="text-xl font-bold text-slate-800 tracking-tight">
               TrashSmart
             </span>
           </a>
@@ -173,8 +173,8 @@ export default function Navbar() {
               href="/login"
               onClick={(e) => handleNavClick(e, '/login')}
               className="flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 text-xs sm:text-sm font-semibold
-                         border border-forest/30 text-forest rounded-full
-                         hover:bg-forest hover:text-white
+                         border border-emerald-300 text-emerald-700 rounded-full
+                         hover:bg-emerald-600 hover:text-white hover:border-emerald-600
                          transition-all duration-300"
             >
               <LoginIcon />
@@ -182,7 +182,7 @@ export default function Navbar() {
             </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-forest/5 transition-colors"
+              className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
               aria-label="Toggle menu"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -210,7 +210,7 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden navbar-blur bg-cream/95 border-t border-sage/20"
+            className="md:hidden overflow-hidden navbar-blur bg-white/95 border-t border-slate-100"
           >
             <div className="px-4 py-4 space-y-1">
               {NAV_LINKS.map((link) => (
