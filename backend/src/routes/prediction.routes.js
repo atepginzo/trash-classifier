@@ -6,10 +6,9 @@ const predictionController = require('../controllers/prediction.controller');
 
 const router = Router();
 
-// ── [FIX: Race Condition] Cegah tumpang-tindih request per user ──────────
-// Jika inferensi + network memakan > 5 detik, FE akan mengirim frame baru
-// sementara yang lama belum selesai. Middleware ini men-drop frame baru agar
-// tidak menumpuk di pipeline → hemat resource server.
+// Cegah tumpang-tindih request per user.
+// Jika inferensi + network > 5 detik, FE akan mengirim frame baru
+// sementara yang lama belum selesai. Drop frame baru agar tidak menumpuk.
 const activeRequests = new Set();
 
 const preventOverlap = (req, res, next) => {
@@ -27,7 +26,7 @@ const preventOverlap = (req, res, next) => {
   res.on('close',  () => activeRequests.delete(clientId));
   next();
 };
-// ─────────────────────────────────────────────────────────────────────────
+
 
 // POST /api/predictions — Upload image and get prediction
 router.post('/', preventOverlap, uploadImage, requireFile, predictionController.createPrediction);

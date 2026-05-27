@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, History, AlertTriangle, Leaf, Recycle, Trash2, Clock, Sparkles, CheckCircle2, ShieldAlert, Coins, RefreshCw } from 'lucide-react';
 import { usePrediction } from '../hooks/usePrediction';
@@ -38,7 +38,7 @@ const CATEGORY_CONFIG = {
 
 const CATEGORY_TIPS = {
   organik: {
-    title: 'AI Insight — Analisis Sampah',
+    title: 'AI Insight',
     cards: [
       {
         title: 'Dampak Lingkungan',
@@ -67,7 +67,7 @@ const CATEGORY_TIPS = {
     ]
   },
   anorganik: {
-    title: 'AI Insight — Analisis Sampah',
+    title: 'AI Insight',
     cards: [
       {
         title: 'Dampak Lingkungan',
@@ -96,7 +96,7 @@ const CATEGORY_TIPS = {
     ]
   },
   b3: {
-    title: 'AI Insight — Analisis Sampah',
+    title: 'AI Insight',
     cards: [
       {
         title: 'Dampak Lingkungan',
@@ -125,6 +125,94 @@ const CATEGORY_TIPS = {
     ]
   }
 };
+
+function ConfidenceBar({ value, delay = 300, animated = true, onComplete }) {
+  const [currentValue, setCurrentValue] = useState(0);
+  const [showShimmer, setShowShimmer] = useState(false);
+  const targetValue = Math.round(value);
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const shouldAnimate = animated && !mediaQuery.matches;
+
+    if (!shouldAnimate) {
+      setCurrentValue(targetValue);
+      setShowShimmer(false);
+      if (onCompleteRef.current) onCompleteRef.current();
+      return;
+    }
+
+    let startTime;
+    let animationFrame;
+    const duration = 1200;
+
+    const animateCount = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = timestamp - startTime;
+
+      if (progress < duration) {
+        const t = progress / duration;
+        const ease = 1 - Math.pow(1 - t, 3); // easeOutCubic
+        setCurrentValue(Math.round(ease * targetValue));
+        animationFrame = requestAnimationFrame(animateCount);
+      } else {
+        setCurrentValue(targetValue);
+        if (onCompleteRef.current) onCompleteRef.current();
+      }
+    };
+
+    const startTimeout = setTimeout(() => {
+      animationFrame = requestAnimationFrame(animateCount);
+      const shimmerTimeout = setTimeout(() => setShowShimmer(true), duration);
+    }, delay);
+
+    return () => {
+      clearTimeout(startTimeout);
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+    };
+  }, [targetValue, delay, animated]);
+
+  return (
+    <div className="w-full flex flex-col gap-2">
+      <div className="flex justify-between items-center">
+        <span className="text-[12px] text-[#666]">Tingkat Kepastian</span>
+        <span className="text-[13px] font-medium text-[#0F6E56]">{currentValue}%</span>
+      </div>
+      <div className="relative h-[8px] w-full rounded-[99px] bg-[#E1F5EE] overflow-hidden">
+        <motion.div
+          initial={{ width: animated ? '0%' : `${targetValue}%` }}
+          animate={{ width: `${targetValue}%` }}
+          transition={{
+            delay: animated ? delay / 1000 : 0,
+            duration: animated ? 1.2 : 0,
+            ease: [0.34, 1.2, 0.64, 1]
+          }}
+          className="absolute left-0 top-0 h-full rounded-[99px]"
+          style={{ background: 'linear-gradient(90deg, #1D9E75 0%, #5DCAA5 60%, #9FE1CB 100%)' }}
+        >
+          {showShimmer && animated && (
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: '200%' }}
+              transition={{
+                duration: 1.8,
+                ease: 'easeInOut',
+                repeat: Infinity,
+              }}
+              className="absolute left-0 top-0 h-full w-[60%]"
+              style={{ background: 'linear-gradient(90deg, transparent 20%, rgba(255,255,255,0.55) 50%, transparent 80%)' }}
+            />
+          )}
+        </motion.div>
+      </div>
+    </div>
+  );
+}
 
 function BoundingBoxOverlay({ imageUrl, detections, categoryColor }) {
   const imgRef = useRef(null);
@@ -197,7 +285,7 @@ function BoundingBoxOverlay({ imageUrl, detections, categoryColor }) {
         ref={imgRef}
         src={imageUrl}
         alt="Hasil Deteksi"
-        className="w-full h-auto max-h-[420px] object-contain mx-auto block"
+        className="w-full h-auto max-h-[200px] md:max-h-[240px] object-contain mx-auto block"
         onLoad={drawBoxes}
         crossOrigin="anonymous"
       />
@@ -213,6 +301,7 @@ export default function ResultPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, loading, error } = usePrediction(id);
+  const [showAccuracyBadge, setShowAccuracyBadge] = useState(false);
 
   if (loading) {
     return (
@@ -281,9 +370,9 @@ export default function ResultPage() {
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-between">
       <Navbar />
 
-      <main className="flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+      <main className="flex-grow pt-20 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         {/* Page Title Row */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
           <div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
               Hasil Pemindaian
@@ -301,11 +390,11 @@ export default function ResultPage() {
         </div>
 
         {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start mb-4">
 
           {/* LEFT COLUMN: Scanned Image */}
-          <div className="lg:col-span-6 bg-white border border-slate-200/60 rounded-3xl p-5 sm:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+          <div className="lg:col-span-5 bg-white border border-slate-200/60 rounded-3xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
               <span className="font-bold text-sm text-slate-800 uppercase tracking-wider flex items-center gap-2">
                 <Sparkles size={16} className="text-emerald-500 animate-pulse" />
                 Citra Terdeteksi
@@ -322,29 +411,42 @@ export default function ResultPage() {
                 categoryColor={catConfig.primaryColor}
               />
             ) : (
-              <div className="w-full h-64 bg-slate-50 rounded-2xl flex items-center justify-center border border-dashed border-slate-200">
+              <div className="w-full h-48 bg-slate-50 rounded-2xl flex items-center justify-center border border-dashed border-slate-200">
                 <span className="text-sm text-slate-400">Gambar tidak tersedia</span>
               </div>
             )}
           </div>
 
-          {/* RIGHT COLUMN: AI Analysis & Educational tips */}
-          <div className="lg:col-span-6 space-y-6">
+          {/* RIGHT COLUMN: AI Analysis & Actions */}
+          <div className="lg:col-span-7 flex flex-col gap-4">
 
             {/* Category Analysis Card */}
-            <div className="bg-white border border-slate-200/60 rounded-3xl p-5 sm:p-6 lg:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-6">
+            <div className="bg-white border border-slate-200/60 rounded-3xl p-4 md:p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex-1 flex flex-col justify-between">
 
               {/* Category Badge & Headline */}
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 sm:gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                 <div className="space-y-3">
                   <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Kategori Dominan</span>
                   <div className="flex items-start gap-3">
                     <div className={`p-2.5 rounded-2xl ${catConfig.color} border shrink-0`}>
-                      <CatIcon size={28} />
+                      <CatIcon size={24} />
                     </div>
                     <div className="min-w-0">
-                      <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none mb-1">
+                      <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 leading-none mb-1 flex items-center gap-3">
                         {catConfig.label}
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: showAccuracyBadge ? 1 : 0, scale: showAccuracyBadge ? 1 : 0.8 }}
+                          transition={{ duration: 0.3, ease: 'easeOut' }}
+                        >
+                          {showAccuracyBadge && (
+                            <span 
+                              className="bg-[#E1F5EE] text-[#0F6E56] border border-[#1D9E75]/20 rounded-lg px-3 py-1 text-[13px] font-medium"
+                            >
+                              {Math.round(confidence * 100)}%
+                            </span>
+                          )}
+                        </motion.div>
                       </h2>
                       <span className="text-sm font-semibold text-emerald-600 mb-2 block">
                         Terdeteksi: {label}
@@ -355,31 +457,16 @@ export default function ResultPage() {
                     </div>
                   </div>
                 </div>
-
-                {/* Confidence Score Badge */}
-                <div className="flex items-center sm:items-end justify-between sm:justify-start sm:flex-col gap-2 border-t border-dashed border-slate-100 pt-4 sm:border-t-0 sm:pt-0 shrink-0">
-                  <span className="text-xs font-semibold text-slate-400">Akurasi AI</span>
-                  <span className={`inline-flex px-3.5 py-1.5 rounded-xl text-sm font-bold border ${catConfig.bgPill}`}>
-                    {((confidence || 0) * 100).toFixed(1)}%
-                  </span>
-                </div>
               </div>
 
               {/* Confidence Progress Bar */}
-              <div className="space-y-2 border-t border-slate-100 pt-5">
-                <div className="flex justify-between text-xs font-semibold text-slate-600">
-                  <span>Tingkat Kepastian</span>
-                  <span>{((confidence || 0) * 100).toFixed(0)}%</span>
-                </div>
-                <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200/60">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${(confidence || 0) * 100}%` }}
-                    transition={{ duration: 1, ease: 'easeOut' }}
-                    style={{ backgroundColor: catConfig.primaryColor }}
-                    className="h-full rounded-full"
-                  />
-                </div>
+              <div className="border-t border-slate-100 pt-4 mt-4">
+                <ConfidenceBar 
+                  value={confidence * 100} 
+                  delay={300} 
+                  animated={true} 
+                  onComplete={() => setShowAccuracyBadge(true)} 
+                />
               </div>
 
               {/* Detailed Detections List */}
@@ -403,58 +490,57 @@ export default function ResultPage() {
                   </div>
                 </div>
               )}
-            </div>
 
-            {/* AI Insight — Analisis Sampah (4-Card Dashboard Grid) */}
-            <div className="bg-white border border-slate-200/60 rounded-3xl p-5 sm:p-6 lg:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-6">
-              <div className="flex items-center gap-2 border-b border-slate-100 pb-4">
-                <Sparkles size={18} className="text-emerald-500 shrink-0" />
-                <h3 className="text-lg font-bold text-slate-800">
-                  {tipsConfig.title}
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {tipsConfig.cards.map((card, idx) => {
-                  const CardIcon = card.icon;
-                  return (
-                    <div
-                      key={idx}
-                      className={`p-4 rounded-2xl border ${card.color} flex flex-col justify-start transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.02)]`}
-                    >
-                      <div className="flex items-center gap-2 mb-2.5">
-                        <CardIcon size={16} className="shrink-0" />
-                        <h4 className="font-bold text-xs uppercase tracking-wider">
-                          {card.title}
-                        </h4>
-                      </div>
-                      <p className="text-xs text-slate-500 leading-relaxed">
-                        {card.desc}
-                      </p>
-                    </div>
-                  );
-                })}
+              {/* Actions Panel */}
+              <div className="flex flex-col sm:flex-row gap-3 w-full mt-4 pt-4 border-t border-slate-100">
+                <button
+                  onClick={() => navigate('/upload')}
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 px-5 border-2 border-emerald-500 text-emerald-600 rounded-full font-bold hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm cursor-pointer text-center text-sm"
+                >
+                  <ArrowLeft className="w-4 h-4 shrink-0" />
+                  Pindai Baru
+                </button>
+                <Link
+                  to="/predictions"
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 px-5 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition-all duration-300 shadow-md cursor-pointer text-center text-sm"
+                >
+                  <History className="w-4 h-4 shrink-0" />
+                  Lihat Riwayat
+                </Link>
               </div>
             </div>
+          </div>
+        </div>
 
-            {/* Actions Panel */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full">
-              <button
-                onClick={() => navigate('/upload')}
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 border-2 border-emerald-500 text-emerald-600 rounded-full font-bold hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm cursor-pointer text-center text-sm"
-              >
-                <ArrowLeft className="w-5 h-5 shrink-0" />
-                Pindai Baru
-              </button>
-              <Link
-                to="/predictions"
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition-all duration-300 shadow-md cursor-pointer text-center text-sm"
-              >
-                <History className="w-5 h-5 shrink-0" />
-                Lihat Riwayat
-              </Link>
-            </div>
+        {/* AI Insight — Analisis Sampah (4-Card Dashboard Grid) */}
+        <div className="bg-white border border-slate-200/60 rounded-3xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-3">
+          <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
+            <Sparkles size={18} className="text-emerald-500 shrink-0" />
+            <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider">
+              {tipsConfig.title}
+            </h3>
+          </div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {tipsConfig.cards.map((card, idx) => {
+              const CardIcon = card.icon;
+              return (
+                <div
+                  key={idx}
+                  className={`p-3 rounded-2xl border ${card.color} flex flex-col justify-start transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.02)]`}
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <CardIcon size={16} className="shrink-0" />
+                    <h4 className="font-bold text-[11px] uppercase tracking-wider">
+                      {card.title}
+                    </h4>
+                  </div>
+                  <p className="text-[11px] text-slate-500 leading-relaxed line-clamp-3">
+                    {card.desc}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </main>

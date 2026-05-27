@@ -16,12 +16,12 @@ function FinalCTA() {
       {/* Background image with overlay */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&h=600&fit=crop"
+          src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&h=600&fit=crop"
           alt="Lingkungan hijau bersih"
           loading="lazy"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/90 to-teal-900/85" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-emerald-900/90 to-cyan-900/80" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -31,10 +31,8 @@ function FinalCTA() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full mb-6
-                          bg-white/10 border border-white/20
-                          text-emerald-200 text-xs sm:text-sm font-semibold tracking-wide">
-            ♻️ Mulai Sekarang
+          <span className="inline-flex items-center rounded-full border border-emerald-500/30 bg-white/10 px-5 py-2 text-sm font-semibold text-emerald-300 shadow-sm backdrop-blur-md mb-6">
+            Mulai Sekarang
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold
                          text-white leading-[1.15] tracking-tight mb-6">
@@ -47,18 +45,17 @@ function FinalCTA() {
           <div className="flex flex-wrap justify-center gap-4">
             <a
               href="/upload"
-              className="inline-flex items-center gap-2.5 px-8 py-4
-                         bg-white text-emerald-700 font-bold text-sm sm:text-base
-                         rounded-full shadow-xl shadow-black/20
-                         hover:bg-emerald-50 hover:-translate-y-0.5
-                         transition-all duration-300"
+              className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-emerald-500 px-8 py-4 text-sm sm:text-base font-bold text-white shadow-xl shadow-emerald-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-400 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 active:scale-95"
             >
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 7V4a1 1 0 011-1h3" /><path d="M13 3h3a1 1 0 011 1v3" />
-                <path d="M17 13v3a1 1 0 01-1 1h-3" /><path d="M7 17H4a1 1 0 01-1-1v-3" />
-                <circle cx="10" cy="10" r="3" />
-              </svg>
-              Mulai Scan Sampah
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              <span className="relative flex items-center gap-2.5">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 7V4a1 1 0 011-1h3" /><path d="M13 3h3a1 1 0 011 1v3" />
+                  <path d="M17 13v3a1 1 0 01-1 1h-3" /><path d="M7 17H4a1 1 0 01-1-1v-3" />
+                  <circle cx="10" cy="10" r="3" />
+                </svg>
+                Mulai Scan Sampah
+              </span>
             </a>
             <a
               href="/dashboard-tps"

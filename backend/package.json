@@ -10,7 +10,11 @@
     "db:push": "npx prisma db push",
     "db:studio": "npx prisma studio",
     "db:generate": "npx prisma generate",
-    "db:migrate-tps": "node scripts/migrate-tps.js"
+    "db:migrate-tps": "node scripts/migrate-tps.js",
+    "db:seed": "npx prisma db seed"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "keywords": [
     "trash",

@@ -45,13 +45,6 @@ export default function AboutSection() {
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
           >
-            <motion.div variants={fadeUp} className="mb-5">
-              <span className="inline-flex items-center px-4 py-1.5 rounded-full
-                              bg-emerald-50 border border-emerald-200/60
-                              text-emerald-700 text-xs sm:text-sm font-semibold tracking-wide">
-                Tentang Kami
-              </span>
-            </motion.div>
             <motion.h2
               variants={fadeUp}
               className="text-3xl sm:text-4xl lg:text-5xl font-extrabold
@@ -89,14 +82,12 @@ export default function AboutSection() {
             viewport={{ once: true, margin: '-80px' }}
             className="flex justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-sm lg:max-w-md">
-              <div className="relative overflow-hidden rounded-2xl lg:rounded-3xl
-                              bg-gradient-to-br from-emerald-50 to-teal-50
-                              border border-emerald-100/60
-                              shadow-[0_20px_60px_rgba(0,0,0,0.06)]
-                              flex items-center justify-center
-                              h-[300px] sm:h-[380px]">
-                <Logo size={160} />
+            <div className="relative flex items-center justify-center w-full max-w-sm lg:max-w-md">
+              <div className="pointer-events-none absolute h-72 w-72 rounded-full bg-emerald-200/30 blur-3xl" />
+              <div className="relative transition-transform duration-500 ease-out hover:scale-110 hover:-rotate-3 active:scale-105">
+                <div className="h-64 w-64 md:h-80 md:w-80 lg:h-96 lg:w-96 flex items-center justify-center drop-shadow-2xl">
+                  <Logo size="100%" variant="default" />
+                </div>
               </div>
             </div>
           </motion.div>

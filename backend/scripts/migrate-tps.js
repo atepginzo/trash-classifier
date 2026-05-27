@@ -26,9 +26,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-// ═══════════════════════════════════════════════════════════════════════════════
 // CONFIG
-// ═══════════════════════════════════════════════════════════════════════════════
 
 // Cari file CSV — cek beberapa lokasi
 const CSV_CANDIDATES = [
@@ -58,9 +56,7 @@ const BANDUNG_RAYA = new Set([
   'KABUPATEN SUMEDANG',
 ]);
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// KOORDINAT KECAMATAN (identik dengan Python app.py KEC_COORDS)
-// ═══════════════════════════════════════════════════════════════════════════════
+// Koordinat kecamatan (identik dengan Python app.py KEC_COORDS)
 
 const KEC_COORDS = {
   // Kab. Bandung
@@ -110,9 +106,7 @@ const KAB_CENTER = {
   'KABUPATEN SUMEDANG':      [-6.8500, 107.9200],
 };
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// AREA TYPE & KAPASITAS (disesuaikan dengan spesifikasi user)
-// ═══════════════════════════════════════════════════════════════════════════════
+// Area type & kapasitas
 
 const URBAN_KEC = new Set([
   'BALEENDAH', 'DAYEUHKOLOT', 'BOJONGSOANG',
@@ -142,9 +136,7 @@ function getAreaType(kecamatan) {
   return 'RURAL';
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// GENERATE KOORDINAT (port 1:1 dari Python _coords)
-// ═══════════════════════════════════════════════════════════════════════════════
+// Generate koordinat (port 1:1 dari Python _coords)
 
 /**
  * Generate koordinat pseudo-random deterministik menggunakan MD5 hash.
@@ -182,9 +174,7 @@ function generateCoords(kecamatan, kodeDesa, kabupaten) {
   };
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// TITLE CASE HELPER
-// ═══════════════════════════════════════════════════════════════════════════════
+// Title case helper
 
 function toTitleCase(str) {
   return str
@@ -194,18 +184,14 @@ function toTitleCase(str) {
     .join(' ');
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// MAIN
-// ═══════════════════════════════════════════════════════════════════════════════
+// Main
 
 async function main() {
-  console.log('╔═══════════════════════════════════════════════════════════╗');
-  console.log('║          migrate-tps.js — CSV → PostgreSQL              ║');
-  console.log('╚═══════════════════════════════════════════════════════════╝');
+  console.log('=== migrate-tps.js: CSV -> PostgreSQL ===');
   console.log(`[+] CSV   : ${CSV_PATH}`);
-  console.log(`[+] DB    : ${DATABASE_URL.replace(/:[^:@]+@/, ':****@')}`); // mask password
+  console.log(`[+] DB    : ${DATABASE_URL.replace(/:[^:@]+@/, ':****@')}`);
 
-  // ── 1. Koneksi database ───────────────────────────────────────────────────
+  // 1. Koneksi database
   const pool = new Pool({ connectionString: DATABASE_URL });
 
   try {
@@ -216,7 +202,7 @@ async function main() {
     process.exit(1);
   }
 
-  // ── 2. DDL: Buat tabel tps_master ─────────────────────────────────────────
+  // 2. DDL: Buat tabel tps_master
   console.log('[1/4] Membuat tabel tps_master...');
   await pool.query(`
     CREATE TABLE IF NOT EXISTS tps_master (
@@ -230,12 +216,12 @@ async function main() {
       kapasitas_ton  DECIMAL(6,1)   NOT NULL
     );
   `);
-  console.log('      ✔ Tabel tps_master siap.\n');
+  console.log('      Tabel tps_master siap.\n');
 
-  // ── 3. Baca dan filter CSV ────────────────────────────────────────────────
+  // 3. Baca dan filter CSV
   console.log('[2/4] Membaca dan memfilter CSV...');
   const rows = await readAndFilterCSV(CSV_PATH);
-  console.log(`      ✔ ${rows.length} baris lolos filter (Bandung Raya, 2023, ADA).\n`);
+  console.log(`      ${rows.length} baris lolos filter (Bandung Raya, 2023, ADA).\n`);
 
   if (rows.length === 0) {
     console.log('[!] Tidak ada data yang lolos filter. Proses dihentikan.');
@@ -243,7 +229,7 @@ async function main() {
     return;
   }
 
-  // ── 4. Generate koordinat dan tentukan area type ──────────────────────────
+  // 4. Generate koordinat dan tentukan area type
   console.log('[3/4] Menghitung koordinat dan area type...');
   const tpsRecords = rows.map((row) => {
     const kodeDesa = String(parseInt(row.bps_kode_desa_kelurahan));
@@ -268,9 +254,9 @@ async function main() {
   // Statistik area type
   const stats = { URBAN: 0, SEMI_URBAN: 0, RURAL: 0 };
   tpsRecords.forEach((r) => stats[r.area_type]++);
-  console.log(`      ✔ URBAN: ${stats.URBAN}  |  SEMI_URBAN: ${stats.SEMI_URBAN}  |  RURAL: ${stats.RURAL}\n`);
+  console.log(`      URBAN: ${stats.URBAN}  |  SEMI_URBAN: ${stats.SEMI_URBAN}  |  RURAL: ${stats.RURAL}\n`);
 
-  // ── 5. Insert ke database ─────────────────────────────────────────────────
+  // 5. Insert ke database
   console.log('[4/4] Memasukkan data ke PostgreSQL...');
   let inserted = 0;
   let skipped = 0;
@@ -289,25 +275,22 @@ async function main() {
     }
   }
 
-  console.log(`      ✔ Inserted: ${inserted}  |  Skipped (sudah ada): ${skipped}\n`);
+  console.log(`      Inserted: ${inserted}  |  Skipped (sudah ada): ${skipped}\n`);
 
-  // ── Selesai ───────────────────────────────────────────────────────────────
-  // Verifikasi jumlah record di database
+  // Selesai: verifikasi jumlah record
   const countResult = await pool.query('SELECT COUNT(*) AS total FROM tps_master');
-  console.log(`[✔] Total record di tps_master: ${countResult.rows[0].total}`);
-  console.log('[✔] Migrasi selesai!\n');
+  console.log(`[OK] Total record di tps_master: ${countResult.rows[0].total}`);
+  console.log('[OK] Migrasi selesai!\n');
 
   // Tampilkan 5 sample
   const sample = await pool.query('SELECT id, nama_desa, kecamatan, area_type, lat, lon FROM tps_master LIMIT 5');
-  console.log('── Sample Data ──────────────────────────────────────────────');
+  console.log('Sample Data:');
   console.table(sample.rows);
 
   await pool.end();
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// CSV READER + FILTER
-// ═══════════════════════════════════════════════════════════════════════════════
+// CSV reader + filter
 
 function readAndFilterCSV(csvPath) {
   return new Promise((resolve, reject) => {
@@ -343,9 +326,7 @@ function readAndFilterCSV(csvPath) {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
 // RUN
-// ═══════════════════════════════════════════════════════════════════════════════
 
 main().catch((err) => {
   console.error('[!] Fatal error:', err);

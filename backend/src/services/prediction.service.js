@@ -36,7 +36,7 @@ async function createPrediction(file) {
     category   = top.kategori  || 'Unknown';
   }
 
-  // ── Simpan gambar ke disk ──────────────────────────────────────────────────
+  // Simpan gambar ke disk
   let imageUrl = null;
   if (file.buffer && file.buffer.length > 0) {
     const ext = (file.mimetype || 'image/jpeg').split('/')[1] || 'jpg';

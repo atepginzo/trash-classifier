@@ -62,11 +62,12 @@ function StatCard({ stat, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="text-center px-4 py-8 bg-white/60 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-sm"
+      className="group relative overflow-hidden text-center px-4 py-8 bg-white/75 backdrop-blur-xl rounded-3xl border border-white/70 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 hover:-translate-y-1"
     >
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-400 to-cyan-400 opacity-80" />
       <div className="flex justify-center mb-3 opacity-70"><stat.Icon /></div>
-      <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-emerald-600 mb-1 tracking-tight">
-        {count}<span className="text-amber-500">{stat.suffix}</span>
+      <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-800 mb-1 tracking-tight">
+        {count}<span className="text-emerald-500">{stat.suffix}</span>
       </div>
       <div className="text-sm sm:text-base text-slate-500 font-medium">{stat.label}</div>
     </motion.div>

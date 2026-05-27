@@ -9,7 +9,7 @@ async function getTps(req, res, next) {
     const userLat = parseFloat(lat);
     const userLon = parseFloat(lon);
 
-    // ── Mode 1: Koordinat dikirim → cari TPS terdekat ───────────────
+    // Mode 1: Koordinat dikirim -> cari TPS terdekat
     if (!isNaN(userLat) && !isNaN(userLon)) {
       // Validasi range koordinat
       if (userLat < -90 || userLat > 90 || userLon < -180 || userLon > 180) {
@@ -27,7 +27,7 @@ async function getTps(req, res, next) {
       });
     }
 
-    // ── Mode 2: Tanpa koordinat → sembalikan semua dengan paginasi ──
+    // Mode 2: Tanpa koordinat -> kembalikan semua dengan paginasi
     const pageNum = Math.max(parseInt(page) || 1, 1);
     const limitNum = Math.min(parseInt(limit) || 50, 100);
 

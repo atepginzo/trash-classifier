@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion';
 import { School, BookOpen, Users } from 'lucide-react';
 
+import imamImg from '../assets/team/imam.jpg';
+import atepImg from '../assets/team/atep.jpg';
+import latsaImg from '../assets/team/latsa.jpeg';
+import azmiImg from '../assets/team/azmi.jpeg';
+import devinImg from '../assets/team/devin.jpeg';
+import darmaImg from '../assets/team/darma.png';
+
 /* Social Icons */
 const LinkedInIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -28,7 +35,7 @@ const TEAM_MEMBERS = {
       id: 'CFCC554D6Y1710',
       university: 'Universitas Bale Bandung',
       major: 'Teknik Informatika',
-      photo: '/team/imam.jpg',
+      photo: imamImg,
       quote: 'Menulis kode bukan hanya tentang instruksi komputer, tetapi tentang merancang masa depan bumi yang lebih hijau.',
       linkedin: 'https://www.linkedin.com/in/imam-rizki-saputra-64103b3ab',
       github: 'https://github.com/imamrzkys',
@@ -39,7 +46,7 @@ const TEAM_MEMBERS = {
       id: 'CFCC554D6Y0350',
       university: 'Universitas Bale Bandung',
       major: 'Teknik Informatika',
-      photo: '/team/atep.jpg',
+      photo: atepImg,
       quote: 'Teknologi terbaik adalah teknologi yang tidak hanya memecahkan masalah hari ini, tetapi juga menjaga warisan esok hari.',
       linkedin: 'https://www.linkedin.com/in/atep-solihin-39129b291?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       github: 'https://github.com/atepginzo',
@@ -52,7 +59,7 @@ const TEAM_MEMBERS = {
       id: 'CDCC011D6X2244',
       university: 'Universitas Padjadjaran',
       major: 'Teknik Informatika',
-      photo: '/team/latsa.jpeg',
+      photo: latsaImg,
       quote: 'Di balik setiap tumpukan sampah, ada data tersembunyi yang siap diubah menjadi keputusan cerdas demi kelestarian alam.',
       linkedin: 'https://www.linkedin.com/in/fadhila-latsa-tsabita',
       github: 'https://github.com/FadhilaLatsaTsabita',
@@ -63,7 +70,7 @@ const TEAM_MEMBERS = {
       id: 'CDCC011D6X2286',
       university: 'Universitas Padjadjaran',
       major: 'Teknik Informatika',
-      photo: '/team/azmi.jpeg',
+      photo: azmiImg,
       quote: 'Kecerdasan buatan hanyalah alat. Kepedulian kitalah yang menjadikannya solusi nyata bagi keselamatan lingkungan.',
       linkedin: 'https://www.linkedin.com/in/aifaa18/',
       github: 'https://github.com/aifa18',
@@ -76,7 +83,7 @@ const TEAM_MEMBERS = {
       id: 'CACC011D6Y0941',
       university: 'Universitas Padjadjaran',
       major: 'Teknik Informatika',
-      photo: '/team/devin.jpeg',
+      photo: devinImg,
       quote: 'Belajar dan berinovasi tanpa henti untuk menciptakan teknologi masa depan yang selaras dengan alam.',
       linkedin: 'https://www.linkedin.com/in/devin-suryadi',
       github: 'https://github.com/DevinSuryadi',
@@ -87,7 +94,7 @@ const TEAM_MEMBERS = {
       id: 'CACC012D6Y0805',
       university: 'Universitas Telkom',
       major: 'Teknik Informatika',
-      photo: '/team/darma.png',
+      photo: darmaImg,
       quote: 'Melatih model AI untuk mendeteksi limbah adalah langkah kecil kami untuk melindungi rumah kita yang paling berharga: Bumi.',
       linkedin: 'https://www.linkedin.com/in/darma-al-gani-556456262/',
       github: 'https://github.com/Daarma-IC',

@@ -55,9 +55,7 @@ async function realPredict(fileBuffer, mimeType) {
   });
 
   try {
-    // ── [FIX: Timeout] Timeout harus < interval polling (2 detik) ──────
-    // Agar request lambat tidak menumpuk dengan frame berikutnya.
-    // Gunakan AI_TIMEOUT env var, default 2500ms (sesuai skenario auto-capture 2.5s).
+    // Timeout harus < interval polling agar request lambat tidak menumpuk
     const timeoutMs = config.aiTimeout || 2500;
     const response = await axios.post(config.aiServiceUrl, form, {
       headers: { ...form.getHeaders() },
@@ -75,12 +73,9 @@ async function realPredict(fileBuffer, mimeType) {
   }
 }
 
-// Normalisasi response AI ke format standar backend.
-// Mendukung format Python FastAPI: { status, hasil: [{ kategori, confidence }] }
-// Serta format generik lama: { predictions, results }
+// Normalisasi response AI ke format standar backend
 function normalizeAiResponse(rawResponse) {
-  // --- Format Python FastAPI (primer) ---
-  // { "status": "success", "hasil": [{ "kategori": "Anorganik", "confidence": 0.986 }] }
+  // Format Python FastAPI (primer)
   if (Array.isArray(rawResponse.hasil) && rawResponse.hasil.length > 0) {
     const top = rawResponse.hasil[0];
     const label = top.kategori || 'Unknown';
@@ -99,7 +94,7 @@ function normalizeAiResponse(rawResponse) {
     };
   }
 
-  // --- Format generik lama (fallback) ---
+  // Format generik lama (fallback)
   const predictions =
     rawResponse.predictions || rawResponse.results || [];
 
@@ -134,9 +129,7 @@ async function predictImage(fileBuffer, mimeType) {
   return realPredict(fileBuffer, mimeType);
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// FITUR 2: Prediksi Volume Sampah (LSTM)
-// ═══════════════════════════════════════════════════════════════════════════════
+// Prediksi Volume Sampah (LSTM)
 
 /**
  * Kirim payload 12 bulan history ke FastAPI /predict-volume/
@@ -148,7 +141,7 @@ async function predictImage(fileBuffer, mimeType) {
 async function predictVolume(history) {
   const axios = require('axios');
 
-  // URL FastAPI — ganti /predict/ → /predict-volume/
+  // URL FastAPI predict-volume
   const baseUrl = config.aiServiceUrl.replace(/\/predict\/?$/, '');
   const volumeUrl = `${baseUrl}/predict-volume/`;
 

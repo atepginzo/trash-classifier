@@ -1,7 +1,7 @@
 const prisma = require('../lib/prisma');
 const aiService = require('./ai.service');
 
-// ── Konstanta (identik dengan Python app.py) ────────────────────────────────
+// Konstanta (identik dengan Python app.py)
 const SEASONAL_FACTOR = {
   1: 1.20, 2: 1.05, 3: 1.15, 4: 1.10, 5: 1.00, 6: 0.95,
   7: 0.88, 8: 0.88, 9: 0.92, 10: 0.98, 11: 1.05, 12: 1.25,

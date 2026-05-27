@@ -20,25 +20,22 @@ const ShieldIcon = () => (
 
 const BENEFITS = [
   {
-    title: 'Meningkatkan efisiensi pemilahan',
-    desc: 'Mengurangi human error dalam proses pemilahan sampah manual sehingga kontaminasi silang antar material bisa diminimalkan.',
+    title: 'Lebih mudah memahami kategori sampah',
+    desc: 'Bantuan AI membuat identifikasi sampah organik, anorganik, dan B3 menjadi instan tanpa kebingungan.',
+    image: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=400&h=200&fit=crop',
     Icon: TrendUpIcon,
-    gradient: 'from-emerald-50 to-emerald-100/40',
-    borderColor: 'border-emerald-200/40',
   },
   {
-    title: 'Mendukung pengelolaan limbah berkelanjutan',
-    desc: 'Data deteksi real-time membantu pengambilan keputusan berbasis data untuk meningkatkan rasio daur ulang.',
+    title: 'Proses belajar lebih cepat',
+    desc: 'Panduan visual dan tips praktis langsung membantu Anda memilah sampah dengan benar sejak hari pertama.',
+    image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=400&h=200&fit=crop',
     Icon: LeafIcon,
-    gradient: 'from-teal-50 to-teal-100/40',
-    borderColor: 'border-teal-200/40',
   },
   {
-    title: 'Menjamin kualitas & kepatuhan',
-    desc: 'Sistem otomatis memastikan standar pemilahan terpenuhi sesuai regulasi pengelolaan limbah yang berlaku.',
+    title: 'Membantu kebiasaan ramah lingkungan',
+    desc: 'Langkah kecil memilah sampah berdampak besar untuk mengurangi volume di TPA dan mempercepat daur ulang.',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=400&h=200&fit=crop',
     Icon: ShieldIcon,
-    gradient: 'from-sky-50 to-sky-100/40',
-    borderColor: 'border-sky-200/40',
   },
 ];
 
@@ -56,14 +53,8 @@ export default function BenefitsSection() {
           transition={{ duration: 0.6 }}
           className="mb-14 sm:mb-16"
         >
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full mb-5
-                          bg-emerald-50 border border-emerald-200/60
-                          text-emerald-700 text-xs sm:text-sm font-semibold tracking-wide">
-            Dampak Positif
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold
-                         text-slate-900 leading-[1.15] tracking-tight">
-            Manfaat untuk organisasi pengelola sampah
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.15] tracking-tight">
+            Manfaat untuk kebiasaan sehari-hari
           </h2>
         </motion.div>
         <motion.div
@@ -77,19 +68,25 @@ export default function BenefitsSection() {
             <motion.div
               key={i}
               variants={fadeUp}
-              whileHover={{ y: -6, transition: { duration: 0.3 } }}
-              className={`group bg-white border ${b.borderColor} rounded-2xl overflow-hidden
-                         shadow-[0_2px_20px_rgba(0,0,0,0.03)]
-                         hover:shadow-[0_12px_40px_rgba(5,150,105,0.08)]
-                         transition-shadow duration-400`}
+              className="group relative bg-white/75 border border-white/70 rounded-3xl overflow-hidden
+                         shadow-sm backdrop-blur-xl
+                         hover:shadow-xl hover:shadow-emerald-500/10
+                         transition-all duration-300 hover:-translate-y-1"
             >
-              <div className={`bg-gradient-to-br ${b.gradient} px-6 py-10 flex items-center justify-center`}>
-                <div className="group-hover:scale-110 transition-transform duration-300">
+              <div className="relative h-32 w-full overflow-hidden bg-slate-100">
+                <img
+                  src={b.image}
+                  alt={b.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+                <div className="absolute bottom-4 left-4 rounded-xl bg-white/20 p-2 text-white backdrop-blur-md shadow-sm">
                   <b.Icon />
                 </div>
               </div>
-              <div className="px-6 py-6">
-                <h3 className="text-base sm:text-lg font-bold text-slate-800 mb-2 tracking-tight">
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-slate-800 mb-2 tracking-tight">
                   {b.title}
                 </h3>
                 <p className="text-sm text-slate-500 leading-relaxed">{b.desc}</p>

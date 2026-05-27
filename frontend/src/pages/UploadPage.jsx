@@ -10,6 +10,147 @@ const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const AUTO_SCAN_INTERVAL = 3000; // 3 detik
 
+function UploadZone({ onDrop, onDragOver, onDragLeave, onClick, dragging, loading, preview, file }) {
+  const [ripples, setRipples] = useState([]);
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const handleClick = (e) => {
+    if (loading) return;
+    
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const size = Math.max(rect.width, rect.height) * 1.5;
+    
+    const newRipple = { x, y, size, id: Date.now() };
+    setRipples((prev) => [...prev, newRipple]);
+    
+    onClick();
+  };
+
+  const removeRipple = (id) => {
+    setRipples((prev) => prev.filter(r => r.id !== id));
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { 
+      e.preventDefault(); 
+      if (!loading) onClick(); 
+    }
+  };
+
+  const isDragOrHover = dragging || isHovered;
+  
+  const containerStyle = {
+    position: 'relative',
+    overflow: 'hidden',
+    borderRadius: '20px',
+    padding: '20px',
+    width: '100%',
+    maxWidth: '360px',
+    height: '300px',
+    margin: '0 auto',
+    cursor: loading ? 'not-allowed' : 'pointer',
+    backgroundColor: isDragOrHover ? 'rgba(29, 158, 117, 0.05)' : 'rgba(225, 245, 238, 0.25)',
+    boxShadow: isDragOrHover ? '0 0 0 6px rgba(29, 158, 117, 0.07), inset 0 0 40px rgba(29, 158, 117, 0.04)' : 'none',
+    transition: 'all 250ms ease',
+  };
+
+  return (
+    <div
+      onDrop={onDrop}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      style={containerStyle}
+      className="flex flex-col items-center justify-center group outline-none"
+    >
+      <svg className="absolute inset-0 w-full h-full pointer-events-none rounded-[20px]">
+        <rect
+          x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" rx="19" ry="19"
+          fill="none"
+          stroke={isDragOrHover ? '#1D9E75' : 'rgba(159, 225, 203, 0.7)'}
+          strokeWidth="2"
+          strokeDasharray="8,8"
+          strokeLinecap="round"
+          className="transition-colors duration-250 ease-in-out"
+          style={{
+            animation: isDragOrHover ? 'dash-animation 1s linear infinite' : 'none'
+          }}
+        />
+      </svg>
+      <style>{`
+        @keyframes dash-animation {
+          from { stroke-dashoffset: 16; }
+          to { stroke-dashoffset: 0; }
+        }
+        @keyframes ripple-animation {
+          from { transform: scale(0); opacity: 0.25; }
+          to { transform: scale(1); opacity: 0; }
+        }
+      `}</style>
+
+      {ripples.map((r) => (
+        <div
+          key={r.id}
+          onAnimationEnd={() => removeRipple(r.id)}
+          style={{
+            position: 'absolute',
+            left: r.x,
+            top: r.y,
+            width: r.size,
+            height: r.size,
+            backgroundColor: 'rgba(29, 158, 117, 0.2)',
+            borderRadius: '50%',
+            transform: 'translate(-50%, -50%)',
+            transformOrigin: '0 0',
+            pointerEvents: 'none',
+            animation: 'ripple-animation 700ms ease-out forwards',
+          }}
+        />
+      ))}
+
+      {!preview ? (
+        <>
+          <div className="relative mb-4">
+            <Upload 
+              size={48} 
+              style={{ color: '#1D9E75', transition: 'transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1)' }} 
+              className={isDragOrHover ? '-translate-y-1' : ''}
+            />
+          </div>
+          <h3 style={{ fontSize: 16, fontWeight: 500, color: '#0F6E56', margin: '0 0 4px 0' }}>
+            {dragging ? "Lepaskan foto di sini" : "Seret foto sampah ke sini"}
+          </h3>
+          <p style={{ fontSize: 13, color: '#888', margin: '0' }}>
+            atau klik untuk memilih dari galeri
+          </p>
+          <p style={{ fontSize: 11, color: '#aaa', marginTop: 6, marginBottom: 0 }}>
+            JPG, PNG — maks. 10MB
+          </p>
+        </>
+      ) : (
+        <div className="flex flex-col items-center relative z-10 w-full pointer-events-none">
+          <div style={{ maxWidth: 200, maxHeight: 200, borderRadius: 12, overflow: 'hidden', aspectRatio: '1/1', width: '100%', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)' }}>
+            <img src={preview} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          {file && (
+            <div className="mt-4 flex flex-col items-center text-center">
+              <p style={{ color: '#0F6E56', fontSize: 13, fontWeight: 500, margin: 0 }} className="truncate max-w-[250px]">{file.name}</p>
+              <p style={{ color: '#888', fontSize: 11, margin: '2px 0 0 0' }}>{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function UploadPage() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
@@ -32,7 +173,7 @@ export default function UploadPage() {
   const [scanLoading, setScanLoading] = useState(false);
   const scanIntervalRef = useRef(null);
 
-  /* ── camera helpers ── */
+  /* camera helpers */
   function terminateCamera() {
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((t) => t.stop());
@@ -68,7 +209,7 @@ export default function UploadPage() {
     setPreview(url);
   }
 
-  /* ── file validation ── */
+  /* file validation */
   function validateFile(f) {
     if (!ALLOWED_TYPES.includes(f.type)) return 'Format tidak didukung. Gunakan JPG, PNG, atau WebP.';
     if (f.size > MAX_FILE_SIZE) return 'Ukuran file terlalu besar. Maksimal 10MB.';
@@ -83,13 +224,13 @@ export default function UploadPage() {
     setPreviewFromSource(f);
   }
 
-  /* ── drag & drop ── */
+  /* drag & drop */
   function handleDrop(e) { e.preventDefault(); setDragging(false); const f = e.dataTransfer.files[0]; if (f) processFile(f); }
   function handleDragOver(e) { e.preventDefault(); setDragging(true); }
   function handleDragLeave(e) { e.preventDefault(); setDragging(false); }
   function handleFileInputChange(e) { const f = e.target.files[0]; if (f) processFile(f); }
 
-  /* ── camera ── */
+  /* camera */
   async function activateCamera() {
     if (!navigator.mediaDevices?.getUserMedia) { setCameraStatus('unsupported'); return; }
     try {
@@ -164,7 +305,7 @@ export default function UploadPage() {
     }
   }
 
-  /* ── submit → langsung navigate ke ResultPage ── */
+  /* submit: langsung navigate ke ResultPage */
   async function submitClassification() {
     if (!file) return;
     setLoading(true);
@@ -210,12 +351,12 @@ export default function UploadPage() {
       <Navbar />
       <div
         style={{ minHeight: '100vh', backgroundColor: '#F8FAFC' }}
-        className="flex flex-col items-center px-4 pt-28 pb-16 md:pt-32 md:pb-24"
+        className="flex flex-col items-center px-4 pt-20 pb-8 md:pt-24 md:pb-12"
       >
         {/* heading */}
-        <div className="text-center mb-8 max-w-lg">
+        <div className="text-center mb-5 max-w-lg">
           <h1 style={{ fontFamily: 'var(--font-sans)', color: '#0F172A' }}
-            className="text-3xl md:text-4xl font-extrabold mb-2">
+            className="text-3xl md:text-4xl font-extrabold mb-1">
             Deteksi Sampah
           </h1>
           <p style={{ color: '#64748B' }} className="text-base leading-relaxed">
@@ -230,10 +371,10 @@ export default function UploadPage() {
           borderRadius: 12,
           transition: 'max-width 0.3s ease'
         }}
-          className="w-full p-5 md:p-8">
+          className="w-full p-5 md:p-6">
 
           {/* tab switcher */}
-          <div style={{ backgroundColor: '#F1F5F9', borderRadius: 999, padding: 4 }} className="flex mb-6">
+          <div style={{ backgroundColor: '#F1F5F9', borderRadius: 999, padding: 4 }} className="flex mb-4">
             {[{ key: 'upload', label: 'Upload File', Icon: Upload }, { key: 'camera', label: 'Kamera', Icon: Camera }].map(({ key, label, Icon }) => (
               <button key={key} onClick={() => switchTab(key)} disabled={loading}
                 style={{
@@ -249,46 +390,25 @@ export default function UploadPage() {
             ))}
           </div>
 
-          {/* ── Upload tab ── */}
+          {/* Upload tab */}
           {activeTab === 'upload' && (
             <>
-              {!preview ? (
-                <div
-                  onDrop={handleDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave}
-                  onClick={() => !loading && fileInputRef.current?.click()}
-                  role="button" tabIndex={0}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!loading) fileInputRef.current?.click(); } }}
-                  style={{
-                    border: `2px dashed ${dragging ? '#059669' : '#CBD5E1'}`,
-                    backgroundColor: dragging ? '#ECFDF5' : '#F8FAFC',
-                    borderRadius: 12, cursor: loading ? 'not-allowed' : 'pointer',
-                    transition: 'border-color 0.2s ease, background-color 0.2s ease',
-                  }}
-                  className="flex flex-col items-center justify-center py-16 px-4"
-                >
-                  <Upload size={40} style={{ color: dragging ? '#059669' : '#94A3B8' }} />
-                  <p style={{ color: '#334155' }} className="mt-4 text-sm font-medium">
-                    <span style={{ color: '#059669' }} className="font-semibold">Klik untuk upload</span>{' '}
-                    atau drag & drop di sini
-                  </p>
-                  <p style={{ color: '#64748B' }} className="text-xs mt-1.5">
-                    Format: JPG, PNG, WebP — Maksimal 10MB
-                  </p>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center">
-                  <div style={{ maxWidth: 300, maxHeight: 300, borderRadius: 8, overflow: 'hidden', aspectRatio: '1/1', width: '100%' }}>
-                    <img src={preview} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                  </div>
-                  {file && <p style={{ color: '#64748B' }} className="text-xs mt-3 truncate max-w-[300px]">{file.name}</p>}
-                </div>
-              )}
+              <UploadZone
+                onDrop={handleDrop}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onClick={() => !loading && fileInputRef.current?.click()}
+                dragging={dragging}
+                loading={loading}
+                preview={preview}
+                file={file}
+              />
               <input type="file" ref={fileInputRef} onChange={handleFileInputChange}
                 accept=".jpg,.jpeg,.png,.webp" className="hidden" aria-label="Pilih file gambar" />
             </>
           )}
 
-          {/* ── Camera tab (LIVE SCAN MODE) ── */}
+          {/* Camera tab (LIVE SCAN MODE) */}
           {activeTab === 'camera' && (
             <>
               {cameraStatus === 'unsupported' && (
@@ -434,7 +554,7 @@ export default function UploadPage() {
                           {scanResult.result?.category && (
                             <div style={{ backgroundColor: '#ffffff', borderRadius: 8, padding: 12, border: '1px solid #E2E8F0' }}>
                               <div style={{ fontSize: 12, fontWeight: 600, color: '#0F172A', marginBottom: 6 }}>
-                                💡 Tips Penanganan
+                                Tips Penanganan
                               </div>
                               <p style={{ fontSize: 12, color: '#64748B', lineHeight: 1.5 }}>
                                 {scanResult.result.category === 'Organik' 
@@ -500,7 +620,7 @@ export default function UploadPage() {
           {/* error */}
           {error && activeTab === 'upload' && (
             <div style={{ backgroundColor: '#fef2f2', border: '1px solid #f5c6c6', borderRadius: 8 }}
-              className="flex items-start gap-3 p-4 mt-5">
+              className="flex items-start gap-3 p-4 mt-4">
               <AlertCircle size={18} style={{ color: '#a32d2d', flexShrink: 0, marginTop: 2 }} />
               <p style={{ color: '#7f1d1d' }} className="text-sm flex-1">{error}</p>
               <button onClick={submitClassification} disabled={loading || !file}
@@ -513,7 +633,7 @@ export default function UploadPage() {
 
           {/* action buttons - hanya untuk tab upload */}
           {activeTab === 'upload' && (
-            <div className="flex gap-3 mt-6">
+            <div className="flex gap-3 mt-5">
               <button onClick={submitClassification} disabled={!canClassify}
                 style={{ backgroundColor: canClassify ? '#059669' : '#94A3B8', color: '#ffffff', borderRadius: 999, border: 'none', cursor: canClassify ? 'pointer' : 'not-allowed', transition: 'background-color 0.2s ease' }}
                 className="flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold">

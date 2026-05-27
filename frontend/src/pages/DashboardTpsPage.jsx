@@ -10,7 +10,7 @@ import { tpsService } from '../services/tpsService';
 import { volumeService } from '../services/volumeService';
 import Navbar from '../components/Navbar';
 
-// ── Fix: Leaflet default marker icon path ────────────────────────────────────
+// Fix: Leaflet default marker icon path
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -18,7 +18,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
-// ── Custom marker icons per area type ────────────────────────────────────────
+// Custom marker icons per area type
 function createIcon(color) {
   return new L.DivIcon({
     className: '',
@@ -47,14 +47,13 @@ const AREA_META = {
 
 const BULAN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
 
-// ── Helper: fly map to marker ────────────────────────────────────────────────
+// Fly map to marker on selection
 function FlyTo({ center }) {
   const map = useMap();
   useEffect(() => { if (center) map.flyTo(center, 14, { duration: 1.2 }); }, [center, map]);
   return null;
 }
 
-// ═════════════════════════════════════════════════════════════════════════════
 export default function DashboardTpsPage() {
   const [allTps, setAllTps] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,7 +68,7 @@ export default function DashboardTpsPage() {
 
   const sidebarRef = useRef(null);
 
-  // ── Load all TPS on mount ──────────────────────────────────────────────────
+  // Load all TPS on mount
   useEffect(() => {
     async function load() {
       try {
@@ -81,7 +80,7 @@ export default function DashboardTpsPage() {
     load();
   }, []);
 
-  // ── Handle marker click ────────────────────────────────────────────────────
+  // Handle marker click
   async function handleMarkerClick(tps) {
     setSelectedTps(tps);
     setSidebarOpen(true);
@@ -107,7 +106,7 @@ export default function DashboardTpsPage() {
     setVolError(null);
   }
 
-  // ── Compute max volume for bar scaling ─────────────────────────────────────
+  // Compute max volume for bar scaling
   const allVols = [
     ...(volResult?.history || []).map(h => h.volume_ton),
     ...(volResult?.predictions || []).map(p => p.volume_ton),
@@ -121,7 +120,7 @@ export default function DashboardTpsPage() {
         position: 'fixed', top: 64, left: 0, right: 0, bottom: 0,
         display: 'flex', overflow: 'hidden',
       }}>
-        {/* ══════════ LEFT: MAP ══════════ */}
+        {/* Map */}
         <div style={{
           flex: sidebarOpen ? '0 0 65%' : '1',
           transition: 'flex 0.3s ease',
@@ -148,7 +147,7 @@ export default function DashboardTpsPage() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <FlyTo center={flyCenter} />
-              {allTps.map(tps => (
+              {allTps?.filter(tps => tps?.lat != null && tps?.lon != null)?.map(tps => (
                 <Marker
                   key={tps.id}
                   position={[tps.lat, tps.lon]}
@@ -173,7 +172,7 @@ export default function DashboardTpsPage() {
             fontSize: 12,
           }}>
             <div style={{ fontWeight: 700, marginBottom: 8, color: '#0F172A' }}>
-              {allTps.length} TPS di Bandung Raya
+              {allTps?.filter(tps => tps?.lat != null && tps?.lon != null)?.length || 0} TPS di Bandung Raya
             </div>
             {Object.entries(AREA_META).map(([key, m]) => (
               <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
@@ -201,7 +200,7 @@ export default function DashboardTpsPage() {
           )}
         </div>
 
-        {/* ══════════ RIGHT: SIDEBAR ══════════ */}
+        {/* Sidebar */}
         <div
           ref={sidebarRef}
           style={{
