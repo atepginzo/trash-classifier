@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
+import PageTransition from '../components/PageTransition';
 
 /* Icons */
 const EyeIcon = () => (
@@ -75,8 +76,7 @@ export default function SignUpPage() {
   const strengthColor = ['', 'bg-red-400', 'bg-yellow-400', 'bg-forest-light', 'bg-forest'][strength] || '';
 
   const inputClass = `w-full px-4 py-3 text-sm bg-white border border-sage/30 rounded-xl
-    text-heading placeholder-muted/50
-    focus:outline-none focus:ring-2 focus:ring-forest/20 focus:border-forest/40
+    text-heading placeholder-muted/50 input-focus-glow
     transition-all duration-200`;
 
   const requirements = [
@@ -87,137 +87,139 @@ export default function SignUpPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-cream flex flex-col">
-      <div className="px-4 sm:px-6 lg:px-8 py-5">
-        <Link to="/" className="flex items-center gap-2.5 group w-fit">
-          <div className="transition-transform duration-300 group-hover:scale-110">
-            <Logo size={40} />
-          </div>
-          <span className="font-serif text-xl font-semibold text-heading tracking-tight">TrashSmart</span>
-        </Link>
-      </div>
-      <div className="flex-1 flex items-center justify-center px-4 pb-10">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
-        >
-          <div className="bg-white border border-sage/20 rounded-2xl p-7 sm:p-9
-                          shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
-
-            <div className="text-center mb-8">
-              <h1 className="font-serif text-2xl sm:text-3xl font-bold text-heading tracking-tight mb-2">
-                Buat Akun Baru
-              </h1>
-              <p className="text-sm text-muted">
-                Daftar untuk mulai menggunakan TrashSmart
-              </p>
+    <PageTransition>
+      <div className="min-h-screen bg-cream flex flex-col">
+        <div className="px-4 sm:px-6 lg:px-8 py-5">
+          <Link to="/" className="flex items-center gap-2.5 group w-fit">
+            <div className="transition-transform duration-300 group-hover:scale-110">
+              <Logo size={40} />
             </div>
+            <span className="font-serif text-xl font-semibold text-heading tracking-tight">TrashSmart</span>
+          </Link>
+        </div>
+        <div className="flex-1 flex items-center justify-center px-4 pb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full max-w-md"
+          >
+            <div className="bg-white border border-sage/20 rounded-2xl p-7 sm:p-9
+                            shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
 
-            {error && (
-              <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-5 p-3.5 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600 font-medium"
-              >
-                {error}
-              </motion.div>
-            )}
+              <div className="text-center mb-8">
+                <h1 className="font-serif text-2xl sm:text-3xl font-bold text-heading tracking-tight mb-2">
+                  Buat Akun Baru
+                </h1>
+                <p className="text-sm text-muted">
+                  Daftar untuk mulai menggunakan TrashSmart
+                </p>
+              </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label className="block text-xs font-semibold text-heading mb-1.5">Nama Lengkap</label>
-                <input type="text" name="name" value={form.name} onChange={handleChange}
-                       placeholder="Nama lengkap Anda" required className={inputClass} />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-heading mb-1.5">Email</label>
-                <input type="email" name="email" value={form.email} onChange={handleChange}
-                       placeholder="nama@email.com" required className={inputClass} />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-heading mb-1.5">Password</label>
-                <div className="relative">
-                  <input type={showPass ? 'text' : 'password'} name="password"
-                         value={form.password} onChange={handleChange}
-                         placeholder="Minimal 8 karakter" required className={`${inputClass} pr-11`} />
-                  <button type="button" onClick={() => setShowPass(!showPass)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-heading transition-colors">
-                    {showPass ? <EyeOffIcon /> : <EyeIcon />}
-                  </button>
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-5 p-3.5 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600 font-medium"
+                >
+                  {error}
+                </motion.div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label className="block text-xs font-semibold text-heading mb-1.5">Nama Lengkap</label>
+                  <input type="text" name="name" value={form.name} onChange={handleChange}
+                         placeholder="Nama lengkap Anda" required className={inputClass} />
                 </div>
-                {form.password && (
-                  <div className="mt-2.5">
-                    <div className="flex gap-1 mb-1.5">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className={`h-1 flex-1 rounded-full transition-all duration-300 ${
-                          i <= strength ? strengthColor : 'bg-sage/20'
-                        }`} />
+                <div>
+                  <label className="block text-xs font-semibold text-heading mb-1.5">Email</label>
+                  <input type="email" name="email" value={form.email} onChange={handleChange}
+                         placeholder="nama@email.com" required className={inputClass} />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-heading mb-1.5">Password</label>
+                  <div className="relative">
+                    <input type={showPass ? 'text' : 'password'} name="password"
+                           value={form.password} onChange={handleChange}
+                           placeholder="Minimal 8 karakter" required className={`${inputClass} pr-11`} />
+                    <button type="button" onClick={() => setShowPass(!showPass)}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-heading transition-colors">
+                      {showPass ? <EyeOffIcon /> : <EyeIcon />}
+                    </button>
+                  </div>
+                  {form.password && (
+                    <div className="mt-2.5">
+                      <div className="flex gap-1 mb-1.5">
+                        {[1, 2, 3, 4].map((i) => (
+                          <div key={i} className={`h-1 flex-1 rounded-full transition-all duration-300 ${
+                            i <= strength ? strengthColor : 'bg-sage/20'
+                          }`} />
+                        ))}
+                      </div>
+                      <p className="text-xs text-muted">
+                        Kekuatan: <span className="font-semibold">{strengthLabel}</span>
+                      </p>
+                    </div>
+                  )}
+                  {form.password && (
+                    <div className="mt-3 grid grid-cols-2 gap-1.5">
+                      {requirements.map((req) => (
+                        <div key={req.label} className={`flex items-center gap-1.5 text-xs transition-colors ${
+                          req.met ? 'text-forest' : 'text-muted/50'
+                        }`}>
+                          <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center ${
+                            req.met ? 'bg-forest text-white' : 'bg-sage/15'
+                          }`}>
+                            {req.met && <CheckIcon />}
+                          </span>
+                          {req.label}
+                        </div>
                       ))}
                     </div>
-                    <p className="text-xs text-muted">
-                      Kekuatan: <span className="font-semibold">{strengthLabel}</span>
-                    </p>
-                  </div>
-                )}
-                {form.password && (
-                  <div className="mt-3 grid grid-cols-2 gap-1.5">
-                    {requirements.map((req) => (
-                      <div key={req.label} className={`flex items-center gap-1.5 text-xs transition-colors ${
-                        req.met ? 'text-forest' : 'text-muted/50'
-                      }`}>
-                        <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center ${
-                          req.met ? 'bg-forest text-white' : 'bg-sage/15'
-                        }`}>
-                          {req.met && <CheckIcon />}
-                        </span>
-                        {req.label}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-heading mb-1.5">Konfirmasi Password</label>
-                <input type="password" name="confirmPassword" value={form.confirmPassword}
-                       onChange={handleChange} placeholder="Ulangi password" required className={inputClass} />
-              </div>
-              <label className="flex items-start gap-2.5 cursor-pointer">
-                <input type="checkbox" required
-                       className="mt-0.5 w-4 h-4 rounded border-sage/40 text-forest focus:ring-forest/30 accent-forest" />
-                <span className="text-xs text-muted leading-relaxed">
-                  Saya menyetujui{' '}
-                  <a href="#" className="text-forest font-semibold hover:underline">Syarat & Ketentuan</a>
-                  {' '}dan{' '}
-                  <a href="#" className="text-forest font-semibold hover:underline">Kebijakan Privasi</a>
-                </span>
-              </label>
-              <button type="submit" disabled={loading}
-                      className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5
-                                 bg-forest text-white text-sm font-semibold rounded-xl
-                                 hover:bg-forest-dark active:scale-[0.98]
-                                 disabled:opacity-60 disabled:cursor-not-allowed
-                                 transition-all duration-300 shadow-lg shadow-forest/20">
-                {loading ? (
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                ) : (
-                  <>
-                    <UserPlusIcon />
-                    Daftar Sekarang
-                  </>
-                )}
-              </button>
-            </form>
-          </div>
-          <p className="text-center text-sm text-muted mt-6">
-            Sudah punya akun?{' '}
-            <Link to="/login" className="text-forest font-semibold hover:underline">
-              Masuk di sini
-            </Link>
-          </p>
-        </motion.div>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-heading mb-1.5">Konfirmasi Password</label>
+                  <input type="password" name="confirmPassword" value={form.confirmPassword}
+                         onChange={handleChange} placeholder="Ulangi password" required className={inputClass} />
+                </div>
+                <label className="flex items-start gap-2.5 cursor-pointer">
+                  <input type="checkbox" required
+                         className="mt-0.5 w-4 h-4 rounded border-sage/40 text-forest focus:ring-forest/30 accent-forest" />
+                  <span className="text-xs text-muted leading-relaxed">
+                    Saya menyetujui{' '}
+                    <a href="#" className="text-forest font-semibold hover:underline">Syarat & Ketentuan</a>
+                    {' '}dan{' '}
+                    <a href="#" className="text-forest font-semibold hover:underline">Kebijakan Privasi</a>
+                  </span>
+                </label>
+                <button type="submit" disabled={loading}
+                        className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5
+                                   bg-forest text-white text-sm font-semibold rounded-xl
+                                   hover:bg-forest-dark active:scale-[0.98]
+                                   disabled:opacity-60 disabled:cursor-not-allowed
+                                   transition-all duration-300 shadow-lg shadow-forest/20">
+                  {loading ? (
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    <>
+                      <UserPlusIcon />
+                      Daftar Sekarang
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+            <p className="text-center text-sm text-muted mt-6">
+              Sudah punya akun?{' '}
+              <Link to="/login" className="text-forest font-semibold hover:underline">
+                Masuk di sini
+              </Link>
+            </p>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </PageTransition>
   );
 }

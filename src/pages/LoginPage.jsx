@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
+import PageTransition from '../components/PageTransition';
 
 /* Icons */
 const EyeIcon = () => (
@@ -76,28 +77,28 @@ export default function LoginPage() {
     alert('Fitur segera hadir');
   };
 
-  const inputClass = (hasError) => `w-full px-4 py-3 text-sm bg-white border ${hasError ? 'border-red' : 'border-sage/30'} rounded-xl
+  const inputClass = (hasError) => `w-full px-4 py-3 text-sm bg-white border ${hasError ? 'border-red focus:ring-2 focus:ring-red/20 focus:border-red focus:outline-none' : 'border-sage/30 input-focus-glow'} rounded-xl
     text-heading placeholder-muted/50
-    focus:outline-none focus:ring-2 ${hasError ? 'focus:ring-red/20 focus:border-red' : 'focus:ring-forest/20 focus:border-forest/40'}
     transition-all duration-200`;
 
   return (
-    <div className="min-h-screen bg-cream flex flex-col">
-      <div className="px-4 sm:px-6 lg:px-8 py-5">
-        <Link to="/" className="flex items-center gap-2.5 group w-fit">
-          <div className="transition-transform duration-300 group-hover:scale-110">
-            <Logo size={40} />
-          </div>
-          <span className="font-serif text-xl font-semibold text-heading tracking-tight">TrashSmart</span>
-        </Link>
-      </div>
-      <div className="flex-1 flex items-center justify-center px-4 pb-10">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
-        >
+    <PageTransition>
+      <div className="min-h-screen bg-cream flex flex-col">
+        <div className="px-4 sm:px-6 lg:px-8 py-5">
+          <Link to="/" className="flex items-center gap-2.5 group w-fit">
+            <div className="transition-transform duration-300 group-hover:scale-110">
+              <Logo size={40} />
+            </div>
+            <span className="font-serif text-xl font-semibold text-heading tracking-tight">TrashSmart</span>
+          </Link>
+        </div>
+        <div className="flex-1 flex items-center justify-center px-4 pb-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full max-w-md"
+          >
           <div className="bg-white border border-sage/20 rounded-2xl p-7 sm:p-9
                           shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
 
@@ -181,8 +182,9 @@ export default function LoginPage() {
               Daftar sekarang
             </Link>
           </p>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </PageTransition>
   );
 }

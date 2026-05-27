@@ -25,9 +25,9 @@ const BoltIcon = () => (
 );
 
 const STATS = [
-  { value: 91, suffix: '%', label: 'Akurasi Model', Icon: TargetIcon },
-  { value: 3, suffix: '', label: 'Kategori Sampah', Icon: GridIcon },
-  { value: 500, suffix: '+', label: 'Gambar Dataset', Icon: ImageIcon },
+  { value: 99, suffix: '%', label: 'Akurasi Model', Icon: TargetIcon },
+  { value: 6, suffix: '', label: 'Kategori Sampah', Icon: GridIcon },
+  { value: 1000, suffix: '+', label: 'Gambar Dataset', Icon: ImageIcon },
   { value: 3, suffix: 's', label: 'Waktu Deteksi', Icon: BoltIcon },
 ];
 
@@ -62,13 +62,13 @@ function StatCard({ stat, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="text-center px-4 py-8 bg-white/60 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-sm"
+      className="text-center px-4 py-8 bg-white/60 dark:bg-black/60 backdrop-blur-sm rounded-2xl border border-slate-100 dark:border-white/5 shadow-sm transition-colors duration-300"
     >
       <div className="flex justify-center mb-3 opacity-70"><stat.Icon /></div>
-      <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-emerald-600 mb-1 tracking-tight">
+      <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-emerald-600 dark:text-emerald-400 mb-1 tracking-tight">
         {count}<span className="text-amber-500">{stat.suffix}</span>
       </div>
-      <div className="text-sm sm:text-base text-slate-500 font-medium">{stat.label}</div>
+      <div className="text-sm sm:text-base text-slate-500 dark:text-white/60 font-medium">{stat.label}</div>
     </motion.div>
   );
 }
@@ -77,9 +77,9 @@ export default function StatsSection() {
   return (
     <section className="relative py-16 sm:py-20 overflow-hidden">
       {/* Subtle bg */}
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-teal-50/30 pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-200/40 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-200/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-teal-50/30 dark:from-emerald-950/10 dark:to-teal-950/5 pointer-events-none transition-colors duration-300" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-200/40 dark:via-emerald-800/10 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-200/40 dark:via-emerald-800/10 to-transparent" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {STATS.map((stat, i) => (

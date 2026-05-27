@@ -40,8 +40,8 @@ const fadeUp = {
 
 export default function HowItWorks() {
   return (
-    <section id="cara-pakai" className="relative py-20 sm:py-28 lg:py-32 overflow-hidden bg-white">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200/60 to-transparent" />
+    <section id="cara-pakai" className="relative py-16 sm:py-24 overflow-hidden bg-white dark:bg-black transition-colors duration-300">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200/60 dark:via-white/5 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -53,11 +53,12 @@ export default function HowItWorks() {
         >
           <span className="inline-flex items-center px-4 py-1.5 rounded-full mb-5
                           bg-emerald-50 border border-emerald-200/60
-                          text-emerald-700 text-xs sm:text-sm font-semibold tracking-wide">
+                          dark:bg-emerald-950/30 dark:border-emerald-800/30
+                          text-emerald-700 dark:text-emerald-400 text-xs sm:text-sm font-semibold tracking-wide">
             Cara Pakai
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold
-                         text-slate-900 leading-[1.15] tracking-tight">
+                         text-slate-900 dark:text-white leading-[1.15] tracking-tight">
             Panduan penggunaan aplikasi
           </h2>
         </motion.div>
@@ -75,10 +76,10 @@ export default function HowItWorks() {
               key={i}
               variants={fadeUp}
               whileHover={{ y: -6, transition: { duration: 0.3 } }}
-              className="group relative bg-white border border-slate-200/60 rounded-2xl overflow-hidden
-                         shadow-[0_2px_20px_rgba(0,0,0,0.04)]
-                         hover:shadow-[0_12px_40px_rgba(5,150,105,0.1)]
-                         transition-shadow duration-400"
+              className="group relative bg-white dark:bg-[#111111] border border-slate-200/60 dark:border-white/5 rounded-2xl overflow-hidden
+                         shadow-[0_2px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_2px_20px_rgba(0,0,0,0.5)]
+                         hover:shadow-[0_12px_40px_rgba(5,150,105,0.1)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.8)]
+                         transition-all duration-300"
             >
               {/* Step number badge */}
               <div className="absolute top-5 left-6 z-10">
@@ -91,7 +92,7 @@ export default function HowItWorks() {
               </div>
 
               {/* Image area */}
-              <div className="relative aspect-[3/2] w-full overflow-hidden bg-slate-50">
+              <div className="relative aspect-[3/2] w-full overflow-hidden bg-slate-50 dark:bg-black/30">
                 <img
                   src={step.image}
                   alt={step.title}
@@ -105,10 +106,10 @@ export default function HowItWorks() {
               </div>
 
               <div className="px-6 py-6">
-                <h3 className="text-base sm:text-lg font-bold text-slate-800 mb-2 tracking-tight">
+                <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-2 tracking-tight">
                   {step.title}
                 </h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
+                <p className="text-sm text-slate-500 dark:text-white/60 leading-relaxed">
                   {step.description}
                 </p>
               </div>

@@ -1,69 +1,52 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
 
-/* ═══════════════════════════════════════════════════════════════════
-   DATA
-   ═══════════════════════════════════════════════════════════════════ */
-
+/* ═══════════════════════════════════════════════════════════ */
+/*  DATA                                                        */
+/* ═══════════════════════════════════════════════════════════ */
 const CATEGORIES = [
   {
     name: 'Organik',
     desc: 'Sisa makanan, daun, limbah dapur — mudah terurai secara alami',
-    image: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=600&h=500&fit=crop',
+    image: '/SAMPAH ORGANIK.jpeg',
     color: '#059669',
-    bg: '#ECFDF5',
-    emoji: '🍂',
-    span: 'col-span-1 sm:col-span-2 lg:col-span-2 row-span-1 lg:row-span-2',
-    imgH: 'h-64 sm:h-72 lg:h-full',
+    light: '#ECFDF5',
   },
   {
     name: 'Plastik',
     desc: 'Botol, kemasan, gelas plastik — bisa didaur ulang',
-    image: 'https://images.unsplash.com/photo-1605600659908-0ef719419d41?w=500&h=400&fit=crop',
+    image: '/SAMPAH PELASTIK.jpeg',
     color: '#0284C7',
-    bg: '#F0F9FF',
-    emoji: '♻️',
-    span: 'col-span-1',
-    imgH: 'h-40 sm:h-44',
+    light: '#EFF6FF',
   },
   {
     name: 'Kertas',
     desc: 'Kardus, koran, kertas bekas — daur ulang atau kompos',
-    image: 'https://images.unsplash.com/photo-1585351737793-55b3d67e4448?w=500&h=400&fit=crop&q=80',
+    image: '/SAMPAH KARDUS.jpeg',
     color: '#D97706',
-    bg: '#FFFBEB',
-    emoji: '📄',
-    span: 'col-span-1',
-    imgH: 'h-40 sm:h-44',
+    light: '#FFFBEB',
   },
   {
     name: 'Kaca',
     desc: 'Botol kaca, toples — 100% bisa didaur ulang tanpa batas',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500&h=400&fit=crop',
+    image: '/SAMPAH KACA.jpeg',
     color: '#7C3AED',
-    bg: '#F5F3FF',
-    emoji: '🫙',
-    span: 'col-span-1',
-    imgH: 'h-40 sm:h-44',
+    light: '#F5F3FF',
   },
   {
     name: 'Logam',
     desc: 'Kaleng, aluminium, besi — nilai jual tinggi di bank sampah',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500&h=400&fit=crop&crop=left',
+    image: '/SAMPAH LOGAM.jpeg',
     color: '#475569',
-    bg: '#F8FAFC',
-    emoji: '🥫',
-    span: 'col-span-1',
-    imgH: 'h-40 sm:h-44',
+    light: '#F8FAFC',
   },
   {
     name: 'B3 / Elektronik',
     desc: 'Baterai, lampu, gadget rusak — butuh penanganan khusus',
-    image: 'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=500&h=400&fit=crop',
+    image: '/SAMPAH B3.jpeg',
     color: '#DC2626',
-    bg: '#FEF2F2',
-    emoji: '⚠️',
-    span: 'col-span-1 sm:col-span-2 lg:col-span-2',
-    imgH: 'h-40 sm:h-48',
+    light: '#FEF2F2',
   },
 ];
 
@@ -72,284 +55,368 @@ const STEPS = [
     num: '01',
     title: 'Identifikasi Jenis',
     desc: 'Kenali apakah sampah termasuk organik, plastik, kertas, kaca, logam, atau B3.',
-    icon: '🔍',
     accent: '#059669',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+      </svg>
+    ),
   },
   {
     num: '02',
     title: 'Bersihkan & Keringkan',
     desc: 'Bilas kemasan dari sisa makanan. Lipat kardus agar hemat ruang.',
-    icon: '🧹',
     accent: '#0284C7',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" />
+      </svg>
+    ),
   },
   {
     num: '03',
     title: 'Pisahkan per Wadah',
     desc: 'Simpan di wadah terpisah: organik, daur ulang, dan residu. Jangan campur B3.',
-    icon: '🗑️',
     accent: '#D97706',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+        <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+      </svg>
+    ),
   },
   {
     num: '04',
     title: 'Kelola dengan Tepat',
-    desc: 'Kompos organik, setor daur ulang ke bank sampah, dan kirim B3 ke drop-off resmi.',
-    icon: '♻️',
+    desc: 'Kompos organik, setor daur ulang ke bank sampah, kirim B3 ke drop-off resmi.',
     accent: '#7C3AED',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" />
+        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+      </svg>
+    ),
   },
 ];
 
+/* ═══════════════════════════════════════════════════════════ */
+/*  TIPS PRAKTIS ICONS & DATA                                    */
+/* ═══════════════════════════════════════════════════════════ */
+const DropIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-11-7-11S5 10.7 5 15a7 7 0 0 0 7 7z" />
+  </svg>
+);
+
+const BoxFoldIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="4 14 10 14 10 20" />
+    <polyline points="20 10 14 10 14 4" />
+    <line x1="14" y1="10" x2="21" y2="3" />
+    <line x1="10" y1="14" x2="3" y2="21" />
+  </svg>
+);
+
+const BatteryIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="7" width="16" height="10" rx="2" ry="2" />
+    <line x1="22" y1="11" x2="22" y2="13" />
+  </svg>
+);
+
+const ShieldLockIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+  </svg>
+);
+
+const RecycleIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+  </svg>
+);
+
+const SearchCheckIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8" />
+    <path d="m21 21-4.3-4.3" />
+    <path d="m8 11 2 2 4-4" />
+  </svg>
+);
+
 const TIPS = [
-  { emoji: '💧', text: 'Bilas botol plastik sebelum dibuang agar tidak terkontaminasi' },
-  { emoji: '📦', text: 'Lipat kardus rata agar hemat ruang di tempat sampah' },
-  { emoji: '🔋', text: 'Pisahkan baterai bekas — jangan campur dengan sampah rumah tangga' },
-  { emoji: '🥬', text: 'Gunakan wadah tertutup untuk sampah organik agar tidak bau' },
-  { emoji: '🏦', text: 'Kumpulkan barang daur ulang lalu setor ke bank sampah terdekat' },
-  { emoji: '🏷️', text: 'Cek simbol daur ulang pada kemasan plastik sebelum membuang' },
+  { text: 'Bilas botol plastik sebelum dibuang agar tidak terkontaminasi', color: '#0284C7', lightBg: '#F0F9FF', icon: DropIcon },
+  { text: 'Lipat kardus rata agar hemat ruang di tempat sampah', color: '#D97706', lightBg: '#FFFBEB', icon: BoxFoldIcon },
+  { text: 'Pisahkan baterai bekas — jangan campur dengan sampah biasa', color: '#DC2626', lightBg: '#FEF2F2', icon: BatteryIcon },
+  { text: 'Gunakan wadah tertutup untuk sampah organik agar tidak bau', color: '#059669', lightBg: '#ECFDF5', icon: ShieldLockIcon },
+  { text: 'Kumpulkan barang daur ulang lalu setor ke bank sampah terdekat', color: '#7C3AED', lightBg: '#F5F3FF', icon: RecycleIcon },
+  { text: 'Cek simbol daur ulang pada kemasan plastik sebelum membuang', color: '#475569', lightBg: '#F8FAFC', icon: SearchCheckIcon },
 ];
 
-/* ═══════════════════════════════════════════════════════════════════
-   ANIMATIONS
-   ═══════════════════════════════════════════════════════════════════ */
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
-};
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } },
+/* ═══════════════════════════════════════════════════════════ */
+/*  ANIMATIONS                                                  */
+/* ═══════════════════════════════════════════════════════════ */
+const cardVariant = {
+  hidden: { opacity: 0, y: 32, scale: 0.97 },
+  visible: (i) => ({
+    opacity: 1, y: 0, scale: 1,
+    transition: { delay: i * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  }),
 };
 
-/* ═══════════════════════════════════════════════════════════════════
-   COMPONENT
-   ═══════════════════════════════════════════════════════════════════ */
+const overlayVariant = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: 'easeOut' } },
+};
+
+/* ═══════════════════════════════════════════════════════════ */
+/*  CATEGORY CARD — hover reveals full description             */
+/* ═══════════════════════════════════════════════════════════ */
+function CategoryCard({ cat, index }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      custom={index}
+      variants={cardVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-40px' }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      className="group relative overflow-hidden rounded-2xl cursor-default aspect-[4/3]"
+      style={{ border: `1.5px solid ${hovered ? cat.color + '60' : 'rgba(255,255,255,0.08)'}` }}
+    >
+      {/* Photo */}
+      <img
+        src={cat.image}
+        alt={cat.name}
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover object-center
+                   transition-transform duration-700 group-hover:scale-110"
+      />
+
+      {/* Persistent dark gradient at bottom */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+      {/* Animated color tint on hover */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={{ opacity: hovered ? 0.25 : 0 }}
+        transition={{ duration: 0.4 }}
+        style={{ background: `radial-gradient(circle at bottom center, ${cat.color}, transparent 70%)` }}
+      />
+
+      {/* Bottom content */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+        {/* Category badge — always visible */}
+        <span
+          className="inline-block px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider text-white mb-2"
+          style={{ backgroundColor: cat.color }}
+        >
+          {cat.name}
+        </span>
+
+        {/* Description — slides up on hover */}
+        <AnimatePresence>
+          {hovered && (
+            <motion.p
+              key="desc"
+              variants={overlayVariant}
+              initial="hidden"
+              animate="visible"
+              exit={{ opacity: 0, y: 8, transition: { duration: 0.2 } }}
+              className="text-sm text-white/90 leading-snug"
+            >
+              {cat.desc}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/*  MAIN SECTION                                               */
+/* ═══════════════════════════════════════════════════════════ */
 export default function WasteGuideSection() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
     <section id="edukasi" className="relative overflow-hidden">
 
-      {/* ────────────────────────────────────────────────────────────
-          PART 1: HEADER + BENTO GRID (Kenali Kategori Sampah)
-          ──────────────────────────────────────────────────────────── */}
-      <div className="bg-slate-900 pt-20 sm:pt-28 lg:pt-32 pb-20 sm:pb-28 lg:pb-32 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.12),transparent_60%)] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
+      {/* ══ PART 1: CATEGORY GRID — dark emerald theme ══ */}
+      <div className="bg-[#0A1A0F] pt-20 sm:pt-28 lg:pt-32 pb-20 sm:pb-28 relative">
+        {/* Subtle ambient glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.08),transparent_60%)] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-700/40 to-transparent" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+
           {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-14 sm:mb-16 lg:mb-20"
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-12 sm:mb-16"
           >
-            <span className="inline-flex items-center px-4 py-1.5 rounded-full mb-5
-                            bg-emerald-500/15 border border-emerald-500/25
-                            text-emerald-400 text-xs sm:text-sm font-semibold tracking-wide">
-              📚 Panduan Cerdas
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5
+                             bg-emerald-500/10 border border-emerald-500/20
+                             text-emerald-400 text-xs font-semibold tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Panduan Cerdas
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-[3.25rem] font-extrabold
-                           text-white leading-[1.12] tracking-tight mb-5">
+            <h2 className="text-[2rem] sm:text-[2.6rem] lg:text-[3rem]
+                           font-extrabold text-white leading-[1.1] tracking-[-0.025em] mb-4">
               Kenali, Pilah, dan Kelola<br className="hidden sm:block" /> Sampah dengan Benar
             </h2>
-            <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-              Pelajari 6 kategori sampah, cara memilah yang tepat,
-              dan tips praktis yang bisa langsung kamu terapkan sehari-hari.
+            <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed font-medium">
+              Hover setiap kartu untuk melihat cara pengelolaan masing-masing kategori.
             </p>
           </motion.div>
 
-          {/* ═════ BENTO GRID ═════ */}
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 auto-rows-auto"
-          >
+          {/* 6-card grid — hover reveals desc */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {CATEGORIES.map((cat, i) => (
+              <CategoryCard key={i} cat={cat} index={i} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ══ PART 2: HOW TO SORT — clean white bg ══ */}
+      <div className="bg-white dark:bg-black py-20 sm:py-28 transition-colors duration-300" id="cara-pakai-steps">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.55 }}
+            className="text-center mb-14"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5
+                             bg-emerald-50 border border-emerald-200/60
+                             dark:bg-emerald-950/30 dark:border-emerald-800/30
+                             text-emerald-700 dark:text-emerald-400 text-xs font-semibold tracking-widest uppercase">
+              4 Langkah Mudah
+            </span>
+            <h2 className="text-[2rem] sm:text-[2.6rem] lg:text-[3rem]
+                           font-extrabold text-slate-900 dark:text-white leading-[1.1] tracking-[-0.025em] transition-colors duration-300">
+              Cara Memilah Sampah
+            </h2>
+          </motion.div>
+
+          {/* Steps grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 relative">
+            {/* Connector line desktop */}
+            <div className="hidden lg:block absolute top-9 left-[12.5%] right-[12.5%] h-px bg-emerald-100 dark:bg-emerald-950/40 z-0 transition-colors duration-300" />
+
+            {STEPS.map((step, i) => (
               <motion.div
                 key={i}
-                variants={fadeUp}
-                className={`group relative overflow-hidden rounded-2xl
-                           border border-white/10 hover:border-emerald-500/40
-                           transition-all duration-500 cursor-default ${cat.span}`}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: i * 0.1, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="relative z-10 flex flex-col items-center text-center px-5 group"
               >
-                {/* Photo */}
-                <div className={`relative overflow-hidden ${cat.imgH}`}>
-                  <img
-                    src={cat.image}
-                    alt={cat.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700
-                               group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
-                </div>
-
-                {/* Content overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-                  <div className="flex items-start gap-3">
-                    <span
-                      className="inline-flex items-center justify-center w-9 h-9 rounded-xl text-base shrink-0"
-                      style={{ backgroundColor: cat.bg }}
-                    >
-                      {cat.emoji}
-                    </span>
-                    <div className="min-w-0">
-                      <span
-                        className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-white mb-1.5"
-                        style={{ backgroundColor: cat.color }}
-                      >
-                        {cat.name}
-                      </span>
-                      <p className="text-sm text-slate-300 leading-snug line-clamp-2">{cat.desc}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Hover glow */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                {/* Icon circle */}
+                <motion.div
+                  whileHover={{ scale: 1.1, y: -4 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+                  className="w-[72px] h-[72px] rounded-2xl flex items-center justify-center mb-5
+                             text-white shadow-lg"
                   style={{
-                    background: `radial-gradient(circle at bottom center, ${cat.color}15, transparent 70%)`,
+                    background: `linear-gradient(135deg, ${step.accent}, ${step.accent}cc)`,
+                    boxShadow: `0 8px 24px ${step.accent}30`,
                   }}
-                />
+                >
+                  {step.icon}
+                </motion.div>
+
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5"
+                  style={{ color: step.accent }}>
+                  Step {step.num}
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-2 tracking-tight transition-colors duration-300">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-white/60 leading-relaxed max-w-[200px] transition-colors duration-300">
+                  {step.desc}
+                </p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* ────────────────────────────────────────────────────────────
-          PART 2: CARA MEMILAH (Timeline Steps)
-          ──────────────────────────────────────────────────────────── */}
-      <div className="bg-[#F8FAFC] py-20 sm:py-28 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ══ PART 3: TIPS — warm off-white strip ══ */}
+      <div className="bg-[#F8FAFC] dark:bg-[#0a0a0a] border-t border-slate-100 dark:border-white/5 py-16 sm:py-20 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-14 sm:mb-16"
-          >
-            <span className="inline-flex items-center px-4 py-1.5 rounded-full mb-5
-                            bg-emerald-50 border border-emerald-200/60
-                            text-emerald-700 text-xs sm:text-sm font-semibold tracking-wide">
-              Langkah Pemilahan
-            </span>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold
-                           text-slate-900 leading-[1.15] tracking-tight mb-4">
-              4 Langkah Memilah Sampah
-            </h3>
-            <p className="text-slate-500 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-              Ikuti alur sederhana ini untuk memastikan sampahmu ditangani dengan benar
-            </p>
-          </motion.div>
-
-          {/* Timeline Steps */}
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0"
-          >
-            {STEPS.map((step, i) => (
-              <motion.div key={i} variants={fadeUp} className="relative">
-                {/* Connector line (desktop) */}
-                {i < STEPS.length - 1 && (
-                  <div className="hidden lg:block absolute top-10 left-[calc(50%+28px)] right-0 h-[2px]">
-                    <div className="w-full h-full bg-gradient-to-r from-slate-200 to-slate-100" />
-                  </div>
-                )}
-                <div className="relative z-10 flex flex-col items-center text-center px-4 group">
-                  {/* Number circle */}
-                  <div
-                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center
-                               text-white text-lg sm:text-xl font-bold mb-5
-                               shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1"
-                    style={{
-                      background: `linear-gradient(135deg, ${step.accent}, ${step.accent}CC)`,
-                      boxShadow: `0 8px 24px ${step.accent}30`,
-                    }}
-                  >
-                    <span className="text-xl">{step.icon}</span>
-                  </div>
-                  {/* Step number label */}
-                  <span
-                    className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2"
-                    style={{ color: step.accent }}
-                  >
-                    Step {step.num}
-                  </span>
-                  <h4 className="text-base sm:text-lg font-bold text-slate-800 mb-2">{step.title}</h4>
-                  <p className="text-sm text-slate-500 leading-relaxed max-w-[220px]">{step.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-
-      {/* ────────────────────────────────────────────────────────────
-          PART 3: TIPS PRAKTIS (Compact Strip)
-          ──────────────────────────────────────────────────────────── */}
-      <div className="bg-white border-t border-slate-100 py-16 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 sm:mb-12"
+            transition={{ duration: 0.5 }}
+            className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10"
           >
             <div>
-              <span className="inline-flex items-center px-3.5 py-1 rounded-full mb-4
-                              bg-amber-50 border border-amber-200/60
-                              text-amber-700 text-xs sm:text-sm font-semibold tracking-wide">
-                💡 Tips Praktis
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4
+                               bg-amber-500/10 border border-amber-500/20
+                               text-amber-700 dark:text-amber-400 text-xs font-semibold tracking-widest uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                Tips Praktis
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                Kebiasaan Kecil, Dampak Besar
-              </h3>
+              <h2 className="text-[1.8rem] sm:text-[2.2rem] font-extrabold
+                             text-slate-900 dark:text-white tracking-[-0.02em] leading-tight transition-colors duration-300">
+                Kebiasaan Kecil, <span className="text-gradient">Dampak Besar</span>
+              </h2>
             </div>
-            <p className="text-sm text-slate-500 max-w-xs leading-relaxed">
-              Tips sederhana yang bisa langsung kamu terapkan di rumah setiap hari
+            <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xs leading-relaxed sm:text-right transition-colors duration-300">
+              Tips yang bisa langsung kamu terapkan setiap hari
             </p>
           </motion.div>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-          >
-            {TIPS.map((tip, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                className="group flex items-start gap-4 p-5 rounded-2xl
-                           bg-slate-50/70 border border-slate-100
-                           hover:bg-white hover:border-emerald-200/60
-                           hover:shadow-[0_4px_20px_rgba(5,150,105,0.06)]
-                           transition-all duration-300"
-              >
-                <span className="text-2xl shrink-0 mt-0.5
-                               group-hover:scale-110 transition-transform duration-300">
-                  {tip.emoji}
-                </span>
-                <div className="flex items-start gap-2.5 min-w-0">
-                  <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-                         stroke="#059669" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
+ 
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {TIPS.map((tip, i) => {
+              const Icon = tip.icon;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ delay: i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={{ y: -6, scale: 1.015 }}
+                  style={{
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.02)',
+                  }}
+                  className="group flex items-start gap-4 p-5 rounded-2xl
+                             bg-white dark:bg-[#111111] border border-slate-100/80 dark:border-white/5
+                             hover:border-slate-200 dark:hover:border-white/10 hover:shadow-[0_12px_36px_rgba(15,23,42,0.06)] dark:hover:shadow-[0_12px_36px_rgba(0,0,0,0.5)]
+                             transition-all duration-300"
+                >
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:rotate-6"
+                    style={{ backgroundColor: isDark ? `${tip.color}15` : tip.lightBg }}
+                  >
+                    <Icon color={tip.color} />
                   </div>
-                  <p className="text-sm text-slate-600 leading-relaxed">{tip.text}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                  <p className="text-sm font-semibold text-slate-600 dark:text-slate-300 leading-relaxed mt-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-200">
+                    {tip.text}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
