@@ -9,10 +9,7 @@ const path = require('path');
 
 const app = express();
 
-app.use(cors({
-  origin: config.corsOrigin,
-  methods: ['GET', 'POST'],
-}));
+app.use(cors({ origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'] }));
 
 app.use(morgan(config.nodeEnv === 'production' ? 'combined' : 'dev'));
 app.use(express.json());
