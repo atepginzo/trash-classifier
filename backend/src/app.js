@@ -16,7 +16,10 @@ app.use(cors({
 
 app.use(morgan(config.nodeEnv === 'production' ? 'combined' : 'dev'));
 app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+const uploadsPath = process.env.VERCEL 
+  ? '/tmp/uploads' 
+  : path.join(__dirname, '../../uploads');
+app.use('/uploads', express.static(uploadsPath));
 
 app.use('/api', routes);
 
