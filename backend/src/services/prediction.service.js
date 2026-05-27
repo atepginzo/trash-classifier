@@ -1,18 +1,13 @@
 const prisma = require('../lib/prisma');
 const aiService = require('./ai.service');
 const config = require('../config');
-const fs = require('fs');
-const path = require('path');
+const { createClient } = require('@supabase/supabase-js');
 const crypto = require('crypto');
 
-// Pastikan folder uploads/ ada
-const UPLOADS_DIR = process.env.VERCEL 
-  ? '/tmp/uploads' 
-  : path.join(__dirname, '../../uploads');
-
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
-}
+const supabase = createClient(
+  process.env.SUPABASE_URL || 'https://placeholder.supabase.co',
+  process.env.SUPABASE_KEY || 'placeholder'
+);
 
 async function createPrediction(file) {
   const aiResult = await aiService.predictImage(file.buffer, file.mimetype);
@@ -39,14 +34,31 @@ async function createPrediction(file) {
     category   = top.kategori  || 'Unknown';
   }
 
-  // Simpan gambar ke disk
+  // Upload gambar ke Supabase Storage
   let imageUrl = null;
   if (file.buffer && file.buffer.length > 0) {
     const ext = (file.mimetype || 'image/jpeg').split('/')[1] || 'jpg';
     const filename = `${crypto.randomUUID()}.${ext}`;
-    const filepath = path.join(UPLOADS_DIR, filename);
-    fs.writeFileSync(filepath, file.buffer);
-    imageUrl = `/uploads/${filename}`;
+
+    const { data, error } = await supabase
+      .storage
+      .from('trash-images')
+      .upload(filename, file.buffer, {
+        contentType: file.mimetype,
+        upsert: false
+      });
+
+    if (error) {
+      console.error('Supabase upload error:', error);
+      throw new Error('Gagal mengupload gambar ke Supabase');
+    }
+
+    const { data: publicUrlData } = supabase
+      .storage
+      .from('trash-images')
+      .getPublicUrl(filename);
+      
+    imageUrl = publicUrlData.publicUrl;
   }
 
   const prediction = await prisma.prediction.create({

@@ -1,0 +1,5502 @@
+[
+  {
+    "id": "TPS-3204290004",
+    "nama_desa": "Cileunyi Kulon",
+    "kecamatan": "Cileunyi",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.928727",
+    "lon": "107.758",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204290005",
+    "nama_desa": "Cileunyi Wetan",
+    "kecamatan": "Cileunyi",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.909865",
+    "lon": "107.757388",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204290003",
+    "nama_desa": "Cimekar",
+    "kecamatan": "Cileunyi",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.916696",
+    "lon": "107.741788",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204290002",
+    "nama_desa": "Cinunuk",
+    "kecamatan": "Cileunyi",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.917002",
+    "lon": "107.753718",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204290001",
+    "nama_desa": "Cibiru Hilir",
+    "kecamatan": "Cileunyi",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.926382",
+    "lon": "107.757286",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204290006",
+    "nama_desa": "Cibiru Wetan",
+    "kecamatan": "Cileunyi",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.924343",
+    "lon": "107.760753",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204310004",
+    "nama_desa": "Cikadut",
+    "kecamatan": "Cimenyan",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.865518",
+    "lon": "107.679873",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204310008",
+    "nama_desa": "Mekarsaluyu",
+    "kecamatan": "Cimenyan",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.85991",
+    "lon": "107.699857",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204310006",
+    "nama_desa": "Mekarmanik",
+    "kecamatan": "Cimenyan",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.868169",
+    "lon": "107.699551",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204300002",
+    "nama_desa": "Jatiendah",
+    "kecamatan": "Cilengkrang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.887718",
+    "lon": "107.699851",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204300001",
+    "nama_desa": "Girimekar",
+    "kecamatan": "Cilengkrang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.888329",
+    "lon": "107.715859",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204280003",
+    "nama_desa": "Lengkong",
+    "kecamatan": "Bojongsoang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-6.979482",
+    "lon": "107.642845",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204280002",
+    "nama_desa": "Bojongsoang",
+    "kecamatan": "Bojongsoang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-6.975404",
+    "lon": "107.641112",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204280004",
+    "nama_desa": "Cipagalo",
+    "kecamatan": "Bojongsoang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-6.993451",
+    "lon": "107.631935",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204280001",
+    "nama_desa": "Bojongsari",
+    "kecamatan": "Bojongsoang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-6.984275",
+    "lon": "107.644171",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204280006",
+    "nama_desa": "Tegalluar",
+    "kecamatan": "Bojongsoang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-6.98611",
+    "lon": "107.655896",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204260005",
+    "nama_desa": "Margahayu Tengah",
+    "kecamatan": "Margahayu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.966029",
+    "lon": "107.577406",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204260002",
+    "nama_desa": "Sukamenak",
+    "kecamatan": "Margahayu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.957261",
+    "lon": "107.586582",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204260003",
+    "nama_desa": "Sayati",
+    "kecamatan": "Margahayu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.978571",
+    "lon": "107.580873",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204250005",
+    "nama_desa": "Margaasih",
+    "kecamatan": "Margaasih",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.961912",
+    "lon": "107.571233",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204250006",
+    "nama_desa": "Lagadar",
+    "kecamatan": "Margaasih",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.946414",
+    "lon": "107.575924",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204250001",
+    "nama_desa": "Nanjung",
+    "kecamatan": "Margaasih",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.949676",
+    "lon": "107.561037",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204250002",
+    "nama_desa": "Mekar Rahayu",
+    "kecamatan": "Margaasih",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.967418",
+    "lon": "107.574496",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204250003",
+    "nama_desa": "Rahayu",
+    "kecamatan": "Margaasih",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.959873",
+    "lon": "107.561241",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204250004",
+    "nama_desa": "Cigondewah Hilir",
+    "kecamatan": "Margaasih",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.956202",
+    "lon": "107.566237",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204180009",
+    "nama_desa": "Sangkanhurip",
+    "kecamatan": "Katapang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.995255",
+    "lon": "107.575969",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204180005",
+    "nama_desa": "Katapang",
+    "kecamatan": "Katapang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.001169",
+    "lon": "107.586165",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204180004",
+    "nama_desa": "Gandasari",
+    "kecamatan": "Katapang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.99138",
+    "lon": "107.575765",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204180010",
+    "nama_desa": "Sukamukti",
+    "kecamatan": "Katapang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.00229",
+    "lon": "107.569341",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204180006",
+    "nama_desa": "Cilampeni",
+    "kecamatan": "Katapang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.993114",
+    "lon": "107.5776",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204180007",
+    "nama_desa": "Pangauban",
+    "kecamatan": "Katapang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.013098",
+    "lon": "107.584737",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204180008",
+    "nama_desa": "Banyusari",
+    "kecamatan": "Katapang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.988525",
+    "lon": "107.568729",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204270004",
+    "nama_desa": "Dayeuhkolot",
+    "kecamatan": "Dayeuhkolot",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-6.982949",
+    "lon": "107.631037",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204270002",
+    "nama_desa": "Cangkuang Wetan",
+    "kecamatan": "Dayeuhkolot",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-6.986722",
+    "lon": "107.631445",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204270001",
+    "nama_desa": "Cangkuang Kulon",
+    "kecamatan": "Dayeuhkolot",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-6.999671",
+    "lon": "107.621249",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204270006",
+    "nama_desa": "Sukapura",
+    "kecamatan": "Dayeuhkolot",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-6.998345",
+    "lon": "107.609829",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204270005",
+    "nama_desa": "Citeureup",
+    "kecamatan": "Dayeuhkolot",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-6.995898",
+    "lon": "107.63328",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204160008",
+    "nama_desa": "Kamasan",
+    "kecamatan": "Banjaran",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.055541",
+    "lon": "107.586175",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204160002",
+    "nama_desa": "Banjaran Wetan",
+    "kecamatan": "Banjaran",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.047486",
+    "lon": "107.593108",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204160009",
+    "nama_desa": "Banjaran",
+    "kecamatan": "Banjaran",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.056663",
+    "lon": "107.590865",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204160003",
+    "nama_desa": "Ciapus",
+    "kecamatan": "Banjaran",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.048302",
+    "lon": "107.585359",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204160004",
+    "nama_desa": "Sindangpanon",
+    "kecamatan": "Banjaran",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.03729",
+    "lon": "107.596778",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204160007",
+    "nama_desa": "Kiangroke",
+    "kecamatan": "Banjaran",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.050749",
+    "lon": "107.583014",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204160010",
+    "nama_desa": "Tarajusari",
+    "kecamatan": "Banjaran",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.032804",
+    "lon": "107.587602",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204160006",
+    "nama_desa": "Margahurip",
+    "kecamatan": "Banjaran",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.033314",
+    "lon": "107.586073",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204160005",
+    "nama_desa": "Neglasari",
+    "kecamatan": "Banjaran",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.032906",
+    "lon": "107.580159",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204160011",
+    "nama_desa": "Pasirmulya",
+    "kecamatan": "Banjaran",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.048302",
+    "lon": "107.577712",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204170003",
+    "nama_desa": "Sukasari",
+    "kecamatan": "Pameungpeuk",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.009088",
+    "lon": "107.613792",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204170001",
+    "nama_desa": "Bojongmanggu",
+    "kecamatan": "Pameungpeuk",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.005316",
+    "lon": "107.612365",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204170005",
+    "nama_desa": "Rancatungku",
+    "kecamatan": "Pameungpeuk",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.003175",
+    "lon": "107.606655",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204170006",
+    "nama_desa": "Bojongkunci",
+    "kecamatan": "Pameungpeuk",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.00868",
+    "lon": "107.588608",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204170004",
+    "nama_desa": "Rancamulya",
+    "kecamatan": "Pameungpeuk",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.019284",
+    "lon": "107.597784",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204170002",
+    "nama_desa": "Langonsari",
+    "kecamatan": "Pameungpeuk",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.016429",
+    "lon": "107.613894",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204040010",
+    "nama_desa": "Pangalengan",
+    "kecamatan": "Pangalengan",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.154508",
+    "lon": "107.587427",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204040003",
+    "nama_desa": "Margaluyu",
+    "kecamatan": "Pangalengan",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.167661",
+    "lon": "107.577435",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204040005",
+    "nama_desa": "Warnasari",
+    "kecamatan": "Pangalengan",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.154202",
+    "lon": "107.595075",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204040013",
+    "nama_desa": "Lamajang",
+    "kecamatan": "Pangalengan",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.155935",
+    "lon": "107.574886",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204040002",
+    "nama_desa": "Banjarsari",
+    "kecamatan": "Pangalengan",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.145535",
+    "lon": "107.594157",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204040004",
+    "nama_desa": "Sukaluyu",
+    "kecamatan": "Pangalengan",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.156139",
+    "lon": "107.586102",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204040012",
+    "nama_desa": "Tribaktimulya",
+    "kecamatan": "Pangalengan",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.157363",
+    "lon": "107.579271",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204040007",
+    "nama_desa": "Margamekar",
+    "kecamatan": "Pangalengan",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.150735",
+    "lon": "107.593953",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204150007",
+    "nama_desa": "Arjasari",
+    "kecamatan": "Arjasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.062494",
+    "lon": "107.564573",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204150005",
+    "nama_desa": "Lebakwangi",
+    "kecamatan": "Arjasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.055969",
+    "lon": "107.574259",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204150001",
+    "nama_desa": "Batukarut",
+    "kecamatan": "Arjasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.064737",
+    "lon": "107.575992",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204150004",
+    "nama_desa": "Baros",
+    "kecamatan": "Arjasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.052706",
+    "lon": "107.567427",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204150002",
+    "nama_desa": "Mangunjaya",
+    "kecamatan": "Arjasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.057294",
+    "lon": "107.560596",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204150008",
+    "nama_desa": "Pinggirsari",
+    "kecamatan": "Arjasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.073914",
+    "lon": "107.567937",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204150009",
+    "nama_desa": "Patrolsari",
+    "kecamatan": "Arjasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.076463",
+    "lon": "107.574361",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204150010",
+    "nama_desa": "Rancakole",
+    "kecamatan": "Arjasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.071263",
+    "lon": "107.552133",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204150006",
+    "nama_desa": "Wargaluyu",
+    "kecamatan": "Arjasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.061373",
+    "lon": "107.572933",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204030004",
+    "nama_desa": "Cimaung",
+    "kecamatan": "Cimaung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.099886",
+    "lon": "107.564063",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204030007",
+    "nama_desa": "Jagabaya",
+    "kecamatan": "Cimaung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.074702",
+    "lon": "107.57171",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204030006",
+    "nama_desa": "Pasirhuni",
+    "kecamatan": "Cimaung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.085",
+    "lon": "107.572831",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204030005",
+    "nama_desa": "Campakamulya",
+    "kecamatan": "Cimaung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.078169",
+    "lon": "107.554784",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204030003",
+    "nama_desa": "Cipinang",
+    "kecamatan": "Cimaung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.08551",
+    "lon": "107.562941",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204030009",
+    "nama_desa": "Sukamaju",
+    "kecamatan": "Cimaung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.080922",
+    "lon": "107.563349",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204030001",
+    "nama_desa": "Cikalong",
+    "kecamatan": "Cimaung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.0902",
+    "lon": "107.554478",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204100004",
+    "nama_desa": "Cicalengka Wetan",
+    "kecamatan": "Cicalengka",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.971467",
+    "lon": "107.744618",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204100010",
+    "nama_desa": "Babakanpeuteuy",
+    "kecamatan": "Cicalengka",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.971161",
+    "lon": "107.764092",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204100005",
+    "nama_desa": "Cikuya",
+    "kecamatan": "Cicalengka",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.966267",
+    "lon": "107.765418",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204100011",
+    "nama_desa": "Dampit",
+    "kecamatan": "Cicalengka",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.975647",
+    "lon": "107.760422",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204100003",
+    "nama_desa": "Margaasih",
+    "kecamatan": "Cicalengka",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.974831",
+    "lon": "107.762155",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204100002",
+    "nama_desa": "Narawita",
+    "kecamatan": "Cicalengka",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.966369",
+    "lon": "107.754304",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204100007",
+    "nama_desa": "Panenjoan",
+    "kecamatan": "Cicalengka",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.964125",
+    "lon": "107.768069",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204100012",
+    "nama_desa": "Tanjungwangi",
+    "kecamatan": "Cicalengka",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.957294",
+    "lon": "107.758994",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204100006",
+    "nama_desa": "Waluya",
+    "kecamatan": "Cicalengka",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.964635",
+    "lon": "107.768069",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204100001",
+    "nama_desa": "Nagrog",
+    "kecamatan": "Cicalengka",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.964941",
+    "lon": "107.758076",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204101002",
+    "nama_desa": "Bojong",
+    "kecamatan": "Nagreg",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.01002",
+    "lon": "107.797173",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204101004",
+    "nama_desa": "Ciaro",
+    "kecamatan": "Nagreg",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.006349",
+    "lon": "107.806247",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204101003",
+    "nama_desa": "Ciherang",
+    "kecamatan": "Nagreg",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.994318",
+    "lon": "107.790443",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204101006",
+    "nama_desa": "Citaman",
+    "kecamatan": "Nagreg",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.994522",
+    "lon": "107.809816",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204101001",
+    "nama_desa": "Mandalawangi",
+    "kecamatan": "Nagreg",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.992686",
+    "lon": "107.806145",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204101008",
+    "nama_desa": "Ganjar Sabar",
+    "kecamatan": "Nagreg",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.008898",
+    "lon": "107.794827",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204090005",
+    "nama_desa": "Cikancung",
+    "kecamatan": "Cikancung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.944449",
+    "lon": "107.749627",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204090004",
+    "nama_desa": "Cihanyir",
+    "kecamatan": "Cikancung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.945876",
+    "lon": "107.758396",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204090002",
+    "nama_desa": "Ciluluk",
+    "kecamatan": "Cikancung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.952708",
+    "lon": "107.750953",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204090007",
+    "nama_desa": "Hegarmanah",
+    "kecamatan": "Cikancung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.934457",
+    "lon": "107.745855",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204090003",
+    "nama_desa": "Mekarlaksana",
+    "kecamatan": "Cikancung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.932214",
+    "lon": "107.748302",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204090009",
+    "nama_desa": "Tanjunglaya",
+    "kecamatan": "Cikancung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.946998",
+    "lon": "107.744122",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204090001",
+    "nama_desa": "Srirahayu",
+    "kecamatan": "Cikancung",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.9575",
+    "lon": "107.740859",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204110004",
+    "nama_desa": "Rancaekek Wetan",
+    "kecamatan": "Rancaekek",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.977673",
+    "lon": "107.721602",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204110003",
+    "nama_desa": "Rancaekek Kulon",
+    "kecamatan": "Rancaekek",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.970229",
+    "lon": "107.740771",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204110011",
+    "nama_desa": "Bojongsalam",
+    "kecamatan": "Rancaekek",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.981547",
+    "lon": "107.729045",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204110005",
+    "nama_desa": "Bojongloa",
+    "kecamatan": "Rancaekek",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.977469",
+    "lon": "107.734041",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204110006",
+    "nama_desa": "Jelegong",
+    "kecamatan": "Rancaekek",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.977061",
+    "lon": "107.734653",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204110007",
+    "nama_desa": "Linggar",
+    "kecamatan": "Rancaekek",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.976347",
+    "lon": "107.745869",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204110012",
+    "nama_desa": "Cangkuang",
+    "kecamatan": "Rancaekek",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.972167",
+    "lon": "107.740363",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204110009",
+    "nama_desa": "Haurpugur",
+    "kecamatan": "Rancaekek",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.987257",
+    "lon": "107.744849",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204110001",
+    "nama_desa": "Sukamanah",
+    "kecamatan": "Rancaekek",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.974716",
+    "lon": "107.722418",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204110010",
+    "nama_desa": "Sangiang",
+    "kecamatan": "Rancaekek",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.968802",
+    "lon": "107.742708",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204110013",
+    "nama_desa": "Nanjungmekar",
+    "kecamatan": "Rancaekek",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.985931",
+    "lon": "107.729963",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130007",
+    "nama_desa": "Ciparay",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.027529",
+    "lon": "107.709918",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130006",
+    "nama_desa": "Mekarsari",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.011318",
+    "lon": "107.705941",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130002",
+    "nama_desa": "Cikoneng",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.027937",
+    "lon": "107.699212",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130012",
+    "nama_desa": "Ciheulang",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.01142",
+    "lon": "107.690545",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130004",
+    "nama_desa": "Pakutandang",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.015294",
+    "lon": "107.698702",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130008",
+    "nama_desa": "Sumbersari",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.017741",
+    "lon": "107.709102",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130005",
+    "nama_desa": "Manggungharja",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.02029",
+    "lon": "107.700537",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130009",
+    "nama_desa": "Sarimahi",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.021004",
+    "lon": "107.696969",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130010",
+    "nama_desa": "Serangmekar",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.026408",
+    "lon": "107.696561",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130001",
+    "nama_desa": "Babakan",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.035278",
+    "lon": "107.703392",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130014",
+    "nama_desa": "Bumiwangi",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.034055",
+    "lon": "107.697988",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204130013",
+    "nama_desa": "Mekarlaksana",
+    "kecamatan": "Ciparay",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.034871",
+    "lon": "107.690341",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204060012",
+    "nama_desa": "Cipeujeuh",
+    "kecamatan": "Pacet",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.882475",
+    "lon": "107.726918",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204060001",
+    "nama_desa": "Cikitu",
+    "kecamatan": "Pacet",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.878192",
+    "lon": "107.730078",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204060007",
+    "nama_desa": "Maruyung",
+    "kecamatan": "Pacet",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.884106",
+    "lon": "107.728651",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204060005",
+    "nama_desa": "Nagrak",
+    "kecamatan": "Pacet",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.887573",
+    "lon": "107.726",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204060004",
+    "nama_desa": "Cikawao",
+    "kecamatan": "Pacet",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.869525",
+    "lon": "107.724369",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204060006",
+    "nama_desa": "Mandalahaji",
+    "kecamatan": "Pacet",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.889",
+    "lon": "107.720902",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204060013",
+    "nama_desa": "Tanjungwangi",
+    "kecamatan": "Pacet",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.893282",
+    "lon": "107.713969",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204050007",
+    "nama_desa": "Sukapura",
+    "kecamatan": "Kertasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.195692",
+    "lon": "107.612949",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204050005",
+    "nama_desa": "Cibeureum",
+    "kecamatan": "Kertasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.210884",
+    "lon": "107.624165",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204050002",
+    "nama_desa": "Santosa",
+    "kecamatan": "Kertasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.203747",
+    "lon": "107.620392",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204050003",
+    "nama_desa": "Tarumajaya",
+    "kecamatan": "Kertasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.19039",
+    "lon": "107.610808",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204050001",
+    "nama_desa": "Neglawangi",
+    "kecamatan": "Kertasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.207112",
+    "lon": "107.626612",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204050006",
+    "nama_desa": "Cihawuk",
+    "kecamatan": "Kertasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.200076",
+    "lon": "107.634871",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204050004",
+    "nama_desa": "Cikembang",
+    "kecamatan": "Kertasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.198343",
+    "lon": "107.61458",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204050008",
+    "nama_desa": "Resmi Tinggal",
+    "kecamatan": "Kertasari",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.187841",
+    "lon": "107.623349",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204140006",
+    "nama_desa": "Bojongmalaka",
+    "kecamatan": "Baleendah",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-7.015749",
+    "lon": "107.618606",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204140007",
+    "nama_desa": "Rancamanyar",
+    "kecamatan": "Baleendah",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "URBAN",
+    "lat": "-7.015749",
+    "lon": "107.622888",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3204120002",
+    "nama_desa": "Wangisagara",
+    "kecamatan": "Majalaya",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.052933",
+    "lon": "107.712643",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204120006",
+    "nama_desa": "Biru",
+    "kecamatan": "Majalaya",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.041718",
+    "lon": "107.723859",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204120003",
+    "nama_desa": "Padamulya",
+    "kecamatan": "Majalaya",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.047224",
+    "lon": "107.734463",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204120011",
+    "nama_desa": "Bojong",
+    "kecamatan": "Majalaya",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.039169",
+    "lon": "107.728447",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204120008",
+    "nama_desa": "Majasetra",
+    "kecamatan": "Majalaya",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.033663",
+    "lon": "107.710706",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204120010",
+    "nama_desa": "Majakerta",
+    "kecamatan": "Majalaya",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.047325",
+    "lon": "107.72029",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204120007",
+    "nama_desa": "Sukamaju",
+    "kecamatan": "Majalaya",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.038455",
+    "lon": "107.725388",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204120005",
+    "nama_desa": "Padaulun",
+    "kecamatan": "Majalaya",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.038455",
+    "lon": "107.712337",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204120001",
+    "nama_desa": "Neglasari",
+    "kecamatan": "Majalaya",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.03978",
+    "lon": "107.721514",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204120004",
+    "nama_desa": "Sukamukti",
+    "kecamatan": "Majalaya",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.048957",
+    "lon": "107.731098",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204121005",
+    "nama_desa": "Solokanjeruk",
+    "kecamatan": "Solokan Jeruk",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.011973",
+    "lon": "107.692155",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204121003",
+    "nama_desa": "Cibodas",
+    "kecamatan": "Solokan Jeruk",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.018192",
+    "lon": "107.70959",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204121007",
+    "nama_desa": "Bojongemas",
+    "kecamatan": "Solokan Jeruk",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.019925",
+    "lon": "107.700516",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204121002",
+    "nama_desa": "Padamukti",
+    "kecamatan": "Solokan Jeruk",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.011463",
+    "lon": "107.691033",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204121004",
+    "nama_desa": "Langensari",
+    "kecamatan": "Solokan Jeruk",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.011463",
+    "lon": "107.697559",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204080012",
+    "nama_desa": "Cigentur",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.063718",
+    "lon": "107.7482",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204080010",
+    "nama_desa": "Cipedes",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.071365",
+    "lon": "107.737392",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204080001",
+    "nama_desa": "Loa",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.063616",
+    "lon": "107.751055",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204080008",
+    "nama_desa": "Cijagra",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.058722",
+    "lon": "107.739329",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204080003",
+    "nama_desa": "Cipaku",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.071365",
+    "lon": "107.745855",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204080004",
+    "nama_desa": "Sindangsari",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.074118",
+    "lon": "107.756969",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204080002",
+    "nama_desa": "Drawati",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.071263",
+    "lon": "107.753298",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204080006",
+    "nama_desa": "Sukamanah",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.070549",
+    "lon": "107.743",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204080005",
+    "nama_desa": "Sukamantri",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.070855",
+    "lon": "107.736067",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204070003",
+    "nama_desa": "Ibun",
+    "kecamatan": "Ibun",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.045345",
+    "lon": "107.739125",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204070004",
+    "nama_desa": "Laksana",
+    "kecamatan": "Ibun",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.045039",
+    "lon": "107.74249",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204070002",
+    "nama_desa": "Dukuh",
+    "kecamatan": "Ibun",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.041878",
+    "lon": "107.734231",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204070011",
+    "nama_desa": "Talun",
+    "kecamatan": "Ibun",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.049831",
+    "lon": "107.738208",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204070005",
+    "nama_desa": "Mekarwangi",
+    "kecamatan": "Ibun",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.051973",
+    "lon": "107.748506",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204070006",
+    "nama_desa": "Sudi",
+    "kecamatan": "Ibun",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.034741",
+    "lon": "107.739227",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204070012",
+    "nama_desa": "Tanggulun",
+    "kecamatan": "Ibun",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.045447",
+    "lon": "107.73678",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204070007",
+    "nama_desa": "Cibeet",
+    "kecamatan": "Ibun",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.055745",
+    "lon": "107.740247",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204070009",
+    "nama_desa": "Karyalaksana",
+    "kecamatan": "Ibun",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.042184",
+    "lon": "107.741063",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204190007",
+    "nama_desa": "Soreang",
+    "kecamatan": "Soreang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.041965",
+    "lon": "107.530614",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204190002",
+    "nama_desa": "Sadu",
+    "kecamatan": "Soreang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.03758",
+    "lon": "107.516441",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204190003",
+    "nama_desa": "Sukajadi",
+    "kecamatan": "Soreang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.031871",
+    "lon": "107.512975",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204190008",
+    "nama_desa": "Pamekaran",
+    "kecamatan": "Soreang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.018208",
+    "lon": "107.512057",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204190021",
+    "nama_desa": "Cingcin",
+    "kecamatan": "Soreang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.028302",
+    "lon": "107.523782",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204190019",
+    "nama_desa": "Parungserab",
+    "kecamatan": "Soreang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.041455",
+    "lon": "107.531225",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204190020",
+    "nama_desa": "Sekarwangi",
+    "kecamatan": "Soreang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.036561",
+    "lon": "107.517155",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3204020006",
+    "nama_desa": "Cibodas",
+    "kecamatan": "Pasirjambu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.110476",
+    "lon": "107.467367",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204020010",
+    "nama_desa": "Cikoneng",
+    "kecamatan": "Pasirjambu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.092735",
+    "lon": "107.466857",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204020007",
+    "nama_desa": "Cukanggenteng",
+    "kecamatan": "Pasirjambu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.093449",
+    "lon": "107.465429",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204020004",
+    "nama_desa": "Cisondari",
+    "kecamatan": "Pasirjambu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.102422",
+    "lon": "107.452073",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204020002",
+    "nama_desa": "Margamulya",
+    "kecamatan": "Pasirjambu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.087841",
+    "lon": "107.443304",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204020005",
+    "nama_desa": "Mekarsari",
+    "kecamatan": "Pasirjambu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.086312",
+    "lon": "107.453398",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204020009",
+    "nama_desa": "Mekarmaju",
+    "kecamatan": "Pasirjambu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.096814",
+    "lon": "107.464308",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204020001",
+    "nama_desa": "Sugihmukti",
+    "kecamatan": "Pasirjambu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.108539",
+    "lon": "107.44881",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204020003",
+    "nama_desa": "Tenjolaya",
+    "kecamatan": "Pasirjambu",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.093347",
+    "lon": "107.466245",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204010004",
+    "nama_desa": "Lebakmuncang",
+    "kecamatan": "Ciwidey",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.086937",
+    "lon": "107.48168",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204010002",
+    "nama_desa": "Ciwidey",
+    "kecamatan": "Ciwidey",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.096624",
+    "lon": "107.489124",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204010001",
+    "nama_desa": "Panundaan",
+    "kecamatan": "Ciwidey",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.076537",
+    "lon": "107.487084",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204010003",
+    "nama_desa": "Panyocokan",
+    "kecamatan": "Ciwidey",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.082247",
+    "lon": "107.478214",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204011004",
+    "nama_desa": "Patengan",
+    "kecamatan": "Rancabali",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.135788",
+    "lon": "107.429296",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204011002",
+    "nama_desa": "Sukaresmi",
+    "kecamatan": "Rancabali",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.127937",
+    "lon": "107.42532",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204011003",
+    "nama_desa": "Indragiri",
+    "kecamatan": "Rancabali",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.128855",
+    "lon": "107.442245",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204011001",
+    "nama_desa": "Cipelah",
+    "kecamatan": "Rancabali",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.126102",
+    "lon": "107.440104",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204011005",
+    "nama_desa": "Alamendah",
+    "kecamatan": "Rancabali",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.127631",
+    "lon": "107.424912",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204161006",
+    "nama_desa": "Cangkuang",
+    "kecamatan": "Cangkuang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.013255",
+    "lon": "107.561178",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204161003",
+    "nama_desa": "Bandasari",
+    "kecamatan": "Cangkuang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.014478",
+    "lon": "107.557814",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204161001",
+    "nama_desa": "Jatisari",
+    "kecamatan": "Cangkuang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.022533",
+    "lon": "107.5831",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204161007",
+    "nama_desa": "Tanjungsari",
+    "kecamatan": "Cangkuang",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.029263",
+    "lon": "107.558018",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204191008",
+    "nama_desa": "Jatisari",
+    "kecamatan": "Kutawaringin",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.006073",
+    "lon": "107.550269",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204191011",
+    "nama_desa": "Pameuntasan",
+    "kecamatan": "Kutawaringin",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.996794",
+    "lon": "107.538645",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204191006",
+    "nama_desa": "Kopo",
+    "kecamatan": "Kutawaringin",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.005155",
+    "lon": "107.539461",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204191005",
+    "nama_desa": "Kutawaringin",
+    "kecamatan": "Kutawaringin",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.992206",
+    "lon": "107.554653",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204191004",
+    "nama_desa": "Sukamulya",
+    "kecamatan": "Kutawaringin",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-7.003524",
+    "lon": "107.55292",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204191003",
+    "nama_desa": "Padasuka",
+    "kecamatan": "Kutawaringin",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.987108",
+    "lon": "107.545884",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204191010",
+    "nama_desa": "Gajahmekar",
+    "kecamatan": "Kutawaringin",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.994245",
+    "lon": "107.547924",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3204191001",
+    "nama_desa": "Cilame",
+    "kecamatan": "Kutawaringin",
+    "kabupaten": "Kabupaten Bandung",
+    "area_type": "RURAL",
+    "lat": "-6.993531",
+    "lon": "107.552716",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211100012",
+    "nama_desa": "Cikareo Selatan",
+    "kecamatan": "Wado",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.974906",
+    "lon": "108.035557",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211100014",
+    "nama_desa": "Wado",
+    "kecamatan": "Wado",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.985918",
+    "lon": "108.037494",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211100011",
+    "nama_desa": "Mulyajaya",
+    "kecamatan": "Wado",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.996929",
+    "lon": "108.033008",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211100002",
+    "nama_desa": "Sukajadi",
+    "kecamatan": "Wado",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.980004",
+    "lon": "108.049933",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211100016",
+    "nama_desa": "Sukapura",
+    "kecamatan": "Wado",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.988671",
+    "lon": "108.0326",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211101008",
+    "nama_desa": "Sirnasari",
+    "kecamatan": "Jatinunggal",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.843424",
+    "lon": "107.92678",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211101007",
+    "nama_desa": "Tarikolot",
+    "kecamatan": "Jatinunggal",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.844749",
+    "lon": "107.920357",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211101009",
+    "nama_desa": "Pawenang",
+    "kecamatan": "Jatinunggal",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.861573",
+    "lon": "107.908835",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211101005",
+    "nama_desa": "Banjarsari",
+    "kecamatan": "Jatinunggal",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.850459",
+    "lon": "107.93249",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211080007",
+    "nama_desa": "Darmaraja",
+    "kecamatan": "Darmaraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.935482",
+    "lon": "108.009598",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211080004",
+    "nama_desa": "Sukamenak",
+    "kecamatan": "Darmaraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.924165",
+    "lon": "108.012249",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211080014",
+    "nama_desa": "Sukaratu",
+    "kecamatan": "Darmaraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.932322",
+    "lon": "108.007865",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211080008",
+    "nama_desa": "Cipeuteuy",
+    "kecamatan": "Darmaraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.912949",
+    "lon": "108.017143",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211080019",
+    "nama_desa": "Paku Alam",
+    "kecamatan": "Darmaraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.933239",
+    "lon": "108.007355",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211080003",
+    "nama_desa": "Neglasari",
+    "kecamatan": "Darmaraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.911012",
+    "lon": "108.006335",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211080013",
+    "nama_desa": "Tarunajaya",
+    "kecamatan": "Darmaraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.927631",
+    "lon": "108.022139",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211090002",
+    "nama_desa": "Jaya Mekar",
+    "kecamatan": "Cibugel",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.85831",
+    "lon": "107.916278",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211090003",
+    "nama_desa": "Cibugel",
+    "kecamatan": "Cibugel",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.841792",
+    "lon": "107.921071",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211090006",
+    "nama_desa": "Cipasang",
+    "kecamatan": "Cibugel",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.839141",
+    "lon": "107.907816",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211090004",
+    "nama_desa": "Tamansari",
+    "kecamatan": "Cibugel",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.853416",
+    "lon": "107.930247",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211071006",
+    "nama_desa": "Cisitu",
+    "kecamatan": "Cisitu",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.848947",
+    "lon": "107.99289",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211071005",
+    "nama_desa": "Situmekar",
+    "kecamatan": "Cisitu",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.845175",
+    "lon": "107.992584",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211071007",
+    "nama_desa": "Cigintung",
+    "kecamatan": "Cisitu",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.845378",
+    "lon": "108.013588",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211071009",
+    "nama_desa": "Cilopang",
+    "kecamatan": "Cisitu",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.862202",
+    "lon": "108.007267",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211071002",
+    "nama_desa": "Cimarga",
+    "kecamatan": "Cisitu",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.861998",
+    "lon": "108.0038",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211071003",
+    "nama_desa": "Cinangsi",
+    "kecamatan": "Cisitu",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.848947",
+    "lon": "108.010835",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211070020",
+    "nama_desa": "Situraja Utara",
+    "kecamatan": "Situraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.953386",
+    "lon": "108.010502",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211070018",
+    "nama_desa": "Situraja",
+    "kecamatan": "Situraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.96348",
+    "lon": "108.018863",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211070012",
+    "nama_desa": "Mekarmulya",
+    "kecamatan": "Situraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.945229",
+    "lon": "108.021106",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211070002",
+    "nama_desa": "Kaduwulung",
+    "kecamatan": "Situraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.952876",
+    "lon": "108.017639",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211070015",
+    "nama_desa": "Cijeler",
+    "kecamatan": "Situraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.954304",
+    "lon": "108.033239",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211070016",
+    "nama_desa": "Ambit",
+    "kecamatan": "Situraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.944006",
+    "lon": "108.024267",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211070019",
+    "nama_desa": "Jatimekar",
+    "kecamatan": "Situraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.946861",
+    "lon": "108.012847",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211070021",
+    "nama_desa": "Malaka",
+    "kecamatan": "Situraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.960727",
+    "lon": "108.016008",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211070017",
+    "nama_desa": "Sukatali",
+    "kecamatan": "Situraja",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.949308",
+    "lon": "108.019475",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211140003",
+    "nama_desa": "Cipamekar",
+    "kecamatan": "Conggeang",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.797324",
+    "lon": "107.935251",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211140002",
+    "nama_desa": "Jambu",
+    "kecamatan": "Conggeang",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.809151",
+    "lon": "107.944325",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211140008",
+    "nama_desa": "Babakan Asem",
+    "kecamatan": "Conggeang",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.786822",
+    "lon": "107.942592",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211140011",
+    "nama_desa": "Karanglayung",
+    "kecamatan": "Conggeang",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.810578",
+    "lon": "107.938106",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211150008",
+    "nama_desa": "Paseh Kaler",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.078196",
+    "lon": "107.753298",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211150002",
+    "nama_desa": "Legok Kidul",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.060659",
+    "lon": "107.736576",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211150001",
+    "nama_desa": "Legok Kaler",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.055255",
+    "lon": "107.736475",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211150007",
+    "nama_desa": "Bongkok",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.060149",
+    "lon": "107.741776",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211150005",
+    "nama_desa": "Pasireungit",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.078298",
+    "lon": "107.746263",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211150004",
+    "nama_desa": "Cijambe",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.073608",
+    "lon": "107.750341",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211150010",
+    "nama_desa": "Citepok",
+    "kecamatan": "Paseh",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-7.068102",
+    "lon": "107.747384",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211181002",
+    "nama_desa": "Wanasari",
+    "kecamatan": "Surian",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.859024",
+    "lon": "107.919949",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211181001",
+    "nama_desa": "Wanajaya",
+    "kecamatan": "Surian",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.838835",
+    "lon": "107.924129",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211181005",
+    "nama_desa": "Tanjung",
+    "kecamatan": "Surian",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.841384",
+    "lon": "107.919949",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211181004",
+    "nama_desa": "Surian",
+    "kecamatan": "Surian",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.8578",
+    "lon": "107.929431",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211181007",
+    "nama_desa": "Suriamedal",
+    "kecamatan": "Surian",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.859125",
+    "lon": "107.931165",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211181009",
+    "nama_desa": "Nanjungwangi",
+    "kecamatan": "Surian",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.861165",
+    "lon": "107.929635",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211180008",
+    "nama_desa": "Buahdua",
+    "kecamatan": "Buahdua",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.754133",
+    "lon": "107.964908",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211180007",
+    "nama_desa": "Panyindangan",
+    "kecamatan": "Buahdua",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.756784",
+    "lon": "107.962869",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211180002",
+    "nama_desa": "Cilangkap",
+    "kecamatan": "Buahdua",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.772996",
+    "lon": "107.953998",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211180004",
+    "nama_desa": "Cikurubuk",
+    "kecamatan": "Buahdua",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.759945",
+    "lon": "107.962869",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211030015",
+    "nama_desa": "Gudang",
+    "kecamatan": "Tanjungsari",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.913575",
+    "lon": "107.863684",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211030011",
+    "nama_desa": "Jatisari",
+    "kecamatan": "Tanjungsari",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.912249",
+    "lon": "107.856445",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211030014",
+    "nama_desa": "Margaluyu",
+    "kecamatan": "Tanjungsari",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.920304",
+    "lon": "107.851653",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211030012",
+    "nama_desa": "Kutamandiri",
+    "kecamatan": "Tanjungsari",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.923159",
+    "lon": "107.868782",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211030002",
+    "nama_desa": "Raharja",
+    "kecamatan": "Tanjungsari",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.922241",
+    "lon": "107.864908",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211030027",
+    "nama_desa": "Cijambu",
+    "kecamatan": "Tanjungsari",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.923669",
+    "lon": "107.857873",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211030008",
+    "nama_desa": "Gunungmanik",
+    "kecamatan": "Tanjungsari",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.904092",
+    "lon": "107.849614",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211030001",
+    "nama_desa": "Cinanjung",
+    "kecamatan": "Tanjungsari",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.912657",
+    "lon": "107.853998",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211031007",
+    "nama_desa": "Genteng",
+    "kecamatan": "Sukasari",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.949241",
+    "lon": "107.798673",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211031003",
+    "nama_desa": "Mekarsari",
+    "kecamatan": "Sukasari",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.93252",
+    "lon": "107.783786",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211031004",
+    "nama_desa": "Sindangsari",
+    "kecamatan": "Sukasari",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.957398",
+    "lon": "107.789598",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211032006",
+    "nama_desa": "Cigendel",
+    "kecamatan": "Pamulihan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-7.001455",
+    "lon": "107.833851",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211032005",
+    "nama_desa": "Cijeruk",
+    "kecamatan": "Pamulihan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-7.002475",
+    "lon": "107.831914",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211032007",
+    "nama_desa": "Haurngombong",
+    "kecamatan": "Pamulihan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.992176",
+    "lon": "107.813663",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211032003",
+    "nama_desa": "Cimarias",
+    "kecamatan": "Pamulihan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-7.006043",
+    "lon": "107.820188",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211032004",
+    "nama_desa": "Cinanggerang",
+    "kecamatan": "Pamulihan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.993808",
+    "lon": "107.817639",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211032009",
+    "nama_desa": "Citali",
+    "kecamatan": "Pamulihan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-7.004412",
+    "lon": "107.818047",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211020008",
+    "nama_desa": "Cimanggung",
+    "kecamatan": "Cimanggung",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.963718",
+    "lon": "107.801455",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211020007",
+    "nama_desa": "Sindangpakuon",
+    "kecamatan": "Cimanggung",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.978094",
+    "lon": "107.805329",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211020009",
+    "nama_desa": "Tegalmanggung",
+    "kecamatan": "Cimanggung",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.96331",
+    "lon": "107.792584",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211020010",
+    "nama_desa": "Sindulang",
+    "kecamatan": "Cimanggung",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.962698",
+    "lon": "107.812059",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211020006",
+    "nama_desa": "Sindanggalih",
+    "kecamatan": "Cimanggung",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.955969",
+    "lon": "107.797376",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211020002",
+    "nama_desa": "Sawahdadap",
+    "kecamatan": "Cimanggung",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.958008",
+    "lon": "107.806451",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211020003",
+    "nama_desa": "Sukadana",
+    "kecamatan": "Cimanggung",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.95342",
+    "lon": "107.807471",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211020001",
+    "nama_desa": "Mangunarga",
+    "kecamatan": "Cimanggung",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.955561",
+    "lon": "107.809408",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211020004",
+    "nama_desa": "Cihanjuang",
+    "kecamatan": "Cimanggung",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.956478",
+    "lon": "107.792992",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211020011",
+    "nama_desa": "Pasirnanjung",
+    "kecamatan": "Cimanggung",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.96331",
+    "lon": "107.806145",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211010009",
+    "nama_desa": "Cikeruh",
+    "kecamatan": "Jatinangor",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.913969",
+    "lon": "107.777163",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211010008",
+    "nama_desa": "Hegarmanah",
+    "kecamatan": "Jatinangor",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.9312",
+    "lon": "107.785422",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211010010",
+    "nama_desa": "Cibeusi",
+    "kecamatan": "Jatinangor",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.914275",
+    "lon": "107.782465",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211010002",
+    "nama_desa": "Sayang",
+    "kecamatan": "Jatinangor",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.91091",
+    "lon": "107.776143",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211010003",
+    "nama_desa": "Mekargalih",
+    "kecamatan": "Jatinangor",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.929569",
+    "lon": "107.773084",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211010004",
+    "nama_desa": "Cinta Mulya",
+    "kecamatan": "Jatinangor",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.913969",
+    "lon": "107.771759",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211010006",
+    "nama_desa": "Jatimukti",
+    "kecamatan": "Jatinangor",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.911827",
+    "lon": "107.772982",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211010005",
+    "nama_desa": "Cisempur",
+    "kecamatan": "Jatinangor",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.920086",
+    "lon": "107.768904",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211010007",
+    "nama_desa": "Jatiroke",
+    "kecamatan": "Jatinangor",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.93538",
+    "lon": "107.768496",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211010011",
+    "nama_desa": "Cileles",
+    "kecamatan": "Jatinangor",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.919678",
+    "lon": "107.770637",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211010012",
+    "nama_desa": "Cilayung",
+    "kecamatan": "Jatinangor",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "SEMI_URBAN",
+    "lat": "-6.910706",
+    "lon": "107.773798",
+    "kapasitas_ton": "10"
+  },
+  {
+    "id": "TPS-3211040010",
+    "nama_desa": "Sukahayu",
+    "kecamatan": "Rancakalong",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.891424",
+    "lon": "107.823131",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211040009",
+    "nama_desa": "Sukamaju",
+    "kecamatan": "Rancakalong",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.878475",
+    "lon": "107.843727",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211040008",
+    "nama_desa": "Pamekaran",
+    "kecamatan": "Rancakalong",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.88918",
+    "lon": "107.83608",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211040014",
+    "nama_desa": "Cibungur",
+    "kecamatan": "Rancakalong",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.888467",
+    "lon": "107.830676",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211050009",
+    "nama_desa": "Sukagalih",
+    "kecamatan": "Sumedang Selatan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.874818",
+    "lon": "107.902359",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211050003",
+    "nama_desa": "Cipancar",
+    "kecamatan": "Sumedang Selatan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.884912",
+    "lon": "107.910006",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211050007",
+    "nama_desa": "Gunasari",
+    "kecamatan": "Sumedang Selatan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.864927",
+    "lon": "107.920508",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211050001",
+    "nama_desa": "Sukajaya",
+    "kecamatan": "Sumedang Selatan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.874308",
+    "lon": "107.900218",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211050002",
+    "nama_desa": "Margamekar",
+    "kecamatan": "Sumedang Selatan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.873696",
+    "lon": "107.9201",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211050015",
+    "nama_desa": "Mekarrahayu",
+    "kecamatan": "Sumedang Selatan",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.877571",
+    "lon": "107.900218",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211060003",
+    "nama_desa": "Mulyasari",
+    "kecamatan": "Sumedang Utara",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "URBAN",
+    "lat": "-6.863018",
+    "lon": "107.91149",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3211060002",
+    "nama_desa": "Girimukti",
+    "kecamatan": "Sumedang Utara",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "URBAN",
+    "lat": "-6.862712",
+    "lon": "107.924439",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3211060005",
+    "nama_desa": "Margamukti",
+    "kecamatan": "Sumedang Utara",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "URBAN",
+    "lat": "-6.8621",
+    "lon": "107.908329",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3211060009",
+    "nama_desa": "Kebonjati",
+    "kecamatan": "Sumedang Utara",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "URBAN",
+    "lat": "-6.842116",
+    "lon": "107.911388",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3211060008",
+    "nama_desa": "Jatihurip",
+    "kecamatan": "Sumedang Utara",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "URBAN",
+    "lat": "-6.846704",
+    "lon": "107.92342",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3211060013",
+    "nama_desa": "Rancamulya",
+    "kecamatan": "Sumedang Utara",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "URBAN",
+    "lat": "-6.850782",
+    "lon": "107.918627",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3211061006",
+    "nama_desa": "Ganeas",
+    "kecamatan": "Ganeas",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.863704",
+    "lon": "107.985155",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211061003",
+    "nama_desa": "Dayeuh Luhur",
+    "kecamatan": "Ganeas",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.869516",
+    "lon": "107.992802",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211061004",
+    "nama_desa": "Cikoneng",
+    "kecamatan": "Ganeas",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.869618",
+    "lon": "107.999124",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211061002",
+    "nama_desa": "Tanjunghurip",
+    "kecamatan": "Ganeas",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.867986",
+    "lon": "107.994739",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211061008",
+    "nama_desa": "Cikoneng Kulon",
+    "kecamatan": "Ganeas",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.879814",
+    "lon": "107.977814",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211170009",
+    "nama_desa": "Sukamantri",
+    "kecamatan": "Tanjungkerta",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.910924",
+    "lon": "108.056765",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211170005",
+    "nama_desa": "Gunturmekar",
+    "kecamatan": "Tanjungkerta",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.909496",
+    "lon": "108.051463",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211170008",
+    "nama_desa": "Mulyamekar",
+    "kecamatan": "Tanjungkerta",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.910618",
+    "lon": "108.032702",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211170004",
+    "nama_desa": "Cigentur",
+    "kecamatan": "Tanjungkerta",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.907865",
+    "lon": "108.056255",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211170003",
+    "nama_desa": "Tanjungmekar",
+    "kecamatan": "Tanjungkerta",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.923159",
+    "lon": "108.05391",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211170020",
+    "nama_desa": "Awilega",
+    "kecamatan": "Tanjungkerta",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.899708",
+    "lon": "108.043102",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211171004",
+    "nama_desa": "Cikaramas",
+    "kecamatan": "Tanjungmedar",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.851394",
+    "lon": "108.083829",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211171007",
+    "nama_desa": "Kamal",
+    "kecamatan": "Tanjungmedar",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.844257",
+    "lon": "108.079445",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211171005",
+    "nama_desa": "Kertamukti",
+    "kecamatan": "Tanjungmedar",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.866688",
+    "lon": "108.094433",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211171002",
+    "nama_desa": "Tanjungwangi",
+    "kecamatan": "Tanjungmedar",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.864037",
+    "lon": "108.080261",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211160014",
+    "nama_desa": "Cimalaka",
+    "kecamatan": "Cimalaka",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.817857",
+    "lon": "107.939037",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211160012",
+    "nama_desa": "Cibeureum Kulon",
+    "kecamatan": "Cimalaka",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.823057",
+    "lon": "107.940261",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211160020",
+    "nama_desa": "Naluk",
+    "kecamatan": "Cimalaka",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.81541",
+    "lon": "107.931696",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211160017",
+    "nama_desa": "Cikole",
+    "kecamatan": "Cimalaka",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.81908",
+    "lon": "107.924049",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211160011",
+    "nama_desa": "Cibeureum Wetan",
+    "kecamatan": "Cimalaka",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.804194",
+    "lon": "107.931186",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211160013",
+    "nama_desa": "Mandalaherang",
+    "kecamatan": "Cimalaka",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.807151",
+    "lon": "107.930473",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211160021",
+    "nama_desa": "Citimun",
+    "kecamatan": "Cimalaka",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.817347",
+    "lon": "107.932512",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211160023",
+    "nama_desa": "Padasari",
+    "kecamatan": "Cimalaka",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.811943",
+    "lon": "107.939241",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211160001",
+    "nama_desa": "Cimuja",
+    "kecamatan": "Cimalaka",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.8253",
+    "lon": "107.929963",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211161005",
+    "nama_desa": "Ciuyah",
+    "kecamatan": "Cisarua",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.823743",
+    "lon": "107.583218",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211161006",
+    "nama_desa": "Cimara",
+    "kecamatan": "Cisarua",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.823641",
+    "lon": "107.598104",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211161004",
+    "nama_desa": "Bantarmara",
+    "kecamatan": "Cisarua",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.829147",
+    "lon": "107.599124",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211161007",
+    "nama_desa": "Cipandanwangi",
+    "kecamatan": "Cisarua",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.846175",
+    "lon": "107.601469",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211161001",
+    "nama_desa": "Cisalak",
+    "kecamatan": "Cisarua",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.843116",
+    "lon": "107.598104",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211120007",
+    "nama_desa": "Tolengas",
+    "kecamatan": "Tomo",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.8208",
+    "lon": "108.003684",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211120004",
+    "nama_desa": "Darmawangi",
+    "kecamatan": "Tomo",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.827529",
+    "lon": "108.017857",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211120006",
+    "nama_desa": "Marongge",
+    "kecamatan": "Tomo",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.829263",
+    "lon": "108.024994",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211120005",
+    "nama_desa": "Jembarwangi",
+    "kecamatan": "Tomo",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.823553",
+    "lon": "108.0097",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211120010",
+    "nama_desa": "Bugel",
+    "kecamatan": "Tomo",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.825694",
+    "lon": "108.021629",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211120003",
+    "nama_desa": "Cipeles",
+    "kecamatan": "Tomo",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.825286",
+    "lon": "108.001033",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211120011",
+    "nama_desa": "Mekarwangi",
+    "kecamatan": "Tomo",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.831812",
+    "lon": "108.018876",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211130007",
+    "nama_desa": "Ujungjaya",
+    "kecamatan": "Ujung Jaya",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.837918",
+    "lon": "107.924027",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211130002",
+    "nama_desa": "Palabuan",
+    "kecamatan": "Ujung Jaya",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.837408",
+    "lon": "107.930859",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211130003",
+    "nama_desa": "Kebon Cau",
+    "kecamatan": "Ujung Jaya",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.857188",
+    "lon": "107.919643",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211130008",
+    "nama_desa": "Sakurjaya",
+    "kecamatan": "Ujung Jaya",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.845667",
+    "lon": "107.925251",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211130004",
+    "nama_desa": "Kudangwangi",
+    "kecamatan": "Ujung Jaya",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.844035",
+    "lon": "107.916686",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211130005",
+    "nama_desa": "Sukamulya",
+    "kecamatan": "Ujung Jaya",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.846584",
+    "lon": "107.913016",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211130001",
+    "nama_desa": "Cipelang",
+    "kecamatan": "Ujung Jaya",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.837408",
+    "lon": "107.911384",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211130009",
+    "nama_desa": "Cibuluh",
+    "kecamatan": "Ujung Jaya",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.854435",
+    "lon": "107.922906",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211111011",
+    "nama_desa": "Cijeungjing",
+    "kecamatan": "Jatigede",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.932512",
+    "lon": "108.084967",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211111012",
+    "nama_desa": "Kadujaya",
+    "kecamatan": "Jatigede",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.933837",
+    "lon": "108.084049",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211111007",
+    "nama_desa": "Lebaksiuh",
+    "kecamatan": "Jatigede",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.929147",
+    "lon": "108.071916",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211111008",
+    "nama_desa": "Cintajaya",
+    "kecamatan": "Jatigede",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.941178",
+    "lon": "108.070284",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211111009",
+    "nama_desa": "Cipicung",
+    "kecamatan": "Jatigede",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.923131",
+    "lon": "108.074873",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211111002",
+    "nama_desa": "Mekarasih",
+    "kecamatan": "Jatigede",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.94281",
+    "lon": "108.077218",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211111003",
+    "nama_desa": "Ciranggem",
+    "kecamatan": "Jatigede",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.942198",
+    "lon": "108.086802",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211111004",
+    "nama_desa": "Cisampih",
+    "kecamatan": "Jatigede",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.93812",
+    "lon": "108.082927",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3211111006",
+    "nama_desa": "Kadu",
+    "kecamatan": "Jatigede",
+    "kabupaten": "Kabupaten Sumedang",
+    "area_type": "RURAL",
+    "lat": "-6.926394",
+    "lon": "108.091798",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217120003",
+    "nama_desa": "Pagerwangi",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.805724",
+    "lon": "107.615614",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217120006",
+    "nama_desa": "Kayuambon",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.80868",
+    "lon": "107.624382",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217120008",
+    "nama_desa": "Cikahuripan",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.801645",
+    "lon": "107.602971",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217120012",
+    "nama_desa": "Cikole",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.81592",
+    "lon": "107.624994",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217120001",
+    "nama_desa": "Gudangkahuripan",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.81439",
+    "lon": "107.600625",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217120005",
+    "nama_desa": "Langensari",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.808069",
+    "lon": "107.600524",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217120004",
+    "nama_desa": "Mekarwangi",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.823465",
+    "lon": "107.601033",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217120011",
+    "nama_desa": "Cibogo",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.813982",
+    "lon": "107.612147",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217120009",
+    "nama_desa": "Sukajaya",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.820712",
+    "lon": "107.615104",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217120016",
+    "nama_desa": "Suntenjaya",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.800422",
+    "lon": "107.604296",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217120014",
+    "nama_desa": "Wangunharja",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.822547",
+    "lon": "107.61908",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217120002",
+    "nama_desa": "Wangunsari",
+    "kecamatan": "Lembang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.805112",
+    "lon": "107.618978",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217110007",
+    "nama_desa": "Karyawangi",
+    "kecamatan": "Parongpong",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.825796",
+    "lon": "107.58758",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217110005",
+    "nama_desa": "Cihanjuang",
+    "kecamatan": "Parongpong",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.814682",
+    "lon": "107.580137",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217110006",
+    "nama_desa": "Cihanjuang Rahayu",
+    "kecamatan": "Parongpong",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.817639",
+    "lon": "107.584216",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217110002",
+    "nama_desa": "Cihideung",
+    "kecamatan": "Parongpong",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.820698",
+    "lon": "107.572796",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217110001",
+    "nama_desa": "Ciwaruga",
+    "kecamatan": "Parongpong",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.8208",
+    "lon": "107.564435",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217110003",
+    "nama_desa": "Cigugur Girang",
+    "kecamatan": "Parongpong",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.814988",
+    "lon": "107.575039",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217110004",
+    "nama_desa": "Sariwangi",
+    "kecamatan": "Parongpong",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.818353",
+    "lon": "107.565557",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217130002",
+    "nama_desa": "Jambudipa",
+    "kecamatan": "Cisarua",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.844441",
+    "lon": "107.600551",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217130003",
+    "nama_desa": "Padaasih",
+    "kecamatan": "Cisarua",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.834041",
+    "lon": "107.58648",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217130005",
+    "nama_desa": "Tugumukti",
+    "kecamatan": "Cisarua",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.833225",
+    "lon": "107.584135",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217140007",
+    "nama_desa": "Ciptagumati",
+    "kecamatan": "Cikalong Wetan",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.917261",
+    "lon": "107.518114",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217140004",
+    "nama_desa": "Cipada",
+    "kecamatan": "Cikalong Wetan",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.916037",
+    "lon": "107.530859",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217140012",
+    "nama_desa": "Cisomang Barat",
+    "kecamatan": "Cikalong Wetan",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.906759",
+    "lon": "107.519031",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217140011",
+    "nama_desa": "Tenjolaut",
+    "kecamatan": "Cikalong Wetan",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.903802",
+    "lon": "107.529329",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217140013",
+    "nama_desa": "Wangunjaya",
+    "kecamatan": "Cikalong Wetan",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.921645",
+    "lon": "107.513627",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217150007",
+    "nama_desa": "Cipeundeuy",
+    "kecamatan": "Cipeundeuy",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.881343",
+    "lon": "107.476161",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217150010",
+    "nama_desa": "Ciharashas",
+    "kecamatan": "Cipeundeuy",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.87808",
+    "lon": "107.485439",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217150012",
+    "nama_desa": "Ciroyom",
+    "kecamatan": "Cipeundeuy",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.874308",
+    "lon": "107.485235",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217150008",
+    "nama_desa": "Margalaksana",
+    "kecamatan": "Cipeundeuy",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.888582",
+    "lon": "107.487275",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217150003",
+    "nama_desa": "Sirnaraja",
+    "kecamatan": "Cipeundeuy",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.880935",
+    "lon": "107.47871",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217100008",
+    "nama_desa": "Ngamprah",
+    "kecamatan": "Ngamprah",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.899771",
+    "lon": "107.536233",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217100001",
+    "nama_desa": "Cimareme",
+    "kecamatan": "Ngamprah",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.896406",
+    "lon": "107.547245",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217100006",
+    "nama_desa": "Margajaya",
+    "kecamatan": "Ngamprah",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.897425",
+    "lon": "107.537457",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217100009",
+    "nama_desa": "Sukatani",
+    "kecamatan": "Ngamprah",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.892939",
+    "lon": "107.538884",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217100004",
+    "nama_desa": "Pakuhaji",
+    "kecamatan": "Ngamprah",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.886108",
+    "lon": "107.549182",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217080002",
+    "nama_desa": "Ciptaharja",
+    "kecamatan": "Cipatat",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.877571",
+    "lon": "107.426816",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217080003",
+    "nama_desa": "Cipatat",
+    "kecamatan": "Cipatat",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.886339",
+    "lon": "107.418149",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217080004",
+    "nama_desa": "Citatah",
+    "kecamatan": "Cipatat",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.875837",
+    "lon": "107.420596",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217080001",
+    "nama_desa": "Rajamandala Kulon",
+    "kecamatan": "Cipatat",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.873288",
+    "lon": "107.428957",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217080012",
+    "nama_desa": "Mandalawangi",
+    "kecamatan": "Cipatat",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.882159",
+    "lon": "107.432933",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217080009",
+    "nama_desa": "Kertamukti",
+    "kecamatan": "Cipatat",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.881955",
+    "lon": "107.424471",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217080007",
+    "nama_desa": "Nyalindung",
+    "kecamatan": "Cipatat",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.888175",
+    "lon": "107.418455",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217080005",
+    "nama_desa": "Gunungmasigit",
+    "kecamatan": "Cipatat",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.873594",
+    "lon": "107.413051",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217080006",
+    "nama_desa": "Cirawamekar",
+    "kecamatan": "Cipatat",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.887869",
+    "lon": "107.419576",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217080011",
+    "nama_desa": "Mandalasari",
+    "kecamatan": "Cipatat",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.865539",
+    "lon": "107.415906",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217080010",
+    "nama_desa": "Sarimukti",
+    "kecamatan": "Cipatat",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.872269",
+    "lon": "107.418761",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217090007",
+    "nama_desa": "Kertamulya",
+    "kecamatan": "Padalarang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.882057",
+    "lon": "107.511929",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217090006",
+    "nama_desa": "Padalarang",
+    "kecamatan": "Padalarang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.873798",
+    "lon": "107.518863",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217090002",
+    "nama_desa": "Cimerang",
+    "kecamatan": "Padalarang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.88379",
+    "lon": "107.517435",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217090010",
+    "nama_desa": "Cempakamekar",
+    "kecamatan": "Padalarang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.88379",
+    "lon": "107.514071",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217090009",
+    "nama_desa": "Tagogapu",
+    "kecamatan": "Padalarang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.885829",
+    "lon": "107.534871",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217090008",
+    "nama_desa": "Ciburuy",
+    "kecamatan": "Padalarang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.886441",
+    "lon": "107.531914",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217090004",
+    "nama_desa": "Kertajaya",
+    "kecamatan": "Padalarang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.88012",
+    "lon": "107.518149",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217090005",
+    "nama_desa": "Jayamekar",
+    "kecamatan": "Padalarang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.883076",
+    "lon": "107.520494",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217090001",
+    "nama_desa": "Laksanamekar",
+    "kecamatan": "Padalarang",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "URBAN",
+    "lat": "-6.889296",
+    "lon": "107.530384",
+    "kapasitas_ton": "20"
+  },
+  {
+    "id": "TPS-3217070003",
+    "nama_desa": "Batujajar Timur",
+    "kecamatan": "Batujajar",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.918469",
+    "lon": "107.493422",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217070002",
+    "nama_desa": "Batujajar Barat",
+    "kecamatan": "Batujajar",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.912045",
+    "lon": "107.4871",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217070005",
+    "nama_desa": "Galanggang",
+    "kecamatan": "Batujajar",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.920202",
+    "lon": "107.507288",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217070007",
+    "nama_desa": "Cangkorah",
+    "kecamatan": "Batujajar",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.924586",
+    "lon": "107.509531",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217070006",
+    "nama_desa": "Pangauban",
+    "kecamatan": "Batujajar",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.918571",
+    "lon": "107.48761",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217050016",
+    "nama_desa": "Cihampelas",
+    "kecamatan": "Cihampelas",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.946569",
+    "lon": "107.490239",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217050017",
+    "nama_desa": "Mekarmukti",
+    "kecamatan": "Cihampelas",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.947384",
+    "lon": "107.510224",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217050013",
+    "nama_desa": "Pataruman",
+    "kecamatan": "Cihampelas",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.954827",
+    "lon": "107.49289",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217050009",
+    "nama_desa": "Singajaya",
+    "kecamatan": "Cihampelas",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.956561",
+    "lon": "107.496459",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217050011",
+    "nama_desa": "Tanjungwangi",
+    "kecamatan": "Cihampelas",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.946976",
+    "lon": "107.496153",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217050020",
+    "nama_desa": "Tanjungjaya",
+    "kecamatan": "Cihampelas",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.945549",
+    "lon": "107.507369",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217040005",
+    "nama_desa": "Bongas",
+    "kecamatan": "Cililin",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.955255",
+    "lon": "107.449671",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217040003",
+    "nama_desa": "Mukapayung",
+    "kecamatan": "Cililin",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.962086",
+    "lon": "107.452424",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217040004",
+    "nama_desa": "Rancapanggung",
+    "kecamatan": "Cililin",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.971059",
+    "lon": "107.442024",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060010",
+    "nama_desa": "Sarinagen",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.981839",
+    "lon": "107.400537",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060014",
+    "nama_desa": "Baranangsiang",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.990404",
+    "lon": "107.406145",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060008",
+    "nama_desa": "Citalem",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.985816",
+    "lon": "107.412161",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060005",
+    "nama_desa": "Cijenuk",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.983675",
+    "lon": "107.390443",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060012",
+    "nama_desa": "Cijambu",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.981737",
+    "lon": "107.401047",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060011",
+    "nama_desa": "Cibenda",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.983063",
+    "lon": "107.409102",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060001",
+    "nama_desa": "Cintaasih",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.989792",
+    "lon": "107.405533",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060006",
+    "nama_desa": "Cicangkang Hilir",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.9954",
+    "lon": "107.412059",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060004",
+    "nama_desa": "Girimukti",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.975824",
+    "lon": "107.400231",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060003",
+    "nama_desa": "Neglasari",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.997847",
+    "lon": "107.395949",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060013",
+    "nama_desa": "Sirnagalih",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.988161",
+    "lon": "107.409918",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217060007",
+    "nama_desa": "Sukamulya",
+    "kecamatan": "Cipongkor",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.992137",
+    "lon": "107.40431",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217010004",
+    "nama_desa": "Bojong",
+    "kecamatan": "Rongga",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.020188",
+    "lon": "107.394725",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217010005",
+    "nama_desa": "Bojongsalam",
+    "kecamatan": "Rongga",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.019169",
+    "lon": "107.408592",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217010007",
+    "nama_desa": "Sukaresmi",
+    "kecamatan": "Rongga",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.026408",
+    "lon": "107.406757",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217030007",
+    "nama_desa": "Cintakarya",
+    "kecamatan": "Sindangkerta",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.018876",
+    "lon": "107.429875",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217030004",
+    "nama_desa": "Buninagara",
+    "kecamatan": "Sindangkerta",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.00501",
+    "lon": "107.417435",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217030005",
+    "nama_desa": "Cikadu",
+    "kecamatan": "Sindangkerta",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.006641",
+    "lon": "107.418863",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217030008",
+    "nama_desa": "Cicangkang Girang",
+    "kecamatan": "Sindangkerta",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.017551",
+    "lon": "107.43222",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217030010",
+    "nama_desa": "Pasirpogor",
+    "kecamatan": "Sindangkerta",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.016429",
+    "lon": "107.425796",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217030006",
+    "nama_desa": "Ranca Senggang",
+    "kecamatan": "Sindangkerta",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.011535",
+    "lon": "107.422329",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217020004",
+    "nama_desa": "Sirnajaya",
+    "kecamatan": "Gununghalu",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.039125",
+    "lon": "107.397798",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217020005",
+    "nama_desa": "Gununghalu",
+    "kecamatan": "Gununghalu",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.034027",
+    "lon": "107.39688",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217020001",
+    "nama_desa": "Cilangari",
+    "kecamatan": "Gununghalu",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-7.032804",
+    "lon": "107.388112",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217071005",
+    "nama_desa": "Jati",
+    "kecamatan": "Saguling",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.92458",
+    "lon": "107.484012",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217071003",
+    "nama_desa": "Girimukti",
+    "kecamatan": "Saguling",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.929373",
+    "lon": "107.4886",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217071004",
+    "nama_desa": "Cipangeran",
+    "kecamatan": "Saguling",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.936918",
+    "lon": "107.479525",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS-3217071006",
+    "nama_desa": "Saguling",
+    "kecamatan": "Saguling",
+    "kabupaten": "Kabupaten Bandung Barat",
+    "area_type": "RURAL",
+    "lat": "-6.922949",
+    "lon": "107.477486",
+    "kapasitas_ton": "4"
+  },
+  {
+    "id": "TPS_ANDI_1",
+    "nama_desa": null,
+    "kecamatan": "Andir",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_ANDI_2",
+    "nama_desa": null,
+    "kecamatan": "Andir",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_ANDI_3",
+    "nama_desa": null,
+    "kecamatan": "Andir",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_ANTA_1",
+    "nama_desa": null,
+    "kecamatan": "Antapani",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_ANTA_2",
+    "nama_desa": null,
+    "kecamatan": "Antapani",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_ANTA_3",
+    "nama_desa": null,
+    "kecamatan": "Antapani",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_ARCA_1",
+    "nama_desa": null,
+    "kecamatan": "Arcamanik",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_ARCA_2",
+    "nama_desa": null,
+    "kecamatan": "Arcamanik",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_ARCA_3",
+    "nama_desa": null,
+    "kecamatan": "Arcamanik",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_ASTA_1",
+    "nama_desa": null,
+    "kecamatan": "Astanaanyar",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_ASTA_2",
+    "nama_desa": null,
+    "kecamatan": "Astanaanyar",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_ASTA_3",
+    "nama_desa": null,
+    "kecamatan": "Astanaanyar",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BABA_1",
+    "nama_desa": null,
+    "kecamatan": "Babakan Ciparay",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BABA_2",
+    "nama_desa": null,
+    "kecamatan": "Babakan Ciparay",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BABA_3",
+    "nama_desa": null,
+    "kecamatan": "Babakan Ciparay",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BAND_1",
+    "nama_desa": null,
+    "kecamatan": "Bandung Kidul",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BAND_2",
+    "nama_desa": null,
+    "kecamatan": "Bandung Kidul",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BAND_3",
+    "nama_desa": null,
+    "kecamatan": "Bandung Kidul",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BATU_1",
+    "nama_desa": null,
+    "kecamatan": "Batununggal",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BATU_2",
+    "nama_desa": null,
+    "kecamatan": "Batununggal",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BATU_3",
+    "nama_desa": null,
+    "kecamatan": "Batununggal",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BOJO_1",
+    "nama_desa": null,
+    "kecamatan": "Bojongloa Kidul",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BOJO_2",
+    "nama_desa": null,
+    "kecamatan": "Bojongloa Kidul",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BOJO_3",
+    "nama_desa": null,
+    "kecamatan": "Bojongloa Kidul",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BUAH_1",
+    "nama_desa": null,
+    "kecamatan": "Buahbatu",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BUAH_2",
+    "nama_desa": null,
+    "kecamatan": "Buahbatu",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_BUAH_3",
+    "nama_desa": null,
+    "kecamatan": "Buahbatu",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CENA_1",
+    "nama_desa": null,
+    "kecamatan": "Cenang",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CENA_2",
+    "nama_desa": null,
+    "kecamatan": "Cenang",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CENA_3",
+    "nama_desa": null,
+    "kecamatan": "Cenang",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CIBE_1",
+    "nama_desa": null,
+    "kecamatan": "Cibeunying Kidul",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CIBE_2",
+    "nama_desa": null,
+    "kecamatan": "Cibeunying Kidul",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CIBE_3",
+    "nama_desa": null,
+    "kecamatan": "Cibeunying Kidul",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CIBI_1",
+    "nama_desa": null,
+    "kecamatan": "Cibiru",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CIBI_2",
+    "nama_desa": null,
+    "kecamatan": "Cibiru",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CIBI_3",
+    "nama_desa": null,
+    "kecamatan": "Cibiru",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CICE_1",
+    "nama_desa": null,
+    "kecamatan": "Cicendo",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CICE_2",
+    "nama_desa": null,
+    "kecamatan": "Cicendo",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CICE_3",
+    "nama_desa": null,
+    "kecamatan": "Cicendo",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CIDA_1",
+    "nama_desa": null,
+    "kecamatan": "Cidadap",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CIDA_2",
+    "nama_desa": null,
+    "kecamatan": "Cidadap",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CIDA_3",
+    "nama_desa": null,
+    "kecamatan": "Cidadap",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CINA_1",
+    "nama_desa": null,
+    "kecamatan": "Cinambo",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CINA_2",
+    "nama_desa": null,
+    "kecamatan": "Cinambo",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_CINA_3",
+    "nama_desa": null,
+    "kecamatan": "Cinambo",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_COBL_1",
+    "nama_desa": null,
+    "kecamatan": "Coblong",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_COBL_2",
+    "nama_desa": null,
+    "kecamatan": "Coblong",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_COBL_3",
+    "nama_desa": null,
+    "kecamatan": "Coblong",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_GEDE_1",
+    "nama_desa": null,
+    "kecamatan": "Gedebage",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_GEDE_2",
+    "nama_desa": null,
+    "kecamatan": "Gedebage",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_GEDE_3",
+    "nama_desa": null,
+    "kecamatan": "Gedebage",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_KIAR_1",
+    "nama_desa": null,
+    "kecamatan": "Kiaracondong",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_KIAR_2",
+    "nama_desa": null,
+    "kecamatan": "Kiaracondong",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_KIAR_3",
+    "nama_desa": null,
+    "kecamatan": "Kiaracondong",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_LENG_1",
+    "nama_desa": null,
+    "kecamatan": "Lengkong",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_LENG_2",
+    "nama_desa": null,
+    "kecamatan": "Lengkong",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_LENG_3",
+    "nama_desa": null,
+    "kecamatan": "Lengkong",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_MAND_1",
+    "nama_desa": null,
+    "kecamatan": "Mandalajati",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_MAND_2",
+    "nama_desa": null,
+    "kecamatan": "Mandalajati",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_MAND_3",
+    "nama_desa": null,
+    "kecamatan": "Mandalajati",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_PANY_1",
+    "nama_desa": null,
+    "kecamatan": "Panyileukan",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_PANY_2",
+    "nama_desa": null,
+    "kecamatan": "Panyileukan",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_PANY_3",
+    "nama_desa": null,
+    "kecamatan": "Panyileukan",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_RANC_1",
+    "nama_desa": null,
+    "kecamatan": "Rancasari",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_RANC_2",
+    "nama_desa": null,
+    "kecamatan": "Rancasari",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_RANC_3",
+    "nama_desa": null,
+    "kecamatan": "Rancasari",
+    "kabupaten": "Kota Bandung",
+    "area_type": "pedesaan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_REGO_1",
+    "nama_desa": null,
+    "kecamatan": "Regol",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_REGO_2",
+    "nama_desa": null,
+    "kecamatan": "Regol",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_REGO_3",
+    "nama_desa": null,
+    "kecamatan": "Regol",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_SUKA_1",
+    "nama_desa": null,
+    "kecamatan": "Sukasari",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_SUKA_2",
+    "nama_desa": null,
+    "kecamatan": "Sukasari",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_SUKA_3",
+    "nama_desa": null,
+    "kecamatan": "Sukasari",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_SUMU_1",
+    "nama_desa": null,
+    "kecamatan": "Sumur Bandung",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_SUMU_2",
+    "nama_desa": null,
+    "kecamatan": "Sumur Bandung",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_SUMU_3",
+    "nama_desa": null,
+    "kecamatan": "Sumur Bandung",
+    "kabupaten": "Kota Bandung",
+    "area_type": "metropolitan",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_UJUN_1",
+    "nama_desa": null,
+    "kecamatan": "Ujungberung",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_UJUN_2",
+    "nama_desa": null,
+    "kecamatan": "Ujungberung",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  },
+  {
+    "id": "TPS_UJUN_3",
+    "nama_desa": null,
+    "kecamatan": "Ujungberung",
+    "kabupaten": "Kota Bandung",
+    "area_type": "semi urban",
+    "lat": null,
+    "lon": null,
+    "kapasitas_ton": null
+  }
+]

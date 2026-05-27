@@ -28,6 +28,7 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^6.6.0",
+    "@supabase/supabase-js": "^2.106.2",
     "axios": "^1.16.0",
     "cors": "^2.8.6",
     "csv-parser": "^3.2.1",
