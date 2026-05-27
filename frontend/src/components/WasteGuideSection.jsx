@@ -1,338 +1,422 @@
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SearchCheck, Droplets, Archive, Recycle } from 'lucide-react';
+import { useState } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
 
-import sisaMakananImg from '../assets/guide/sisa-makanan.png';
-import daunKeringImg from '../assets/guide/daun-kering.png';
-import botolPlastikImg from '../assets/guide/botol-plastik.png';
-import kardusBekasImg from '../assets/guide/kardus-bekas.png';
-import kalengBekasImg from '../assets/guide/kaleng-bekas.png';
-import kacaBelingImg from '../assets/guide/kaca&beling.png';
-import bateraiBekasImg from '../assets/guide/baterai-bekas.png';
-import lampuRusakImg from '../assets/guide/lampu-rusak.jpg';
-import minyakJelantahImg from '../assets/guide/minyak-jelantah.jpg';
-
-// Data
-const wasteItems = [
+/* ═══════════════════════════════════════════════════════════ */
+/*  DATA                                                        */
+/* ═══════════════════════════════════════════════════════════ */
+const CATEGORIES = [
   {
-    name: "Sisa Makanan",
-    category: "Organik",
-    image: sisaMakananImg,
-    description: "Sisa konsumsi manusia seperti nasi, tulang, kulit buah, sisa sayur, dan bahan makanan lain yang mudah membusuk karena berasal dari bahan alami.",
-    sorting: "Tiriskan sisa air atau kuah terlebih dahulu agar tidak terlalu basah, lalu pisahkan dari plastik, tisu, kemasan makanan, atau benda anorganik lain. Masukkan ke wadah tertutup supaya tidak menimbulkan bau menyengat dan tidak mengundang lalat.",
-    management: "Sisa makanan dapat diolah menjadi kompos rumah tangga, eco-enzyme, atau pakan maggot BSF jika dipilah dengan benar sejak awal. Untuk hasil terbaik, campurkan dengan bahan kering seperti daun kering atau serbuk gergaji agar proses pembusukan lebih seimbang."
+    name: 'Organik',
+    desc: 'Sisa makanan, daun, limbah dapur — mudah terurai secara alami',
+    image: '/SAMPAH ORGANIK.jpeg',
+    color: '#059669',
+    light: '#ECFDF5',
   },
   {
-    name: "Daun Kering",
-    category: "Organik",
-    image: daunKeringImg,
-    description: "Sampah kebun seperti daun gugur, ranting kecil, dan sisa tanaman kering yang mudah terurai serta sangat baik untuk mengembalikan unsur hara ke tanah.",
-    sorting: "Kumpulkan daun kering dalam karung, keranjang, atau wadah khusus yang terpisah dari sampah plastik, batu, kaca, dan sampah basah. Pastikan daun tidak tercampur minyak, bahan kimia, atau limbah rumah tangga lain agar tetap aman untuk pengomposan.",
-    management: "Daun kering sangat cocok dijadikan mulsa untuk menjaga kelembapan tanah atau dicampurkan ke komposter sebagai bahan karbon. Jika dicacah lebih kecil, proses penguraian akan berjalan lebih cepat dan hasil kompos menjadi lebih merata."
+    name: 'Plastik',
+    desc: 'Botol, kemasan, gelas plastik — bisa didaur ulang',
+    image: '/SAMPAH PELASTIK.jpeg',
+    color: '#0284C7',
+    light: '#EFF6FF',
   },
   {
-    name: "Botol Plastik",
-    category: "Anorganik",
-    image: botolPlastikImg,
-    description: "Botol plastik umumnya terbuat dari bahan sintetis seperti PET yang membutuhkan waktu sangat lama untuk terurai secara alami, tetapi masih memiliki nilai daur ulang yang cukup tinggi.",
-    sorting: "Kosongkan seluruh sisa cairan, bilas bagian dalam botol agar tidak meninggalkan bau atau residu, lalu keringkan sebentar. Jika memungkinkan, remukkan botol untuk menghemat ruang dan pisahkan tutup botol karena jenis plastiknya bisa berbeda.",
-    management: "Botol plastik yang bersih dan kering dapat dikumpulkan untuk disetorkan ke bank sampah, pengepul, atau fasilitas daur ulang. Hindari membakar plastik karena dapat menghasilkan asap beracun dan mencemari udara."
+    name: 'Kertas',
+    desc: 'Kardus, koran, kertas bekas — daur ulang atau kompos',
+    image: '/SAMPAH KARDUS.jpeg',
+    color: '#D97706',
+    light: '#FFFBEB',
   },
   {
-    name: "Kardus Bekas",
-    category: "Anorganik",
-    image: kardusBekasImg,
-    description: "Kardus bekas merupakan material berbasis kertas tebal yang dapat didaur ulang menjadi kertas atau kardus baru selama kondisinya tidak terlalu kotor, basah, atau berminyak.",
-    sorting: "Pastikan kardus dalam kondisi kering sebelum dikumpulkan. Lepaskan sisa selotip, plastik pembungkus, label pengiriman, atau stiker tebal jika memungkinkan, lalu lipat atau pipihkan agar tidak memakan banyak tempat.",
-    management: "Kardus bekas memiliki nilai ekonomi yang cukup baik jika dikumpulkan dalam jumlah banyak dan kondisi bersih. Setorkan ke bank sampah atau pengepul barang bekas agar bisa masuk kembali ke rantai daur ulang."
+    name: 'Kaca',
+    desc: 'Botol kaca, toples — 100% bisa didaur ulang tanpa batas',
+    image: '/SAMPAH KACA.jpeg',
+    color: '#7C3AED',
+    light: '#F5F3FF',
   },
   {
-    name: "Kaleng Bekas",
-    category: "Anorganik",
-    image: kalengBekasImg,
-    description: "Kaleng bekas biasanya terbuat dari aluminium atau baja yang memiliki nilai daur ulang tinggi dan dapat diproses kembali menjadi material logam baru.",
-    sorting: "Bilas kaleng dari sisa makanan atau minuman agar tidak berbau dan tidak menarik serangga. Setelah kering, pipihkan kaleng jika memungkinkan untuk menghemat ruang penyimpanan, tetapi tetap berhati-hati pada bagian tepi yang tajam.",
-    management: "Kaleng bekas dapat disetorkan ke bank sampah atau fasilitas daur ulang logam. Karena logam bisa didaur ulang berkali-kali, memilah kaleng dengan benar membantu mengurangi kebutuhan produksi material baru dari alam."
+    name: 'Logam',
+    desc: 'Kaleng, aluminium, besi — nilai jual tinggi di bank sampah',
+    image: '/SAMPAH LOGAM.jpeg',
+    color: '#475569',
+    light: '#F8FAFC',
   },
   {
-  name: "Kaca & Beling",
-  category: "B3",
-  image: kacaBelingImg,
-  description: "Kaca pecah, beling, atau botol kaca rusak termasuk sampah berisiko karena memiliki sisi tajam yang dapat melukai petugas kebersihan dan pengguna.",
-  sorting: "Jangan dicampur langsung dengan sampah rumah tangga biasa. Bungkus pecahan kaca dengan kertas tebal, kardus, atau kain bekas, lalu beri tanda peringatan seperti 'Kaca Pecah' agar aman saat diangkut.",
-  management: "Jika botol kaca masih utuh, gunakan kembali atau setorkan ke fasilitas daur ulang kaca. Jika sudah pecah, perlakukan sebagai limbah berisiko dan serahkan ke petugas atau fasilitas pengelolaan yang menerima sampah tajam."
+    name: 'B3 / Elektronik',
+    desc: 'Baterai, lampu, gadget rusak — butuh penanganan khusus',
+    image: '/SAMPAH B3.jpeg',
+    color: '#DC2626',
+    light: '#FEF2F2',
   },
-  {
-    name: "Baterai Bekas",
-    category: "B3",
-    image: bateraiBekasImg,
-    description: "Baterai bekas termasuk limbah B3 karena mengandung bahan kimia dan logam berat yang berpotensi mencemari tanah, air, serta membahayakan kesehatan jika dibuang sembarangan.",
-    sorting: "Jangan mencampur baterai bekas dengan sampah organik atau anorganik biasa. Simpan baterai di wadah kering dan tertutup, jauhkan dari panas, air, dan benda logam lain untuk mencegah kebocoran atau korsleting.",
-    management: "Baterai bekas sebaiknya diserahkan ke drop point e-waste, toko elektronik tertentu, bank sampah khusus, atau fasilitas pengelolaan limbah B3 resmi. Jangan dibakar, dibongkar, atau dibuang ke tanah karena kandungannya berbahaya."
-  },
-  {
-    name: "Lampu Rusak",
-    category: "B3",
-    image: lampuRusakImg,
-    description: "Beberapa jenis lampu seperti CFL, neon, atau TL dapat mengandung merkuri dan bahan berbahaya lain, sehingga perlu diperlakukan sebagai limbah B3 terutama jika pecah atau rusak.",
-    sorting: "Jangan memecahkan lampu dengan sengaja. Jika lampu masih utuh, simpan kembali dalam kardus atau bungkus pelindung agar tidak pecah saat dipindahkan. Jika sudah pecah, gunakan sarung tangan dan kumpulkan pecahannya dengan hati-hati.",
-    management: "Lampu rusak sebaiknya dikumpulkan di kotak e-waste atau diserahkan ke fasilitas pengelolaan limbah B3. Hindari membuangnya langsung ke tempat sampah biasa karena pecahan kaca dan kandungan kimianya dapat membahayakan manusia serta lingkungan."
-  },
-  {
-    name: "Minyak Jelantah",
-    category: "B3",
-    image: minyakJelantahImg,
-    description: "Minyak jelantah adalah minyak goreng bekas yang tidak layak digunakan berulang kali dan dapat mencemari air, menyumbat saluran pipa, serta merusak ekosistem jika dibuang sembarangan.",
-    sorting: "Tunggu minyak hingga benar-benar dingin, lalu saring ampas makanan yang tersisa. Simpan minyak dalam botol, jerigen, atau wadah tertutup rapat agar tidak tumpah dan tidak tercampur dengan air atau sampah lain.",
-    management: "Minyak jelantah dapat disetorkan ke lembaga pengumpul jelantah untuk diolah menjadi biodiesel, sabun, atau produk turunan lain. Jangan menuangkannya ke wastafel, selokan, tanah, atau sungai karena dapat menyebabkan pencemaran serius."
-  }
 ];
 
 const STEPS = [
   {
     num: '01',
     title: 'Identifikasi Jenis',
-    desc: 'Kenali apakah sampah termasuk organik, anorganik, atau B3 sebelum dibuang.',
-    icon: SearchCheck,
+    desc: 'Kenali apakah sampah termasuk organik, plastik, kertas, kaca, logam, atau B3.',
+    accent: '#059669',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+      </svg>
+    ),
   },
   {
     num: '02',
     title: 'Bersihkan & Keringkan',
-    desc: 'Bilas kemasan dari sisa kotoran dan pastikan kering agar tidak mencemari sampah lain.',
-    icon: Droplets,
+    desc: 'Bilas kemasan dari sisa makanan. Lipat kardus agar hemat ruang.',
+    accent: '#0284C7',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" />
+      </svg>
+    ),
   },
   {
     num: '03',
     title: 'Pisahkan per Wadah',
-    desc: 'Gunakan wadah berbeda untuk sampah organik, anorganik, dan limbah berisiko.',
-    icon: Archive,
+    desc: 'Simpan di wadah terpisah: organik, daur ulang, dan residu. Jangan campur B3.',
+    accent: '#D97706',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+        <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+      </svg>
+    ),
   },
   {
     num: '04',
     title: 'Kelola dengan Tepat',
-    desc: 'Jadikan kompos, setor ke bank sampah, atau kirim limbah B3 ke drop-off resmi.',
-    icon: Recycle,
+    desc: 'Kompos organik, setor daur ulang ke bank sampah, kirim B3 ke drop-off resmi.',
+    accent: '#7C3AED',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" />
+        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+      </svg>
+    ),
   },
 ];
 
-// Helper for category badge styling
-const getCategoryStyle = (category) => {
-  switch (category) {
-    case 'Organik':
-      return 'bg-emerald-100 text-emerald-700 ring-emerald-500/20';
-    case 'Anorganik':
-      return 'bg-sky-100 text-sky-700 ring-sky-500/20';
-    case 'B3':
-      return 'bg-amber-100 text-amber-700 ring-amber-500/20';
-    default:
-      return 'bg-slate-100 text-slate-700 ring-slate-500/20';
-  }
+/* ═══════════════════════════════════════════════════════════ */
+/*  TIPS PRAKTIS ICONS & DATA                                    */
+/* ═══════════════════════════════════════════════════════════ */
+const DropIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-11-7-11S5 10.7 5 15a7 7 0 0 0 7 7z" />
+  </svg>
+);
+
+const BoxFoldIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="4 14 10 14 10 20" />
+    <polyline points="20 10 14 10 14 4" />
+    <line x1="14" y1="10" x2="21" y2="3" />
+    <line x1="10" y1="14" x2="3" y2="21" />
+  </svg>
+);
+
+const BatteryIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="7" width="16" height="10" rx="2" ry="2" />
+    <line x1="22" y1="11" x2="22" y2="13" />
+  </svg>
+);
+
+const ShieldLockIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+  </svg>
+);
+
+const RecycleIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+  </svg>
+);
+
+const SearchCheckIcon = ({ color }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8" />
+    <path d="m21 21-4.3-4.3" />
+    <path d="m8 11 2 2 4-4" />
+  </svg>
+);
+
+const TIPS = [
+  { text: 'Bilas botol plastik sebelum dibuang agar tidak terkontaminasi', color: '#0284C7', lightBg: '#F0F9FF', icon: DropIcon },
+  { text: 'Lipat kardus rata agar hemat ruang di tempat sampah', color: '#D97706', lightBg: '#FFFBEB', icon: BoxFoldIcon },
+  { text: 'Pisahkan baterai bekas — jangan campur dengan sampah biasa', color: '#DC2626', lightBg: '#FEF2F2', icon: BatteryIcon },
+  { text: 'Gunakan wadah tertutup untuk sampah organik agar tidak bau', color: '#059669', lightBg: '#ECFDF5', icon: ShieldLockIcon },
+  { text: 'Kumpulkan barang daur ulang lalu setor ke bank sampah terdekat', color: '#7C3AED', lightBg: '#F5F3FF', icon: RecycleIcon },
+  { text: 'Cek simbol daur ulang pada kemasan plastik sebelum membuang', color: '#475569', lightBg: '#F8FAFC', icon: SearchCheckIcon },
+];
+
+/* ═══════════════════════════════════════════════════════════ */
+/*  ANIMATIONS                                                  */
+/* ═══════════════════════════════════════════════════════════ */
+const cardVariant = {
+  hidden: { opacity: 0, y: 32, scale: 0.97 },
+  visible: (i) => ({
+    opacity: 1, y: 0, scale: 1,
+    transition: { delay: i * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  }),
 };
 
-// Animations
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
-};
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } },
+const overlayVariant = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: 'easeOut' } },
 };
 
+/* ═══════════════════════════════════════════════════════════ */
+/*  CATEGORY CARD — hover reveals full description             */
+/* ═══════════════════════════════════════════════════════════ */
+function CategoryCard({ cat, index }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      custom={index}
+      variants={cardVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-40px' }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      className="group relative overflow-hidden rounded-2xl cursor-default aspect-[4/3]"
+      style={{ border: `1.5px solid ${hovered ? cat.color + '60' : 'rgba(255,255,255,0.08)'}` }}
+    >
+      {/* Photo */}
+      <img
+        src={cat.image}
+        alt={cat.name}
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover object-center
+                   transition-transform duration-700 group-hover:scale-110"
+      />
+
+      {/* Persistent dark gradient at bottom */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+      {/* Animated color tint on hover */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={{ opacity: hovered ? 0.25 : 0 }}
+        transition={{ duration: 0.4 }}
+        style={{ background: `radial-gradient(circle at bottom center, ${cat.color}, transparent 70%)` }}
+      />
+
+      {/* Bottom content */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+        {/* Category badge — always visible */}
+        <span
+          className="inline-block px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider text-white mb-2"
+          style={{ backgroundColor: cat.color }}
+        >
+          {cat.name}
+        </span>
+
+        {/* Description — slides up on hover */}
+        <AnimatePresence>
+          {hovered && (
+            <motion.p
+              key="desc"
+              variants={overlayVariant}
+              initial="hidden"
+              animate="visible"
+              exit={{ opacity: 0, y: 8, transition: { duration: 0.2 } }}
+              className="text-sm text-white/90 leading-snug"
+            >
+              {cat.desc}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/*  MAIN SECTION                                               */
+/* ═══════════════════════════════════════════════════════════ */
 export default function WasteGuideSection() {
-  const [selectedWaste, setSelectedWaste] = useState(wasteItems[0]);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
     <section id="edukasi" className="relative overflow-hidden">
-      {/* Part 1: Macam-Macam Sampah (Carousel & Detail) */}
-      <div className="bg-gradient-to-br from-[#F8FAFC] via-emerald-50/40 to-cyan-50/30 pt-16 md:pt-20 pb-20 sm:pb-28 lg:pb-32 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.08),transparent_60%)] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-200/50 to-transparent" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+      {/* ══ PART 1: CATEGORY GRID — dark emerald theme ══ */}
+      <div className="bg-[#0A1A0F] pt-20 sm:pt-28 lg:pt-32 pb-20 sm:pb-28 relative">
+        {/* Subtle ambient glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.08),transparent_60%)] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-700/40 to-transparent" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+
           {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-10 sm:mb-14"
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-[3.25rem] font-extrabold
-                           text-slate-900 leading-[1.1] tracking-tight mb-5">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5
+                             bg-emerald-500/10 border border-emerald-500/20
+                             text-emerald-400 text-xs font-semibold tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Panduan Cerdas
+            </span>
+            <h2 className="text-[2rem] sm:text-[2.6rem] lg:text-[3rem]
+                           font-extrabold text-white leading-[1.1] tracking-[-0.025em] mb-4">
               Kenali, Pilah, dan Kelola<br className="hidden sm:block" /> Sampah dengan Benar
             </h2>
-            <p className="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-              Pilih salah satu jenis sampah untuk melihat kategori, cara memilah, dan rekomendasi pengelolaannya.
+            <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed font-medium">
+              Hover setiap kartu untuk melihat cara pengelolaan masing-masing kategori.
             </p>
           </motion.div>
 
-          {/* Carousel Wrapper */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-8"
-          >
-            <div className="overflow-x-auto pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              <div className="flex gap-4 sm:gap-5 snap-x snap-mandatory">
-                {wasteItems.map((item, idx) => {
-                  const isSelected = selectedWaste.name === item.name;
-                  return (
-                    <button
-                      key={idx}
-                      onClick={() => setSelectedWaste(item)}
-                      className={`relative min-w-[220px] md:min-w-[260px] snap-start rounded-3xl border bg-white shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl text-left focus:outline-none
-                        ${isSelected ? 'ring-2 ring-emerald-500 border-emerald-200' : 'border-slate-200/70 hover:border-emerald-300'}
-                      `}
-                    >
-                      <div className="h-44 sm:h-48 w-full overflow-hidden">
-                        <img 
-                          src={item.image} 
-                          alt={item.name} 
-                          loading="lazy"
-                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                        />
-                      </div>
-                      <div className="p-4 sm:p-5">
-                        <span className={`inline-flex items-center rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset mb-2 ${getCategoryStyle(item.category)}`}>
-                          {item.category}
-                        </span>
-                        <h3 className="text-base font-bold text-slate-800">{item.name}</h3>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Detail Panel */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedWaste.name}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.3 }}
-              className="mt-4 sm:mt-6 rounded-[2rem] border border-emerald-100 bg-white/80 p-4 sm:p-5 lg:p-6 shadow-sm backdrop-blur-xl"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-5 lg:gap-8 items-center">
-                
-                {/* Image Col */}
-                <div className="md:col-span-5 lg:col-span-4">
-                  <div className="relative aspect-[16/9] md:aspect-[4/3] lg:aspect-[3/2] rounded-2xl overflow-hidden shadow-inner border border-slate-100">
-                    <img 
-                      src={selectedWaste.image} 
-                      alt={selectedWaste.name} 
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-3 left-3">
-                      <span className={`inline-flex items-center rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset shadow-sm ${getCategoryStyle(selectedWaste.category)} bg-white/95 backdrop-blur`}>
-                        {selectedWaste.category}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Text Col */}
-                <div className="md:col-span-7 lg:col-span-8 flex flex-col justify-center space-y-4">
-                  <div>
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 mb-1.5">
-                      {selectedWaste.name}
-                    </h3>
-                    <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-                      {selectedWaste.description}
-                    </p>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
-                    <div className="bg-white border border-slate-200/60 rounded-xl p-3.5 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100">
-                          <svg className="w-3 h-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
-                        </div>
-                        <h4 className="font-bold text-[11px] sm:text-xs text-slate-800 uppercase tracking-wider">Cara Memilah</h4>
-                      </div>
-                      <p className="text-[13px] text-slate-500 leading-relaxed">
-                        {selectedWaste.sorting}
-                      </p>
-                    </div>
-
-                    <div className="bg-white border border-slate-200/60 rounded-xl p-3.5 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100">
-                          <svg className="w-3 h-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
-                        </div>
-                        <h4 className="font-bold text-[11px] sm:text-xs text-slate-800 uppercase tracking-wider">Pengelolaan</h4>
-                      </div>
-                      <p className="text-[13px] text-slate-500 leading-relaxed">
-                        {selectedWaste.management}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
+          {/* 6-card grid — hover reveals desc */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {CATEGORIES.map((cat, i) => (
+              <CategoryCard key={i} cat={cat} index={i} />
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Part 2: Cara Memilah (Timeline Steps) */}
-      <div className="bg-[#F8FAFC] py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      {/* ══ PART 2: HOW TO SORT — clean white bg ══ */}
+      <div className="bg-white dark:bg-black py-20 sm:py-28 transition-colors duration-300" id="cara-pakai-steps">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-            className="mx-auto max-w-2xl text-center"
+            transition={{ duration: 0.55 }}
+            className="text-center mb-14"
           >
-            <h3 className="text-3xl md:text-4xl font-black tracking-tight text-slate-950 mb-4">
-              4 Langkah Memilah Sampah
-            </h3>
-            <p className="text-slate-500 text-base leading-7">
-              Ikuti alur sederhana ini untuk memastikan sampahmu ditangani dengan benar.
-            </p>
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5
+                             bg-emerald-50 border border-emerald-200/60
+                             dark:bg-emerald-950/30 dark:border-emerald-800/30
+                             text-emerald-700 dark:text-emerald-400 text-xs font-semibold tracking-widest uppercase">
+              4 Langkah Mudah
+            </span>
+            <h2 className="text-[2rem] sm:text-[2.6rem] lg:text-[3rem]
+                           font-extrabold text-slate-900 dark:text-white leading-[1.1] tracking-[-0.025em] transition-colors duration-300">
+              Cara Memilah Sampah
+            </h2>
           </motion.div>
 
-          {/* Timeline Steps */}
+          {/* Steps grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 relative">
+            {/* Connector line desktop */}
+            <div className="hidden lg:block absolute top-9 left-[12.5%] right-[12.5%] h-px bg-emerald-100 dark:bg-emerald-950/40 z-0 transition-colors duration-300" />
+
+            {STEPS.map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: i * 0.1, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="relative z-10 flex flex-col items-center text-center px-5 group"
+              >
+                {/* Icon circle */}
+                <motion.div
+                  whileHover={{ scale: 1.1, y: -4 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+                  className="w-[72px] h-[72px] rounded-2xl flex items-center justify-center mb-5
+                             text-white shadow-lg"
+                  style={{
+                    background: `linear-gradient(135deg, ${step.accent}, ${step.accent}cc)`,
+                    boxShadow: `0 8px 24px ${step.accent}30`,
+                  }}
+                >
+                  {step.icon}
+                </motion.div>
+
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5"
+                  style={{ color: step.accent }}>
+                  Step {step.num}
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white mb-2 tracking-tight transition-colors duration-300">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-white/60 leading-relaxed max-w-[200px] transition-colors duration-300">
+                  {step.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ══ PART 3: TIPS — warm off-white strip ══ */}
+      <div className="bg-[#F8FAFC] dark:bg-[#0a0a0a] border-t border-slate-100 dark:border-white/5 py-16 sm:py-20 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
           <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-            className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10"
           >
-            {STEPS.map((step, i) => {
-              const IconComponent = step.icon;
+            <div>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4
+                               bg-amber-500/10 border border-amber-500/20
+                               text-amber-700 dark:text-amber-400 text-xs font-semibold tracking-widest uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                Tips Praktis
+              </span>
+              <h2 className="text-[1.8rem] sm:text-[2.2rem] font-extrabold
+                             text-slate-900 dark:text-white tracking-[-0.02em] leading-tight transition-colors duration-300">
+                Kebiasaan Kecil, <span className="text-gradient">Dampak Besar</span>
+              </h2>
+            </div>
+            <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xs leading-relaxed sm:text-right transition-colors duration-300">
+              Tips yang bisa langsung kamu terapkan setiap hari
+            </p>
+          </motion.div>
+ 
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {TIPS.map((tip, i) => {
+              const Icon = tip.icon;
               return (
-                <motion.div key={i} variants={fadeUp} className="group relative overflow-hidden rounded-3xl border border-white/70 bg-white/75 p-5 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/10">
-                  <div className="absolute left-5 right-5 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent" />
-
-                  <div className="mb-5 flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-100 to-cyan-100 text-emerald-700 shadow-inner">
-                      <IconComponent size={22} />
-                    </div>
-                    <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-600">
-                      Step {step.num}
-                    </span>
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ delay: i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={{ y: -6, scale: 1.015 }}
+                  style={{
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.02)',
+                  }}
+                  className="group flex items-start gap-4 p-5 rounded-2xl
+                             bg-white dark:bg-[#111111] border border-slate-100/80 dark:border-white/5
+                             hover:border-slate-200 dark:hover:border-white/10 hover:shadow-[0_12px_36px_rgba(15,23,42,0.06)] dark:hover:shadow-[0_12px_36px_rgba(0,0,0,0.5)]
+                             transition-all duration-300"
+                >
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:rotate-6"
+                    style={{ backgroundColor: isDark ? `${tip.color}15` : tip.lightBg }}
+                  >
+                    <Icon color={tip.color} />
                   </div>
-
-                  <h4 className="text-lg font-bold text-slate-950">
-                    {step.title}
-                  </h4>
-                  <p className="mt-2 text-sm leading-6 text-slate-500">
-                    {step.desc}
+                  <p className="text-sm font-semibold text-slate-600 dark:text-slate-300 leading-relaxed mt-0.5 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-200">
+                    {tip.text}
                   </p>
                 </motion.div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

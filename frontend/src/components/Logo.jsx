@@ -3,7 +3,7 @@
  * Komponen logo yang dapat digunakan di berbagai tempat dengan ukuran yang berbeda
  */
 
-export default function Logo({ size = 40, variant = 'default' }) {
+export default function Logo({ size = 40, variant = 'default', className = '' }) {
   // Variant colors
   const colors = {
     default: {
@@ -25,7 +25,7 @@ export default function Logo({ size = 40, variant = 'default' }) {
   const c = colors[variant] || colors.default;
 
   return (
-    <svg width={size} height={size} viewBox="0 0 72 72" fill="none">
+    <svg width={size} height={size} viewBox="0 0 72 72" fill="none" className={className}>
       <circle cx="36" cy="36" r="34" fill={c.bg} />
 
       {/* badan trash can */}

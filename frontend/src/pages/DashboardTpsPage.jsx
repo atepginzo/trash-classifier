@@ -10,7 +10,7 @@ import { tpsService } from '../services/tpsService';
 import { volumeService } from '../services/volumeService';
 import Navbar from '../components/Navbar';
 
-// Fix: Leaflet default marker icon path
+// ── Fix: Leaflet default marker icon path ────────────────────────────────────
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -18,7 +18,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
-// Custom marker icons per area type
+// ── Custom marker icons per area type ────────────────────────────────────────
 function createIcon(color) {
   return new L.DivIcon({
     className: '',
@@ -47,13 +47,14 @@ const AREA_META = {
 
 const BULAN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
 
-// Fly map to marker on selection
+// ── Helper: fly map to marker ────────────────────────────────────────────────
 function FlyTo({ center }) {
   const map = useMap();
   useEffect(() => { if (center) map.flyTo(center, 14, { duration: 1.2 }); }, [center, map]);
   return null;
 }
 
+// ═════════════════════════════════════════════════════════════════════════════
 export default function DashboardTpsPage() {
   const [allTps, setAllTps] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -68,7 +69,7 @@ export default function DashboardTpsPage() {
 
   const sidebarRef = useRef(null);
 
-  // Load all TPS on mount
+  // ── Load all TPS on mount ──────────────────────────────────────────────────
   useEffect(() => {
     async function load() {
       try {
@@ -80,11 +81,11 @@ export default function DashboardTpsPage() {
     load();
   }, []);
 
-  // Handle marker click
+  // ── Handle marker click ────────────────────────────────────────────────────
   async function handleMarkerClick(tps) {
     setSelectedTps(tps);
     setSidebarOpen(true);
-    setFlyCenter([tps.lat, tps.lon]);
+    setFlyCenter([Number(tps.lat), Number(tps.lon)]);
     setVolResult(null);
     setVolError(null);
     setVolLoading(true);
@@ -106,7 +107,7 @@ export default function DashboardTpsPage() {
     setVolError(null);
   }
 
-  // Compute max volume for bar scaling
+  // ── Compute max volume for bar scaling ─────────────────────────────────────
   const allVols = [
     ...(volResult?.history || []).map(h => h.volume_ton),
     ...(volResult?.predictions || []).map(p => p.volume_ton),
@@ -114,26 +115,22 @@ export default function DashboardTpsPage() {
   const maxVol = Math.max(...allVols, 1);
 
   return (
-    <>
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-black transition-colors duration-300 flex flex-col">
       <Navbar />
       <div style={{
         position: 'fixed', top: 64, left: 0, right: 0, bottom: 0,
         display: 'flex', overflow: 'hidden',
       }}>
-        {/* Map */}
+        {/* ══════════ LEFT: MAP ══════════ */}
         <div style={{
           flex: sidebarOpen ? '0 0 65%' : '1',
           transition: 'flex 0.3s ease',
           position: 'relative',
         }}>
           {loading ? (
-            <div style={{
-              display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center',
-              height: '100%', backgroundColor: '#F8FAFC',
-            }}>
-              <Loader2 size={36} style={{ color: '#059669' }} className="animate-spin" />
-              <p style={{ color: '#64748B', marginTop: 16, fontSize: 14 }}>Memuat peta TPS...</p>
+            <div className="flex flex-col items-center justify-center h-full bg-slate-50 dark:bg-black transition-colors duration-300">
+              <Loader2 size={36} className="text-emerald-600 dark:text-emerald-400 animate-spin" />
+              <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">Memuat peta TPS...</p>
             </div>
           ) : (
             <MapContainer
@@ -147,10 +144,10 @@ export default function DashboardTpsPage() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <FlyTo center={flyCenter} />
-              {allTps?.filter(tps => tps?.lat != null && tps?.lon != null)?.map(tps => (
+              {allTps.filter(tps => tps.lat != null && tps.lon != null).map(tps => (
                 <Marker
                   key={tps.id}
-                  position={[tps.lat, tps.lon]}
+                  position={[Number(tps.lat), Number(tps.lon)]}
                   icon={ICONS[tps.area_type] || ICONS.RURAL}
                   eventHandlers={{ click: () => handleMarkerClick(tps) }}
                 >
@@ -165,23 +162,18 @@ export default function DashboardTpsPage() {
           )}
 
           {/* Legend */}
-          <div style={{
-            position: 'absolute', bottom: 20, left: 20, zIndex: 1000,
-            backgroundColor: 'rgba(255,255,255,0.95)', borderRadius: 10,
-            padding: '12px 16px', boxShadow: '0 2px 12px rgba(0,0,0,0.12)',
-            fontSize: 12,
-          }}>
-            <div style={{ fontWeight: 700, marginBottom: 8, color: '#0F172A' }}>
-              {allTps?.filter(tps => tps?.lat != null && tps?.lon != null)?.length || 0} TPS di Bandung Raya
+          <div className="absolute bottom-5 left-5 z-[1000] bg-white/95 dark:bg-black/90 rounded-xl px-4 py-3 shadow-md text-xs border border-transparent dark:border-white/10 transition-colors duration-300">
+            <div className="font-bold mb-2 text-slate-900 dark:text-white transition-colors duration-300">
+              {allTps.length} TPS di Bandung Raya
             </div>
             {Object.entries(AREA_META).map(([key, m]) => (
-              <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+              <div key={key} className="flex items-center gap-2 mb-1">
                 <div style={{
                   width: 12, height: 12, borderRadius: '50%',
                   backgroundColor: m.color, border: '2px solid #fff',
                   boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
                 }} />
-                <span style={{ color: '#334155' }}>{m.label}</span>
+                <span className="text-slate-700 dark:text-slate-300 transition-colors duration-300">{m.label}</span>
               </div>
             ))}
           </div>
@@ -200,34 +192,29 @@ export default function DashboardTpsPage() {
           )}
         </div>
 
-        {/* Sidebar */}
+        {/* ══════════ RIGHT: SIDEBAR ══════════ */}
         <div
           ref={sidebarRef}
+          className={`flex flex-col overflow-hidden bg-slate-50 dark:bg-[#0a0a0a] transition-all duration-300 ${
+            sidebarOpen ? 'border-l border-slate-200 dark:border-white/5' : ''
+          }`}
           style={{
             width: sidebarOpen ? '35%' : 0,
             minWidth: sidebarOpen ? 360 : 0,
-            overflow: 'hidden',
-            transition: 'width 0.3s ease, min-width 0.3s ease',
-            backgroundColor: '#F8FAFC',
-            borderLeft: sidebarOpen ? '1px solid #E2E8F0' : 'none',
-            display: 'flex', flexDirection: 'column',
           }}
         >
           {sidebarOpen && selectedTps && (
-            <div style={{ flex: 1, overflowY: 'auto', padding: 24 }}>
+            <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
               {/* Close button */}
               <button
                 onClick={closeSidebar}
-                style={{
-                  float: 'right', background: 'none', border: 'none',
-                  cursor: 'pointer', color: '#64748B', padding: 4,
-                }}
+                className="float-right bg-transparent border-none cursor-pointer text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white p-1 transition-colors duration-200"
               >
                 <X size={20} />
               </button>
 
               {/* TPS Header */}
-              <div style={{ marginBottom: 20 }}>
+              <div className="mb-5">
                 {(() => {
                   const meta = AREA_META[selectedTps.area_type] || AREA_META.RURAL;
                   const BadgeIcon = meta.Icon;
@@ -241,52 +228,38 @@ export default function DashboardTpsPage() {
                     </span>
                   );
                 })()}
-                <h2 style={{
-                  fontFamily: 'var(--font-sans)', color: '#0F172A',
-                  fontSize: 22, fontWeight: 700, marginTop: 8, marginBottom: 4,
-                }}>
+                <h2 className="font-sans text-[22px] font-bold text-slate-900 dark:text-white mt-2 mb-1 tracking-tight transition-colors duration-300">
                   {selectedTps.nama_desa}
                 </h2>
-                <p style={{ color: '#64748B', fontSize: 13 }}>
+                <p className="text-[13px] text-slate-500 dark:text-slate-400 transition-colors duration-300">
                   Kec. {selectedTps.kecamatan} • {selectedTps.kabupaten}
                 </p>
-                <div style={{
-                  display: 'flex', alignItems: 'center', gap: 12,
-                  marginTop: 8, fontSize: 12, color: '#64748B',
-                }}>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <div className="flex items-center gap-3 mt-2 text-[12px] text-slate-500 dark:text-slate-400 transition-colors duration-300">
+                  <span className="flex items-center gap-1">
                     <Navigation size={12} />
                     {typeof selectedTps.lat === 'number' ? selectedTps.lat.toFixed(4) : selectedTps.lat},
                     {typeof selectedTps.lon === 'number' ? selectedTps.lon.toFixed(4) : selectedTps.lon}
                   </span>
                   <span>•</span>
-                  <span style={{ fontWeight: 600, color: '#334155' }}>
+                  <span className="font-semibold text-slate-700 dark:text-slate-300 transition-colors duration-300">
                     {selectedTps.kapasitas_ton} ton
                   </span>
                 </div>
               </div>
 
-              <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: '0 0 20px' }} />
+              <hr className="border-none border-t border-slate-200 dark:border-white/10 my-5 transition-colors duration-300" />
 
               {/* Volume Prediction Section */}
-              <h3 style={{
-                fontSize: 14, fontWeight: 700, color: '#0F172A',
-                display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16,
-              }}>
-                <TrendingUp size={16} style={{ color: '#059669' }} />
+              <h3 className="flex items-center gap-2 text-[14px] font-bold text-slate-900 dark:text-white mb-4 transition-colors duration-300">
+                <TrendingUp size={16} className="text-emerald-600 dark:text-emerald-400" />
                 Prediksi Volume Sampah (LSTM)
               </h3>
 
               {/* Loading */}
               {volLoading && (
-                <div style={{
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '40px 0',
-                }}>
-                  <div style={{
-                    width: 36, height: 36, border: '3px solid #E2E8F0',
-                    borderTopColor: '#059669', borderRadius: '50%',
-                  }} className="animate-spin" />
-                  <p style={{ color: '#64748B', fontSize: 13, marginTop: 12 }}>
+                <div className="flex flex-col items-center py-10">
+                  <div className="w-9 h-9 border-[3px] border-slate-200 dark:border-white/10 border-t-emerald-600 dark:border-t-emerald-400 rounded-full animate-spin" />
+                  <p className="mt-3 text-[13px] text-slate-500 dark:text-slate-400 transition-colors duration-300">
                     Menjalankan model LSTM...
                   </p>
                 </div>
@@ -294,13 +267,9 @@ export default function DashboardTpsPage() {
 
               {/* Error */}
               {volError && (
-                <div style={{
-                  backgroundColor: '#fef2f2', border: '1px solid #f5c6c6',
-                  borderRadius: 8, padding: 12, display: 'flex', alignItems: 'start', gap: 10,
-                  marginBottom: 16,
-                }}>
-                  <AlertCircle size={16} style={{ color: '#a32d2d', marginTop: 2 }} />
-                  <p style={{ color: '#7f1d1d', fontSize: 13 }}>{volError}</p>
+                <div className="flex items-start gap-2.5 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/30 rounded-lg p-3 mb-4 transition-colors duration-300">
+                  <AlertCircle size={16} className="text-red-700 dark:text-red-400 mt-0.5 shrink-0" />
+                  <p className="text-[13px] text-red-800 dark:text-red-300 m-0">{volError}</p>
                 </div>
               )}
 
@@ -308,78 +277,58 @@ export default function DashboardTpsPage() {
               {volResult && (
                 <>
                   {/* 3 Prediction Cards */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 20 }}>
+                  <div className="grid grid-cols-3 gap-2.5 mb-5">
                     {(volResult.predictions || []).map((pred, i) => {
                       const lastH = volResult.history?.[volResult.history.length - 1];
                       const predMonth = lastH ? ((lastH.bulan + i) % 12) + 1 : i + 1;
                       const predYear = lastH ? lastH.tahun + Math.floor((lastH.bulan + i) / 12) : 2026;
                       return (
-                        <div key={i} style={{
-                          backgroundColor: '#ffffff', borderRadius: 10, padding: 14,
-                          textAlign: 'center', border: '1px solid #E2E8F0',
-                          boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
-                        }}>
-                          <div style={{ fontSize: 11, color: '#64748B', marginBottom: 6 }}>
+                        <div key={i} className="bg-white dark:bg-[#111111] rounded-xl p-3.5 text-center border border-slate-200 dark:border-white/5 shadow-[0_1px_4px_rgba(0,0,0,0.04)] dark:shadow-[0_1px_4px_rgba(0,0,0,0.5)] transition-colors duration-300">
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 mb-1.5 transition-colors duration-300">
                             {BULAN[predMonth - 1]} {predYear}
                           </div>
-                          <div style={{
-                            fontSize: 20, fontWeight: 800, color: '#059669',
-                            fontFamily: 'var(--font-mono, monospace)',
-                          }}>
+                          <div className="text-[20px] font-extrabold text-emerald-600 dark:text-emerald-400 font-mono transition-colors duration-300">
                             {pred.volume_ton.toFixed(1)}
                           </div>
-                          <div style={{ fontSize: 10, color: '#64748B', marginTop: 2 }}>ton</div>
+                          <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 transition-colors duration-300">ton</div>
                         </div>
                       );
                     })}
                   </div>
 
                   {/* Model badge */}
-                  <div style={{
-                    backgroundColor: '#ECFDF5', borderRadius: 6,
-                    padding: '6px 12px', display: 'inline-flex', alignItems: 'center', gap: 6,
-                    fontSize: 11, color: '#059669', fontWeight: 600, marginBottom: 16,
-                  }}>
+                  <div className="bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 rounded-md px-3 py-1.5 inline-flex items-center gap-1.5 text-[11px] font-semibold mb-4 border border-transparent dark:border-emerald-800/30 transition-colors duration-300">
                     <BarChart3 size={12} /> {volResult.model_used}
                   </div>
 
                   {/* History Bar Chart */}
-                  <h4 style={{
-                    fontSize: 12, fontWeight: 600, color: '#334155',
-                    marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6,
-                  }}>
+                  <h4 className="text-[12px] font-semibold text-slate-700 dark:text-slate-300 mb-2.5 flex items-center gap-1.5 transition-colors duration-300">
                     <BarChart3 size={13} /> Riwayat 12 Bulan (ton)
                   </h4>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 5, marginBottom: 16 }}>
+                  <div className="flex flex-col gap-1.5 mb-4">
                     {(volResult.history || []).map((h, i) => (
-                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <span style={{ minWidth: 52, fontSize: 11, color: '#64748B', textAlign: 'right' }}>
+                      <div key={i} className="flex items-center gap-2">
+                        <span className="min-w-[52px] text-[11px] text-slate-500 dark:text-slate-400 text-right transition-colors duration-300">
                           {BULAN[h.bulan - 1]} {h.tahun}
                         </span>
-                        <div style={{
-                          flex: 1, height: 16, backgroundColor: '#F1F5F9',
-                          borderRadius: 3, overflow: 'hidden',
-                        }}>
-                          <div style={{
-                            width: `${(h.volume_ton / maxVol) * 100}%`,
-                            height: '100%', backgroundColor: '#86EFAC',
-                            borderRadius: 3, transition: 'width 0.4s ease',
-                          }} />
+                        <div className="flex-1 h-4 bg-slate-100 dark:bg-white/5 rounded-sm overflow-hidden transition-colors duration-300">
+                          <div
+                            className="h-full bg-emerald-300 dark:bg-emerald-500 rounded-sm transition-all duration-500"
+                            style={{ width: `${(h.volume_ton / maxVol) * 100}%` }}
+                          />
                         </div>
-                        <span style={{ minWidth: 40, fontSize: 11, fontWeight: 600, color: '#334155', textAlign: 'right' }}>
+                        <span className="min-w-[40px] text-[11px] font-semibold text-slate-700 dark:text-slate-300 text-right transition-colors duration-300">
                           {h.volume_ton.toFixed(1)}
                         </span>
                       </div>
                     ))}
 
                     {/* Divider */}
-                    <div style={{
-                      display: 'flex', alignItems: 'center', gap: 8, padding: '4px 0',
-                    }}>
-                      <div style={{ flex: 1, height: 1, backgroundColor: '#CBD5E1' }} />
-                      <span style={{ fontSize: 10, fontWeight: 700, color: '#059669' }}>▼ PREDIKSI</span>
-                      <div style={{ flex: 1, height: 1, backgroundColor: '#c5c5b8' }} />
+                    <div className="flex items-center gap-2 py-1">
+                      <div className="flex-1 h-px bg-slate-300 dark:bg-white/10 transition-colors duration-300" />
+                      <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 transition-colors duration-300">▼ PREDIKSI</span>
+                      <div className="flex-1 h-px bg-slate-300 dark:bg-white/10 transition-colors duration-300" />
                     </div>
 
                     {/* Prediction bars */}
@@ -388,22 +337,20 @@ export default function DashboardTpsPage() {
                       const pm = lastH ? ((lastH.bulan + i) % 12) + 1 : i + 1;
                       const py = lastH ? lastH.tahun + Math.floor((lastH.bulan + i) / 12) : 2026;
                       return (
-                        <div key={`p-${i}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <span style={{ minWidth: 52, fontSize: 11, fontWeight: 700, color: '#059669', textAlign: 'right' }}>
+                        <div key={`p-${i}`} className="flex items-center gap-2">
+                          <span className="min-w-[52px] text-[11px] font-bold text-emerald-600 dark:text-emerald-400 text-right transition-colors duration-300">
                             {BULAN[pm - 1]} {py}
                           </span>
-                          <div style={{
-                            flex: 1, height: 16, backgroundColor: '#f0ebe3',
-                            borderRadius: 3, overflow: 'hidden',
-                          }}>
-                            <div style={{
-                              width: `${(p.volume_ton / maxVol) * 100}%`,
-                              height: '100%',
-                              background: 'linear-gradient(90deg, #059669 0%, #34D399 100%)',
-                              borderRadius: 3, transition: 'width 0.4s ease',
-                            }} />
+                          <div className="flex-1 h-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-sm overflow-hidden transition-colors duration-300">
+                            <div
+                              className="h-full rounded-sm transition-all duration-500"
+                              style={{
+                                width: `${(p.volume_ton / maxVol) * 100}%`,
+                                background: 'linear-gradient(90deg, #059669 0%, #34D399 100%)',
+                              }}
+                            />
                           </div>
-                          <span style={{ minWidth: 40, fontSize: 11, fontWeight: 800, color: '#059669', textAlign: 'right' }}>
+                          <span className="min-w-[40px] text-[11px] font-extrabold text-emerald-600 dark:text-emerald-400 text-right transition-colors duration-300">
                             {p.volume_ton.toFixed(1)}
                           </span>
                         </div>
@@ -416,6 +363,6 @@ export default function DashboardTpsPage() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,139 +1,175 @@
+import { useNavigate, useLocation } from 'react-router-dom';
 import Logo from './Logo';
+import { motion } from 'framer-motion';
 
-/* Social media icons */
 const FacebookIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
   </svg>
 );
 const InstagramIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
   </svg>
 );
-const YoutubeIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-  </svg>
-);
-const TwitterIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+const GithubIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
   </svg>
 );
 
-/* Login icon */
-const LoginIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="14" height="14" rx="3" />
-    <circle cx="10" cy="8.5" r="2.2" /><path d="M5.5 16c0-2 2-3.5 4.5-3.5s4.5 1.5 4.5 3.5" />
-  </svg>
-);
+const NAV_COLS = [
+  {
+    title: 'Navigasi',
+    links: [
+      { label: 'Beranda', href: '/', internal: true },
+      { label: 'Cara Pakai', href: '/#cara-pakai', internal: true, scroll: 'cara-pakai' },
+      { label: 'Peta TPS', href: '/dashboard-tps', internal: true },
+      { label: 'Riwayat', href: '/predictions', internal: true },
+      { label: 'Tim', href: '/team', internal: true },
+    ],
+  },
+  {
+    title: 'Kontak',
+    links: [
+      { label: 'Email Kami', href: 'mailto:ecosortdbs@gmail.com' },
+      { label: 'WhatsApp', href: 'https://wa.me/6289513829923', external: true },
+      { label: 'Telepon', href: 'tel:+6289513829923' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Kebijakan Privasi', href: '/privacy' },
+      { label: 'Syarat & Ketentuan', href: '/terms' },
+    ],
+  },
+];
 
 export default function Footer() {
+  const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
 
-  return (
-    <footer id="kontak" className="bg-slate-900 overflow-hidden">
+  const handleLink = (e, link) => {
+    if (!link.internal && !link.scroll) return;
+    e.preventDefault();
+    if (link.scroll) {
+      // Navigate to home then scroll
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById(link.scroll);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    } else {
+      navigate(link.href);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
-      {/* ======== CTA Banner Strip ======== */}
-      <div className="bg-emerald-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10
+  return (
+    <footer id="kontak" className="bg-[#0A1A0F] overflow-hidden">
+
+      {/* ── Top divider line ── */}
+      <div className="h-px bg-gradient-to-r from-transparent via-emerald-700/40 to-transparent" />
+
+      {/* ── CTA Banner ── */}
+      <div className="border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-10
                         flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 tracking-tight">
               Mulai kelola sampah lebih cerdas
             </h3>
-            <p className="text-sm sm:text-base text-emerald-100/70 max-w-md">
+            <p className="text-sm text-slate-400 max-w-md">
               Bergabung bersama organisasi pengelola limbah yang sudah menggunakan TrashSmart
             </p>
           </div>
-          <a href="/login"
-             className="inline-flex items-center gap-2.5 px-6 py-3 bg-white text-emerald-700
-                        font-semibold text-sm rounded-full
-                        hover:bg-emerald-50 hover:shadow-lg
-                        transition-all duration-300 shrink-0">
-            <LoginIcon />
+          <motion.a
+            href="/login"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2.5 px-6 py-3
+                       bg-emerald-600 text-white font-semibold text-sm rounded-full
+                       hover:bg-emerald-500 shadow-lg shadow-emerald-900/40
+                       transition-all duration-300 shrink-0"
+          >
             Masuk Sekarang
-          </a>
+          </motion.a>
         </div>
       </div>
 
-      {/* ======== Main Footer ======== */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-10 border-b border-white/10">
+      {/* ── Main Footer grid ── */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-14 pb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-10
+                        border-b border-white/5">
+
+          {/* Brand col */}
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <Logo size={32} />
-              <span className="text-lg font-bold text-white">TrashSmart</span>
+              <Logo size={34} />
+              <span className="text-lg font-bold text-white tracking-tight">TrashSmart</span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-xs mb-6">
-              Sistem klasifikasi sampah berbasis AI untuk mendukung pengelolaan limbah yang lebih efisien dan berkelanjutan.
+              Sistem klasifikasi sampah berbasis AI untuk mendukung pengelolaan
+              limbah yang lebih efisien dan berkelanjutan.
             </p>
-            <div className="flex items-center gap-3">
+            {/* Social */}
+            <div className="flex items-center gap-2.5">
               {[
-                { Icon: FacebookIcon, href: 'https://facebook.com' },
-                { Icon: InstagramIcon, href: 'https://instagram.com' },
-                { Icon: YoutubeIcon, href: 'https://youtube.com' },
-                { Icon: TwitterIcon, href: 'https://twitter.com' },
-              ].map(({ Icon, href }, i) => (
-                <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10
-                                              flex items-center justify-center text-slate-400
-                                              hover:bg-emerald-500/20 hover:text-emerald-400 hover:border-emerald-500/30
-                                              transition-all duration-300">
+                { Icon: FacebookIcon, href: 'https://facebook.com', label: 'Facebook' },
+                { Icon: InstagramIcon, href: 'https://instagram.com', label: 'Instagram' },
+                { Icon: GithubIcon, href: 'https://github.com/atepginzo', label: 'GitHub' },
+              ].map(({ Icon, href, label }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  whileHover={{ scale: 1.15, y: -2 }}
+                  transition={{ duration: 0.15 }}
+                  className="w-9 h-9 rounded-xl bg-white/5 border border-white/8
+                             flex items-center justify-center text-slate-400
+                             hover:bg-emerald-500/20 hover:text-emerald-400
+                             hover:border-emerald-500/30 transition-all duration-300"
+                >
                   <Icon />
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
-          <div>
-            <h4 className="text-white font-semibold text-sm mb-4 tracking-wider">Navigasi</h4>
-            <ul className="space-y-2.5">
-              {[
-                { label: 'Beranda', href: '/' },
-                { label: 'Tentang', href: '/about' },
-                { label: 'Edukasi', href: '/education' },
-                { label: 'Cara Pakai', href: '/about#cara-pakai' },
-                { label: 'Tim', href: '/team' },
-              ].map((item) => (
-                <li key={item.label}>
-                  <a href={item.href} className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">{item.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white font-semibold text-sm mb-4 tracking-wider">Kontak</h4>
-            <ul className="space-y-2.5">
-              <li>
-                <a href="mailto:ecosortdbs@gmail.com" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">Email kami</a>
-              </li>
-              <li>
-                <a href="https://wa.me/6289513829923" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">WhatsApp</a>
-              </li>
-              <li>
-                <a href="tel:+6289513829923" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">Telepon</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white font-semibold text-sm mb-4 tracking-wider">Perusahaan</h4>
-            <ul className="space-y-2.5">
-              <li>
-                <a href="/privacy" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">Kebijakan Privasi</a>
-              </li>
-              <li>
-                <a href="/terms" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">Syarat & Ketentuan</a>
-              </li>
-              <li>
-                <a href="/career" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">Karir</a>
-              </li>
-            </ul>
-          </div>
+
+          {/* Link columns */}
+          {NAV_COLS.map((col) => (
+            <div key={col.title}>
+              <h4 className="text-white font-semibold text-sm mb-5 tracking-widest uppercase">
+                {col.title}
+              </h4>
+              <ul className="space-y-3">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target={link.external ? '_blank' : undefined}
+                      rel={link.external ? 'noopener noreferrer' : undefined}
+                      onClick={link.internal || link.scroll ? (e) => handleLink(e, link) : undefined}
+                      className="text-sm text-slate-400 hover:text-emerald-400
+                                 transition-colors duration-200 inline-flex items-center group"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+
+        {/* Bottom bar */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between
+                        gap-3 text-xs text-slate-500">
           <p>&copy; {currentYear} TrashSmart &middot; Coding Camp DBS Foundation</p>
-          <p className="font-mono tracking-wider">CC26-PSU179</p>
+          <p className="font-mono tracking-widest">CC26-PSU179</p>
         </div>
       </div>
     </footer>

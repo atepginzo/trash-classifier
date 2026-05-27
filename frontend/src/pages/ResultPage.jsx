@@ -1,218 +1,141 @@
-import { useRef, useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, History, AlertTriangle, Leaf, Recycle, Trash2, Clock, Sparkles, CheckCircle2, ShieldAlert, Coins, RefreshCw } from 'lucide-react';
+import { useRef, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { ArrowLeft, History, AlertTriangle, Leaf, Recycle, Clock, Sparkles, CheckCircle2, ShieldAlert, Coins, RefreshCw } from 'lucide-react';
 import { usePrediction } from '../hooks/usePrediction';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
+import PageTransition from '../components/PageTransition';
+import { fadeIn, slideInLeft, slideInRight, staggerContainer, scaleIn } from '../lib/animations';
+import { useTheme } from '../contexts/ThemeContext';
+
+const getCardTheme = (title, isDark) => {
+  const key = title.toUpperCase();
+  if (isDark) {
+    const darkThemes = {
+      'DAMPAK LINGKUNGAN': { bg: 'rgba(220, 38, 38, 0.1)', border: '1px solid rgba(220, 38, 38, 0.25)', titleColor: '#f87171' },
+      'PENANGANAN TEPAT': { bg: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.25)', titleColor: '#34d399' },
+      'NILAI EKONOMIS': { bg: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.25)', titleColor: '#fbbf24' },
+      'KONVERSI KREATIF': { bg: 'rgba(37, 99, 235, 0.1)', border: '1px solid rgba(37, 99, 235, 0.25)', titleColor: '#60a5fa' }
+    };
+    return darkThemes[key] || { bg: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', titleColor: '#ffffff' };
+  } else {
+    const lightThemes = {
+      'DAMPAK LINGKUNGAN': { bg: '#fff5f5', border: '1px solid #fecaca', titleColor: '#dc2626' },
+      'PENANGANAN TEPAT': { bg: '#f0fdf4', border: '1px solid #bbf7d0', titleColor: '#16a34a' },
+      'NILAI EKONOMIS': { bg: '#fffbeb', border: '1px solid #fde68a', titleColor: '#d97706' },
+      'KONVERSI KREATIF': { bg: '#eff6ff', border: '1px solid #bfdbfe', titleColor: '#2563eb' }
+    };
+    return lightThemes[key] || { bg: '#ffffff', border: '1px solid #e2e8f0', titleColor: '#475569' };
+  }
+};
 
 const CATEGORY_CONFIG = {
   organik: {
     label: 'Organik',
     icon: Leaf,
-    color: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    color: 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/30',
     primaryColor: '#059669',
-    bgBadge: 'bg-emerald-50 text-emerald-700',
-    bgPill: 'border-emerald-300 bg-emerald-50 text-emerald-700',
+    bgBadge: 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400',
+    bgPill: 'border-emerald-300 dark:border-emerald-800/30 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400',
     description: 'Sampah alami yang mudah membusuk dan terurai secara alami oleh mikroorganisme.'
   },
   anorganik: {
     label: 'Anorganik',
     icon: Recycle,
-    color: 'bg-sky-50 text-sky-700 border-sky-200',
+    color: 'bg-sky-50 dark:bg-sky-950/20 text-sky-700 dark:text-sky-400 border-sky-200 dark:border-sky-800/30',
     primaryColor: '#0284C7',
-    bgBadge: 'bg-sky-50 text-sky-700',
-    bgPill: 'border-sky-300 bg-sky-50 text-sky-700',
+    bgBadge: 'bg-sky-50 dark:bg-sky-950/20 text-sky-700 dark:text-sky-400',
+    bgPill: 'border-sky-300 dark:border-sky-800/30 bg-sky-50 dark:bg-sky-950/20 text-sky-700 dark:text-sky-400',
     description: 'Sampah buatan manusia yang tidak mudah terurai secara alami dan dapat didaur ulang.'
   },
   b3: {
     label: 'Limbah B3',
     icon: AlertTriangle,
-    color: 'bg-red-50 text-red-600 border-red-200',
+    color: 'bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800/30',
     primaryColor: '#DC2626',
-    bgBadge: 'bg-red-50 text-red-600',
-    bgPill: 'border-red-300 bg-red-50 text-red-600',
+    bgBadge: 'bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400',
+    bgPill: 'border-red-300 dark:border-red-800/30 bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400',
     description: 'Bahan Berbahaya dan Beracun yang memerlukan penanganan khusus demi keamanan lingkungan.'
   }
 };
 
 const CATEGORY_TIPS = {
   organik: {
-    title: 'AI Insight',
+    title: 'AI Insight — Analisis Sampah',
     cards: [
       {
         title: 'Dampak Lingkungan',
         desc: 'Membusuk dalam 1–4 minggu. Menghasilkan emisi gas metana berbahaya jika menumpuk di TPA tanpa oksigen.',
-        icon: AlertTriangle,
-        color: 'bg-red-50 text-red-600 border border-red-100'
+        icon: AlertTriangle
       },
       {
         title: 'Penanganan Tepat',
         desc: 'Pisahkan dari sampah anorganik agar kering, masukkan ke wadah tertutup atau komposter organik rumah tangga.',
-        icon: CheckCircle2,
-        color: 'bg-emerald-50 text-emerald-700 border border-emerald-100'
+        icon: CheckCircle2
       },
       {
         title: 'Nilai Ekonomis',
         desc: 'Berkisar Rp 500 – Rp 1.500 per kilogram jika diolah menjadi pupuk kompos matang atau pakan budidaya maggot.',
-        icon: Coins,
-        color: 'bg-amber-50 text-amber-700 border border-amber-100'
+        icon: Coins
       },
       {
         title: 'Konversi Kreatif',
         desc: 'Sangat ideal diolah kembali menjadi pupuk kompos organik cair, eco-enzyme pembersih, atau sumber biogas.',
-        icon: RefreshCw,
-        color: 'bg-sky-50 text-sky-700 border border-sky-100'
+        icon: RefreshCw
       }
     ]
   },
   anorganik: {
-    title: 'AI Insight',
+    title: 'AI Insight — Analisis Sampah',
     cards: [
       {
         title: 'Dampak Lingkungan',
         desc: 'Butuh 450 tahun terurai di alam. Menyumbang mikroplastik di rantai makanan jika hancur terfragmentasi.',
-        icon: AlertTriangle,
-        color: 'bg-red-light/60 text-red border border-red/10'
+        icon: AlertTriangle
       },
       {
         title: 'Penanganan Tepat',
         desc: 'Kosongkan cairan, bilas bersih, pisahkan tutup dari badan botol, lalu buang ke wadah sampah biru.',
-        icon: CheckCircle2,
-        color: 'bg-green-light/60 text-green border border-green/10'
+        icon: CheckCircle2
       },
       {
         title: 'Nilai Ekonomis',
         desc: 'Berkisar Rp 1.500 – Rp 3.500 per kilogram di Bank Sampah terdekat tergantung pada kebersihan & jenis plastik.',
-        icon: Coins,
-        color: 'bg-terracotta/5 text-terracotta border border-terracotta/10'
+        icon: Coins
       },
       {
         title: 'Konversi Kreatif',
         desc: 'Dapat didaur ulang menjadi produk bernilai guna tinggi seperti pot tanaman, wadah baru, hingga serat poliester.',
-        icon: RefreshCw,
-        color: 'bg-blue-light/60 text-blue border border-blue/10'
+        icon: RefreshCw
       }
     ]
   },
   b3: {
-    title: 'AI Insight',
+    title: 'AI Insight — Analisis Sampah',
     cards: [
       {
         title: 'Dampak Lingkungan',
         desc: 'Zat kimia beracun sangat korosif atau beracun bagi manusia & merusak rantai makanan lingkungan jangka panjang.',
-        icon: AlertTriangle,
-        color: 'bg-red-light/60 text-red border border-red/10'
+        icon: AlertTriangle
       },
       {
         title: 'Penanganan Tepat',
         desc: 'Simpan di wadah khusus yang tahan bocor, pisahkan dari sampah umum, dan serahkan ke TPS khusus limbah B3.',
-        icon: CheckCircle2,
-        color: 'bg-green-light/60 text-green border border-green/10'
+        icon: CheckCircle2
       },
       {
         title: 'Nilai Ekonomis',
         desc: 'Tidak bernilai jual karena tergolong limbah berbahaya yang regulasinya ketat dan memerlukan pemusnahan profesional.',
-        icon: Coins,
-        color: 'bg-terracotta/5 text-terracotta border border-terracotta/10'
+        icon: Coins
       },
       {
         title: 'Konversi Kreatif',
         desc: 'Dinetralisasi melalui metode fisika-kimia khusus atau dikelola aman oleh lembaga pengolahan limbah berizin.',
-        icon: RefreshCw,
-        color: 'bg-blue-light/60 text-blue border border-blue/10'
+        icon: RefreshCw
       }
     ]
   }
 };
-
-function ConfidenceBar({ value, delay = 300, animated = true, onComplete }) {
-  const [currentValue, setCurrentValue] = useState(0);
-  const [showShimmer, setShowShimmer] = useState(false);
-  const targetValue = Math.round(value);
-  const onCompleteRef = useRef(onComplete);
-
-  useEffect(() => {
-    onCompleteRef.current = onComplete;
-  }, [onComplete]);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const shouldAnimate = animated && !mediaQuery.matches;
-
-    if (!shouldAnimate) {
-      setCurrentValue(targetValue);
-      setShowShimmer(false);
-      if (onCompleteRef.current) onCompleteRef.current();
-      return;
-    }
-
-    let startTime;
-    let animationFrame;
-    const duration = 1200;
-
-    const animateCount = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
-
-      if (progress < duration) {
-        const t = progress / duration;
-        const ease = 1 - Math.pow(1 - t, 3); // easeOutCubic
-        setCurrentValue(Math.round(ease * targetValue));
-        animationFrame = requestAnimationFrame(animateCount);
-      } else {
-        setCurrentValue(targetValue);
-        if (onCompleteRef.current) onCompleteRef.current();
-      }
-    };
-
-    const startTimeout = setTimeout(() => {
-      animationFrame = requestAnimationFrame(animateCount);
-      const shimmerTimeout = setTimeout(() => setShowShimmer(true), duration);
-    }, delay);
-
-    return () => {
-      clearTimeout(startTimeout);
-      if (animationFrame) cancelAnimationFrame(animationFrame);
-    };
-  }, [targetValue, delay, animated]);
-
-  return (
-    <div className="w-full flex flex-col gap-2">
-      <div className="flex justify-between items-center">
-        <span className="text-[12px] text-[#666]">Tingkat Kepastian</span>
-        <span className="text-[13px] font-medium text-[#0F6E56]">{currentValue}%</span>
-      </div>
-      <div className="relative h-[8px] w-full rounded-[99px] bg-[#E1F5EE] overflow-hidden">
-        <motion.div
-          initial={{ width: animated ? '0%' : `${targetValue}%` }}
-          animate={{ width: `${targetValue}%` }}
-          transition={{
-            delay: animated ? delay / 1000 : 0,
-            duration: animated ? 1.2 : 0,
-            ease: [0.34, 1.2, 0.64, 1]
-          }}
-          className="absolute left-0 top-0 h-full rounded-[99px]"
-          style={{ background: 'linear-gradient(90deg, #1D9E75 0%, #5DCAA5 60%, #9FE1CB 100%)' }}
-        >
-          {showShimmer && animated && (
-            <motion.div
-              initial={{ x: '-100%' }}
-              animate={{ x: '200%' }}
-              transition={{
-                duration: 1.8,
-                ease: 'easeInOut',
-                repeat: Infinity,
-              }}
-              className="absolute left-0 top-0 h-full w-[60%]"
-              style={{ background: 'linear-gradient(90deg, transparent 20%, rgba(255,255,255,0.55) 50%, transparent 80%)' }}
-            />
-          )}
-        </motion.div>
-      </div>
-    </div>
-  );
-}
 
 function BoundingBoxOverlay({ imageUrl, detections, categoryColor }) {
   const imgRef = useRef(null);
@@ -238,38 +161,31 @@ function BoundingBoxOverlay({ imageUrl, detections, categoryColor }) {
       const pw = width * canvas.width;
       const ph = height * canvas.height;
 
-      // Color scheme matches the category color
-      ctx.strokeStyle = categoryColor || '#2D5016';
-      ctx.lineWidth = 3;
-      ctx.lineJoin = 'round';
-
-      // Draw double border effect
-      ctx.setLineDash([6, 4]);
-      ctx.strokeRect(px, py, pw, ph);
-      ctx.setLineDash([]);
+      ctx.strokeStyle = categoryColor || '#1D9E75';
+      ctx.lineWidth = 2;
       ctx.strokeRect(px, py, pw, ph);
 
-      // Draw prediction label
       const text = `${det.label} ${(det.confidence * 100).toFixed(0)}%`;
       ctx.font = 'bold 11px system-ui, -apple-system, sans-serif';
-      const textW = ctx.measureText(text).width + 12;
+      const textW = ctx.measureText(text).width + 18;
 
-      const rx = px;
-      const ry = py - 22;
-      const rw = textW;
-      const rh = 20;
+      const labelX = px;
+      const labelY = py - 20;
+      const labelW = textW;
+      const labelH = 20;
 
-      ctx.fillStyle = categoryColor || '#2D5016';
+      ctx.fillStyle = '#0a1f15';
       if (ctx.roundRect) {
         ctx.beginPath();
-        ctx.roundRect(rx, ry, rw, rh, 4);
+        ctx.roundRect(labelX, labelY, labelW, labelH, [5, 5, 0, 0]);
         ctx.fill();
       } else {
-        ctx.fillRect(rx, ry, rw, rh);
+        ctx.fillRect(labelX, labelY, labelW, labelH);
       }
 
-      ctx.fillStyle = '#ffffff';
-      ctx.fillText(text, px + 6, py - 8);
+      ctx.fillStyle = '#6ee7b7';
+      ctx.font = '700 11px system-ui';
+      ctx.fillText(text, labelX + 9, labelY + 14);
     });
   };
 
@@ -280,12 +196,13 @@ function BoundingBoxOverlay({ imageUrl, detections, categoryColor }) {
   }, [detections]);
 
   return (
-    <div className="relative inline-block w-full overflow-hidden rounded-2xl border border-slate-200/60 bg-slate-50/40 shadow-sm">
+    <div style={{ width: '100%', height: '100%', position: 'relative' }} className="overflow-hidden">
       <img
         ref={imgRef}
         src={imageUrl}
         alt="Hasil Deteksi"
-        className="w-full h-auto max-h-[200px] md:max-h-[240px] object-contain mx-auto block"
+        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+        className="mx-auto block"
         onLoad={drawBoxes}
         crossOrigin="anonymous"
       />
@@ -301,36 +218,36 @@ export default function ResultPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, loading, error } = usePrediction(id);
-  const [showAccuracyBadge, setShowAccuracyBadge] = useState(false);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-between">
+      <div className="min-h-screen bg-[#F8FAFC] dark:bg-black flex flex-col justify-between transition-colors duration-300">
         <Navbar />
         <div className="flex-grow pt-28 pb-16 flex items-center justify-center px-4">
-          <div className="max-w-xl w-full bg-white rounded-3xl border border-slate-200/60 shadow-sm p-8 text-center space-y-6">
+          <div className="max-w-xl w-full bg-white dark:bg-[#111111] rounded-3xl border border-slate-200/60 dark:border-white/5 shadow-sm p-8 text-center space-y-6 transition-colors duration-300">
             <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto" />
             <div className="space-y-2">
-              <h2 className="text-xl font-bold text-slate-800">Menganalisis Data Sampah...</h2>
-              <p className="text-sm text-slate-500">Mengambil detail hasil klasifikasi AI dari basis data.</p>
+              <h2 className="text-xl font-bold text-slate-800 dark:text-white">Menganalisis Data Sampah...</h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400">Mengambil detail hasil klasifikasi AI dari basis data.</p>
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-between">
+      <div className="min-h-screen bg-[#F8FAFC] dark:bg-black flex flex-col justify-between transition-colors duration-300">
         <Navbar />
         <div className="flex-grow pt-28 pb-16 flex items-center justify-center px-4">
-          <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200/60 shadow-md p-8 text-center space-y-6">
+          <div className="max-w-md w-full bg-white dark:bg-[#111111] rounded-3xl border border-slate-200/60 dark:border-white/5 shadow-md p-8 text-center space-y-6 transition-colors duration-300">
             <ShieldAlert className="w-16 h-16 text-amber-500 mx-auto animate-bounce-slow" />
             <div className="space-y-2">
-              <h2 className="text-2xl font-extrabold text-slate-800">Analisis Tidak Ditemukan</h2>
-              <p className="text-sm text-slate-500">ID deteksi "{id}" tidak terdaftar atau telah kadaluarsa.</p>
+              <h2 className="text-2xl font-extrabold text-slate-800 dark:text-white">Analisis Tidak Ditemukan</h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400">ID deteksi "{id}" tidak terdaftar atau telah kadaluarsa.</p>
             </div>
             <button
               onClick={() => navigate('/upload')}
@@ -340,7 +257,6 @@ export default function ResultPage() {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -355,197 +271,229 @@ export default function ResultPage() {
   const CatIcon = catConfig.icon;
   const detections = result.detections || prediction?.detections || [];
 
-  // Resolve imageUrl: path relatif → URL absolut
   const rawImageUrl = prediction?.imageUrl || prediction?.image_url;
   const backendBase = (import.meta.env.VITE_API_URL || 'http://localhost:3000/api').replace(/\/api\/?$/, '');
   const imageUrl = rawImageUrl
     ? rawImageUrl.startsWith('http') ? rawImageUrl : `${backendBase}${rawImageUrl}`
     : null;
 
-  const confidence = result.confidence ?? prediction?.confidence ?? 0;
+  const rawConfidence = result.confidence ?? prediction?.confidence ?? 0;
+  const confidence = rawConfidence > 1 ? rawConfidence / 100 : rawConfidence;
   const label = result.label ?? prediction?.label ?? 'Tidak terdeteksi';
   const tipsConfig = CATEGORY_TIPS[categoryKey] || CATEGORY_TIPS.organik;
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-between">
-      <Navbar />
+    <PageTransition>
+      <div className="h-screen bg-[#F8FAFC] dark:bg-black text-slate-900 dark:text-white flex flex-col overflow-hidden p-0 transition-colors duration-300">
+        <Navbar />
 
-      <main className="flex-grow pt-20 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        {/* Page Title Row */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Hasil Pemindaian
-            </h1>
-            <p className="text-xs sm:text-sm text-slate-400 font-mono mt-1">
-              ID Pindaian: #{id}
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-500 shadow-sm">
-              <Clock size={13} />
-              {prediction?.createdAt ? new Date(prediction.createdAt).toLocaleString('id-ID') : 'Baru saja'}
-            </span>
-          </div>
-        </div>
-
-        {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start mb-4">
-
-          {/* LEFT COLUMN: Scanned Image */}
-          <div className="lg:col-span-5 bg-white border border-slate-200/60 rounded-3xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
-              <span className="font-bold text-sm text-slate-800 uppercase tracking-wider flex items-center gap-2">
-                <Sparkles size={16} className="text-emerald-500 animate-pulse" />
-                Citra Terdeteksi
+        <main className="flex-grow pt-20 pb-4 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto w-full overflow-hidden flex flex-col">
+          {/* Page Header - Compact */}
+          <motion.div 
+            variants={fadeIn}
+            initial="hidden"
+            animate="visible"
+            style={{ height: '56px' }}
+            className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200/60 dark:border-white/5 shrink-0 transition-colors duration-300"
+          >
+            <div>
+              <h1 style={{ fontSize: '1.2rem', fontWeight: 700 }} className="text-slate-900 dark:text-white leading-tight">
+                Hasil Pemindaian
+              </h1>
+            </div>
+            <div className="flex items-center gap-3 text-right">
+              <span style={{ fontSize: '0.78rem' }} className="text-slate-400 dark:text-white/40 font-mono">
+                ID: #{id?.slice(0, 8)}
               </span>
-              <span className="text-xs text-slate-400 font-medium">
-                {prediction?.originalFilename || 'Hasil-Pindai.jpg'}
+              <span style={{ fontSize: '0.78rem' }} className="text-slate-500 dark:text-white/50 flex items-center gap-1">
+                <Clock size={12} className="inline" />
+                {prediction?.createdAt ? new Date(prediction.createdAt).toLocaleString('id-ID', { 
+                  day: '2-digit', 
+                  month: 'short', 
+                  hour: '2-digit', 
+                  minute: '2-digit' 
+                }) : 'Baru'}
               </span>
             </div>
+          </motion.div>
 
-            {imageUrl ? (
-              <BoundingBoxOverlay
-                imageUrl={imageUrl}
-                detections={detections}
-                categoryColor={catConfig.primaryColor}
-              />
-            ) : (
-              <div className="w-full h-48 bg-slate-50 rounded-2xl flex items-center justify-center border border-dashed border-slate-200">
-                <span className="text-sm text-slate-400">Gambar tidak tersedia</span>
+          {/* Main Content Grid - Fits in viewport */}
+          <div className="result-grid flex-1 min-h-0 overflow-hidden">
+            {/* LEFT COLUMN - Image + Bottom Strip */}
+            <motion.div 
+              variants={slideInLeft}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.1 }}
+              style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%', minHeight: 0 }}
+              className="flex flex-col"
+            >
+              {/* Image Area */}
+              <div 
+                style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', flex: 1, minHeight: 0 }}
+                className="bg-white dark:bg-[#111111] border border-slate-200/60 dark:border-white/5 result-image-area transition-colors duration-300"
+              >
+                {imageUrl ? (
+                  <BoundingBoxOverlay
+                    imageUrl={imageUrl}
+                    detections={detections}
+                    categoryColor={catConfig.primaryColor}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-slate-50 dark:bg-black/30 flex items-center justify-center transition-colors duration-300">
+                    <span className="text-sm text-slate-400 dark:text-white/30">Citra tidak tersedia</span>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          {/* RIGHT COLUMN: AI Analysis & Actions */}
-          <div className="lg:col-span-7 flex flex-col gap-4">
+              {/* Bottom strip */}
+              <div 
+                style={{ height: '80px', flexShrink: 0 }}
+                className="flex flex-col justify-between"
+              >
+                {/* Row 1 */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <CatIcon size={22} style={{ color: catConfig.primaryColor }} />
+                    <span style={{ fontSize: '1.35rem', fontWeight: 800 }} className="text-slate-900 dark:text-white transition-colors duration-300">
+                      {catConfig.label}
+                    </span>
+                  </div>
+                  <motion.span 
+                    animate={{ scale: [0.8, 1.05, 1] }} 
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    style={{ 
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      backgroundColor: catConfig.primaryColor + '15',
+                      color: catConfig.primaryColor,
+                      borderColor: catConfig.primaryColor + '30'
+                    }} 
+                    className="px-2.5 py-0.5 rounded-full border shrink-0"
+                  >
+                    {((confidence || 0) * 100).toFixed(1)}%
+                  </motion.span>
+                </div>
 
-            {/* Category Analysis Card */}
-            <div className="bg-white border border-slate-200/60 rounded-3xl p-4 md:p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex-1 flex flex-col justify-between">
+                {/* Row 2 */}
+                <div style={{ fontSize: '0.8rem' }} className="text-slate-500 dark:text-white/60 font-medium leading-none transition-colors duration-300">
+                  Terdeteksi: {label}
+                </div>
 
-              {/* Category Badge & Headline */}
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                <div className="space-y-3">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Kategori Dominan</span>
-                  <div className="flex items-start gap-3">
-                    <div className={`p-2.5 rounded-2xl ${catConfig.color} border shrink-0`}>
-                      <CatIcon size={24} />
-                    </div>
-                    <div className="min-w-0">
-                      <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 leading-none mb-1 flex items-center gap-3">
-                        {catConfig.label}
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: showAccuracyBadge ? 1 : 0, scale: showAccuracyBadge ? 1 : 0.8 }}
-                          transition={{ duration: 0.3, ease: 'easeOut' }}
-                        >
-                          {showAccuracyBadge && (
-                            <span 
-                              className="bg-[#E1F5EE] text-[#0F6E56] border border-[#1D9E75]/20 rounded-lg px-3 py-1 text-[13px] font-medium"
-                            >
-                              {Math.round(confidence * 100)}%
-                            </span>
-                          )}
-                        </motion.div>
-                      </h2>
-                      <span className="text-sm font-semibold text-emerald-600 mb-2 block">
-                        Terdeteksi: {label}
-                      </span>
-                      <span className="text-xs text-slate-400 leading-relaxed block max-w-sm">
-                        {catConfig.description}
-                      </span>
-                    </div>
+                {/* Row 3 */}
+                <div className="flex items-center gap-3">
+                  <span style={{ fontSize: '0.7rem', letterSpacing: '0.05em' }} className="font-bold text-slate-400 dark:text-white/40 uppercase tracking-wider whitespace-nowrap">
+                    Tingkat Kepastian
+                  </span>
+                  <div className="flex-grow h-[5px] bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(confidence || 0) * 100}%` }}
+                      transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      style={{ backgroundColor: catConfig.primaryColor }}
+                      className="h-full rounded-full"
+                    />
                   </div>
                 </div>
               </div>
+            </motion.div>
 
-              {/* Confidence Progress Bar */}
-              <div className="border-t border-slate-100 pt-4 mt-4">
-                <ConfidenceBar 
-                  value={confidence * 100} 
-                  delay={300} 
-                  animated={true} 
-                  onComplete={() => setShowAccuracyBadge(true)} 
-                />
-              </div>
+            {/* RIGHT COLUMN - AI Insights + Actions */}
+            <motion.div 
+              variants={slideInRight}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.15 }}
+              style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}
+              className="flex flex-col result-right-col"
+            >
+              <div className="flex-grow overflow-auto scrollbar-thin bg-white dark:bg-[#111111] border border-slate-200/60 dark:border-white/5 rounded-xl p-5 shadow-sm flex flex-col min-h-0 transition-colors duration-300">
+                <div className="mb-3.5 pb-2 border-b border-slate-100 dark:border-white/5 flex items-center justify-between shrink-0 transition-colors duration-300">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={16} className="text-emerald-500" />
+                    <h3 style={{ fontSize: '0.95rem', fontWeight: 800 }} className="text-slate-800 dark:text-white">
+                      AI Insight — Analisis Sampah
+                    </h3>
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded border border-emerald-100 dark:border-emerald-800/30 transition-colors duration-300">
+                    Gemini AI
+                  </span>
+                </div>
 
-              {/* Detailed Detections List */}
-              {detections.length > 0 && (
-                <div className="space-y-3 pt-2">
-                  <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider">
-                    Daftar Objek Terdeteksi
-                  </h3>
-                  <div className="divide-y divide-slate-100 border border-slate-200/60 rounded-2xl bg-slate-50/30 overflow-hidden">
-                    {detections.map((det, i) => (
-                      <div key={i} className="flex items-center justify-between px-4 py-3 hover:bg-white/40 transition-colors duration-150">
-                        <div className="flex items-center gap-2.5">
-                          <CheckCircle2 size={16} style={{ color: catConfig.primaryColor }} />
-                          <span className="text-sm text-slate-600 font-semibold">{det.label}</span>
+                {/* 2x2 Grid for AI Insight Cards */}
+                <motion.div 
+                  variants={staggerContainer}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid grid-cols-1 md:grid-cols-2 gap-2.5 flex-1 min-h-0 overflow-auto scrollbar-thin result-insights-grid"
+                >
+                  {tipsConfig.cards.map((card, idx) => {
+                    const CardIcon = card.icon;
+                    const themeObj = getCardTheme(card.title, isDark);
+                    return (
+                      <motion.div
+                        key={idx}
+                        variants={scaleIn}
+                        className="p-4 rounded-xl flex flex-col transition-all duration-300"
+                        style={{ 
+                          backgroundColor: themeObj.bg, 
+                          border: themeObj.border,
+                          display: 'flex',
+                          flexDirection: 'column'
+                        }}
+                      >
+                        <div className="flex items-center gap-1.5 mb-2 shrink-0">
+                          <CardIcon size={14} className="shrink-0" style={{ color: themeObj.titleColor }} />
+                          <h4 
+                            style={{ color: themeObj.titleColor, fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.08em' }} 
+                            className="uppercase"
+                          >
+                            {card.title}
+                          </h4>
                         </div>
-                        <span className="text-xs font-mono font-bold bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-slate-500 shadow-sm">
-                          {(det.confidence * 100).toFixed(1)}%
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+                        <p 
+                          style={{ fontSize: '0.78rem', lineHeight: '1.5' }} 
+                          className="text-slate-600 dark:text-white/70 line-clamp-5 overflow-hidden flex-grow transition-colors duration-300"
+                        >
+                          {card.desc}
+                        </p>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+              </div>
 
-              {/* Actions Panel */}
-              <div className="flex flex-col sm:flex-row gap-3 w-full mt-4 pt-4 border-t border-slate-100">
+              {/* Short description */}
+              <p style={{ fontSize: '0.82rem', margin: '8px 0' }} className="text-slate-400 dark:text-white/30 truncate leading-none shrink-0">
+                * Analisis ini dihasilkan secara otomatis oleh sistem AI TrashSmart berdasarkan citra yang dipindai.
+              </p>
+
+              {/* Action Buttons - Pinned to bottom */}
+              <div 
+                style={{ height: '44px', gap: '8px' }} 
+                className="flex mt-auto shrink-0 result-buttons-row"
+              >
                 <button
                   onClick={() => navigate('/upload')}
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 px-5 border-2 border-emerald-500 text-emerald-600 rounded-full font-bold hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm cursor-pointer text-center text-sm"
+                  style={{ fontSize: '0.88rem', fontWeight: 600, height: '100%' }}
+                  className="flex-1 flex items-center justify-center gap-2 border-2 border-emerald-500 dark:border-emerald-600 text-emerald-600 dark:text-emerald-400 rounded-xl hover:bg-emerald-600 dark:hover:bg-emerald-700 hover:text-white dark:hover:text-white transition-all duration-200 shadow-sm bg-transparent cursor-pointer"
                 >
-                  <ArrowLeft className="w-4 h-4 shrink-0" />
+                  <ArrowLeft size={16} />
                   Pindai Baru
                 </button>
-                <Link
-                  to="/predictions"
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 px-5 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition-all duration-300 shadow-md cursor-pointer text-center text-sm"
+                <button
+                  onClick={() => navigate('/predictions')}
+                  style={{ fontSize: '0.88rem', fontWeight: 600, height: '100%' }}
+                  className="flex-1 flex items-center justify-center gap-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all duration-200 shadow-md cursor-pointer border-none outline-none"
                 >
-                  <History className="w-4 h-4 shrink-0" />
-                  Lihat Riwayat
-                </Link>
+                  <History size={16} />
+                  Riwayat
+                </button>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
-
-        {/* AI Insight — Analisis Sampah (4-Card Dashboard Grid) */}
-        <div className="bg-white border border-slate-200/60 rounded-3xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-3">
-          <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
-            <Sparkles size={18} className="text-emerald-500 shrink-0" />
-            <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider">
-              {tipsConfig.title}
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {tipsConfig.cards.map((card, idx) => {
-              const CardIcon = card.icon;
-              return (
-                <div
-                  key={idx}
-                  className={`p-3 rounded-2xl border ${card.color} flex flex-col justify-start transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.02)]`}
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <CardIcon size={16} className="shrink-0" />
-                    <h4 className="font-bold text-[11px] uppercase tracking-wider">
-                      {card.title}
-                    </h4>
-                  </div>
-                  <p className="text-[11px] text-slate-500 leading-relaxed line-clamp-3">
-                    {card.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+        </main>
+      </div>
+    </PageTransition>
   );
 }

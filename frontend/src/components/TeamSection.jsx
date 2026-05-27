@@ -1,14 +1,7 @@
 import { motion } from 'framer-motion';
-import { School, BookOpen, Users } from 'lucide-react';
+import { fadeUp, scaleIn } from '../lib/animations';
 
-import imamImg from '../assets/team/imam.jpg';
-import atepImg from '../assets/team/atep.jpg';
-import latsaImg from '../assets/team/latsa.jpeg';
-import azmiImg from '../assets/team/azmi.jpeg';
-import devinImg from '../assets/team/devin.jpeg';
-import darmaImg from '../assets/team/darma.png';
-
-/* Social Icons */
+/* ── Social Icons ── */
 const LinkedInIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
@@ -25,9 +18,7 @@ const InstagramIcon = () => (
   </svg>
 );
 
-/* ============================================================
-   TEAM DATA
-   ============================================================ */
+/* ── Team data ── */
 const TEAM_MEMBERS = {
   'Full-Stack Web Developer': [
     {
@@ -35,20 +26,20 @@ const TEAM_MEMBERS = {
       id: 'CFCC554D6Y1710',
       university: 'Universitas Bale Bandung',
       major: 'Teknik Informatika',
-      photo: imamImg,
+      photo: '/team/imam.jpg',
       quote: 'Menulis kode bukan hanya tentang instruksi komputer, tetapi tentang merancang masa depan bumi yang lebih hijau.',
       linkedin: 'https://www.linkedin.com/in/imam-rizki-saputra-64103b3ab',
       github: 'https://github.com/imamrzkys',
-      instagram: 'https://www.instagram.com/imamrzky.s?igsh=MTk0ZDk1a2RoZWJlNQ%3D%3D&utm_source=qr',
+      instagram: 'https://www.instagram.com/imamrzky.s?igsh=MTk0ZDk1a2RoZWJlNQ==&utm_source=qr',
     },
     {
       name: 'Atep Solihin',
       id: 'CFCC554D6Y0350',
       university: 'Universitas Bale Bandung',
       major: 'Teknik Informatika',
-      photo: atepImg,
+      photo: '/team/atep.jpg',
       quote: 'Teknologi terbaik adalah teknologi yang tidak hanya memecahkan masalah hari ini, tetapi juga menjaga warisan esok hari.',
-      linkedin: 'https://www.linkedin.com/in/atep-solihin-39129b291?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+      linkedin: 'https://www.linkedin.com/in/atep-solihin-39129b291',
       github: 'https://github.com/atepginzo',
       instagram: 'https://www.instagram.com/9inzoo?igsh=cWttMDhxMzVlNmk=',
     },
@@ -59,7 +50,7 @@ const TEAM_MEMBERS = {
       id: 'CDCC011D6X2244',
       university: 'Universitas Padjadjaran',
       major: 'Teknik Informatika',
-      photo: latsaImg,
+      photo: '/team/latsa.jpeg',
       quote: 'Di balik setiap tumpukan sampah, ada data tersembunyi yang siap diubah menjadi keputusan cerdas demi kelestarian alam.',
       linkedin: 'https://www.linkedin.com/in/fadhila-latsa-tsabita',
       github: 'https://github.com/FadhilaLatsaTsabita',
@@ -70,7 +61,7 @@ const TEAM_MEMBERS = {
       id: 'CDCC011D6X2286',
       university: 'Universitas Padjadjaran',
       major: 'Teknik Informatika',
-      photo: azmiImg,
+      photo: '/team/azmi.jpeg',
       quote: 'Kecerdasan buatan hanyalah alat. Kepedulian kitalah yang menjadikannya solusi nyata bagi keselamatan lingkungan.',
       linkedin: 'https://www.linkedin.com/in/aifaa18/',
       github: 'https://github.com/aifa18',
@@ -83,7 +74,7 @@ const TEAM_MEMBERS = {
       id: 'CACC011D6Y0941',
       university: 'Universitas Padjadjaran',
       major: 'Teknik Informatika',
-      photo: devinImg,
+      photo: '/team/devin.jpeg',
       quote: 'Belajar dan berinovasi tanpa henti untuk menciptakan teknologi masa depan yang selaras dengan alam.',
       linkedin: 'https://www.linkedin.com/in/devin-suryadi',
       github: 'https://github.com/DevinSuryadi',
@@ -94,7 +85,7 @@ const TEAM_MEMBERS = {
       id: 'CACC012D6Y0805',
       university: 'Universitas Telkom',
       major: 'Teknik Informatika',
-      photo: darmaImg,
+      photo: '/team/darma.png',
       quote: 'Melatih model AI untuk mendeteksi limbah adalah langkah kecil kami untuk melindungi rumah kita yang paling berharga: Bumi.',
       linkedin: 'https://www.linkedin.com/in/darma-al-gani-556456262/',
       github: 'https://github.com/Daarma-IC',
@@ -103,145 +94,177 @@ const TEAM_MEMBERS = {
   ],
 };
 
-/* Role badge colors */
-const ROLE_COLORS = {
-  'Full-Stack Web Developer': 'border-forest bg-forest/5 text-forest',
-  'Data Scientist': 'border-terracotta bg-terracotta/5 text-terracotta',
-  'AI Engineer': 'border-[#7C3AED] bg-[#7C3AED]/5 text-[#5B21B6]',
+/* ── Role config ── */
+const ROLE_CONFIG = {
+  'Full-Stack Web Developer': {
+    color: '#059669',
+    bg: 'from-emerald-400/10 to-teal-400/5',
+    border: 'border-emerald-200/60 dark:border-emerald-900/40',
+    badge: 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800',
+    dot: 'bg-emerald-500',
+  },
+  'Data Scientist': {
+    color: '#D97706',
+    bg: 'from-amber-400/10 to-orange-400/5',
+    border: 'border-amber-200/60 dark:border-amber-900/40',
+    badge: 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800',
+    dot: 'bg-amber-500',
+  },
+  'AI Engineer': {
+    color: '#7C3AED',
+    bg: 'from-violet-400/10 to-purple-400/5',
+    border: 'border-violet-200/60 dark:border-violet-900/40',
+    badge: 'bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-400 border-violet-200 dark:border-violet-800',
+    dot: 'bg-violet-500',
+  },
 };
 
-/* Initials helper (for placeholder avatar) */
 function getInitials(name) {
-  return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  return name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase();
 }
 
-/* Avatar gradients for members with no photos */
-const AVATAR_GRADIENTS = {
-  'Full-Stack Web Developer': 'from-forest to-forest-light',
-  'Data Scientist': 'from-terracotta to-terracotta-light',
-  'AI Engineer': 'from-[#5B21B6] to-[#7C3AED]',
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.96 },
+  visible: (i) => ({
+    opacity: 1, y: 0, scale: 1,
+    transition: { delay: i * 0.1, duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  }),
 };
 
-/* Single member card */
+/* ── Member Card ── */
 function MemberCard({ member, role, index }) {
-  const badgeStyle = ROLE_COLORS[role] || 'border-sage bg-sage/10 text-body';
-  const avatarGradient = AVATAR_GRADIENTS[role] || 'from-sage to-sage-light';
+  const cfg = ROLE_CONFIG[role] || ROLE_CONFIG['Full-Stack Web Developer'];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-20px' }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -6, transition: { duration: 0.2 } }}
-      style={{
-        borderRadius: 24,
-        backgroundColor: '#ffffff',
-        border: '1px solid rgba(168, 184, 156, 0.2)',
-      }}
-      className="p-6 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(45,80,22,0.1)] transition-all duration-300 flex flex-col justify-between"
+      custom={index}
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-40px' }}
+      whileHover={{ y: -10, scale: 1.015 }}
+      transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+      className="group relative bg-white dark:bg-[#111111] rounded-3xl overflow-hidden
+                 border border-slate-100 dark:border-white/5
+                 shadow-[0_4px_24px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.5)]
+                 hover:shadow-[0_20px_48px_rgba(0,0,0,0.13)] dark:hover:shadow-[0_20px_48px_rgba(0,0,0,0.8)]
+                 transition-all duration-500 flex flex-col"
     >
-      <div>
-        {/* Photo Container */}
+      {/* ── Header band + avatar ── */}
+      <div className="relative h-24 shrink-0"
+        style={{ background: `linear-gradient(135deg, ${cfg.color}22, ${cfg.color}10)` }}>
+        {/* Decorative circles */}
+        <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full opacity-20"
+          style={{ background: cfg.color }} />
+        <div className="absolute -bottom-4 left-8 w-16 h-16 rounded-full opacity-10"
+          style={{ background: cfg.color }} />
+      </div>
+
+      {/* Avatar — overlaps header band */}
+      <div className="relative -mt-14 flex justify-center shrink-0 mb-1 z-10">
         <div
+          className="w-28 h-28 rounded-full border-4 border-white shadow-xl overflow-hidden
+                      transition-all duration-300"
           style={{
-            borderRadius: 16,
-            overflow: 'hidden',
-            aspectRatio: '1 / 1',
-            width: '100%',
+            boxShadow: `0 0 0 0px ${cfg.color}`,
           }}
-          className="relative mb-5 bg-gradient-to-br from-cream-light to-sage-light/20"
+          onMouseEnter={(e) => { e.currentTarget.style.boxShadow = `0 0 0 3px ${cfg.color}60, 0 20px 40px rgba(0,0,0,0.15)`; }}
+          onMouseLeave={(e) => { e.currentTarget.style.boxShadow = `0 0 0 0px ${cfg.color}`; }}
         >
           {member.photo ? (
             <img
               src={member.photo}
               alt={member.name}
-              className="w-full h-full object-cover object-center transform hover:scale-103 transition-transform duration-500"
+              className="w-full h-full object-cover object-center
+                         transition-transform duration-500 group-hover:scale-110"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <div className={`w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br ${avatarGradient} flex items-center justify-center shadow-md`}>
-                <span className="text-white text-2xl sm:text-3xl font-serif font-bold tracking-tight">
-                  {getInitials(member.name)}
-                </span>
-              </div>
+            <div className="w-full h-full flex items-center justify-center text-white text-2xl font-bold"
+              style={{ background: `linear-gradient(135deg, ${cfg.color}, ${cfg.color}99)` }}>
+              {getInitials(member.name)}
             </div>
           )}
         </div>
-
-        {/* Member Identity */}
-        <div className="text-left">
-          <h3 style={{ color: '#0F1A0A' }} className="text-xl font-bold tracking-tight mb-1">
-            {member.name}
-          </h3>
-          <p style={{ color: '#6B7160' }} className="text-[11px] font-mono mb-4 uppercase tracking-wider">
-            ID: {member.id}
-          </p>
-
-          {/* Role Pill Badge */}
-          <div className="mb-4">
-            <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border ${badgeStyle}`}>
-              {role}
-            </span>
-          </div>
-
-          {/* Academic Info Rows */}
-          <div className="space-y-2 border-t border-sage/10 pt-4 mb-4">
-            <div className="flex items-center gap-2.5">
-              <School size={15} style={{ color: '#2D5016', flexShrink: 0 }} />
-              <span style={{ color: '#3A3D35' }} className="text-xs font-semibold leading-tight">
-                {member.university}
-              </span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <BookOpen size={15} style={{ color: '#6B7160', flexShrink: 0 }} />
-              <span style={{ color: '#6B7160' }} className="text-xs font-medium leading-tight">
-                {member.major}
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <div>
-        {/* Classy Quote Block */}
-        <div className="border-t border-dashed border-sage/20 pt-4 mt-2">
-          <p
-            style={{
-              color: '#3A3D35',
-              borderLeft: '3px solid #2D5016',
-            }}
-            className="pl-3.5 text-xs font-serif italic leading-relaxed text-left opacity-90"
-          >
-            &ldquo;{member.quote}&rdquo;
-          </p>
+      {/* ── Content ── */}
+      <div className="px-6 pb-6 flex flex-col flex-1 text-center">
+        {/* Name & role */}
+        <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight mt-1 mb-0.5 transition-colors duration-300">
+          {member.name}
+        </h3>
+        <p className="text-[11px] font-mono text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3 transition-colors duration-300">
+          ID: {member.id}
+        </p>
+        <div className="flex justify-center mb-4">
+          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full
+                            text-xs font-semibold border transition-colors duration-300 ${cfg.badge}`}>
+            <span className={`w-1.5 h-1.5 rounded-full ${cfg.dot}`} />
+            {role}
+          </span>
         </div>
 
-        {/* Social Icons row */}
-        <div className="flex items-center gap-2.5 mt-5 pt-3 border-t border-sage/10">
+        {/* University info */}
+        <div className="space-y-2 pt-4 border-t border-slate-100 dark:border-white/5 mb-4 text-left transition-colors duration-300">
+          <div className="flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="#059669" strokeWidth="2" strokeLinecap="round" className="shrink-0">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+              <path d="M6 12v5c3 3 9 3 12 0v-5" />
+            </svg>
+            <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 leading-tight transition-colors duration-300">{member.university}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" className="shrink-0">
+              <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+            </svg>
+            <span className="text-xs text-slate-500 dark:text-slate-400 leading-tight transition-colors duration-300">{member.major}</span>
+          </div>
+        </div>
+
+        {/* Quote */}
+        <div className="flex-1 mb-5 text-left">
+          <blockquote className="text-sm text-slate-600 dark:text-slate-400 italic leading-relaxed
+                                 border-l-2 pl-3 transition-colors duration-300"
+            style={{ borderColor: cfg.color }}>
+            &ldquo;{member.quote}&rdquo;
+          </blockquote>
+        </div>
+
+        {/* Social links */}
+        <div className="flex items-center justify-center gap-2.5 pt-4 border-t border-slate-100 dark:border-white/5 transition-colors duration-300">
           {[
             { href: member.linkedin, Icon: LinkedInIcon, label: 'LinkedIn' },
             { href: member.github, Icon: GitHubIcon, label: 'GitHub' },
             { href: member.instagram, Icon: InstagramIcon, label: 'Instagram' },
           ].map(({ href, Icon, label }) => (
-            <a
+            <motion.a
               key={label}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: '50%',
-                border: '1px solid rgba(168,184,156,0.3)',
-                backgroundColor: '#FAFAF7',
-                color: '#6B7160',
+              whileHover={{ scale: 1.2, rotate: 6 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.15 }}
+              className="w-9 h-9 rounded-full flex items-center justify-center
+                         bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400
+                         transition-all duration-300"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = cfg.color;
+                e.currentTarget.style.color = 'white';
+                e.currentTarget.style.borderColor = cfg.color;
               }}
-              className="flex items-center justify-center hover:bg-forest hover:text-white hover:border-forest transition-all duration-300"
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '';
+                e.currentTarget.style.color = '';
+                e.currentTarget.style.borderColor = '';
+              }}
             >
-              <Icon size={14} />
-            </a>
+              <Icon />
+            </motion.a>
           ))}
         </div>
       </div>
@@ -249,84 +272,91 @@ function MemberCard({ member, role, index }) {
   );
 }
 
+const staggerGroup = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
+
+/* ── Section ── */
 export default function TeamSection() {
   const groups = Object.entries(TEAM_MEMBERS);
 
   return (
-    <section id="tim" className="relative py-20 sm:py-28 lg:py-32 bg-cream overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sage/30 to-transparent" />
-
-      {/* Abstract background blobs for premium aesthetic */}
+    <section id="tim" className="relative py-1 sm:py-2 lg:py-3 bg-[#F8FAFC] dark:bg-black overflow-hidden transition-colors duration-300">
+      {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-sage/10 blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-terracotta/5 blur-3xl" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-white/5 to-transparent transition-colors duration-300" />
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-emerald-100/30 dark:bg-emerald-900/10 blur-3xl transition-colors duration-300" />
+        <div className="absolute bottom-0 -right-32 w-96 h-96 rounded-full bg-violet-100/20 dark:bg-violet-900/10 blur-3xl transition-colors duration-300" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
 
-        {/* ======== Section Header ======== */}
+        {/* ── Header ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          variants={fadeUp} initial="hidden"
+          whileInView="visible" viewport={{ once: true, margin: '-60px' }}
+          className="text-center mb-16 sm:mb-20"
         >
-          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full mb-4
-                          bg-forest/8 border border-forest/15
-                          text-forest text-xs sm:text-sm font-semibold tracking-wide">
-            <Users size={14} />
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5
+                           bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/30
+                           text-emerald-700 dark:text-emerald-400 text-xs font-semibold tracking-widest uppercase transition-colors duration-300">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+            </svg>
             Tim Pengembang
           </span>
-          <h2
-            style={{ fontFamily: 'var(--font-serif)', color: '#0F1A0A' }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight mb-3"
-          >
-            Profil Anggota Team
+          <h2 className="text-[2.2rem] sm:text-[2.8rem] lg:text-[3.2rem]
+                         font-extrabold text-slate-900 dark:text-white leading-[1.1] tracking-[-0.025em] mb-4 transition-colors duration-300">
+            Profil Anggota Tim
           </h2>
-          <p style={{ color: '#6B7160' }} className="text-base sm:text-lg max-w-lg mx-auto font-medium">
+          <p className="text-lg text-slate-500 dark:text-slate-400 font-medium transition-colors duration-300">
             Coding Camp DBS Foundation 2026 &middot; CC26-PSU179
           </p>
         </motion.div>
 
-        {/* ======== Team Role-Based Containers ======== */}
-        <div className="space-y-20">
-          {groups.map(([role, members], groupIdx) => (
-            <div
-              key={role}
-              style={{
-                borderRadius: 32,
-                backgroundColor: '#FAFAF7',
-                border: '1px solid rgba(168, 184, 156, 0.15)',
-              }}
-              className="p-8 sm:p-10 lg:p-12 shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
-            >
-              {/* Group Pill Header */}
-              <div className="flex justify-center mb-10">
-                <span className={`inline-flex items-center px-5 py-2.5 rounded-full border-2 text-xs font-bold uppercase tracking-wider
-                                ${role === 'Full-Stack Web Developer'
-                                  ? 'border-forest/40 bg-forest/8 text-forest'
-                                  : role === 'Data Scientist'
-                                    ? 'border-terracotta/40 bg-terracotta/8 text-terracotta'
-                                    : 'border-[#7C3AED]/40 bg-[#7C3AED]/8 text-[#5B21B6]'
-                                }`}>
-                  Team {role}
-                </span>
-              </div>
+        {/* ── Groups ── */}
+        <div className="space-y-20 sm:space-y-24">
+          {groups.map(([role, members], gIdx) => {
+            const cfg = ROLE_CONFIG[role];
+            return (
+              <div key={role}>
+                {/* Role label */}
+                <motion.div
+                  variants={fadeUp} initial="hidden"
+                  whileInView="visible" viewport={{ once: true, margin: '-40px' }}
+                  className="flex items-center gap-4 mb-10"
+                >
+                  <div className="h-px flex-1 bg-slate-200 dark:bg-white/10 transition-colors duration-300" />
+                  <span className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+                                   text-xs font-bold uppercase tracking-widest border transition-colors duration-300 ${cfg.badge}`}>
+                    <span className={`w-2 h-2 rounded-full animate-pulse ${cfg.dot}`} />
+                    {role}
+                  </span>
+                  <div className="h-px flex-1 bg-slate-200 dark:bg-white/10 transition-colors duration-300" />
+                </motion.div>
 
-              {/* Members Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                {members.map((member, i) => (
-                  <MemberCard
-                    key={member.id}
-                    member={member}
-                    role={role}
-                    index={i + groupIdx * 2}
-                  />
-                ))}
+                {/* Cards */}
+                <motion.div
+                  variants={staggerGroup} initial="hidden"
+                  whileInView="visible" viewport={{ once: true, margin: '-40px' }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto"
+                >
+                  {members.map((member, i) => (
+                    <MemberCard
+                      key={member.id}
+                      member={member}
+                      role={role}
+                      index={i + gIdx * 2}
+                    />
+                  ))}
+                </motion.div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

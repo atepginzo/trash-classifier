@@ -1,13 +1,27 @@
+# Editor
 .vscode/
 .idea/
 .DS_Store
-EcoSort-AI/
-**/dev.db
-**/dev.db-journal
-**/uploads/
-**/node_modules/
+
+# Environment
 **/.env
 **/.env.local
 **/.env.*.local
-frontend/Foto Team/
 
+# Dependencies
+**/node_modules/
+
+# Build output
+**/dist/
+**/dist-ssr/
+
+# Database
+**/dev.db
+**/dev.db-journal
+
+# Uploads (runtime data)
+**/uploads/
+
+# Project-specific
+EcoSort-AI/
+frontend/Foto Team/

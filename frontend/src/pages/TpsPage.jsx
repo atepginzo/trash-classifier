@@ -13,26 +13,26 @@ const AREA_BADGE = {
 };
 
 export default function TpsPage() {
-  // Mode state
+  // ── Mode state ────────────────────────────────────────────────────────────
   const [mode, setMode] = useState('all'); // 'all' | 'nearest'
 
-  // Shared state
+  // ── Shared state ──────────────────────────────────────────────────────────
   const [tpsList, setTpsList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Pagination state (mode: all)
+  // ── Pagination state (mode: all) ──────────────────────────────────────────
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
   const LIMIT = 12;
 
-  // Geolocation state (mode: nearest)
+  // ── Geolocation state (mode: nearest) ─────────────────────────────────────
   const [userCoords, setUserCoords] = useState(null);
   const [geoError, setGeoError] = useState(null);
   const [geoLoading, setGeoLoading] = useState(false);
 
-  // Fetch All TPS (paginasi)
+  // ── Fetch All TPS (paginasi) ──────────────────────────────────────────────
   const fetchAll = useCallback(async (p = 1) => {
     setLoading(true);
     setError(null);
@@ -50,7 +50,7 @@ export default function TpsPage() {
     }
   }, []);
 
-  // Fetch Nearest TPS (geolokasi)
+  // ── Fetch Nearest TPS (geolokasi) ─────────────────────────────────────────
   const fetchNearest = useCallback(async (lat, lon) => {
     setLoading(true);
     setError(null);
@@ -66,7 +66,7 @@ export default function TpsPage() {
     }
   }, []);
 
-  // Geolocation handler
+  // ── Geolocation handler ───────────────────────────────────────────────────
   function requestGeolocation() {
     if (!navigator.geolocation) {
       setGeoError('Browser Anda tidak mendukung Geolokasi.');
@@ -103,7 +103,7 @@ export default function TpsPage() {
     );
   }
 
-  // Auto-fetch saat mode berubah
+  // ── Auto-fetch saat mode berubah ──────────────────────────────────────────
   useEffect(() => {
     if (mode === 'all') {
       fetchAll(1);
@@ -131,7 +131,7 @@ export default function TpsPage() {
         style={{ minHeight: '100vh', backgroundColor: '#F5F0E8' }}
         className="flex flex-col items-center px-4 pt-28 pb-16 md:pt-32 md:pb-24"
       >
-        {/* Header */}
+        {/* ── Header ── */}
         <div className="text-center mb-8 max-w-lg">
           <h1
             style={{ fontFamily: 'var(--font-serif)', color: '#0F1A0A' }}
@@ -144,12 +144,12 @@ export default function TpsPage() {
           </p>
         </div>
 
-        {/* Card Container */}
+        {/* ── Card Container ── */}
         <div
           style={{ maxWidth: 900, backgroundColor: '#ffffff', borderRadius: 12 }}
           className="w-full p-5 md:p-8"
         >
-          {/* Tab Switcher */}
+          {/* ── Tab Switcher ── */}
           <div
             style={{ backgroundColor: '#f0ebe3', borderRadius: 999, padding: 4 }}
             className="flex mb-6"
@@ -179,7 +179,7 @@ export default function TpsPage() {
             ))}
           </div>
 
-          {/* Nearest Mode: Koordinat Info */}
+          {/* ── Nearest Mode: Koordinat Info ── */}
           {mode === 'nearest' && (
             <div
               style={{
@@ -232,7 +232,7 @@ export default function TpsPage() {
             </div>
           )}
 
-          {/* Geo Error */}
+          {/* ── Geo Error ── */}
           {geoError && mode === 'nearest' && (
             <div
               style={{
@@ -249,7 +249,7 @@ export default function TpsPage() {
             </div>
           )}
 
-          {/* Fetch Error */}
+          {/* ── Fetch Error ── */}
           {error && (
             <div
               style={{
@@ -266,7 +266,7 @@ export default function TpsPage() {
             </div>
           )}
 
-          {/* Loading Spinner */}
+          {/* ── Loading Spinner ── */}
           {loading && (
             <div className="flex flex-col items-center py-16">
               <div
@@ -287,7 +287,7 @@ export default function TpsPage() {
             </div>
           )}
 
-          {/* Results: TPS Cards */}
+          {/* ── Results: TPS Cards ── */}
           {!loading && tpsList.length > 0 && (
             <>
               {/* Counter */}
@@ -421,7 +421,7 @@ export default function TpsPage() {
                 })}
               </div>
 
-              {/* Pagination (only for 'all' mode) */}
+              {/* ── Pagination (only for 'all' mode) ── */}
               {mode === 'all' && totalPages > 1 && (
                 <div className="flex items-center justify-center gap-2 mt-8">
                   <button
@@ -492,7 +492,7 @@ export default function TpsPage() {
             </>
           )}
 
-          {/* Empty State */}
+          {/* ── Empty State ── */}
           {!loading && !error && tpsList.length === 0 && mode === 'all' && (
             <div className="flex flex-col items-center py-16 text-center">
               <MapPin size={44} style={{ color: '#A8B89C' }} />

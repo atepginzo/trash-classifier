@@ -1,155 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
 import {
-  Upload, Camera, X, Loader2, AlertCircle, RotateCcw, RefreshCw, Zap,
+  Upload, Camera, X, Loader2, AlertCircle, RefreshCw, Zap,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { predictionService } from '../services/predictionService';
 import Navbar from '../components/Navbar';
+import { motion, AnimatePresence } from 'framer-motion';
+import PageTransition from '../components/PageTransition';
+import { useTheme } from '../contexts/ThemeContext';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const AUTO_SCAN_INTERVAL = 3000; // 3 detik
-
-function UploadZone({ onDrop, onDragOver, onDragLeave, onClick, dragging, loading, preview, file }) {
-  const [ripples, setRipples] = useState([]);
-  const [isHovered, setIsHovered] = useState(false);
-  
-  const handleClick = (e) => {
-    if (loading) return;
-    
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const size = Math.max(rect.width, rect.height) * 1.5;
-    
-    const newRipple = { x, y, size, id: Date.now() };
-    setRipples((prev) => [...prev, newRipple]);
-    
-    onClick();
-  };
-
-  const removeRipple = (id) => {
-    setRipples((prev) => prev.filter(r => r.id !== id));
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { 
-      e.preventDefault(); 
-      if (!loading) onClick(); 
-    }
-  };
-
-  const isDragOrHover = dragging || isHovered;
-  
-  const containerStyle = {
-    position: 'relative',
-    overflow: 'hidden',
-    borderRadius: '20px',
-    padding: '20px',
-    width: '100%',
-    maxWidth: '360px',
-    height: '300px',
-    margin: '0 auto',
-    cursor: loading ? 'not-allowed' : 'pointer',
-    backgroundColor: isDragOrHover ? 'rgba(29, 158, 117, 0.05)' : 'rgba(225, 245, 238, 0.25)',
-    boxShadow: isDragOrHover ? '0 0 0 6px rgba(29, 158, 117, 0.07), inset 0 0 40px rgba(29, 158, 117, 0.04)' : 'none',
-    transition: 'all 250ms ease',
-  };
-
-  return (
-    <div
-      onDrop={onDrop}
-      onDragOver={onDragOver}
-      onDragLeave={onDragLeave}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
-      style={containerStyle}
-      className="flex flex-col items-center justify-center group outline-none"
-    >
-      <svg className="absolute inset-0 w-full h-full pointer-events-none rounded-[20px]">
-        <rect
-          x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" rx="19" ry="19"
-          fill="none"
-          stroke={isDragOrHover ? '#1D9E75' : 'rgba(159, 225, 203, 0.7)'}
-          strokeWidth="2"
-          strokeDasharray="8,8"
-          strokeLinecap="round"
-          className="transition-colors duration-250 ease-in-out"
-          style={{
-            animation: isDragOrHover ? 'dash-animation 1s linear infinite' : 'none'
-          }}
-        />
-      </svg>
-      <style>{`
-        @keyframes dash-animation {
-          from { stroke-dashoffset: 16; }
-          to { stroke-dashoffset: 0; }
-        }
-        @keyframes ripple-animation {
-          from { transform: scale(0); opacity: 0.25; }
-          to { transform: scale(1); opacity: 0; }
-        }
-      `}</style>
-
-      {ripples.map((r) => (
-        <div
-          key={r.id}
-          onAnimationEnd={() => removeRipple(r.id)}
-          style={{
-            position: 'absolute',
-            left: r.x,
-            top: r.y,
-            width: r.size,
-            height: r.size,
-            backgroundColor: 'rgba(29, 158, 117, 0.2)',
-            borderRadius: '50%',
-            transform: 'translate(-50%, -50%)',
-            transformOrigin: '0 0',
-            pointerEvents: 'none',
-            animation: 'ripple-animation 700ms ease-out forwards',
-          }}
-        />
-      ))}
-
-      {!preview ? (
-        <>
-          <div className="relative mb-4">
-            <Upload 
-              size={48} 
-              style={{ color: '#1D9E75', transition: 'transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1)' }} 
-              className={isDragOrHover ? '-translate-y-1' : ''}
-            />
-          </div>
-          <h3 style={{ fontSize: 16, fontWeight: 500, color: '#0F6E56', margin: '0 0 4px 0' }}>
-            {dragging ? "Lepaskan foto di sini" : "Seret foto sampah ke sini"}
-          </h3>
-          <p style={{ fontSize: 13, color: '#888', margin: '0' }}>
-            atau klik untuk memilih dari galeri
-          </p>
-          <p style={{ fontSize: 11, color: '#aaa', marginTop: 6, marginBottom: 0 }}>
-            JPG, PNG — maks. 10MB
-          </p>
-        </>
-      ) : (
-        <div className="flex flex-col items-center relative z-10 w-full pointer-events-none">
-          <div style={{ maxWidth: 200, maxHeight: 200, borderRadius: 12, overflow: 'hidden', aspectRatio: '1/1', width: '100%', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)' }}>
-            <img src={preview} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          </div>
-          {file && (
-            <div className="mt-4 flex flex-col items-center text-center">
-              <p style={{ color: '#0F6E56', fontSize: 13, fontWeight: 500, margin: 0 }} className="truncate max-w-[250px]">{file.name}</p>
-              <p style={{ color: '#888', fontSize: 11, margin: '2px 0 0 0' }}>{(file.size / 1024 / 1024).toFixed(2)} MB</p>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
 
 export default function UploadPage() {
   const navigate = useNavigate();
@@ -159,7 +21,7 @@ export default function UploadPage() {
   const streamRef = useRef(null);
   const previewUrlRef = useRef(null);
 
-  const [activeTab, setActiveTab] = useState('upload');
+  const [activeTab, setActiveTab] = useState('camera'); // Default ke kamera
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [dragging, setDragging] = useState(false);
@@ -173,7 +35,10 @@ export default function UploadPage() {
   const [scanLoading, setScanLoading] = useState(false);
   const scanIntervalRef = useRef(null);
 
-  /* camera helpers */
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
+  /* ── camera helpers ── */
   function terminateCamera() {
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((t) => t.stop());
@@ -201,6 +66,13 @@ export default function UploadPage() {
 
   useEffect(() => () => { terminateCamera(); revokePreview(); }, []);
   useEffect(() => { if (activeTab !== 'camera') terminateCamera(); }, [activeTab]);
+  
+  // Auto-start camera on mount if camera tab is active
+  useEffect(() => {
+    if (activeTab === 'camera' && cameraStatus === 'idle') {
+      setTimeout(activateCamera, 300);
+    }
+  }, [activeTab]);
 
   function setPreviewFromSource(source) {
     revokePreview();
@@ -209,7 +81,7 @@ export default function UploadPage() {
     setPreview(url);
   }
 
-  /* file validation */
+  /* ── file validation ── */
   function validateFile(f) {
     if (!ALLOWED_TYPES.includes(f.type)) return 'Format tidak didukung. Gunakan JPG, PNG, atau WebP.';
     if (f.size > MAX_FILE_SIZE) return 'Ukuran file terlalu besar. Maksimal 10MB.';
@@ -224,13 +96,13 @@ export default function UploadPage() {
     setPreviewFromSource(f);
   }
 
-  /* drag & drop */
+  /* ── drag & drop ── */
   function handleDrop(e) { e.preventDefault(); setDragging(false); const f = e.dataTransfer.files[0]; if (f) processFile(f); }
   function handleDragOver(e) { e.preventDefault(); setDragging(true); }
   function handleDragLeave(e) { e.preventDefault(); setDragging(false); }
   function handleFileInputChange(e) { const f = e.target.files[0]; if (f) processFile(f); }
 
-  /* camera */
+  /* ── camera ── */
   async function activateCamera() {
     if (!navigator.mediaDevices?.getUserMedia) { setCameraStatus('unsupported'); return; }
     try {
@@ -305,7 +177,7 @@ export default function UploadPage() {
     }
   }
 
-  /* submit: langsung navigate ke ResultPage */
+  /* ── submit ── */
   async function submitClassification() {
     if (!file) return;
     setLoading(true);
@@ -347,285 +219,283 @@ export default function UploadPage() {
   const canClassify = hasImage && !loading;
 
   return (
-    <>
+    <PageTransition>
       <Navbar />
-      <div
-        style={{ minHeight: '100vh', backgroundColor: '#F8FAFC' }}
-        className="flex flex-col items-center px-4 pt-20 pb-8 md:pt-24 md:pb-12"
-      >
+      <div className="flex flex-col items-center justify-center px-4 pt-20 pb-6 md:pt-24 md:pb-8 min-h-screen bg-[#F8FAFC] dark:bg-black text-slate-900 dark:text-white transition-colors duration-300">
+        
         {/* heading */}
-        <div className="text-center mb-5 max-w-lg">
-          <h1 style={{ fontFamily: 'var(--font-sans)', color: '#0F172A' }}
-            className="text-3xl md:text-4xl font-extrabold mb-1">
+        <div className="text-center mb-6 max-w-lg">
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-2 tracking-tight transition-colors duration-300 text-slate-900 dark:text-white">
             Deteksi Sampah
           </h1>
-          <p style={{ color: '#64748B' }} className="text-base leading-relaxed">
-            Unggah atau foto sampah untuk mendapatkan klasifikasi AI
+          <p className="text-sm leading-relaxed text-slate-500 dark:text-slate-400 transition-colors duration-300">
+            Unggah atau foto sampah untuk mendapatkan klasifikasi AI secara real-time
           </p>
         </div>
 
         {/* card */}
-        <div style={{ 
-          maxWidth: activeTab === 'camera' ? 1200 : 600, 
-          backgroundColor: '#ffffff', 
-          borderRadius: 12,
-          transition: 'max-width 0.3s ease'
-        }}
-          className="w-full p-5 md:p-6">
+        <div 
+          style={{ 
+            maxWidth: activeTab === 'camera' ? 1200 : 600, 
+            transition: 'max-width 0.3s ease'
+          }}
+          className="w-full p-4 md:p-6 bg-white dark:bg-[#111111] border border-slate-200/60 dark:border-white/5 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.6)] upload-card transition-colors duration-300"
+        >
 
           {/* tab switcher */}
-          <div style={{ backgroundColor: '#F1F5F9', borderRadius: 999, padding: 4 }} className="flex mb-4">
-            {[{ key: 'upload', label: 'Upload File', Icon: Upload }, { key: 'camera', label: 'Kamera', Icon: Camera }].map(({ key, label, Icon }) => (
-              <button key={key} onClick={() => switchTab(key)} disabled={loading}
-                style={{
-                  backgroundColor: activeTab === key ? '#059669' : 'transparent',
-                  color: activeTab === key ? '#ffffff' : '#334155',
-                  borderRadius: 999, border: 'none', outline: 'none',
-                  cursor: loading ? 'not-allowed' : 'pointer',
-                  transition: 'background-color 0.2s ease, color 0.2s ease',
-                }}
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold">
+          <div className="flex mb-5 bg-slate-100 dark:bg-white/5 rounded-full p-1 upload-tabs transition-colors duration-300">
+            {[
+              { key: 'upload', label: 'Upload File', Icon: Upload }, 
+              { key: 'camera', label: 'Kamera', Icon: Camera }
+            ].map(({ key, label, Icon }) => (
+              <button 
+                key={key} 
+                onClick={() => switchTab(key)} 
+                disabled={loading}
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold rounded-full border-none outline-none transition-all duration-300 ${
+                  activeTab === key 
+                    ? 'bg-emerald-600 text-white shadow-md' 
+                    : 'bg-transparent text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                }`}
+                style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
+              >
                 <Icon size={16} />{label}
               </button>
             ))}
           </div>
 
-          {/* Upload tab */}
-          {activeTab === 'upload' && (
-            <>
-              <UploadZone
-                onDrop={handleDrop}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onClick={() => !loading && fileInputRef.current?.click()}
-                dragging={dragging}
-                loading={loading}
-                preview={preview}
-                file={file}
-              />
-              <input type="file" ref={fileInputRef} onChange={handleFileInputChange}
-                accept=".jpg,.jpeg,.png,.webp" className="hidden" aria-label="Pilih file gambar" />
-            </>
-          )}
-
-          {/* Camera tab (LIVE SCAN MODE) */}
-          {activeTab === 'camera' && (
-            <>
-              {cameraStatus === 'unsupported' && (
-                <div style={{ backgroundColor: '#F8FAFC', borderRadius: 12, border: '1px solid #E2E8F0' }}
-                  className="flex flex-col items-center justify-center py-16 px-6 text-center">
-                  <AlertCircle size={40} style={{ color: '#a32d2d' }} />
-                  <p style={{ color: '#334155' }} className="mt-4 text-sm font-semibold">Kamera Tidak Didukung</p>
-                  <p style={{ color: '#64748B' }} className="text-xs mt-2 leading-relaxed max-w-xs">
-                    Browser Anda tidak mendukung akses kamera. Gunakan mode upload file.
-                  </p>
-                </div>
-              )}
-              {cameraStatus === 'denied' && (
-                <div style={{ backgroundColor: '#F8FAFC', borderRadius: 12, border: '1px solid #E2E8F0' }}
-                  className="flex flex-col items-center justify-center py-16 px-6 text-center">
-                  <AlertCircle size={40} style={{ color: '#a32d2d' }} />
-                  <p style={{ color: '#334155' }} className="mt-4 text-sm font-semibold">Izin Kamera Ditolak</p>
-                  <p style={{ color: '#64748B' }} className="text-xs mt-2 leading-relaxed max-w-xs">
-                    Izinkan akses kamera di pengaturan browser, lalu coba lagi.
-                  </p>
-                  <button onClick={activateCamera}
-                    style={{ backgroundColor: '#059669', color: '#ffffff', borderRadius: 999, border: 'none' }}
-                    className="mt-5 px-6 py-2.5 text-sm font-semibold flex items-center gap-2 cursor-pointer">
-                    <RefreshCw size={14} /> Coba Lagi
-                  </button>
-                </div>
-              )}
-              {(cameraStatus === 'idle' || cameraStatus === 'starting' || cameraStatus === 'active') && (
-                <div className="flex flex-col lg:flex-row gap-6">
-                  {/* Kamera Feed (Kiri) */}
-                  <div className="flex-1">
-                    <div style={{ borderRadius: 8, overflow: 'hidden', backgroundColor: '#1a1a1a', width: '100%', aspectRatio: '4/3', position: 'relative' }}>
-                      <video ref={videoRef} autoPlay playsInline muted
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                      
-                      {/* Laser Scan Animation */}
-                      {liveScanActive && (
-                        <>
-                          <div className="scan-laser" />
-                          <div className="scan-corner corner-tl" />
-                          <div className="scan-corner corner-tr" />
-                          <div className="scan-corner corner-bl" />
-                          <div className="scan-corner corner-br" />
-                        </>
-                      )}
-                      
-                      {cameraStatus === 'starting' && (
-                        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(26,26,26,0.85)' }}>
-                          <Loader2 size={28} style={{ color: '#ffffff' }} className="animate-spin" />
-                          <p style={{ color: '#d0d0d0' }} className="text-xs mt-3">Memulai kamera...</p>
-                        </div>
-                      )}
-                      
-                      {/* Live Scan Indicator */}
-                      {liveScanActive && (
-                        <div style={{ position: 'absolute', top: 12, left: 12, backgroundColor: 'rgba(0,255,136,0.9)', borderRadius: 999, padding: '6px 12px', display: 'flex', alignItems: 'center', gap: 6 }}>
-                          <div style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#ffffff' }} className="animate-pulse" />
-                          <span style={{ color: '#0F1A0A', fontSize: 11, fontWeight: 600, letterSpacing: '0.5px' }}>LIVE SCAN</span>
-                        </div>
-                      )}
+          {/* tab content with AnimatePresence */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, x: activeTab === 'camera' ? 20 : -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: activeTab === 'camera' ? -20 : 20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {activeTab === 'upload' ? (
+                <>
+                  {!preview ? (
+                    <div
+                      onDrop={handleDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave}
+                      onClick={() => !loading && fileInputRef.current?.click()}
+                      role="button" tabIndex={0}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!loading) fileInputRef.current?.click(); } }}
+                      className={`flex flex-col items-center justify-center py-12 px-4 rounded-2xl border-2 border-dashed transition-all duration-300 ${
+                        dragging 
+                          ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/20' 
+                          : 'border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5'
+                      }`}
+                      style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
+                    >
+                      <Upload size={40} className={dragging ? 'text-emerald-500' : 'text-slate-400 dark:text-white/40'} />
+                      <p className="mt-3 text-sm font-medium text-slate-600 dark:text-slate-300">
+                        <span className="font-semibold text-emerald-600 dark:text-emerald-400">Klik untuk upload</span>{' '}
+                        atau drag & drop di sini
+                      </p>
+                      <p className="text-xs text-slate-400 dark:text-white/40 mt-1">
+                        Format: JPG, PNG, WebP — Maksimal 10MB
+                      </p>
                     </div>
-                  </div>
-                  
-                  {/* Hasil Klasifikasi (Kanan) */}
-                  <div className="flex-1">
-                    <div style={{ backgroundColor: '#F8FAFC', borderRadius: 12, border: '1px solid #E2E8F0', minHeight: 300, position: 'relative' }} className="p-5">
-                      <h3 style={{ color: '#0F172A', fontSize: 16, fontWeight: 600, marginBottom: 16 }}>
-                        Hasil Analisis Real-Time
-                      </h3>
-                      
-                      {!scanResult && !scanLoading && (
-                        <div className="flex flex-col items-center justify-center py-12 text-center">
-                          <Zap size={40} style={{ color: '#94A3B8' }} />
-                          <p style={{ color: '#64748B' }} className="text-sm mt-3">
-                            Menunggu hasil scan...
-                          </p>
-                          <p style={{ color: '#94A3B8' }} className="text-xs mt-1">
-                            Arahkan kamera ke sampah
-                          </p>
-                        </div>
-                      )}
-                      
-                      {scanLoading && !scanResult && (
-                        <div className="flex flex-col items-center justify-center py-12">
-                          <div style={{ width: 40, height: 40, border: '3px solid #E2E8F0', borderTopColor: '#34D399', borderRadius: '50%' }} className="animate-spin" />
-                          <p style={{ color: '#64748B' }} className="text-sm mt-4 animate-pulse">
-                            Menganalisis...
-                          </p>
-                        </div>
-                      )}
-                      
-                      {scanResult && (
-                        <div className="scan-result-fade-in">
-                          {/* Kategori */}
-                          <div style={{ 
-                            backgroundColor: scanResult.result?.category === 'Organik' ? '#e8f5e9' : 
-                                           scanResult.result?.category === 'Anorganik' ? '#e3f2fd' : '#fff3e0',
-                            borderRadius: 8,
-                            padding: 16,
-                            marginBottom: 16
-                          }}>
-                            <div style={{ fontSize: 12, color: '#64748B', marginBottom: 4 }}>Kategori Terdeteksi</div>
-                            <div style={{ 
-                              fontSize: 20, 
-                              fontWeight: 700,
-                              color: scanResult.result?.category === 'Organik' ? '#2e7d32' : 
-                                     scanResult.result?.category === 'Anorganik' ? '#1565c0' : '#e65100'
-                            }}>
-                              {scanResult.result?.category || 'Unknown'}
-                            </div>
-                            {scanResult.result?.label && (
-                              <div style={{ fontSize: 13, color: '#64748B', marginTop: 4 }}>
-                                {scanResult.result.label}
-                              </div>
-                            )}
-                          </div>
+                  ) : (
+                    <div className="flex flex-col items-center py-4">
+                      <div className="relative max-w-[240px] max-h-[240px] rounded-xl overflow-hidden aspect-square w-full shadow-md border border-slate-200 dark:border-white/5">
+                        <img src={preview} alt="Preview" className="w-full h-full object-cover block" />
+                      </div>
+                      {file && <p className="text-xs text-slate-500 dark:text-white/40 mt-3 truncate max-w-[220px] font-medium">{file.name}</p>}
+                    </div>
+                  )}
+                  <input type="file" ref={fileInputRef} onChange={handleFileInputChange}
+                    accept=".jpg,.jpeg,.png,.webp" className="hidden" aria-label="Pilih file gambar" />
+                </>
+              ) : (
+                <>
+                  {cameraStatus === 'unsupported' && (
+                    <div className="flex flex-col items-center justify-center py-16 px-6 text-center bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl transition-colors duration-300">
+                      <AlertCircle size={40} className="text-red-500 dark:text-red-400" />
+                      <p className="mt-4 text-sm font-semibold text-slate-800 dark:text-white">Kamera Tidak Didukung</p>
+                      <p className="text-xs text-slate-500 dark:text-white/60 mt-2 leading-relaxed max-w-xs">
+                        Browser Anda tidak mendukung akses kamera. Gunakan mode upload file.
+                      </p>
+                    </div>
+                  )}
+                  {cameraStatus === 'denied' && (
+                    <div className="flex flex-col items-center justify-center py-16 px-6 text-center bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl transition-colors duration-300">
+                      <AlertCircle size={40} className="text-red-500 dark:text-red-400" />
+                      <p className="mt-4 text-sm font-semibold text-slate-800 dark:text-white">Izin Kamera Ditolak</p>
+                      <p className="text-xs text-slate-500 dark:text-white/60 mt-2 leading-relaxed max-w-xs">
+                        Izinkan akses kamera di pengaturan browser, lalu coba lagi.
+                      </p>
+                      <button onClick={activateCamera}
+                        className="mt-5 px-6 py-2.5 text-sm font-semibold flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full border-none outline-none cursor-pointer shadow-md transition-all duration-300">
+                        <RefreshCw size={14} /> Coba Lagi
+                      </button>
+                    </div>
+                  )}
+                  {(cameraStatus === 'idle' || cameraStatus === 'starting' || cameraStatus === 'active') && (
+                    <div className="upload-camera-layout flex flex-col lg:flex-row gap-6">
+                      {/* Kamera Feed (Kiri) */}
+                      <div className="flex-1">
+                        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-slate-950 border border-slate-200 dark:border-white/5 shadow-md">
+                          <video ref={videoRef} autoPlay playsInline muted
+                            className="w-full h-full object-cover block" />
                           
-                          {/* Confidence Bar */}
-                          {scanResult.result?.confidence && (
-                            <div style={{ marginBottom: 16 }}>
-                              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-                                <span style={{ fontSize: 12, color: '#64748B' }}>Tingkat Keyakinan</span>
-                                <span style={{ fontSize: 12, fontWeight: 600, color: '#0F172A' }}>
-                                  {scanResult.result.confidence}%
-                                </span>
-                              </div>
-                              <div style={{ width: '100%', height: 8, backgroundColor: '#E2E8F0', borderRadius: 999, overflow: 'hidden' }}>
-                                <div 
-                                  style={{ 
-                                    width: `${scanResult.result.confidence}%`, 
-                                    height: '100%', 
-                                    backgroundColor: '#34D399',
-                                    transition: 'width 0.5s ease',
-                                    borderRadius: 999
-                                  }} 
-                                  className="confidence-bar-animation"
-                                />
-                              </div>
+                          {/* Laser Scan Animation */}
+                          {liveScanActive && (
+                            <>
+                              <div className="scan-laser" />
+                              <div className="scan-corner corner-tl" />
+                              <div className="scan-corner corner-tr" />
+                              <div className="scan-corner corner-bl" />
+                              <div className="scan-corner corner-br" />
+                            </>
+                          )}
+                          
+                          {cameraStatus === 'starting' && (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/85 z-20">
+                              <Loader2 size={28} className="text-white animate-spin" />
+                              <p className="text-xs text-slate-300 mt-3">Memulai kamera...</p>
                             </div>
                           )}
                           
-                          {/* Tips Penanganan */}
-                          {scanResult.result?.category && (
-                            <div style={{ backgroundColor: '#ffffff', borderRadius: 8, padding: 12, border: '1px solid #E2E8F0' }}>
-                              <div style={{ fontSize: 12, fontWeight: 600, color: '#0F172A', marginBottom: 6 }}>
-                                Tips Penanganan
-                              </div>
-                              <p style={{ fontSize: 12, color: '#64748B', lineHeight: 1.5 }}>
-                                {scanResult.result.category === 'Organik' 
-                                  ? 'Sampah organik dapat dikomposkan atau dijadikan pupuk alami. Pisahkan dari sampah lainnya.'
-                                  : scanResult.result.category === 'Anorganik'
-                                  ? 'Sampah anorganik dapat didaur ulang. Bersihkan dan pisahkan sesuai jenisnya sebelum dibuang.'
-                                  : 'Sampah B3 harus dibuang di tempat khusus. Jangan dicampur dengan sampah biasa.'}
+                          {/* Live Scan Indicator */}
+                          {liveScanActive && (
+                            <div className="absolute top-4 left-4 bg-emerald-500/90 dark:bg-emerald-400/95 text-[#0F1A0A] text-[11px] font-bold tracking-wider rounded-full px-3 py-1.5 flex items-center gap-2 shadow-md">
+                              <div className="w-2 h-2 rounded-full bg-white animate-blink-dot" />
+                              <span>LIVE SCAN</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      
+                      {/* Hasil Klasifikasi (Kanan) */}
+                      <div className="flex-1">
+                        <div className="relative p-5 min-h-[300px] bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl transition-colors duration-300">
+                          <h3 className="text-base font-bold text-slate-800 dark:text-white mb-4 tracking-tight">
+                            Hasil Analisis Real-Time
+                          </h3>
+                          
+                          {!scanResult && !scanLoading && (
+                            <div className="flex flex-col items-center justify-center py-12 text-center">
+                              <motion.div
+                                animate={{ opacity: [1, 0.35, 1], scale: [1, 1.08, 1] }}
+                                transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+                              >
+                                <Zap size={40} className="text-slate-400 dark:text-white/30" />
+                              </motion.div>
+                              <p className="text-sm text-slate-500 dark:text-slate-400 mt-3 font-medium">
+                                Menunggu hasil scan<span className="loading-dots"></span>
+                              </p>
+                              <p className="text-xs text-slate-400 dark:text-white/30 mt-1">
+                                Arahkan kamera ke sampah
                               </p>
                             </div>
                           )}
                           
-                          {/* Tombol Lihat Detail */}
-                          {scanResult.id && (
-                            <button 
-                              onClick={() => navigate(`/predictions/${scanResult.id}`)}
-                              style={{ 
-                                width: '100%',
-                                backgroundColor: '#059669', 
-                                color: '#ffffff', 
-                                borderRadius: 8, 
-                                border: 'none',
-                                padding: '10px 16px',
-                                fontSize: 13,
-                                fontWeight: 600,
-                                marginTop: 16,
-                                cursor: 'pointer'
-                              }}
-                            >
-                              Lihat Detail Lengkap
-                            </button>
+                          {scanLoading && !scanResult && (
+                            <div className="flex flex-col items-center justify-center py-12">
+                              <div className="w-10 h-10 border-[3px] border-slate-200 dark:border-white/10 border-t-emerald-500 rounded-full animate-spin" />
+                              <p className="text-sm text-slate-500 dark:text-slate-400 mt-4 animate-pulse font-medium">
+                                Menganalisis...
+                              </p>
+                            </div>
+                          )}
+                          
+                          {scanResult && (
+                            <div className="scan-result-fade-in">
+                              {/* Kategori */}
+                              <div 
+                                className={`rounded-xl p-4 mb-4 transition-colors duration-300 ${
+                                  scanResult.result?.category === 'Organik' 
+                                    ? 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-800 dark:text-emerald-400' 
+                                    : scanResult.result?.category === 'Anorganik' 
+                                    ? 'bg-blue-50 dark:bg-blue-950/20 text-blue-800 dark:text-blue-400' 
+                                    : 'bg-amber-50 dark:bg-amber-950/20 text-amber-800 dark:text-amber-400'
+                                }`}
+                              >
+                                <div className="text-[11px] font-semibold opacity-70 mb-1">Kategori Terdeteksi</div>
+                                <div className="text-xl font-extrabold tracking-tight">
+                                  {scanResult.result?.category || 'Unknown'}
+                                </div>
+                                {scanResult.result?.label && (
+                                  <div className="text-xs opacity-80 mt-1">
+                                    {scanResult.result.label}
+                                  </div>
+                                )}
+                              </div>
+                              
+                              {/* Confidence Bar */}
+                              {scanResult.result?.confidence && (
+                                <div className="mb-4">
+                                  <div className="flex justify-between text-xs mb-1.5">
+                                    <span className="text-slate-500 dark:text-slate-400">Tingkat Keyakinan</span>
+                                    <span className="font-bold text-slate-800 dark:text-white">
+                                      {scanResult.result.confidence}%
+                                    </span>
+                                  </div>
+                                  <div className="w-full h-2 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                                    <div 
+                                      style={{ width: `${scanResult.result.confidence}%` }} 
+                                      className="h-full bg-emerald-500 dark:bg-emerald-400 rounded-full confidence-bar-animation"
+                                    />
+                                  </div>
+                                </div>
+                              )}
+                              
+                              {/* Tips Penanganan */}
+                              {scanResult.result?.category && (
+                                <div className="p-3.5 bg-white dark:bg-[#111111] border border-slate-200 dark:border-white/5 rounded-xl transition-colors duration-300 animate-fade-in">
+                                  <div className="text-xs font-bold text-slate-800 dark:text-white mb-1.5 flex items-center gap-1.5">
+                                    <span>💡</span> Tips Penanganan
+                                  </div>
+                                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                                    {scanResult.result.category === 'Organik' 
+                                      ? 'Sampah organik dapat dikomposkan atau dijadikan pupuk alami. Pisahkan dari sampah lainnya.'
+                                      : scanResult.result.category === 'Anorganik'
+                                      ? 'Sampah anorganik dapat didaur ulang. Bersihkan dan pisahkan sesuai jenisnya sebelum dibuang.'
+                                      : 'Sampah B3 harus dibuang di tempat khusus. Jangan dicampur dengan sampah biasa.'}
+                                  </p>
+                                </div>
+                              )}
+                              
+                              {/* Tombol Lihat Detail */}
+                              {scanResult.id && (
+                                <button 
+                                  onClick={() => navigate(`/predictions/${scanResult.id}`)}
+                                  className="w-full mt-4 py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-full border-none outline-none cursor-pointer shadow-md shadow-emerald-950/20 transition-all duration-300"
+                                >
+                                  Lihat Detail Lengkap
+                                </button>
+                              )}
+                            </div>
+                          )}
+                          
+                          {scanLoading && scanResult && (
+                            <div className="absolute top-4 right-4 bg-emerald-400/90 text-[#064E3B] text-[10px] font-bold rounded-full px-2.5 py-1 flex items-center gap-1.5 shadow-sm">
+                              <div className="w-1.5 h-1.5 rounded-full bg-[#0F1A0A] animate-blink-dot" />
+                              <span>UPDATING...</span>
+                            </div>
                           )}
                         </div>
-                      )}
-                      
-                      {scanLoading && scanResult && (
-                        <div style={{ 
-                          position: 'absolute', 
-                          top: 8, 
-                          right: 8, 
-                          backgroundColor: 'rgba(52,211,153,0.9)', 
-                          borderRadius: '0 0 0 8px',
-                          padding: '4px 10px',
-                          fontSize: 10,
-                          fontWeight: 600,
-                          color: '#064E3B',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 4
-                        }}>
-                          <div style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#0F1A0A' }} className="animate-pulse" />
-                          Updating...
-                        </div>
-                      )}
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  )}
+                </>
               )}
-            </>
-          )}
+            </motion.div>
+          </AnimatePresence>
 
           <canvas ref={canvasRef} style={{ display: 'none' }} />
 
           {/* error */}
           {error && activeTab === 'upload' && (
-            <div style={{ backgroundColor: '#fef2f2', border: '1px solid #f5c6c6', borderRadius: 8 }}
-              className="flex items-start gap-3 p-4 mt-4">
-              <AlertCircle size={18} style={{ color: '#a32d2d', flexShrink: 0, marginTop: 2 }} />
-              <p style={{ color: '#7f1d1d' }} className="text-sm flex-1">{error}</p>
+            <div className="flex items-start gap-3 p-4 mt-5 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800/30 rounded-xl transition-colors duration-300">
+              <AlertCircle size={18} className="text-red-500 dark:text-red-400 shrink-0 mt-0.5" />
+              <p className="text-sm text-red-800 dark:text-red-200 flex-1 leading-relaxed">{error}</p>
               <button onClick={submitClassification} disabled={loading || !file}
-                style={{ color: '#a32d2d', background: 'none', border: 'none', cursor: loading || !file ? 'not-allowed' : 'pointer', flexShrink: 0 }}
-                className="flex items-center gap-1.5 text-xs font-semibold whitespace-nowrap">
+                className="flex items-center gap-1.5 text-xs font-semibold text-red-700 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 bg-transparent border-none cursor-pointer whitespace-nowrap"
+                style={{ cursor: loading || !file ? 'not-allowed' : 'pointer' }}
+              >
                 <RefreshCw size={13} /> Ulangi
               </button>
             </div>
@@ -633,28 +503,33 @@ export default function UploadPage() {
 
           {/* action buttons - hanya untuk tab upload */}
           {activeTab === 'upload' && (
-            <div className="flex gap-3 mt-5">
+            <div className="flex gap-3 mt-6">
               <button onClick={submitClassification} disabled={!canClassify}
-                style={{ backgroundColor: canClassify ? '#059669' : '#94A3B8', color: '#ffffff', borderRadius: 999, border: 'none', cursor: canClassify ? 'pointer' : 'not-allowed', transition: 'background-color 0.2s ease' }}
-                className="flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold">
+                className={`flex-1 flex items-center justify-center gap-2 py-3.5 text-sm font-semibold rounded-full border-none outline-none shadow-md transition-all duration-300 ${
+                  canClassify 
+                    ? 'bg-emerald-600 hover:bg-emerald-500 text-white cursor-pointer shadow-emerald-950/20' 
+                    : 'bg-slate-200 dark:bg-white/5 text-slate-400 dark:text-white/20 cursor-not-allowed'
+                }`}
+              >
                 {loading ? <><Loader2 size={18} className="animate-spin" /> Menganalisis...</> : 'Klasifikasi'}
               </button>
               <button onClick={resetAll} disabled={loading}
-                style={{ backgroundColor: '#F1F5F9', color: '#334155', borderRadius: 999, border: 'none', opacity: loading ? 0.5 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
-                className="px-5 py-3 text-sm font-medium flex items-center gap-2">
+                className="px-6 py-3.5 text-sm font-semibold flex items-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 rounded-full border-none cursor-pointer transition-colors duration-300"
+                style={{ opacity: loading ? 0.5 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+              >
                 <X size={14} /> Reset
               </button>
             </div>
           )}
 
           {loading && activeTab === 'upload' && (
-            <div className="flex flex-col items-center mt-6 py-6">
-              <div style={{ width: 44, height: 44, border: '3px solid #E2E8F0', borderTopColor: '#059669', borderRadius: '50%' }} className="animate-spin" />
-              <p style={{ color: '#64748B' }} className="mt-4 text-sm">Menganalisis gambar...</p>
+            <div className="flex flex-col items-center mt-6 py-6 border-t border-slate-100 dark:border-white/5">
+              <div className="w-10 h-10 border-[3px] border-slate-200 dark:border-white/10 border-t-emerald-500 rounded-full animate-spin" />
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-4 animate-pulse">Menganalisis gambar...</p>
             </div>
           )}
         </div>
       </div>
-    </>
+    </PageTransition>
   );
 }
