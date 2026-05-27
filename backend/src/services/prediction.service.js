@@ -3,7 +3,7 @@ const aiService = require('./ai.service');
 const config = require('../config');
 const fs = require('fs');
 const path = require('path');
-const { createId } = require('@paralleldrive/cuid2');
+const crypto = require('crypto');
 
 // Pastikan folder uploads/ ada
 const UPLOADS_DIR = path.join(__dirname, '../../uploads');
@@ -40,7 +40,7 @@ async function createPrediction(file) {
   let imageUrl = null;
   if (file.buffer && file.buffer.length > 0) {
     const ext = (file.mimetype || 'image/jpeg').split('/')[1] || 'jpg';
-    const filename = `${createId()}.${ext}`;
+    const filename = `${crypto.randomUUID()}.${ext}`;
     const filepath = path.join(UPLOADS_DIR, filename);
     fs.writeFileSync(filepath, file.buffer);
     imageUrl = `/uploads/${filename}`;

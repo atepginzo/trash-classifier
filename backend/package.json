@@ -27,7 +27,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@paralleldrive/cuid2": "^3.3.0",
     "@prisma/client": "^6.6.0",
     "axios": "^1.16.0",
     "cors": "^2.8.6",
