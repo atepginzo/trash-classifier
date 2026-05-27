@@ -4,12 +4,14 @@ const config = require('../config');
 const { createClient } = require('@supabase/supabase-js');
 const crypto = require('crypto');
 
-const supabase = createClient(
-  process.env.SUPABASE_URL || 'https://placeholder.supabase.co',
-  process.env.SUPABASE_KEY || 'placeholder'
-);
+// PERBAIKAN 1: Menyesuaikan nama variabel ENV dengan yang ada di Vercel
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 async function createPrediction(file) {
+  // 1. Lakukan prediksi ke AI Flask menggunakan buffer
   const aiResult = await aiService.predictImage(file.buffer, file.mimetype);
 
   let label      = aiResult.label;
@@ -34,11 +36,12 @@ async function createPrediction(file) {
     category   = top.kategori  || 'Unknown';
   }
 
-  // Upload gambar ke Supabase Storage
+  // 2. Upload gambar ke Supabase Storage
   let imageUrl = null;
   if (file.buffer && file.buffer.length > 0) {
     const ext = (file.mimetype || 'image/jpeg').split('/')[1] || 'jpg';
-    const filename = `${crypto.randomUUID()}.${ext}`;
+    // PERBAIKAN 2: Tambahkan Date.now() agar nama file selalu unik setiap detik
+    const filename = `${Date.now()}-${crypto.randomUUID()}.${ext}`;
 
     const { data, error } = await supabase
       .storage
@@ -50,9 +53,10 @@ async function createPrediction(file) {
 
     if (error) {
       console.error('Supabase upload error:', error);
-      throw new Error('Gagal mengupload gambar ke Supabase');
+      throw new Error('Gagal mengupload gambar ke Supabase Cloud Storage');
     }
 
+    // Ambil URL Publik yang abadi
     const { data: publicUrlData } = supabase
       .storage
       .from('trash-images')
@@ -61,12 +65,13 @@ async function createPrediction(file) {
     imageUrl = publicUrlData.publicUrl;
   }
 
+  // 3. Simpan data ke Database (menggunakan URL Awan, bukan lagi /uploads/)
   const prediction = await prisma.prediction.create({
     data: {
       label,
       confidence: parseFloat(confidence),
       category,
-      imageUrl,
+      imageUrl, 
     },
   });
 
@@ -107,4 +112,3 @@ async function getPredictionById(id) {
 }
 
 module.exports = { createPrediction, getPredictions, getPredictionById };
-
