@@ -42,7 +42,7 @@ const ICONS = {
 const AREA_META = {
   URBAN: { label: 'Urban', bg: '#e3f2fd', color: '#1565c0', Icon: Building2 },
   SEMI_URBAN: { label: 'Semi-Urban', bg: '#fff3e0', color: '#e65100', Icon: Landmark },
-  RURAL: { label: 'Rural', bg: '#e8f5e9', color: '#2e7d32', Icon: Trees },
+  RURAL: { label: 'Pedesaan', bg: '#e8f5e9', color: '#2e7d32', Icon: Trees },
 };
 
 const BULAN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
@@ -244,7 +244,7 @@ export default function DashboardTpsPage() {
         {/* ══════════ LEFT: MAP ══════════ */}
         <div 
           className={`relative transition-all duration-300 ${
-            sidebarOpen ? 'hidden md:block md:flex-[0_0_65%]' : 'flex-1'
+            sidebarOpen ? 'hidden md:block md:flex-[0_0_60%] lg:flex-[0_0_65%]' : 'flex-1'
           }`}
         >
           {loading ? (
@@ -370,11 +370,11 @@ export default function DashboardTpsPage() {
         {/* ══════════ RIGHT: SIDEBAR ══════════ */}
         <div
           ref={sidebarRef}
-          className={`flex flex-col overflow-hidden bg-slate-50 dark:bg-[#0a0a0a] transition-all duration-300 
-            ${sidebarOpen ? 'w-full md:w-[35%] md:min-w-[360px] border-l border-slate-200 dark:border-white/5' : 'w-0 min-w-0'}`}
+          className={`flex flex-col overflow-hidden bg-white dark:bg-[#0a0a0a] transition-all duration-300 
+            ${sidebarOpen ? 'w-full md:w-[40%] lg:w-[35%] md:min-w-[360px] lg:min-w-[400px] border-l border-slate-200 dark:border-white/5' : 'w-0 min-w-0'}`}
         >
           {sidebarOpen && selectedTps && (
-            <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
+            <div className="flex-1 overflow-y-auto p-4 md:p-5 lg:p-6 scrollbar-thin">
               {/* Close button */}
               <button
                 onClick={closeSidebar}
@@ -384,7 +384,7 @@ export default function DashboardTpsPage() {
               </button>
 
               {/* TPS Header */}
-              <div className="mb-5">
+              <div className="mb-4">
                 {(() => {
                   const meta = AREA_META[selectedTps.area_type] || AREA_META.RURAL;
                   const BadgeIcon = meta.Icon;
@@ -398,26 +398,184 @@ export default function DashboardTpsPage() {
                     </span>
                   );
                 })()}
-                <h2 className="font-sans text-[22px] font-bold text-slate-900 dark:text-white mt-2 mb-1 tracking-tight transition-colors duration-300">
+                <h2 className="font-sans text-xl md:text-[22px] font-bold text-slate-900 dark:text-white mt-2 mb-1 tracking-tight transition-colors duration-300">
                   {selectedTps.nama_desa}
                 </h2>
-                <p className="text-[13px] text-slate-500 dark:text-slate-400 transition-colors duration-300">
-                  Kec. {selectedTps.kecamatan} • {selectedTps.kabupaten}
+                <p className="text-xs md:text-[13px] text-slate-500 dark:text-slate-400 transition-colors duration-300">
+                  {selectedTps.kecamatan} • {selectedTps.kabupaten}
                 </p>
-                <div className="flex items-center gap-3 mt-2 text-[12px] text-slate-500 dark:text-slate-400 transition-colors duration-300">
-                  <span className="flex items-center gap-1">
-                    <Navigation size={12} />
-                    {typeof selectedTps.lat === 'number' ? selectedTps.lat.toFixed(4) : selectedTps.lat},
-                    {typeof selectedTps.lon === 'number' ? selectedTps.lon.toFixed(4) : selectedTps.lon}
-                  </span>
-                  <span>•</span>
-                  <span className="font-semibold text-slate-700 dark:text-slate-300 transition-colors duration-300">
-                    {selectedTps.kapasitas_ton} ton
-                  </span>
-                </div>
               </div>
 
-              <hr className="border-none border-t border-slate-200 dark:border-white/10 my-5 transition-colors duration-300" />
+              {/* Kapasitas Terpakai Progress Bar */}
+              {volResult && (() => {
+                const kapasitasKg = selectedTps.kapasitas_ton * 1000;
+                const lastHistory = volResult.history?.[volResult.history.length - 1];
+                const totalKg = lastHistory?.volume_ton * 1000 || 0;
+                const persenTerpakai = Math.min((totalKg / kapasitasKg) * 100, 100);
+                
+                return (
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-semibold text-slate-600 dark:text-slate-400">Kapasitas Terpakai</span>
+                      <span className="text-sm font-bold text-slate-900 dark:text-white">{persenTerpakai.toFixed(0)}%</span>
+                    </div>
+                    <div className="w-full h-3 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                      <div 
+                        style={{ width: `${persenTerpakai}%` }}
+                        className={`h-full rounded-full transition-all duration-500 ${
+                          persenTerpakai >= 90 ? 'bg-red-500' : 
+                          persenTerpakai >= 70 ? 'bg-orange-500' : 
+                          'bg-emerald-500'
+                        }`}
+                      />
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Stats Grid 2x2 */}
+              {volResult && (() => {
+                const lastHistory = volResult.history?.[volResult.history.length - 1];
+                const totalKg = lastHistory?.volume_ton * 1000 || 0;
+                
+                // Hitung rate per hari dari 3 bulan terakhir
+                const recentHistory = volResult.history?.slice(-3) || [];
+                const avgMonthlyKg = recentHistory.length > 0 
+                  ? recentHistory.reduce((sum, h) => sum + (h.volume_ton * 1000), 0) / recentHistory.length 
+                  : 0;
+                const ratePerHari = avgMonthlyKg / 30;
+                
+                // Dummy data untuk organik/anorganik (bisa diganti dengan data real jika ada)
+                const organikKg = totalKg * 0.6; // 60% organik
+                const anorganikKg = totalKg * 0.4; // 40% anorganik
+                
+                return (
+                  <div className="grid grid-cols-2 gap-2 md:gap-3 mb-4">
+                    <div className="bg-slate-50 dark:bg-white/5 rounded-lg p-3 md:p-4 border border-slate-200 dark:border-white/5">
+                      <div className="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white mb-1">
+                        {(totalKg / 1000).toFixed(1)}k
+                      </div>
+                      <div className="text-[10px] md:text-xs text-slate-500 dark:text-slate-400">Total (kg)</div>
+                    </div>
+                    <div className="bg-slate-50 dark:bg-white/5 rounded-lg p-3 md:p-4 border border-slate-200 dark:border-white/5">
+                      <div className="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white mb-1">
+                        {(ratePerHari / 1000).toFixed(1)}k
+                      </div>
+                      <div className="text-[10px] md:text-xs text-slate-500 dark:text-slate-400">Rate/hari (kg)</div>
+                    </div>
+                    <div className="bg-slate-50 dark:bg-white/5 rounded-lg p-3 md:p-4 border border-slate-200 dark:border-white/5">
+                      <div className="text-xl md:text-2xl font-extrabold text-emerald-600 dark:text-emerald-400 mb-1">
+                        {(organikKg / 1000).toFixed(1)}k
+                      </div>
+                      <div className="text-[10px] md:text-xs text-slate-500 dark:text-slate-400">Organik (kg)</div>
+                    </div>
+                    <div className="bg-slate-50 dark:bg-white/5 rounded-lg p-3 md:p-4 border border-slate-200 dark:border-white/5">
+                      <div className="text-xl md:text-2xl font-extrabold text-blue-600 dark:text-blue-400 mb-1">
+                        {(anorganikKg / 1000).toFixed(1)}k
+                      </div>
+                      <div className="text-[10px] md:text-xs text-slate-500 dark:text-slate-400">Anorganik (kg)</div>
+                    </div>
+                  </div>
+                );
+              })()}
+
+              <hr className="border-none border-t border-slate-200 dark:border-white/10 my-4 transition-colors duration-300" />
+
+              {/* Prediksi Kapasitas Section */}
+              {volResult && (
+                <>
+                  <div className="mb-4">
+                    <h3 className="flex items-center gap-2 text-sm md:text-[14px] font-bold text-slate-900 dark:text-white mb-3 transition-colors duration-300">
+                      <BarChart3 size={16} className="text-slate-600 dark:text-slate-400" />
+                      Prediksi Kapasitas
+                    </h3>
+
+                    {(() => {
+                      const kapasitasKg = selectedTps.kapasitas_ton * 1000;
+                      const lastHistory = volResult.history?.[volResult.history.length - 1];
+                      const totalKg = lastHistory?.volume_ton * 1000 || 0;
+                      const sisaKapasitasKg = kapasitasKg - totalKg;
+                      
+                      // Hitung rate pengisian per hari (rata-rata 3 bulan terakhir)
+                      const recentHistory = volResult.history?.slice(-3) || [];
+                      const avgMonthlyKg = recentHistory.length > 0 
+                        ? recentHistory.reduce((sum, h) => sum + (h.volume_ton * 1000), 0) / recentHistory.length 
+                        : 0;
+                      const ratePerHari = avgMonthlyKg / 30;
+                      
+                      const estimasiHari = ratePerHari > 0 ? Math.round(sisaKapasitasKg / ratePerHari) : 999;
+                      
+                      // Hitung tanggal estimasi penuh
+                      const today = new Date();
+                      const estimasiDate = new Date(today);
+                      estimasiDate.setDate(today.getDate() + estimasiHari);
+                      
+                      // Hitung persentase dari total
+                      const persenDariTotal = ((kapasitasKg - sisaKapasitasKg) / kapasitasKg * 100).toFixed(1);
+                      
+                      // Tentukan warna berdasarkan estimasi hari
+                      const isKritis = estimasiHari < 3;
+                      const isPerhatian = estimasiHari >= 3 && estimasiHari < 7;
+
+                      return (
+                        <div className="bg-slate-50 dark:bg-white/5 rounded-xl p-3 md:p-4 border border-slate-200 dark:border-white/5 space-y-2.5">
+                          {/* Rate pengisian */}
+                          <div className="flex items-center justify-between text-xs md:text-sm">
+                            <span className="text-slate-600 dark:text-slate-400">Rate pengisian</span>
+                            <span className="font-bold text-slate-900 dark:text-white">
+                              {(ratePerHari / 1000).toFixed(2)} kg/hari
+                            </span>
+                          </div>
+                          
+                          {/* Sisa kapasitas */}
+                          <div className="flex items-center justify-between text-xs md:text-sm">
+                            <span className="text-slate-600 dark:text-slate-400">Sisa kapasitas</span>
+                            <span className="font-bold text-slate-900 dark:text-white">
+                              {(sisaKapasitasKg / 1000).toFixed(2)} kg
+                            </span>
+                          </div>
+                          
+                          {/* Estimasi penuh */}
+                          <div className="flex items-center justify-between text-xs md:text-sm">
+                            <span className="text-slate-600 dark:text-slate-400">Estimasi penuh</span>
+                            <span className={`font-bold ${
+                              isKritis ? 'text-red-600 dark:text-red-400' : 
+                              isPerhatian ? 'text-orange-600 dark:text-orange-400' : 
+                              'text-emerald-600 dark:text-emerald-400'
+                            }`}>
+                              {estimasiHari < 999 
+                                ? `${estimasiHari} hari (${estimasiDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })})`
+                                : '∞ hari'}
+                            </span>
+                          </div>
+                          
+                          {/* B3 dari total */}
+                          <div className="flex items-center justify-between text-xs md:text-sm">
+                            <span className="text-slate-600 dark:text-slate-400">B3 dari total</span>
+                            <span className={`font-bold ${
+                              isKritis ? 'text-red-600 dark:text-red-400' : 
+                              isPerhatian ? 'text-orange-600 dark:text-orange-400' : 
+                              'text-emerald-600 dark:text-emerald-400'
+                            }`}>
+                              {persenDariTotal}% dari total
+                            </span>
+                          </div>
+                          
+                          {/* Status badge */}
+                          {isKritis && (
+                            <div className="flex items-center gap-1.5 text-[10px] md:text-xs font-semibold text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-950/30 px-2.5 py-1.5 rounded-lg mt-2">
+                              <AlertCircle size={12} />
+                              <span>KRITIS — Segera tindak lanjut!</span>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()}
+                  </div>
+
+                  <hr className="border-none border-t border-slate-200 dark:border-white/10 my-4 transition-colors duration-300" />
+                </>
+              )}
 
               {/* Navigation Section */}
               <div className="mb-5">
@@ -499,16 +657,16 @@ export default function DashboardTpsPage() {
               <hr className="border-none border-t border-slate-200 dark:border-white/10 my-5 transition-colors duration-300" />
 
               {/* Volume Prediction Section */}
-              <h3 className="flex items-center gap-2 text-[14px] font-bold text-slate-900 dark:text-white mb-4 transition-colors duration-300">
-                <TrendingUp size={16} className="text-emerald-600 dark:text-emerald-400" />
-                Prediksi Volume Sampah (LSTM)
+              <h3 className="flex items-center gap-2 text-sm md:text-[14px] font-bold text-slate-900 dark:text-white mb-3 transition-colors duration-300">
+                <TrendingUp size={16} className="text-blue-600 dark:text-blue-400" />
+                Prediksi Volume Sampah
               </h3>
 
               {/* Loading */}
               {volLoading && (
                 <div className="flex flex-col items-center py-10">
                   <div className="w-9 h-9 border-[3px] border-slate-200 dark:border-white/10 border-t-emerald-600 dark:border-t-emerald-400 rounded-full animate-spin" />
-                  <p className="mt-3 text-[13px] text-slate-500 dark:text-slate-400 transition-colors duration-300">
+                  <p className="mt-3 text-xs md:text-[13px] text-slate-500 dark:text-slate-400 transition-colors duration-300">
                     Menjalankan model LSTM...
                   </p>
                 </div>
@@ -518,94 +676,145 @@ export default function DashboardTpsPage() {
               {volError && (
                 <div className="flex items-start gap-2.5 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/30 rounded-lg p-3 mb-4 transition-colors duration-300">
                   <AlertCircle size={16} className="text-red-700 dark:text-red-400 mt-0.5 shrink-0" />
-                  <p className="text-[13px] text-red-800 dark:text-red-300 m-0">{volError}</p>
+                  <p className="text-xs md:text-[13px] text-red-800 dark:text-red-300 m-0">{volError}</p>
                 </div>
               )}
 
-              {/* Prediction Cards */}
+              {/* Prediction Card */}
               {volResult && (
                 <>
-                  {/* 3 Prediction Cards */}
-                  <div className="grid grid-cols-3 gap-2.5 mb-5">
-                    {(volResult.predictions || []).map((pred, i) => {
-                      const lastH = volResult.history?.[volResult.history.length - 1];
-                      const predMonth = lastH ? ((lastH.bulan + i) % 12) + 1 : i + 1;
-                      const predYear = lastH ? lastH.tahun + Math.floor((lastH.bulan + i) / 12) : 2026;
-                      return (
-                        <div key={i} className="bg-white dark:bg-[#111111] rounded-xl p-3.5 text-center border border-slate-200 dark:border-white/5 shadow-[0_1px_4px_rgba(0,0,0,0.04)] dark:shadow-[0_1px_4px_rgba(0,0,0,0.5)] transition-colors duration-300">
-                          <div className="text-[11px] text-slate-500 dark:text-slate-400 mb-1.5 transition-colors duration-300">
-                            {BULAN[predMonth - 1]} {predYear}
-                          </div>
-                          <div className="text-[20px] font-extrabold text-emerald-600 dark:text-emerald-400 font-mono transition-colors duration-300">
-                            {pred.volume_ton.toFixed(1)}
-                          </div>
-                          <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 transition-colors duration-300">ton</div>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Model badge */}
-                  <div className="bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 rounded-md px-3 py-1.5 inline-flex items-center gap-1.5 text-[11px] font-semibold mb-4 border border-transparent dark:border-emerald-800/30 transition-colors duration-300">
-                    <BarChart3 size={12} /> {volResult.model_used}
-                  </div>
-
-                  {/* History Bar Chart */}
-                  <h4 className="text-[12px] font-semibold text-slate-700 dark:text-slate-300 mb-2.5 flex items-center gap-1.5 transition-colors duration-300">
-                    <BarChart3 size={13} /> Riwayat 12 Bulan (ton)
-                  </h4>
-
-                  <div className="flex flex-col gap-1.5 mb-4">
-                    {(volResult.history || []).map((h, i) => (
-                      <div key={i} className="flex items-center gap-2">
-                        <span className="min-w-[52px] text-[11px] text-slate-500 dark:text-slate-400 text-right transition-colors duration-300">
-                          {BULAN[h.bulan - 1]} {h.tahun}
-                        </span>
-                        <div className="flex-1 h-4 bg-slate-100 dark:bg-white/5 rounded-sm overflow-hidden transition-colors duration-300">
-                          <div
-                            className="h-full bg-emerald-300 dark:bg-emerald-500 rounded-sm transition-all duration-500"
-                            style={{ width: `${(h.volume_ton / maxVol) * 100}%` }}
-                          />
-                        </div>
-                        <span className="min-w-[40px] text-[11px] font-semibold text-slate-700 dark:text-slate-300 text-right transition-colors duration-300">
-                          {h.volume_ton.toFixed(1)}
-                        </span>
+                  <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800/30 rounded-xl p-3 md:p-4 mb-4 transition-colors duration-300">
+                    {/* Header with badge */}
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2 text-blue-700 dark:text-blue-300 font-semibold text-xs md:text-sm">
+                        <BarChart3 size={14} />
+                        <span>Prediksi Volume Sampah</span>
                       </div>
-                    ))}
-
-                    {/* Divider */}
-                    <div className="flex items-center gap-2 py-1">
-                      <div className="flex-1 h-px bg-slate-300 dark:bg-white/10 transition-colors duration-300" />
-                      <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 transition-colors duration-300">▼ PREDIKSI</span>
-                      <div className="flex-1 h-px bg-slate-300 dark:bg-white/10 transition-colors duration-300" />
+                      <span className="bg-blue-600 dark:bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded-full">
+                        LSTM Model
+                      </span>
                     </div>
+                    
+                    <p className="text-[10px] md:text-xs text-blue-600 dark:text-blue-400 mb-3">
+                      Prediksi LSTM 3 bulan ke depan
+                    </p>
+                    
+                    {/* 3 Prediction Cards */}
+                    <div className="grid grid-cols-3 gap-2 mb-3">
+                      {(volResult.predictions || []).map((pred, i) => {
+                        const lastH = volResult.history?.[volResult.history.length - 1];
+                        const predMonth = lastH ? ((lastH.bulan + i) % 12) + 1 : i + 1;
+                        const predYear = lastH ? lastH.tahun + Math.floor((lastH.bulan + i) / 12) : 2026;
+                        return (
+                          <div key={i} className="bg-white dark:bg-blue-900/30 rounded-lg p-2 md:p-3 text-center border border-blue-200 dark:border-blue-700/50 transition-colors duration-300">
+                            <div className="text-[10px] md:text-[11px] text-blue-600 dark:text-blue-400 mb-1 font-medium">
+                              {BULAN[predMonth - 1]} {predYear}
+                            </div>
+                            <div className="text-lg md:text-xl font-extrabold text-blue-700 dark:text-blue-300 font-mono">
+                              {pred.volume_ton.toFixed(1)}
+                            </div>
+                            <div className="text-[9px] md:text-[10px] text-blue-500 dark:text-blue-400 mt-0.5">ton</div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    
+                    {/* Legend */}
+                    <div className="flex items-center justify-center gap-3 md:gap-4 text-[9px] md:text-[10px] font-medium">
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 md:w-2.5 md:h-2.5 bg-slate-400 dark:bg-slate-500 rounded-sm" />
+                        <span className="text-blue-600 dark:text-blue-400">Estimasi lalu</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 md:w-2.5 md:h-2.5 bg-emerald-500 dark:bg-emerald-400 rounded-sm" />
+                        <span className="text-blue-600 dark:text-blue-400">Bulan ini</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 md:w-2.5 md:h-2.5 bg-blue-500 dark:bg-blue-400 rounded-sm" />
+                        <span className="text-blue-600 dark:text-blue-400">Prediksi</span>
+                      </div>
+                    </div>
+                    
+                    {/* Mini Bar Chart */}
+                    <div className="mt-3 pt-3 border-t border-blue-200 dark:border-blue-700/50">
+                      <div className="flex items-end justify-between gap-1 h-20 md:h-24">
+                        {/* Last 3 history bars (gray) */}
+                        {(volResult.history || []).slice(-3).map((h, i) => (
+                          <div key={`h-${i}`} className="flex-1 flex flex-col items-center gap-1">
+                            <div 
+                              style={{ height: `${(h.volume_ton / maxVol) * 100}%` }}
+                              className="w-full bg-slate-300 dark:bg-slate-600 rounded-t transition-all duration-500"
+                            />
+                            <span className="text-[8px] md:text-[9px] text-blue-600 dark:text-blue-400 font-medium">
+                              {BULAN[h.bulan - 1]}
+                            </span>
+                          </div>
+                        ))}
+                        
+                        {/* Current month (green) */}
+                        {volResult.history && volResult.history.length > 0 && (() => {
+                          const current = volResult.history[volResult.history.length - 1];
+                          return (
+                            <div className="flex-1 flex flex-col items-center gap-1">
+                              <div 
+                                style={{ height: `${(current.volume_ton / maxVol) * 100}%` }}
+                                className="w-full bg-emerald-500 dark:bg-emerald-400 rounded-t transition-all duration-500"
+                              />
+                              <span className="text-[8px] md:text-[9px] text-blue-600 dark:text-blue-400 font-bold">
+                                {BULAN[current.bulan - 1]}
+                              </span>
+                            </div>
+                          );
+                        })()}
+                        
+                        {/* Predictions (blue) */}
+                        {(volResult.predictions || []).map((p, i) => {
+                          const lastH = volResult.history?.[volResult.history.length - 1];
+                          const pm = lastH ? ((lastH.bulan + i) % 12) + 1 : i + 1;
+                          return (
+                            <div key={`p-${i}`} className="flex-1 flex flex-col items-center gap-1">
+                              <div 
+                                style={{ height: `${(p.volume_ton / maxVol) * 100}%` }}
+                                className="w-full bg-blue-500 dark:bg-blue-400 rounded-t transition-all duration-500"
+                              />
+                              <span className="text-[8px] md:text-[9px] text-blue-600 dark:text-blue-400 font-bold">
+                                {BULAN[pm - 1]}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
 
-                    {/* Prediction bars */}
-                    {(volResult.predictions || []).map((p, i) => {
-                      const lastH = volResult.history?.[volResult.history.length - 1];
-                      const pm = lastH ? ((lastH.bulan + i) % 12) + 1 : i + 1;
-                      const py = lastH ? lastH.tahun + Math.floor((lastH.bulan + i) / 12) : 2026;
-                      return (
-                        <div key={`p-${i}`} className="flex items-center gap-2">
-                          <span className="min-w-[52px] text-[11px] font-bold text-emerald-600 dark:text-emerald-400 text-right transition-colors duration-300">
-                            {BULAN[pm - 1]} {py}
+                  {/* Detailed History (Collapsible) */}
+                  <details className="group">
+                    <summary className="cursor-pointer list-none flex items-center justify-between p-2 hover:bg-slate-50 dark:hover:bg-white/5 rounded-lg transition-colors duration-200">
+                      <span className="text-xs md:text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                        <BarChart3 size={13} /> Riwayat 12 Bulan (ton)
+                      </span>
+                      <ChevronRight size={14} className="text-slate-400 group-open:rotate-90 transition-transform duration-200" />
+                    </summary>
+                    
+                    <div className="flex flex-col gap-1.5 mt-2 mb-4">
+                      {(volResult.history || []).map((h, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <span className="min-w-[52px] text-[10px] md:text-[11px] text-slate-500 dark:text-slate-400 text-right transition-colors duration-300">
+                            {BULAN[h.bulan - 1]} {h.tahun}
                           </span>
-                          <div className="flex-1 h-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-sm overflow-hidden transition-colors duration-300">
+                          <div className="flex-1 h-3 md:h-4 bg-slate-100 dark:bg-white/5 rounded-sm overflow-hidden transition-colors duration-300">
                             <div
-                              className="h-full rounded-sm transition-all duration-500"
-                              style={{
-                                width: `${(p.volume_ton / maxVol) * 100}%`,
-                                background: 'linear-gradient(90deg, #059669 0%, #34D399 100%)',
-                              }}
+                              className="h-full bg-emerald-300 dark:bg-emerald-500 rounded-sm transition-all duration-500"
+                              style={{ width: `${(h.volume_ton / maxVol) * 100}%` }}
                             />
                           </div>
-                          <span className="min-w-[40px] text-[11px] font-extrabold text-emerald-600 dark:text-emerald-400 text-right transition-colors duration-300">
-                            {p.volume_ton.toFixed(1)}
+                          <span className="min-w-[40px] text-[10px] md:text-[11px] font-semibold text-slate-700 dark:text-slate-300 text-right transition-colors duration-300">
+                            {h.volume_ton.toFixed(1)}
                           </span>
                         </div>
-                      );
-                    })}
-                  </div>
+                      ))}
+                    </div>
+                  </details>
                 </>
               )}
             </div>

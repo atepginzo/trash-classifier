@@ -9,7 +9,7 @@ import Navbar from '../components/Navbar';
 const AREA_BADGE = {
   URBAN: { label: 'Urban', bg: '#e3f2fd', color: '#1565c0', Icon: Building2 },
   SEMI_URBAN: { label: 'Semi-Urban', bg: '#fff3e0', color: '#e65100', Icon: Landmark },
-  RURAL: { label: 'Rural', bg: '#e8f5e9', color: '#2e7d32', Icon: Trees },
+  RURAL: { label: 'Pedesaan', bg: '#e8f5e9', color: '#2e7d32', Icon: Trees },
 };
 
 export default function TpsPage() {

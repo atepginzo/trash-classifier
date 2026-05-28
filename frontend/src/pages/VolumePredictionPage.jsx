@@ -219,7 +219,7 @@ export default function VolumePredictionPage() {
                   {result.tps?.area_type}
                 </p>
                 <p style={{ color: '#6B7160' }} className="text-xs mt-1">
-                  Model: {result.model_used}
+                  Model: LSTM Model
                 </p>
               </div>
 
