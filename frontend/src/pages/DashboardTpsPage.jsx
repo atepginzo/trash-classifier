@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
   X, Loader2, TrendingUp, MapPin, Navigation, Building2, Trees, Landmark,
-  ChevronRight, BarChart3, AlertCircle,
+  ChevronRight, BarChart3, AlertCircle, Navigation2, XCircle,
 } from 'lucide-react';
 import { tpsService } from '../services/tpsService';
 import { volumeService } from '../services/volumeService';
@@ -54,6 +54,52 @@ function FlyTo({ center }) {
   return null;
 }
 
+// ── Helper: Route Layer Component ────────────────────────────────────────────
+function RouteLayer({ routeGeoJSON }) {
+  if (!routeGeoJSON) return null;
+  
+  const routeStyle = {
+    color: '#2563eb',
+    weight: 5,
+    opacity: 0.8,
+    lineJoin: 'round',
+    lineCap: 'round',
+  };
+
+  return <GeoJSON data={routeGeoJSON} style={routeStyle} />;
+}
+
+// ── Helper: User Location Marker ─────────────────────────────────────────────
+function UserLocationMarker({ position }) {
+  if (!position) return null;
+
+  const userIcon = new L.DivIcon({
+    className: '',
+    html: `<div style="
+      width:20px;height:20px;border-radius:50%;
+      background:#3b82f6;border:3px solid #fff;
+      box-shadow:0 2px 8px rgba(59,130,246,0.5);
+      display:flex;align-items:center;justify-content:center;
+    "><div style="width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 2s infinite;"></div></div>
+    <style>
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.8); }
+      }
+    </style>`,
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
+  });
+
+  return (
+    <Marker position={position} icon={userIcon}>
+      <Popup>
+        <strong>Lokasi Anda</strong>
+      </Popup>
+    </Marker>
+  );
+}
+
 // ═════════════════════════════════════════════════════════════════════════════
 export default function DashboardTpsPage() {
   const [allTps, setAllTps] = useState([]);
@@ -66,6 +112,14 @@ export default function DashboardTpsPage() {
   const [volLoading, setVolLoading] = useState(false);
   const [volResult, setVolResult] = useState(null);
   const [volError, setVolError] = useState(null);
+
+  // Navigation state
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [routeGeoJSON, setRouteGeoJSON] = useState(null);
+  const [routeInfo, setRouteInfo] = useState(null); // { distance, duration }
+  const [userLocation, setUserLocation] = useState(null);
+  const [navLoading, setNavLoading] = useState(false);
+  const [navError, setNavError] = useState(null);
 
   const sidebarRef = useRef(null);
 
@@ -105,6 +159,75 @@ export default function DashboardTpsPage() {
     setSelectedTps(null);
     setVolResult(null);
     setVolError(null);
+    stopNavigation(); // Stop navigation when closing sidebar
+  }
+
+  // ── Navigation Functions ───────────────────────────────────────────────────
+  async function startNavigation() {
+    if (!selectedTps) return;
+
+    setNavLoading(true);
+    setNavError(null);
+
+    try {
+      // Get user location
+      const position = await new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+          reject(new Error('Geolocation tidak didukung browser Anda'));
+          return;
+        }
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        });
+      });
+
+      const userLat = position.coords.latitude;
+      const userLon = position.coords.longitude;
+      setUserLocation([userLat, userLon]);
+
+      // Call OSRM API
+      const tpsLat = Number(selectedTps.lat);
+      const tpsLon = Number(selectedTps.lon);
+      
+      const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${userLon},${userLat};${tpsLon},${tpsLat}?overview=full&geometries=geojson`;
+      
+      const response = await fetch(osrmUrl);
+      if (!response.ok) throw new Error('Gagal mendapatkan rute dari OSRM');
+      
+      const data = await response.json();
+      
+      if (data.code !== 'Ok' || !data.routes || data.routes.length === 0) {
+        throw new Error('Tidak dapat menemukan rute ke TPS ini');
+      }
+
+      const route = data.routes[0];
+      const distanceKm = (route.distance / 1000).toFixed(1);
+      const durationMin = Math.round(route.duration / 60);
+
+      // Set route data
+      setRouteGeoJSON(route.geometry);
+      setRouteInfo({ distance: distanceKm, duration: durationMin });
+      setIsNavigating(true);
+
+      // Fly to show full route
+      setFlyCenter([userLat, userLon]);
+
+    } catch (error) {
+      console.error('Navigation error:', error);
+      setNavError(error.message || 'Gagal memulai navigasi');
+    } finally {
+      setNavLoading(false);
+    }
+  }
+
+  function stopNavigation() {
+    setIsNavigating(false);
+    setRouteGeoJSON(null);
+    setRouteInfo(null);
+    setUserLocation(null);
+    setNavError(null);
   }
 
   // ── Compute max volume for bar scaling ─────────────────────────────────────
@@ -117,16 +240,13 @@ export default function DashboardTpsPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-black transition-colors duration-300 flex flex-col">
       <Navbar />
-      <div style={{
-        position: 'fixed', top: 64, left: 0, right: 0, bottom: 0,
-        display: 'flex', overflow: 'hidden',
-      }}>
+      <div className="fixed top-16 left-0 right-0 bottom-0 flex overflow-hidden">
         {/* ══════════ LEFT: MAP ══════════ */}
-        <div style={{
-          flex: sidebarOpen ? '0 0 65%' : '1',
-          transition: 'flex 0.3s ease',
-          position: 'relative',
-        }}>
+        <div 
+          className={`relative transition-all duration-300 ${
+            sidebarOpen ? 'hidden md:block md:flex-[0_0_65%]' : 'flex-1'
+          }`}
+        >
           {loading ? (
             <div className="flex flex-col items-center justify-center h-full bg-slate-50 dark:bg-black transition-colors duration-300">
               <Loader2 size={36} className="text-emerald-600 dark:text-emerald-400 animate-spin" />
@@ -144,6 +264,13 @@ export default function DashboardTpsPage() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <FlyTo center={flyCenter} />
+              
+              {/* Route Layer */}
+              {isNavigating && routeGeoJSON && <RouteLayer routeGeoJSON={routeGeoJSON} />}
+              
+              {/* User Location Marker */}
+              {isNavigating && userLocation && <UserLocationMarker position={userLocation} />}
+              
               {allTps.filter(tps => tps.lat != null && tps.lon != null).map(tps => (
                 <Marker
                   key={tps.id}
@@ -190,18 +317,61 @@ export default function DashboardTpsPage() {
               <MapPin size={14} /> Klik marker TPS untuk melihat prediksi volume
             </div>
           )}
+
+          {/* Navigation Panel (Floating at bottom) */}
+          {isNavigating && routeInfo && (
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-[1000] w-[95%] sm:w-[90%] max-w-lg px-2">
+              <div className="bg-slate-900/98 dark:bg-slate-950/98 backdrop-blur-md rounded-2xl px-4 sm:px-6 py-4 shadow-2xl border border-white/20">
+                <div className="flex items-center justify-between gap-3 sm:gap-4">
+                  {/* Route Info */}
+                  <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <Navigation2 size={20} className="text-blue-400 shrink-0" />
+                      <div>
+                        <div className="text-xl sm:text-2xl font-extrabold text-white leading-none mb-1">
+                          {routeInfo.distance} <span className="text-sm font-semibold">km</span>
+                        </div>
+                        <div className="text-[10px] sm:text-xs text-slate-300 font-medium">Jarak</div>
+                      </div>
+                    </div>
+                    <div className="h-10 sm:h-12 w-px bg-white/30 shrink-0" />
+                    <div>
+                      <div className="text-xl sm:text-2xl font-extrabold text-white leading-none mb-1">
+                        {routeInfo.duration} <span className="text-sm font-semibold">mnt</span>
+                      </div>
+                      <div className="text-[10px] sm:text-xs text-slate-300 font-medium">Estimasi</div>
+                    </div>
+                  </div>
+
+                  {/* Stop Button */}
+                  <button
+                    onClick={stopNavigation}
+                    className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full
+                               bg-red-600 hover:bg-red-700 active:bg-red-800 text-white
+                               transition-all duration-200 shadow-lg hover:shadow-xl active:scale-95 shrink-0"
+                    title="Hentikan Navigasi"
+                  >
+                    <XCircle size={20} />
+                  </button>
+                </div>
+
+                {/* Route Status */}
+                <div className="mt-3 pt-3 border-t border-white/20">
+                  <div className="text-[11px] sm:text-xs text-emerald-400 flex items-center gap-1.5 font-medium">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                    <span className="truncate">Rute aktif • Menuju {selectedTps?.nama_desa}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* ══════════ RIGHT: SIDEBAR ══════════ */}
         <div
           ref={sidebarRef}
-          className={`flex flex-col overflow-hidden bg-slate-50 dark:bg-[#0a0a0a] transition-all duration-300 ${
-            sidebarOpen ? 'border-l border-slate-200 dark:border-white/5' : ''
-          }`}
-          style={{
-            width: sidebarOpen ? '35%' : 0,
-            minWidth: sidebarOpen ? 360 : 0,
-          }}
+          className={`flex flex-col overflow-hidden bg-slate-50 dark:bg-[#0a0a0a] transition-all duration-300 
+            ${sidebarOpen ? 'w-full md:w-[35%] md:min-w-[360px] border-l border-slate-200 dark:border-white/5' : 'w-0 min-w-0'}`}
         >
           {sidebarOpen && selectedTps && (
             <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
@@ -245,6 +415,85 @@ export default function DashboardTpsPage() {
                     {selectedTps.kapasitas_ton} ton
                   </span>
                 </div>
+              </div>
+
+              <hr className="border-none border-t border-slate-200 dark:border-white/10 my-5 transition-colors duration-300" />
+
+              {/* Navigation Section */}
+              <div className="mb-5">
+                <h3 className="flex items-center gap-2 text-[14px] font-bold text-slate-900 dark:text-white mb-3 transition-colors duration-300">
+                  <Navigation2 size={16} className="text-blue-600 dark:text-blue-400" />
+                  Navigasi ke TPS
+                </h3>
+
+                {/* Navigation Error */}
+                {navError && (
+                  <div className="flex items-start gap-2.5 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/30 rounded-lg p-3 mb-3 transition-colors duration-300">
+                    <AlertCircle size={16} className="text-red-700 dark:text-red-400 mt-0.5 shrink-0" />
+                    <p className="text-[13px] text-red-800 dark:text-red-300 m-0" style={{color: 'inherit'}}>{navError}</p>
+                  </div>
+                )}
+
+                {!isNavigating ? (
+                  <button
+                    onClick={startNavigation}
+                    disabled={navLoading}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3.5
+                               bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400
+                               text-white font-semibold text-sm rounded-xl
+                               transition-all duration-200 shadow-md hover:shadow-lg
+                               disabled:cursor-not-allowed active:scale-95"
+                  >
+                    {navLoading ? (
+                      <>
+                        <Loader2 size={18} className="animate-spin" />
+                        <span>Mendapatkan lokasi...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Navigation2 size={18} />
+                        <span>Navigasi ke sini</span>
+                      </>
+                    )}
+                  </button>
+                ) : (
+                  <>
+                    {/* Route Info Card */}
+                    {routeInfo && (
+                      <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/50 rounded-xl p-4 mb-3 transition-colors duration-300">
+                        <div className="grid grid-cols-2 gap-4 mb-3">
+                          <div>
+                            <div className="text-[11px] text-blue-700 dark:text-blue-300 font-bold mb-1 uppercase tracking-wider">Jarak</div>
+                            <div className="text-2xl font-extrabold text-blue-800 dark:text-blue-200">
+                              {routeInfo.distance} <span className="text-sm font-semibold">km</span>
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-[11px] text-blue-700 dark:text-blue-300 font-bold mb-1 uppercase tracking-wider">Estimasi</div>
+                            <div className="text-2xl font-extrabold text-blue-800 dark:text-blue-200">
+                              {routeInfo.duration} <span className="text-sm font-semibold">mnt</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-[11px] text-blue-700 dark:text-blue-300 flex items-center gap-1.5 font-medium">
+                          <MapPin size={11} />
+                          <span>Rute ditampilkan di peta</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Stop Navigation Button */}
+                    <button
+                      onClick={stopNavigation}
+                      className="w-full flex items-center justify-center gap-2 px-4 py-3.5
+                                 bg-red-600 hover:bg-red-700 text-white font-semibold text-sm rounded-xl
+                                 transition-all duration-200 shadow-md hover:shadow-lg active:scale-95"
+                    >
+                      <XCircle size={18} />
+                      <span>Hentikan Navigasi</span>
+                    </button>
+                  </>
+                )}
               </div>
 
               <hr className="border-none border-t border-slate-200 dark:border-white/10 my-5 transition-colors duration-300" />

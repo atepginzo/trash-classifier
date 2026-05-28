@@ -143,7 +143,7 @@ export default function Hero() {
             <motion.p variants={fadeUp} initial="hidden" animate="visible"
               transition={{ delay: 0.2 }}
               className={`text-base sm:text-lg lg:text-xl leading-relaxed mb-4 max-w-lg font-medium ${
-                isDark ? 'text-white/55' : 'text-slate-500'
+                isDark ? 'text-white/55' : 'text-slate-600'
               }`}>
               Unggah foto sampah dan dapatkan klasifikasi instan menggunakan
               teknologi AI — cepat, akurat, dan berbasis data.
@@ -194,7 +194,7 @@ export default function Hero() {
                   }`}>
                     {s.value}
                   </span>
-                  <span className={`text-xs font-medium mt-1 ${isDark ? 'text-white/45' : 'text-slate-500'}`}>
+                  <span className={`text-xs font-medium mt-1 ${isDark ? 'text-white/45' : 'text-slate-600'}`}>
                     {s.label}
                   </span>
                 </div>
