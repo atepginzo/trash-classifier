@@ -9,7 +9,7 @@ import Navbar from '../components/Navbar';
 const AREA_BADGE = {
   URBAN: { label: 'Urban', bg: '#e3f2fd', color: '#1565c0', Icon: Building2 },
   SEMI_URBAN: { label: 'Semi-Urban', bg: '#fff3e0', color: '#e65100', Icon: Landmark },
-  RURAL: { label: 'Rural', bg: '#e8f5e9', color: '#2e7d32', Icon: Trees },
+  RURAL: { label: 'Pedesaan', bg: '#e8f5e9', color: '#2e7d32', Icon: Trees },
 };
 
 export default function TpsPage() {
@@ -38,7 +38,7 @@ export default function TpsPage() {
     setError(null);
     try {
       const res = await tpsService.getAll({ page: p, limit: LIMIT });
-      setTpsList(res?.data || []);
+      setTpsList(res?.data?.data?.tps || res?.data?.tps || res?.data || []);
       setTotal(res?.meta?.total || 0);
       setTotalPages(res?.meta?.totalPages || 1);
       setPage(p);
@@ -56,7 +56,7 @@ export default function TpsPage() {
     setError(null);
     try {
       const res = await tpsService.findNearest(lat, lon, 10);
-      const data = res?.data?.tps || res?.data || [];
+      const data = res?.data?.data?.tps || res?.data?.tps || res?.data || [];
       setTpsList(data);
     } catch (err) {
       setError(err.message || 'Gagal memuat TPS terdekat');

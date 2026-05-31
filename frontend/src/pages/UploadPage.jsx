@@ -264,6 +264,13 @@ export default function UploadPage() {
             ))}
           </div>
 
+          {/* Tips Section - Always visible */}
+          <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800/30 rounded-xl transition-colors duration-300">
+            <p className="text-xs text-blue-800 dark:text-blue-300 leading-relaxed text-left" style={{ textTransform: 'none' }}>
+              <span className="font-medium">Tips:</span> pastikan sampah berada di pencahayaan yang cukup dan kamera tidak buram untuk hasil deteksi terbaik.
+            </p>
+          </div>
+
           {/* tab content with AnimatePresence */}
           <AnimatePresence mode="wait">
             <motion.div

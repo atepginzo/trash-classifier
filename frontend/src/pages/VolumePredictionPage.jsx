@@ -35,7 +35,7 @@ export default function VolumePredictionPage() {
       try {
         setLoadingTps(true);
         const res = await tpsService.getAll({ limit: 500 });
-        setTpsList(res?.data || []);
+        setTpsList(res?.data?.data?.tps || res?.data?.tps || res?.data || []);
       } catch {
         setTpsList([]);
       } finally {
@@ -63,7 +63,7 @@ export default function VolumePredictionPage() {
 
     try {
       const res = await volumeService.predictVolume(id);
-      setResult(res?.data || res);
+      setResult(res?.data?.data || res?.data || res);
     } catch (err) {
       setError(err.message || 'Gagal memprediksi volume sampah.');
     } finally {
@@ -219,7 +219,7 @@ export default function VolumePredictionPage() {
                   {result.tps?.area_type}
                 </p>
                 <p style={{ color: '#6B7160' }} className="text-xs mt-1">
-                  Model: {result.model_used}
+                  Model: LSTM Model
                 </p>
               </div>
 

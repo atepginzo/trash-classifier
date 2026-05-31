@@ -84,7 +84,7 @@ const TEAM_MEMBERS = {
       name: 'Darma Al Gani',
       id: 'CACC012D6Y0805',
       university: 'Universitas Telkom',
-      major: 'Teknik Informatika',
+      major: 'TEKNIK TELEKOMUNIKASI',
       photo: '/team/darma.png',
       quote: 'Melatih model AI untuk mendeteksi limbah adalah langkah kecil kami untuk melindungi rumah kita yang paling berharga: Bumi.',
       linkedin: 'https://www.linkedin.com/in/darma-al-gani-556456262/',

@@ -66,9 +66,9 @@ function StatCard({ stat, index }) {
     >
       <div className="flex justify-center mb-3 opacity-70"><stat.Icon /></div>
       <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-emerald-600 dark:text-emerald-400 mb-1 tracking-tight">
-        {count}<span className="text-amber-500">{stat.suffix}</span>
+        {count}<span className="text-amber-500 dark:text-amber-500">{stat.suffix}</span>
       </div>
-      <div className="text-sm sm:text-base text-slate-500 dark:text-white/60 font-medium">{stat.label}</div>
+      <div className="text-sm sm:text-base text-slate-700 dark:text-white/60 font-medium">{stat.label}</div>
     </motion.div>
   );
 }

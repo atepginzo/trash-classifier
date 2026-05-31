@@ -46,7 +46,7 @@ function FinalCTA() {
                          font-extrabold text-white leading-[1.1] tracking-[-0.025em] mb-6">
             Siap Mengelola Sampah<br className="hidden sm:block" /> dengan Lebih Cerdas?
           </h2>
-          <p className="text-lg sm:text-xl text-emerald-100/70 leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
+          <p className="text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl mx-auto font-medium" style={{color: 'rgba(255,255,255,0.7)'}}>
             Upload foto sampah sekarang dan biarkan AI membantu mengidentifikasi
             jenis limbah serta cara pengelolaannya yang tepat.
           </p>

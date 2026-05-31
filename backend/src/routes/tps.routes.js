@@ -1,11 +1,10 @@
-const { Router } = require('express');
-const tpsController = require('../controllers/tps.controller');
+const express = require('express');
+const router = express.Router();
 
-const router = Router();
+// Pastikan namanya getNearestTps sesuai dengan yang ada di controller
+const { getNearestTps } = require('../controllers/tps.controller');
 
-// GET /api/tps         — Semua TPS (paginasi) atau TPS terdekat (jika ?lat&lon)
-// GET /api/tps/:id     — Detail satu TPS
-router.get('/', tpsController.getTps);
-router.get('/:id', tpsController.getTpsById);
+// Rute untuk mengambil semua data TPS
+router.get('/', getNearestTps);
 
 module.exports = router;

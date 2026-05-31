@@ -80,7 +80,7 @@ export default function Footer() {
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 tracking-tight">
               Mulai kelola sampah lebih cerdas
             </h3>
-            <p className="text-sm text-slate-400 max-w-md">
+            <p className="text-sm max-w-md" style={{color: 'rgba(255,255,255,0.7)'}}>
               Bergabung bersama organisasi pengelola limbah yang sudah menggunakan TrashSmart
             </p>
           </div>
@@ -109,7 +109,7 @@ export default function Footer() {
               <Logo size={34} />
               <span className="text-lg font-bold text-white tracking-tight">TrashSmart</span>
             </div>
-            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mb-6">
+            <p className="text-sm leading-relaxed max-w-xs mb-6" style={{color: 'rgba(255,255,255,0.7)'}}>
               Sistem klasifikasi sampah berbasis AI untuk mendukung pengelolaan
               limbah yang lebih efisien dan berkelanjutan.
             </p>
@@ -129,7 +129,7 @@ export default function Footer() {
                   whileHover={{ scale: 1.15, y: -2 }}
                   transition={{ duration: 0.15 }}
                   className="w-9 h-9 rounded-xl bg-white/5 border border-white/8
-                             flex items-center justify-center text-slate-400
+                             flex items-center justify-center text-white/60
                              hover:bg-emerald-500/20 hover:text-emerald-400
                              hover:border-emerald-500/30 transition-all duration-300"
                 >
@@ -153,8 +153,9 @@ export default function Footer() {
                       target={link.external ? '_blank' : undefined}
                       rel={link.external ? 'noopener noreferrer' : undefined}
                       onClick={link.internal || link.scroll ? (e) => handleLink(e, link) : undefined}
-                      className="text-sm text-slate-400 hover:text-emerald-400
+                      className="text-sm hover:text-emerald-400
                                  transition-colors duration-200 inline-flex items-center group"
+                      style={{color: 'rgba(255,255,255,0.7)'}}
                     >
                       {link.label}
                     </a>
@@ -166,10 +167,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between
-                        gap-3 text-xs text-slate-500">
-          <p>&copy; {currentYear} TrashSmart &middot; Coding Camp DBS Foundation</p>
-          <p className="font-mono tracking-widest">CC26-PSU179</p>
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <p style={{color: 'rgba(255,255,255,0.5)'}}>&copy; {currentYear} TrashSmart &middot; Coding Camp DBS Foundation</p>
+          <p className="font-mono tracking-widest" style={{color: 'rgba(255,255,255,0.5)'}}>CC26-PSU179</p>
         </div>
       </div>
     </footer>

@@ -278,7 +278,7 @@ export default function WasteGuideSection() {
                            font-extrabold text-white leading-[1.1] tracking-[-0.025em] mb-4">
               Kenali, Pilah, dan Kelola<br className="hidden sm:block" /> Sampah dengan Benar
             </h2>
-            <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed font-medium">
+            <p className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed font-medium" style={{color: 'rgba(255,255,255,0.7)'}}>
               Hover setiap kartu untuk melihat cara pengelolaan masing-masing kategori.
             </p>
           </motion.div>
