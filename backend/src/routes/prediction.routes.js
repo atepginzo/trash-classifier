@@ -42,8 +42,12 @@ router.post('/tips', async (req, res) => {
     try {
         const { kategori } = req.body;
         
+        let aiBaseUrl = process.env.AI_SERVICE_URL || 'https://capstonedbs-ai-model-production.up.railway.app';
+        if (aiBaseUrl.endsWith('/predict/')) aiBaseUrl = aiBaseUrl.replace('/predict/', '');
+        if (aiBaseUrl.endsWith('/predict')) aiBaseUrl = aiBaseUrl.replace('/predict', '');
+
         // Teruskan ke Python
-        const pythonResponse = await axios.post('http://localhost:8000/genai/tips/', {
+        const pythonResponse = await axios.post(`${aiBaseUrl}/genai/tips/`, {
             kategori: kategori
         });
 

@@ -17,8 +17,11 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 const getNearestTps = async (req, res, next) => {
     try {
         const { lat, lon, limit = 100 } = req.query; 
+        let aiBaseUrl = process.env.AI_SERVICE_URL || 'https://capstonedbs-ai-model-production.up.railway.app';
+        if (aiBaseUrl.endsWith('/predict/')) aiBaseUrl = aiBaseUrl.replace('/predict/', '');
+        if (aiBaseUrl.endsWith('/predict')) aiBaseUrl = aiBaseUrl.replace('/predict', '');
 
-        const pythonResponse = await axios.get('http://localhost:8000/api/tps');
+        const pythonResponse = await axios.get(`${aiBaseUrl}/api/tps`);
         const allTps = pythonResponse.data.data || pythonResponse.data || [];
 
         const mappedTps = allTps.map(tps => {

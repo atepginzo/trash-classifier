@@ -8,8 +8,11 @@ const TPS_COUNT_PER_AREA = { "URBAN": 24, "SEMI_URBAN": 30, "RURAL": 24 };
 const predictVolume = async (req, res, next) => {
     try {
         const { tpsId } = req.params;
-        
-        const pythonResponse = await axios.post('http://localhost:8000/predict-volume/', { tps_id: tpsId });
+        let aiBaseUrl = process.env.AI_SERVICE_URL || 'https://capstonedbs-ai-model-production.up.railway.app';
+        if (aiBaseUrl.endsWith('/predict/')) aiBaseUrl = aiBaseUrl.replace('/predict/', '');
+        if (aiBaseUrl.endsWith('/predict')) aiBaseUrl = aiBaseUrl.replace('/predict', '');
+
+        const pythonResponse = await axios.post(`${aiBaseUrl}/predict-volume/`, { tps_id: tpsId });
         const pyData = pythonResponse.data.data || pythonResponse.data;
 
         const tpsObj = pyData.tps || { id: tpsId, area_type: 'RURAL' };
