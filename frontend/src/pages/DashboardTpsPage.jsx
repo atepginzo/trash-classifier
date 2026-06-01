@@ -328,7 +328,7 @@ export default function DashboardTpsPage() {
                   eventHandlers={{ click: () => handleMarkerClick(tps) }}
                 >
                   <Popup>
-                    <strong>{tps.nama_desa}</strong><br />
+                    <strong>{tps.nama_desa || `TPS Kec. ${tps.kecamatan}`}</strong><br />
                     Kec. {tps.kecamatan}<br />
                     {tps.kapasitas_ton} ton
                   </Popup>
@@ -389,7 +389,7 @@ export default function DashboardTpsPage() {
               className="absolute top-5 right-5 z-[1000] bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl shadow-lg border border-slate-200 dark:border-white/10 flex items-center gap-2 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 active:scale-95"
             >
               <MapPin size={14} className="text-emerald-600 dark:text-emerald-400" />
-              {selectedTps.nama_desa || selectedTps.id}
+              {selectedTps.nama_desa || `TPS Kec. ${selectedTps.kecamatan}`}
               <ChevronRight size={14} className="text-slate-400" />
             </button>
           )}
@@ -478,10 +478,10 @@ export default function DashboardTpsPage() {
                   );
                 })()}
                 <h2 className="font-sans text-xl md:text-[22px] font-bold text-slate-900 dark:text-white mt-2 mb-1 tracking-tight transition-colors duration-300">
-                  {selectedTps.nama_desa}
+                  {selectedTps.nama_desa || `TPS Kec. ${selectedTps.kecamatan}`}
                 </h2>
                 <p className="text-xs md:text-[13px] text-slate-500 dark:text-slate-400 transition-colors duration-300">
-                  {selectedTps.kecamatan} • {selectedTps.kabupaten}
+                  {selectedTps.kecamatan} {selectedTps.kabupaten ? `• ${selectedTps.kabupaten}` : ''}
                 </p>
               </div>
 
