@@ -214,6 +214,9 @@ export default function DashboardTpsPage() {
       // Fly to show full route
       setFlyCenter([userLat, userLon]);
 
+      // Scroll ke atas (Peta) agar user langsung melihat rute di versi mobile
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
     } catch (error) {
       console.error('Navigation error:', error);
       setNavError(error.message || 'Gagal memulai navigasi');
@@ -414,7 +417,7 @@ export default function DashboardTpsPage() {
                 <div className="mt-3 pt-3 border-t border-white/20">
                   <div className="text-[11px] sm:text-xs text-emerald-400 flex items-center gap-1.5 font-medium">
                     <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                    <span className="truncate">Rute aktif • Menuju {selectedTps?.nama_desa}</span>
+                    <span className="truncate">Rute aktif</span>
                   </div>
                 </div>
               </div>
