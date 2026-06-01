@@ -3,8 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, GeoJSON } from 'react-l
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
-  X, Loader2, TrendingUp, MapPin, Navigation, Building2, Trees, Landmark,
-  ChevronRight, BarChart3, AlertCircle, Navigation2, XCircle,
+  Loader2, TrendingUp, MapPin, Navigation, Building2, Trees, Landmark,
+  ChevronRight, ChevronDown, BarChart3, AlertCircle, Navigation2, XCircle,
 } from 'lucide-react';
 import { tpsService } from '../services/tpsService';
 import { volumeService } from '../services/volumeService';
@@ -154,12 +154,18 @@ export default function DashboardTpsPage() {
     }
   }
 
+  // Collapse/hide panel only — preserves selectedTps, volResult, and active navigation
+  function collapsePanel() {
+    setSidebarOpen(false);
+  }
+
+  // Full close: clear everything including navigation
   function closeSidebar() {
     setSidebarOpen(false);
     setSelectedTps(null);
     setVolResult(null);
     setVolError(null);
-    stopNavigation(); // Stop navigation when closing sidebar
+    stopNavigation();
   }
 
   // ── Navigation Functions ───────────────────────────────────────────────────
@@ -211,11 +217,11 @@ export default function DashboardTpsPage() {
       setRouteInfo({ distance: distanceKm, duration: durationMin });
       setIsNavigating(true);
 
+      // Auto-collapse panel on mobile so user can see the route
+      setSidebarOpen(false);
+
       // Fly to show full route
       setFlyCenter([userLat, userLon]);
-
-      // Scroll ke atas (Peta) agar user langsung melihat rute di versi mobile
-      window.scrollTo({ top: 0, behavior: 'smooth' });
 
     } catch (error) {
       console.error('Navigation error:', error);
@@ -364,7 +370,7 @@ export default function DashboardTpsPage() {
           </div>
 
           {/* Hint if sidebar closed */}
-          {!sidebarOpen && !loading && (
+          {!sidebarOpen && !loading && !selectedTps && (
             <div style={{
               position: 'absolute', top: 20, left: '50%', transform: 'translateX(-50%)',
               zIndex: 1000, backgroundColor: 'rgba(5,150,105,0.9)', color: '#fff',
@@ -374,6 +380,18 @@ export default function DashboardTpsPage() {
             }}>
               <MapPin size={14} /> Klik marker TPS untuk melihat prediksi volume
             </div>
+          )}
+
+          {/* Re-open panel button when panel is collapsed but TPS is selected */}
+          {!sidebarOpen && selectedTps && !loading && (
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="absolute top-5 right-5 z-[1000] bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl shadow-lg border border-slate-200 dark:border-white/10 flex items-center gap-2 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 active:scale-95"
+            >
+              <MapPin size={14} className="text-emerald-600 dark:text-emerald-400" />
+              {selectedTps.nama_desa || selectedTps.id}
+              <ChevronRight size={14} className="text-slate-400" />
+            </button>
           )}
 
           {/* Navigation Panel (Floating at bottom) */}
@@ -417,7 +435,7 @@ export default function DashboardTpsPage() {
                 <div className="mt-3 pt-3 border-t border-white/20">
                   <div className="text-[11px] sm:text-xs text-emerald-400 flex items-center gap-1.5 font-medium">
                     <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                    <span className="truncate">Rute aktif</span>
+                    <span className="truncate">Rute Aktif</span>
                   </div>
                 </div>
               </div>
@@ -433,12 +451,15 @@ export default function DashboardTpsPage() {
         >
           {sidebarOpen && selectedTps && (
             <div className="flex-1 overflow-y-auto p-4 md:p-5 lg:p-6 scrollbar-thin">
-              {/* Close button */}
+              {/* Collapse panel button — does NOT stop navigation */}
               <button
-                onClick={closeSidebar}
-                className="float-right bg-transparent border-none cursor-pointer text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white p-1 transition-colors duration-200"
+                onClick={collapsePanel}
+                className="float-right bg-transparent border-none cursor-pointer text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-all duration-200"
+                title="Tutup panel"
               >
-                <X size={20} />
+                {/* ChevronRight on desktop, ChevronDown on mobile */}
+                <ChevronRight size={20} className="hidden md:block" />
+                <ChevronDown size={20} className="block md:hidden" />
               </button>
 
               {/* TPS Header */}
